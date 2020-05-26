@@ -1,10 +1,8 @@
 package com.luna.common.tencent;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.HttpUtils;
+import com.luna.common.http.HttpUtils;
 import com.luna.common.utils.ImageUtils;
 import org.apache.http.HttpResponse;
 import java.util.Map;

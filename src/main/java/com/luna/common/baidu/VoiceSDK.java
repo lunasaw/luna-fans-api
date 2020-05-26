@@ -4,17 +4,12 @@ import com.baidu.aip.speech.AipSpeech;
 import com.baidu.aip.speech.TtsResponse;
 import com.baidu.aip.util.Util;
 
-import com.luna.common.utils.DealMedia;
-import com.luna.common.utils.FfmpegUtil;
 import com.luna.common.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Luna@win10

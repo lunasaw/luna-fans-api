@@ -1,4 +1,4 @@
-package com.luna.common.utils;
+package com.luna.common.file;
 
 import java.io.*;
 import java.net.*;
@@ -14,11 +14,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Tony
  */
 public class FileUtils {
+    private final static Logger logger = LoggerFactory.getLogger(FileUtils.class);
+
     /**
      * 读取文件所有内容
      * 
@@ -48,26 +52,6 @@ public class FileUtils {
     }
 
     /**
-     * 判断http文件是否存在
-     * 
-     * @param httpPath 网路路径
-     * @return
-     */
-    public static Boolean existHttpPath(String httpPath) throws Exception {
-        URL httpurl = null;
-
-        httpurl = new URL(new URI(httpPath).toASCIIString());
-        URLConnection urlConnection = httpurl.openConnection();
-        String headerField = urlConnection.getHeaderField(0);
-        if (headerField.startsWith("HTTP/1.1 404")) {
-            return false;
-        } else {
-            return true;
-        }
-        // urlConnection.getInputStream();
-    }
-
-    /**
      * 获取文件数目
      *
      * @param path
@@ -89,7 +73,7 @@ public class FileUtils {
     }
 
     /**
-     * 判断一个文件是否存在
+     * 判断一个本地文件是否存在
      *
      * @param fileName
      * @return
@@ -129,6 +113,31 @@ public class FileUtils {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    /**
+     * 判断http文件是否存在
+     *
+     * @param httpPath 网路路径
+     * @return
+     */
+    public static Boolean existHttpPath(String httpPath) {
+        String headerField = null;
+        try {
+            URL httpurl = new URL(new URI(httpPath).toASCIIString());
+            URLConnection urlConnection = httpurl.openConnection();
+            headerField = urlConnection.getHeaderField(0);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (headerField.startsWith("HTTP/1.1 404")) {
+            return false;
+        } else {
+            return true;
+        }
+        // urlConnection.getInputStream();
     }
 
     /**
@@ -174,31 +183,14 @@ public class FileUtils {
     }
 
     /**
-     * file check
-     * 
-     * @param file
-     * @param sha256
-     * @return
-     */
-    public static boolean checkFileWithSHA256(String file, String sha256) {
-        try {
-            HashCode hash = com.google.common.io.Files.asByteSource(new File(file)).hash(Hashing.sha256());
-            String fileHash = hash.toString();
-            return StringUtils.equalsIgnoreCase(fileHash, sha256);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * 上传到文件服务器
+     * 上传到httpd文件服务器
      *
      * @param file 文件字节
      * @param filePath 网络路径
      * @return
      * @throws Exception
      */
-    public static String uploadFile(byte[] file, String filePath) throws Exception {
+    public static String uploadFile(byte[] file, String filePath) {
         File targetFile = new File(filePath);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
@@ -206,7 +198,7 @@ public class FileUtils {
         Client client = new Client();
         WebResource resource = client.resource(filePath);
         String put = resource.put(String.class, file);
-        System.out.println(put);
+        logger.info("上传文件成功", put);
         return filePath;
     }
 
@@ -216,7 +208,7 @@ public class FileUtils {
      * @param filePath 网络路径
      * @throws Exception
      */
-    public static void delete(String filePath) throws Exception {
+    public static void delete(String filePath) {
         Client client = new Client();
         WebResource resource = client.resource(filePath);
         resource.delete();

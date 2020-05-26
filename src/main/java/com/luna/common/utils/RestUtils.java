@@ -2,6 +2,7 @@ package com.luna.common.utils;
 
 import java.util.Map;
 
+import com.luna.common.http.HttpUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.HttpResponse;
 

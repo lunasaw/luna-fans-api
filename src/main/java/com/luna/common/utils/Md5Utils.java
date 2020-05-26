@@ -6,6 +6,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.UUID;
 
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +79,23 @@ public class Md5Utils {
         }
 
         return null;
+    }
+
+    /**
+     * file check
+     *
+     * @param file
+     * @param sha256
+     * @return
+     */
+    public static boolean checkFileWithSHA256(String file, String sha256) {
+        try {
+            HashCode hash = com.google.common.io.Files.asByteSource(new File(file)).hash(Hashing.sha256());
+            String fileHash = hash.toString();
+            return StringUtils.equalsIgnoreCase(fileHash, sha256);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

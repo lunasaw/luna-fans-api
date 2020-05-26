@@ -1,6 +1,9 @@
-package com.luna.common.utils;
+package com.luna.common.file;
 
 import com.baidu.aip.util.Util;
+import com.luna.common.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,28 +12,33 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class FileEdit {
+    private final static Logger logger = LoggerFactory.getLogger(FileEdit.class);
 
     /**
      * 批量转换文件类型
      * 
-     * @param path
-     * @param oldExt
-     * @param newExt
+     * @param path 文件夹路径
+     * @param oldExt 源类型
+     * @param newExt 输出类型
      */
-    public static void renameFiles(String path, String oldExt, String newExt) {
+    public static void renameFiles(String path, String oldExt, String newPath, String newExt) {
         File file = new File(path);
         if (!file.exists()) {
-            System.err.println("文件路径不存在！");
+            logger.info("文件路径不存在！", path);
             return;
         }
         File[] files = file.listFiles();
         if (files.length <= 0) {
-            System.err.println("当前路径文件不存在！");
+            logger.info("当前路径文件不存在！", path);
             return;
         }
         for (File f : files) {
             if (f.isDirectory()) {
-                renameFiles(f.getPath(), oldExt, newExt);
+                if (newPath != null) {
+                    renameFiles(f.getPath(), oldExt, newPath, newExt);
+                } else {
+                    renameFiles(f.getPath(), oldExt, f.getPath(), newExt);
+                }
             } else {
                 String name = f.getName();
                 if (name.endsWith("." + oldExt)) {
@@ -126,7 +134,7 @@ public class FileEdit {
     public static long getFileSize(String fileName) {
         File file = new File(fileName);
         if (!file.exists() || !file.isFile()) {
-            System.out.println("文件不存在！！！");
+            logger.info("文件不存在！！！", fileName);
             return -1;
         }
         return file.length();
@@ -145,38 +153,5 @@ public class FileEdit {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /** 匹配中文正则表达式 */
-    private final static String PATTERN = "[\\u4e00-\\u9fa5]+";
-
-    /**
-     * 文本匹配 判断toMatch里是否存在prepare
-     *
-     * @param prepare 判断字符
-     * @param toMatch 原始字符
-     * @return
-     */
-    public static boolean checkKnowledge(String prepare, String toMatch) {
-        if (StringUtils.isEmpty(prepare) || StringUtils.isEmpty(toMatch)) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile(PATTERN);
-        // OCR识别出的文字用换行符分隔
-        String[] split = toMatch.split("\n");
-        for (String str : split) {
-            if (pattern.matcher(str).find()) {
-                // 匹配到中文
-                // 判断是否是知识点
-                if (str.replaceAll(" ", "").contains(prepare.replaceAll(" ", ""))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

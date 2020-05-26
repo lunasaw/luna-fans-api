@@ -1,8 +1,10 @@
-package com.luna.common.utils;
+package com.luna.common.ffmpeg;
 
+import com.luna.common.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
@@ -17,13 +19,10 @@ import java.util.regex.Pattern;
  * @date 2020/4/28 20:33
  */
 public class FfmpegUtil {
-    private final static Logger LOG         = LoggerFactory.getLogger("serviceLogger");
-
-    /** ffmpeg安装目录 */
-    public static String        FFMPEG_PATH = "D:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
+    private final static Logger LOG      = LoggerFactory.getLogger(FfmpegUtil.class);
 
     /** 设置图片大小 */
-    private final static String IMG_SIZE    = "1920x1080";
+    private final static String IMG_SIZE = "1920x1080";
 
     /**
      * 截取某一时刻图片
@@ -33,10 +32,10 @@ public class FfmpegUtil {
      * @param timePoint 截取视频多少秒时的画面
      * @return
      */
-    public static boolean ffmpegToImage(String videoPath, String imagePath, int timePoint) {
-        List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+    public static boolean ffmpegToImage(@NotEmpty String ffmpegPaht, String videoPath, String imagePath, int timePoint,
+        String size) {
+        List<String> commands = new ArrayList<String>();
+        commands.add(ffmpegPaht);
         commands.add("-ss");
         commands.add(timePoint + "");
         commands.add("-i");
@@ -48,13 +47,16 @@ public class FfmpegUtil {
         commands.add("0.001");
         commands.add("-s");
         // 这个参数是设置截取图片的大小
-        commands.add(IMG_SIZE);
+        if (StringUtils.isNoneEmpty(size)) {
+            commands.add(size);
+        } else {
+            commands.add(IMG_SIZE);
+        }
         commands.add(imagePath);
         try {
             ProcessBuilder builder = new ProcessBuilder();
             builder.command(commands);
             builder.start();
-            System.out.println("截取成功:" + imagePath);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,9 +91,9 @@ public class FfmpegUtil {
     /**
      * @Description 获取视频时长
      */
-    static int getVideoTime(String video_path) {
-        List<String> commands = new java.util.ArrayList<String>();
-        commands.add(FFMPEG_PATH);
+    static int getVideoTime(@NotEmpty String ffmpegPath, String video_path) {
+        List<String> commands = new ArrayList<String>();
+        commands.add(ffmpegPath);
         commands.add("-i");
         commands.add(video_path);
         try {
@@ -114,8 +116,7 @@ public class FfmpegUtil {
             Matcher m = pattern.matcher(sb.toString());
             if (m.find()) {
                 int time = getTimelen(m.group(1));
-                System.out
-                    .println(video_path + ",视频时长：" + time + ", 开始时间：" + m.group(2) + ",比特率：" + m.group(3) + "kb/s");
+                LOG.info(video_path + ",视频时长：" + time + ", 开始时间：" + m.group(2) + ",比特率：" + m.group(3) + "kb/s");
                 return time;
             }
         } catch (Exception e) {
@@ -239,10 +240,9 @@ public class FfmpegUtil {
      * @param audioPath 音频保存路径
      * @return
      */
-    public static boolean ffmpegToAudio(String videoPath, String type, String audioPath) {
+    public static boolean ffmpegToAudio(String ffmpegPath, String videoPath, String type, String audioPath) {
         List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+        commands.add(ffmpegPath);
         commands.add("-i");
         commands.add(videoPath);
         commands.add("-f");
@@ -264,7 +264,7 @@ public class FfmpegUtil {
             ProcessBuilder builder = new ProcessBuilder();
             builder.command(commands);
             Process p = builder.start();
-            System.out.println("抽离成功:" + audioPath);
+            LOG.info("抽离成功:" + audioPath);
 
             // 1. start
             BufferedReader buf = null;
@@ -275,7 +275,7 @@ public class FfmpegUtil {
 
             StringBuffer sb = new StringBuffer();
             while ((line = buf.readLine()) != null) {
-                System.out.println(line);
+                LOG.info(line);
                 sb.append(line);
                 continue;
             }
@@ -296,10 +296,9 @@ public class FfmpegUtil {
      * @param mp3Path
      * @return
      */
-    public static boolean ffmpegOfwavTomp3(String wavPath, String mp3Path) {
+    public static boolean ffmpegOfwavTomp3(String ffmpegPath, String wavPath, String mp3Path) {
         List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+        commands.add(ffmpegPath);
         commands.add("-i");
         commands.add(wavPath);
         commands.add("-f");
@@ -334,9 +333,5 @@ public class FfmpegUtil {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }

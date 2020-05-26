@@ -2,7 +2,7 @@ package com.luna.common.tencent;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
-import com.luna.common.utils.HttpUtils;
+import com.luna.common.http.HttpUtils;
 
 import org.apache.http.HttpResponse;
 

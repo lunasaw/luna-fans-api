@@ -2,7 +2,7 @@ package com.luna.common.tencent;
 
 import com.alibaba.fastjson.JSONObject;
 
-import com.luna.common.utils.HttpUtils;
+import com.luna.common.http.HttpUtils;
 
 import java.io.UnsupportedEncodingException;
 

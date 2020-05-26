@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.common.baidu.entity.Word;
-import com.luna.common.utils.HttpUtils;
-import com.luna.common.utils.HttpUtilsConstant;
+import com.luna.common.http.HttpUtils;
+import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.utils.text.CharsetKit;
 import org.apache.http.HttpResponse;
 

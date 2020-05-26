@@ -1,7 +1,7 @@
 package com.luna.common.tencent;
 
 import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.HttpUtilsConstant;
+import com.luna.common.http.HttpUtilsConstant;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;

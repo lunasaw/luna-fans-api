@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.luna.common.utils.HttpUtilsConstant;
+import com.luna.common.http.HttpUtilsConstant;
 import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.ImmutableMap;
-import com.luna.common.utils.HttpUtils;
+import com.luna.common.http.HttpUtils;
 
 /**
  * @author Luna@win10

@@ -1,4 +1,4 @@
-package com.luna.common.utils;
+package com.luna.common.ffmpeg;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
  * @author xiaotao
  */
 public class DealMedia {
-    public static String        PATH            = "D:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
 
     /** 日志 */
     private final static Logger LOG             = LoggerFactory.getLogger("serviceLogger");

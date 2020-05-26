@@ -1,17 +1,17 @@
 package com.luna.common.baidu;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.luna.common.utils.HttpUtils;
-import com.luna.common.utils.HttpUtilsConstant;
+import com.luna.common.http.HttpUtils;
+import com.luna.common.http.HttpUtilsConstant;
+import com.luna.common.utils.StringUtils;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author Luna@win10
@@ -57,6 +57,35 @@ public class BaiduCreationApi {
         return map;
     }
 
+    /** 匹配中文正则表达式 */
+    private final static String PATTERN = "[\\u4e00-\\u9fa5]+";
+
+    /**
+     * 文本匹配 判断toMatch里是否存在prepare
+     *
+     * @param prepare 判断字符
+     * @param toMatch 原始字符
+     * @return
+     */
+    public static boolean checkKnowledge(String prepare, String toMatch) {
+        if (StringUtils.isEmpty(prepare) || StringUtils.isEmpty(toMatch)) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile(PATTERN);
+        // OCR识别出的文字用换行符分隔
+        String[] split = toMatch.split("\n");
+        for (String str : split) {
+            if (pattern.matcher(str).find()) {
+                // 匹配到中文
+                // 判断是否是知识点
+                if (str.replaceAll(" ", "").contains(prepare.replaceAll(" ", ""))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * 获取城市天气情况
      * 
@@ -81,12 +110,4 @@ public class BaiduCreationApi {
         return map;
     }
 
-    public static void main(String[] args) throws IOException {
-        Map<String, List<JSONObject>> map = eventContext();
-        for (Map.Entry<String, List<JSONObject>> entry : map.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println("===============================");
-            System.out.println(entry.getValue());
-        }
-    }
 }

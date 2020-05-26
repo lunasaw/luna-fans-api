@@ -57,9 +57,4 @@ public class ImageUtils {
             ex.printStackTrace();
         }
     }
-
-    public static void main(String[] args) throws IOException {
-        byte[] bytes = ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Camera Roll\\github.png");
-        ImageUtils.byte2image(bytes, "D:\\a.jpg");
-    }
 }
