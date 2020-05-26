@@ -1,0 +1,32 @@
+2020-05-21 13:01:16,631  INFO [main] (StartupInfoLogger.java:55) - Starting CommonApplicationTests on improve with PID 12160 (started by improve_ in D:\myproject\luna-common-pro) 
+2020-05-21 13:01:16,634  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-05-21 13:01:19,063  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:01:19,073  INFO [main] (StartupInfoLogger.java:61) - Started CommonApplicationTests in 5.356 seconds (JVM running for 7.524) 
+2020-05-21 13:01:19,623  INFO [main] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:01:21,544  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:01:21,544  INFO [main] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:01:55,272  INFO [main] (StartupInfoLogger.java:55) - Starting LunaCommonApplication on improve with PID 14880 (D:\myproject\luna-common-pro\target\classes started by improve_ in D:\myproject\luna-common-pro) 
+2020-05-21 13:01:55,274  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-05-21 13:01:56,399  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:01:56,404  INFO [main] (StartupInfoLogger.java:61) - Started LunaCommonApplication in 5.489 seconds (JVM running for 6.998) 
+2020-05-21 13:01:57,628  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:02,630  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:02,829  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:07,831  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:07,984  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:12,986  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:13,213  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:18,215  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:18,357  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:23,358  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:23,505  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:28,506  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:28,719  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:33,721  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:33,874  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:38,876  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:39,050  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:44,051  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:44,311  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 
+2020-05-21 13:02:49,313  INFO [scheduling-1] (GetBaiduKey.java:47) - 执行定时任务获取百度Key 
+2020-05-21 13:02:49,465  INFO [scheduling-1] (GetBaiduKey.java:83) - get token success！,{token} 

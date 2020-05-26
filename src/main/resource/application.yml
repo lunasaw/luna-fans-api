@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+
+  # 数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://iszychen.club:3307/luna-message?serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: czy1024
+
+logging:
+  level:
+    root: info
+  config: classpath:log/logback.xml
