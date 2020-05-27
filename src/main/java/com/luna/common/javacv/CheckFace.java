@@ -1,4 +1,4 @@
-package com.luna.common.javaCv;
+package com.luna.common.javacv;
 
 import static org.bytedeco.flandmark.global.flandmark.flandmark_detect;
 import static org.bytedeco.flandmark.global.flandmark.flandmark_init;

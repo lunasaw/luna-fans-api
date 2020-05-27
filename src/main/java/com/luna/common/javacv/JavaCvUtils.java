@@ -4,7 +4,7 @@
  * Author's e-mail: jpsacha at gmail.com
  */
 
-package com.luna.common.javaCv;
+package com.luna.common.javacv;
 
 import static org.bytedeco.opencv.global.opencv_imgcodecs.*;
 

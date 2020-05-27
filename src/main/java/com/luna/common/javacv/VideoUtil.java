@@ -1,4 +1,4 @@
-package com.luna.common.javaCv;
+package com.luna.common.javacv;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

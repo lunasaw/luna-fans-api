@@ -4,7 +4,7 @@
  * 修改时间：2016年6月13日
  * 修改内容：
  */
-package com.luna.common.javaCv;
+package com.luna.common.javacv;
 
 import javax.swing.*;
 

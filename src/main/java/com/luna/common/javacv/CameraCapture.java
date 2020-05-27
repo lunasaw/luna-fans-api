@@ -1,4 +1,4 @@
-package com.luna.common.javaCv;
+package com.luna.common.javacv;
 
 import static org.bytedeco.opencv.global.opencv_imgproc.*;
 import static org.opencv.imgproc.Imgproc.COLOR_BGRA2GRAY;
