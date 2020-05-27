@@ -5,6 +5,8 @@ import com.luna.common.baidu.Config.GetBaiduKey;
 import com.luna.common.baidu.PaintImage;
 import com.luna.common.baidu.entity.Face;
 import com.luna.common.config.TencentConfigValue;
+import com.luna.common.ffmpeg.FfmpegConfigValue;
+import com.luna.common.ffmpeg.FfmpegUtil;
 import com.luna.common.tencent.TencentFaceApi;
 import com.luna.common.utils.Base64Util;
 import com.luna.common.utils.ImageUtils;
@@ -21,11 +23,11 @@ import java.util.List;
 class CommonApplicationTests {
 
     @Autowired
-    TencentConfigValue tencentConfigValue;
+    FfmpegConfigValue ffmpegConfigValue;
 
     @Test
     void contextLoads() {
-
+        System.out.println(ffmpegConfigValue.getPath());
     }
 
 }
