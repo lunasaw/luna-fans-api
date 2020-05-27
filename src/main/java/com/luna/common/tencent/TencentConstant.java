@@ -12,6 +12,8 @@ public class TencentConstant {
 
     public static String FACE_CARD                        = "faceid.tencentcloudapi.com";
 
+    public static String FACE_CHECK                       = "iai.tencentcloudapi.com";
+
     public static String HOST_SMS                         = "sms.tencentcloudapi.com";
 
     public static String TENCENT_MARK_AUTHENTICATION      =
