@@ -1,10 +1,42 @@
 # luna-common 
 ![](https://img.shields.io/badge/luna--common-1.0--SNAPSHOT-green)
 
-一直想写一个开发工具的Utils,市面各种工具类层出不穷,当然都是特别好的,但是工具类的总类不同,往往有时候需要使用的时候又去找度娘。
-我就写了个工具maven包，直接导入就好。
+一款集合市面众多接口和工具类的集合,包括图像处理人脸识别等api 
 
-### Utils, which has always wanted to write a development tool, has seen many kinds of tool classes in the market. Of course, they are especially good. However, the general classes of tool classes are different, and they often go to Du Niang when they need to be used.  I just wrote a tool maven package and imported it directly.
+# Update log
+
+###
++Add JavaCv video processing, including picture synthesis video and video capture pictures
+
++Add Baidu Weather Return, Week of Hot Search, Word Matching
+
++Add Baidu Text Comparison and Error Correction Api
+
++Change Baidu Key Acquisition to Timing Task
+
++Join Alipay Black Box Test including order inquiry, payment connection, etc
+
++Introducing environment configuration files to eliminate the risk of possible key disclosure
+
++Increase Baidu Human Body Identification
+
++Increase Baidu Speech Synthesis
+
++Add Tencent map ip latitude and longitude to return location information
+
++Add Baidu Ocr text position general version and accurate version
+
++Add ffmpeg Image Processing Intercept Frame Synthesis Video Intercept Video Capture
+
++Add Baidu Object Recognition, Link Baidu Encyclopedia, Automatically Identify Celebrities, Famous Buildings, etc
+
++Add Rectangle Frame to Sketch Face Combined with Baidu Face Detection Api
+
++Increase Baidu Witness Audit
+
++Increase the search Api for easy answers
+
++Add Baidu Ocr Face Recognition Face Detection Face Comparison Live Detection Api Call
 
 ## Maven依赖
 ```
