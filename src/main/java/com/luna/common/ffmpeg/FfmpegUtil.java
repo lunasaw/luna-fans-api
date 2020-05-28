@@ -132,7 +132,7 @@ public class FfmpegUtil {
      * @param timelen
      * @return
      */
-    private static int getTimelen(String timelen) {
+    public static int getTimelen(String timelen) {
         int min = 0;
         String strs[] = timelen.split(":");
         if (strs[0].compareTo("0") > 0) {

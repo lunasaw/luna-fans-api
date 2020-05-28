@@ -1,9 +1,3 @@
-/**
- * 文件名：javavcCameraTest.java
- * 描述：调用windows平台的摄像头窗口视频
- * 修改时间：2016年6月13日
- * 修改内容：
- */
 package com.luna.common.javacv;
 
 import javax.swing.*;
@@ -16,12 +10,13 @@ import org.bytedeco.opencv.opencv_core.IplImage;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.presets.opencv_objdetect;
 
-/**
- * 调用本地摄像头窗口视频
- *
- * @version 2016年6月13日
- */
 
+/**
+ * 截图或视频录制
+ * 
+ * @author Luna@win10
+ * @date 2020/5/16 10:12
+ */
 public class VideoRecording {
 
     /**

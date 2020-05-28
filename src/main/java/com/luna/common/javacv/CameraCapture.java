@@ -29,6 +29,7 @@ import com.luna.common.baidu.Config.GetBaiduKey;
  */
 public class CameraCapture {
 
+
     public static void main(String[] args) {
         try {
             TurnOnTheCamera();
@@ -90,6 +91,7 @@ public class CameraCapture {
 
 class camerThread extends Thread {
     private static final Logger       log   = LoggerFactory.getLogger(GetBaiduKey.class);
+
 
     static int                        x     = 0, y = 0, width = 0, height = 0;
     private volatile static boolean   stop  = true;

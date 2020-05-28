@@ -29,6 +29,7 @@ import com.luna.common.utils.StringUtils;
 public class CheckFace {
     private static final Logger log = LoggerFactory.getLogger(GetBaiduKey.class);
 
+
     private static FLANDMARK_Model loadFLandmarkModel(final File file) throws IOException {
         if (!file.exists()) {
             throw new FileNotFoundException("FLandmark model file does not exist: " + file.getAbsolutePath());

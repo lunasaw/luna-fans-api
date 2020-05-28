@@ -21,7 +21,10 @@ import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 
 /**
- * Helper methods that simplify use of OpenCV API.
+ * Javacv 工具类
+ * 
+ * @author Luna@win10
+ * @date 2020/5/16 10:12
  */
 public class JavaCvUtils {
 

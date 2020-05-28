@@ -1,22 +1,32 @@
 package com.luna.common.javacv;
 
+import org.bytedeco.javacv.*;
+import org.bytedeco.opencv.global.opencv_imgproc;
+import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.opencv_core.Rect;
+import org.bytedeco.opencv.opencv_core.RectVector;
+import org.bytedeco.opencv.opencv_core.Scalar;
+import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
+
 import javax.swing.*;
 
-import org.bytedeco.javacv.CanvasFrame;
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
-import org.bytedeco.opencv.opencv_core.Mat;
+import java.io.File;
+import java.io.IOException;
+
+import static org.bytedeco.opencv.global.opencv_imgcodecs.imread;
+import static org.bytedeco.opencv.global.opencv_imgproc.*;
 
 /**
+ *
  * @author Luna@win10
  * @date 2020/5/27 15:37
  */
-public class CheckFace2Video {
+public class FaceRecognitionDisplay {
 
     /**
      * 获取摄像 调用人脸检测 返回显示
      * 
-     * @throws Exception
+     * @throws ExceptionFace recognition display
      */
     public static void cameraJavaCv() throws Exception {
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);

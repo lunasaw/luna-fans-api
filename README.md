@@ -4,8 +4,22 @@
 一直想写一个开发工具的Utils,市面各种工具类层出不穷,当然都是特别好的,但是工具类的总类不同,往往有时候需要使用的时候又去找度娘。
 我就写了个工具maven包，直接导入就好。
 
+### Utils, which has always wanted to write a development tool, has seen many kinds of tool classes in the market. Of course, they are especially good. However, the general classes of tool classes are different, and they often go to Du Niang when they need to be used.  I just wrote a tool maven package and imported it directly.
+
 ## Maven依赖
 ```
+
+<repositories>
+        <repository>
+            <id>luna-common-mvn-repo</id>
+            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+</repositories>
+
 <dependency>
     <groupId>com.luna</groupId>
     <artifactId>common</artifactId>
@@ -21,7 +35,7 @@
 ## 更新日志
 
 ### 1.0--SNAPSHOT
-+ 增加JavaCv 处理视频, 人脸识别等操作,包含opencv ,ffmpeg
++ 增加JavaCv 视频处理, 包含图片合成视频和视频截取图片 
 
 + 增加百度天气返回,一周热点搜索,词语匹配
 
