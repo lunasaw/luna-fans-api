@@ -24,7 +24,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.luna.common" additivity="false" level="INFO">
+    <logger name="com.luna.commons" additivity="false" level="INFO">
         <appender-ref ref="STDOUT"/>
     </logger>
 
