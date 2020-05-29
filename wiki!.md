@@ -133,6 +133,8 @@ public class BaiduApiTest {
    - ==注意==：并不是每次调用服务都需要初始化Key ，Key为静态变量，但30天需更换一次，可以调用定时任务
 
      可在一次初始化获取后，多次调用方法，例如
+     
+    == 目前已改为15天自动获取一次 需将GetBaiduKey注入Spring 并开启 @EnableScheduling==
 
  ```java
      /**
@@ -143,19 +145,14 @@ public class BaiduApiTest {
      @RunWith(SpringRunner.class)
      public class BaiduApiTest {
      
-     	@Resource
-     	BaiduConfigValue baiduConfigValue;
-     
-     	@Test
-     	public void aTest() throws IOException {
-     	//key 赋值
-     		BaiduApiContent.BAIDU_KEY = GetBaiduKey.getAuth(baiduConfigValue.getAppKey(), baiduConfigValue.getSecretKey());
-     		System.out.println(BaiduApi.faceVerification());
-     	}
-     	
+     	    @Autowired
+            FfmpegConfigValue ffmpegConfigValue;
+        
+            @Test
+            void contextLoads() {
+                System.out.println(ffmpegConfigValue.getPath());
+            }
      }
-//现在已经更改成定时任务 需测试其他方法
-     
  ```
 
 ​     ## 非常的简单快捷
