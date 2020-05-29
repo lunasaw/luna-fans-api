@@ -85,7 +85,8 @@ luna.ftp.picture=/pub/picture/
 luna.ftp.voice=/pub/voice/
 # 本地临时路径
 luna.ftp.localPath=D:/
-
+# ffmpeg 安装路径 windows:D:/ffmpeg/ffmpeg/bin/ffmpeg.exe Linux: ffmpeg
+luna.ffmpeg.path=D:/ffmpeg/ffmpeg/bin/ffmpeg.exe
   ```
 
   
