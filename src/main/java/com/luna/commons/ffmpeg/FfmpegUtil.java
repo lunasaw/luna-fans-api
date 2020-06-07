@@ -1,10 +1,16 @@
 package com.luna.commons.ffmpeg;
 
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.FileException;
+import com.luna.commons.exception.JavaCvException;
+import com.luna.commons.file.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,9 +25,6 @@ import java.util.regex.Pattern;
 public class FfmpegUtil {
     private final static Logger LOG         = LoggerFactory.getLogger("serviceLogger");
 
-    /** ffmpeg安装目录 */
-    public static String        FFMPEG_PATH = "D:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
-
     /** 设置图片大小 */
     private final static String IMG_SIZE    = "1920x1080";
 
@@ -33,10 +36,17 @@ public class FfmpegUtil {
      * @param timePoint 截取视频多少秒时的画面
      * @return
      */
-    public static boolean ffmpegToImage(String videoPath, String imagePath, int timePoint) {
+    public static void ffmpegToImage(String ffmpegPath, String videoPath, String imagePath, int timePoint)
+        throws IOException {
+        if (!FileUtils.isFileExists(videoPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
         List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+        ffmpegPath = ffmpegPath.replace("%20", " ");
+        commands.add(ffmpegPath);
         commands.add("-ss");
         commands.add(timePoint + "");
         commands.add("-i");
@@ -50,22 +60,19 @@ public class FfmpegUtil {
         // 这个参数是设置截取图片的大小
         commands.add(IMG_SIZE);
         commands.add(imagePath);
-        try {
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.command(commands);
-            builder.start();
-            System.out.println("截取成功:" + imagePath);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command(commands);
+        builder.start();
+        LOG.info("截取成功:" + imagePath);
     }
 
     /**
      * @Description 文件是否能被ffmpeg解析
      */
     public static int checkFileType(String fileName) {
+        if (!FileUtils.isFileExists(fileName)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
         String type = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
             .toLowerCase();
         if (type.equals("avi")) {
@@ -86,43 +93,45 @@ public class FfmpegUtil {
         return 9;
     }
 
-
     /**
      * @Description 获取视频时长
      */
-    public static int getVideoTime(String videoPath) {
-        List<String> commands = new java.util.ArrayList<String>();
-        commands.add(FFMPEG_PATH);
-        commands.add("-i");
-        commands.add(videoPath);
-        try {
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.command(commands);
-            final Process p = builder.start();
-
-            // 从输入流中读取视频信息
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            StringBuffer sb = new StringBuffer();
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            br.close();
-
-            // 从视频信息中解析时长
-            String regexDuration = "Duration: (.*?), start: (.*?), bitrate: (\\d*) kb\\/s";
-            Pattern pattern = Pattern.compile(regexDuration);
-            Matcher m = pattern.matcher(sb.toString());
-            if (m.find()) {
-                int time = getTimelen(m.group(1));
-                LOG.info(videoPath + ",视频时长：" + time + ", 开始时间：" + m.group(2) + ",比特率：" + m.group(3) + "kb/s");
-                return time;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static int getVideoTime(String ffmpegPath, String videoPath) throws IOException {
+        if (!FileUtils.isFileExists(videoPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
         }
 
-        return 0;
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
+        List<String> commands = new java.util.ArrayList<String>();
+        commands.add(ffmpegPath);
+        commands.add("-i");
+        commands.add(videoPath);
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command(commands);
+        final Process p = builder.start();
+
+        // 从输入流中读取视频信息
+        BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        StringBuffer sb = new StringBuffer();
+        String line = "";
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+
+        // 从视频信息中解析时长
+        String regexDuration = "Duration: (.*?), start: (.*?), bitrate: (\\d*) kb\\/s";
+        Pattern pattern = Pattern.compile(regexDuration);
+        Matcher m = pattern.matcher(sb.toString());
+        if (m.find()) {
+            int time = getTimelen(m.group(1));
+            LOG.info(videoPath + ",视频时长：" + time + ", 开始时间：" + m.group(2) + ",比特率：" + m.group(3) + "kb/s");
+            return time;
+        } else {
+            throw new JavaCvException(ResultCode.ERROR_SYSTEM_EXCEPTION, "获取视频时长错误");
+        }
     }
 
     /**
@@ -158,8 +167,15 @@ public class FfmpegUtil {
      * @param end 结束
      * @return
      */
-    public static boolean getSubMovie2Command(String ffmpegPath, String inputpath, String output, String start,
+    public static void getSubMovie2Command(String ffmpegPath, String inputpath, String output, String start,
         String end) {
+        if (!FileUtils.isFileExists(inputpath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
+
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
         List<String> command = new ArrayList<String>();
         command.add(ffmpegPath);
         command.add("-i");
@@ -177,22 +193,30 @@ public class FfmpegUtil {
         command.add(output);
         command.add("-y");
         boolean process = DealMedia.process(command);
-        if (!process) {
+        if (process) {
+            LOG.info("Coding error, command={}", command);
+        } else {
             LOG.error("Coding error, command={}", command);
+            throw new JavaCvException(ResultCode.ERROR_SYSTEM_EXCEPTION, command.toString());
         }
-        return process == true;
     }
 
     /**
      * mp3 转wav
-     * 
-     * 
+     *
      * @param ffmpegPath
      * @param inputpath
      * @param output
      * @return
      */
-    public static boolean mp3ToWav(String ffmpegPath, String inputpath, String output) {
+    public static void mp3ToWav(String ffmpegPath, String inputpath, String output) {
+        if (!FileUtils.isFileExists(inputpath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
+
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
         String s =
             "D:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe -i C:\\Users\\improve\\Pictures\\音乐\\output.mp3 -acodec pcm_s16le -ac 2 -ar 44100 C:\\Users\\improve\\Pictures\\音乐\\english.wav";
         List<String> command = new ArrayList<String>();
@@ -208,10 +232,12 @@ public class FfmpegUtil {
         command.add(output);
         command.add("-y");
         boolean process = DealMedia.process(command);
-        if (!process) {
+        if (process) {
+            LOG.info("Coding error, command={}", command);
+        } else {
             LOG.error("Coding error, command={}", command);
+            throw new JavaCvException(ResultCode.ERROR_SYSTEM_EXCEPTION, command.toString());
         }
-        return process == true;
     }
 
     /**
@@ -239,10 +265,19 @@ public class FfmpegUtil {
      * @param audioPath 音频保存路径
      * @return
      */
-    public static boolean ffmpegToAudio(String videoPath, String type, String audioPath) {
+    public static void ffmpegToAudio(String ffmpegPath, String videoPath, String type, String audioPath)
+        throws IOException, InterruptedException {
+        if (!FileUtils.isFileExists(videoPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
+
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
+
         List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+        ffmpegPath = ffmpegPath.replace("%20", " ");
+        commands.add(ffmpegPath);
         commands.add("-i");
         commands.add(videoPath);
         commands.add("-f");
@@ -260,32 +295,25 @@ public class FfmpegUtil {
         commands.add("-ac");
         commands.add("1");
         commands.add(audioPath);
-        try {
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.command(commands);
-            Process p = builder.start();
-            System.out.println("抽离成功:" + audioPath);
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command(commands);
+        Process p = builder.start();
+        LOG.info("抽离成功:" + audioPath);
 
-            // 1. start
-            BufferedReader buf = null;
-            // 保存ffmpeg的输出结果流
-            String line = null;
+        // 1. start
+        BufferedReader buf = null;
+        // 保存ffmpeg的输出结果流
+        String line = null;
 
-            buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            StringBuffer sb = new StringBuffer();
-            while ((line = buf.readLine()) != null) {
-                System.out.println(line);
-                sb.append(line);
-                continue;
-            }
-            p.waitFor();// 这里线程阻塞，将等待外部转换进程运行成功运行结束后，才往下执行
-            // 1. end
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        StringBuffer sb = new StringBuffer();
+        while ((line = buf.readLine()) != null) {
+            sb.append(line);
+            continue;
         }
+        p.waitFor();// 这里线程阻塞，将等待外部转换进程运行成功运行结束后，才往下执行
+        // 1. end
     }
 
     /**
@@ -296,10 +324,18 @@ public class FfmpegUtil {
      * @param mp3Path
      * @return
      */
-    public static boolean ffmpegOfwavTomp3(String wavPath, String mp3Path) {
+    public static void ffmpegOfwavTomp3(String ffmpegPath, String wavPath, String mp3Path)
+        throws IOException, InterruptedException {
+        if (!FileUtils.isFileExists(wavPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "文件读取失败或文件不存在,请检查文件路径");
+        }
+
+        if (!FileUtils.isFileExists(ffmpegPath)) {
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "ffmpeg应用路径不存在,请检查文件路径");
+        }
         List<String> commands = new java.util.ArrayList<String>();
-        FFMPEG_PATH = FFMPEG_PATH.replace("%20", " ");
-        commands.add(FFMPEG_PATH);
+        ffmpegPath = ffmpegPath.replace("%20", " ");
+        commands.add(ffmpegPath);
         commands.add("-i");
         commands.add(wavPath);
         commands.add("-f");
@@ -308,35 +344,24 @@ public class FfmpegUtil {
         commands.add("libmp3lame");
         commands.add("-y");
         commands.add(mp3Path);
-        try {
-            ProcessBuilder builder = new ProcessBuilder();
-            builder.command(commands);
-            Process p = builder.start();
-            System.out.println("转换成功:" + mp3Path);
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command(commands);
+        Process p = builder.start();
+        LOG.info("转换成功:" + mp3Path);
 
-            // 1. start
-            BufferedReader buf = null;
-            // 保存ffmpeg的输出结果流
-            String line = null;
+        // 1. start
+        BufferedReader buf = null;
+        // 保存ffmpeg的输出结果流
+        String line = null;
 
-            buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        buf = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            StringBuffer sb = new StringBuffer();
-            while ((line = buf.readLine()) != null) {
-                System.out.println(line);
-                sb.append(line);
-                continue;
-            }
-            p.waitFor();// 这里线程阻塞，将等待外部转换进程运行成功运行结束后，才往下执行
-            // 1. end
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        StringBuffer sb = new StringBuffer();
+        while ((line = buf.readLine()) != null) {
+            sb.append(line);
+            continue;
         }
-    }
-
-    public static void main(String[] args) {
-
+        p.waitFor();// 这里线程阻塞，将等待外部转换进程运行成功运行结束后，才往下执行
+        // 1. end
     }
 }

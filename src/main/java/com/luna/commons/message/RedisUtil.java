@@ -1,5 +1,7 @@
 package com.luna.commons.message;
 
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.base.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -29,6 +31,8 @@ public class RedisUtil {
             s = stringRedisTemplate.opsForValue().get(mark);
         } else if (CommonUtils.isEmailAddress(mark)) {
             s = stringRedisTemplate.opsForValue().get(mark);
+        } else {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");
         }
         return s;
     }

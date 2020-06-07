@@ -1,6 +1,8 @@
 package com.luna.commons.javacv;
 
 import com.luna.commons.baidu.Config.GetBaiduKey;
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.JavaCvException;
 import com.luna.commons.utils.StringUtils;
 import org.bytedeco.flandmark.FLANDMARK_Model;
 import org.bytedeco.opencv.global.opencv_imgproc;
@@ -8,10 +10,12 @@ import org.bytedeco.opencv.opencv_core.*;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 
 import static org.bytedeco.flandmark.global.flandmark.flandmark_detect;
 import static org.bytedeco.flandmark.global.flandmark.flandmark_init;
@@ -26,14 +30,31 @@ import static org.bytedeco.opencv.global.opencv_imgproc.*;
  * 人脸检测工具
  */
 public class CheckFace {
+
     private static final Logger log = LoggerFactory.getLogger(GetBaiduKey.class);
 
+    private static String       modelPath;
+
+    public static String getModelPath() {
+        if (modelPath == null) {
+            URL flandMarkModel =
+                CheckFace.class.getClassLoader().getResource("static/faceData/flandmark_model.dat");
+            modelPath = flandMarkModel.getFile();
+        }
+        return modelPath;
+    }
+
+    public static void setModelPath(String modelPath) {
+        CheckFace.modelPath = modelPath;
+    }
+
     private static FLANDMARK_Model loadFLandmarkModel(final File file) throws IOException {
+
         if (!file.exists()) {
             throw new FileNotFoundException("FLandmark model file does not exist: " + file.getAbsolutePath());
         }
 
-        final FLANDMARK_Model model = flandmark_init("flandmark_model.dat");
+        final FLANDMARK_Model model = flandmark_init(file.getAbsolutePath());
         if (model == null) {
             throw new IOException("Failed to load FLandmark model from file: " + file.getAbsolutePath());
         }
@@ -46,15 +67,15 @@ public class CheckFace {
         CascadeClassifier faceCascade,
         FLANDMARK_Model model,
         int[] bbox,
-        double[] landmarks) throws Exception {
+        double[] landmarks) {
 
         RectVector faces = new RectVector();
         faceCascade.detectMultiScale(input, faces);
 
         long nFaces = faces.size();
-        System.out.println("Faces detected: " + nFaces);
+        log.info("检测到人脸数 【{}】", nFaces);
         if (nFaces == 0) {
-            throw new Exception("No faces detected");
+            throw new JavaCvException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
 
         for (int iface = 0; iface < nFaces; ++iface) {
@@ -116,7 +137,7 @@ public class CheckFace {
             if (StringUtils.isEmpty(outPah)) {
                 outPah = inPath;
             }
-            com.luna.commons.javacv.VideoUtil.doExecuteFrame(JavaCvUtils.converter.convert(mat), outPah);
+            VideoUtil.doExecuteFrame(JavaCvUtils.converter.convert(mat), outPah);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,15 +147,10 @@ public class CheckFace {
      * 人脸检测展示
      * 
      * @param inPath
-     * \
      */
-    public static void chackFaceAndShow(String inPath) {
-        try {
-            Mat image = imread(new File(inPath).getCanonicalPath());
-            CheckFace.checkFace(image);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void chackFaceAndShow(String inPath) throws Exception {
+        Mat image = imread(new File(inPath).getCanonicalPath());
+        CheckFace.checkFace(image);
     }
 
     /**
@@ -142,21 +158,25 @@ public class CheckFace {
      * 
      * @param image
      */
-    public static void checkFace(Mat image) {
-        try {
-            final File flandmarkModelFile = new File("flandmark_model.dat");
-            final FLANDMARK_Model model = loadFLandmarkModel(flandmarkModelFile);
-            Mat imageBW = new Mat();
-            cvtColor(image, imageBW, CV_BGR2GRAY);
-            final int[] bbox = new int[4];
-            final double[] landmarks = new double[2 * model.data().options().M()];
-            detectFaceInImage(image, imageBW, JavaCvUtils.getFaceCascade(), model, bbox, landmarks);
-            JavaCvUtils.show(image, "Example 1 - output");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void checkFace(Mat image) throws Exception {
+        final File flandmarkModelFile = new File(CheckFace.getModelPath());
+        final FLANDMARK_Model model = loadFLandmarkModel(flandmarkModelFile);
+        Mat imageBW = new Mat();
+        cvtColor(image, imageBW, CV_BGR2GRAY);
+        final int[] bbox = new int[4];
+        final double[] landmarks = new double[2 * model.data().options().M()];
+        detectFaceInImage(image, imageBW, JavaCvUtils.getFaceCascade(), model, bbox, landmarks);
+        JavaCvUtils.show(image, "Example 1 - output");
     }
 
+    /**
+     * 人脸对比
+     * 
+     * @param src1
+     * @param src2
+     * @return
+     * @throws InterruptedException
+     */
     public static boolean cmpPic(Mat src1, Mat src2) throws InterruptedException {
         Mat r_hist = new Mat();
         Mat g_hist = new Mat();

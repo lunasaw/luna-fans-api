@@ -15,6 +15,9 @@ import com.luna.commons.message.entity.TemplateDO;
 import com.luna.commons.message.wrapper.MailWrapper;
 import com.luna.commons.message.wrapper.SmsWrapper;
 
+import javax.mail.internet.AddressException;
+import java.io.UnsupportedEncodingException;
+
 /**
  * @author Tony
  */
@@ -59,8 +62,14 @@ public class MessageTask implements Runnable {
         if (StringUtils.equals(MessageTypeConstant.AUTH_OCDE, messageDO.getMessageType())) {
             // 发送
             if (StringUtils.equals(TargetTypeConstant.EMAIL, messageDO.getTargetType())) {
-                mailWrapper.sendEmail(toMail, subject, content,
-                    messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
+                try {
+                    mailWrapper.sendEmail(toMail, subject, content,
+                        messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (AddressException e) {
+                    e.printStackTrace();
+                }
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
                 // TODO 暂不打开，发送要钱
                 // smsWrapper.sendAuthCode(toSms, messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
@@ -68,7 +77,13 @@ public class MessageTask implements Runnable {
         } else if (StringUtils.equals(MessageTypeConstant.RESET_PASSWORD, messageDO.getMessageType())) {
             // 发送
             if (StringUtils.equals(TargetTypeConstant.EMAIL, messageDO.getTargetType())) {
-                mailWrapper.sendEmail(toMail, subject, content, null);
+                try {
+                    mailWrapper.sendEmail(toMail, subject, content, null);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (AddressException e) {
+                    e.printStackTrace();
+                }
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
                 // TODO 暂不打开，发送要钱
                 // smsWrapper.sendAuthCode(toSms,

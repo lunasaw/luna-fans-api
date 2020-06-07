@@ -1,8 +1,11 @@
 package com.luna.commons.message.wrapper;
 
 import com.alibaba.fastjson.JSON;
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.FileException;
 import com.luna.commons.message.constant.MessageTypeConstant;
 import com.luna.commons.utils.text.CharsetKit;
+import org.apache.commons.io.FileExistsException;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
@@ -66,7 +72,8 @@ public class MailWrapper {
      * @param content 内容
      * @param authCode 验证码 可选
      */
-    public void sendEmail(String to, String subject, String content, String authCode) {
+    public void sendEmail(String to, String subject, String content, String authCode)
+        throws UnsupportedEncodingException, AddressException {
         if (authCode != null) {
             stringRedisTemplate.delete(to);
             stringRedisTemplate.opsForValue().append(to, authCode);
@@ -80,13 +87,9 @@ public class MailWrapper {
         // 发送人地址
         simpleMailMessage.setTo(to);
         simpleMailMessage.setFrom(username);
-        try {
-            // 设置自定义发件人昵称
-            String nick = MimeUtility.encodeText(name);
-            simpleMailMessage.setFrom(new InternetAddress(nick + " <" + username + ">").toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // 设置自定义发件人昵称
+        String nick = MimeUtility.encodeText(name);
+        simpleMailMessage.setFrom(new InternetAddress(nick + " <" + username + ">").toString());
         logger.info("simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
         javaMailSender.send(simpleMailMessage);
         logger.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
@@ -144,47 +147,43 @@ public class MailWrapper {
      * @param pathMap 文件名 和文件地址的Map
      */
     public void sendEmail(String main, String to, String subject, String content, String[] Cc, String[] Bcc,
-        Map<String, String> pathMap) {
+        Map<String, String> pathMap) throws MessagingException, UnsupportedEncodingException {
         // 创建复杂邮件
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, CharsetKit.UTF_8);
-            // 发送人地址
-            mimeMessageHelper.setTo(to);
-            // 标题
-            mimeMessageHelper.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
-            // 内容
-            mimeMessageHelper.setText("<b style='color:blue'>" + content + "</b>", true);
-            // 普通抄送,收件人互可见
-            if (Cc != null) {
-                mimeMessageHelper.setCc(Cc);
-            }
-            // 加密抄送,收件人不可见
-            if (Bcc != null) {
-                mimeMessageHelper.setBcc(Bcc);
-            }
-            // 默认使用配置发送人昵称
-            if (main == null || main.length() == 0) {
-                main = name;
-            }
-            if (pathMap != null && pathMap.size() != 0) {
-                // 上传文件
-                // Iterating entries using a For Each loop
-                Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
-                while (entries.hasNext()) {
-                    Map.Entry<String, String> entry = entries.next();
-                    mimeMessageHelper.addAttachment(entry.getKey(), new File(entry.getValue()));
-                }
-            }
-            // 设置自定义发件人昵称
-            String nick = MimeUtility.encodeText(main);
-            mimeMessage.setFrom(new InternetAddress(nick + " <" + username + ">"));
-            logger.info("simpleMailMessage={}", JSON.toJSONString(mimeMessage));
-            javaMailSender.send(mimeMessage);
-            logger.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(mimeMessage));
-        } catch (Exception e) {
-            e.printStackTrace();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, CharsetKit.UTF_8);
+        // 发送人地址
+        mimeMessageHelper.setTo(to);
+        // 标题
+        mimeMessageHelper.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
+        // 内容
+        mimeMessageHelper.setText("<b style='color:blue'>" + content + "</b>", true);
+        // 普通抄送,收件人互可见
+        if (Cc != null) {
+            mimeMessageHelper.setCc(Cc);
         }
+        // 加密抄送,收件人不可见
+        if (Bcc != null) {
+            mimeMessageHelper.setBcc(Bcc);
+        }
+        // 默认使用配置发送人昵称
+        if (main == null || main.length() == 0) {
+            main = name;
+        }
+        if (pathMap != null && pathMap.size() != 0) {
+            // 上传文件
+            // Iterating entries using a For Each loop
+            Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry<String, String> entry = entries.next();
+                mimeMessageHelper.addAttachment(entry.getKey(), new File(entry.getValue()));
+            }
+        }
+        // 设置自定义发件人昵称
+        String nick = MimeUtility.encodeText(main);
+        mimeMessage.setFrom(new InternetAddress(nick + " <" + username + ">"));
+        logger.info("simpleMailMessage={}", JSON.toJSONString(mimeMessage));
+        javaMailSender.send(mimeMessage);
+        logger.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(mimeMessage));
     }
 
     /**
@@ -201,48 +200,44 @@ public class MailWrapper {
      * @param model 模板名称
      */
     public void sendEmail(String main, String[] to, String subject, String content, String[] Cc, String[] Bcc,
-        Map<String, String> pathMap, String src, String model) {
+        Map<String, String> pathMap, String src, String model) throws IOException, MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
-        try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setTo(to);
-            // 普通抄送,收件人互可见
-            if (Cc != null) {
-                helper.setCc(Cc);
-            }
-
-            // 加密抄送,收件人不可见
-            if (Bcc != null) {
-                helper.setBcc(Bcc);
-            }
-
-            // 默认使用配置发送人昵称
-            if (main == null || main == "") {
-                main = name;
-            }
-
-            if (pathMap != null && pathMap.size() != 0) {
-                // 上传文件
-                // Iterating entries using a For Each loop
-                Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
-                while (entries.hasNext()) {
-                    Map.Entry<String, String> entry = entries.next();
-                    helper.addAttachment(entry.getKey(), new File(entry.getValue()));
-                }
-            }
-            // 使用默认模板
-            if (model == null) {
-                model = MessageTypeConstant.EMAIL_MODEL;
-            }
-            // 设置自定义发件人昵称
-            String nick = MimeUtility.encodeText(main);
-            helper.setFrom(new InternetAddress(nick + " <" + username + ">"));
-            helper.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
-            helper.setText(buildContent(model, content, src), true);
-            javaMailSender.send(message);
-        } catch (Exception e) {
-            e.printStackTrace();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        helper.setTo(to);
+        // 普通抄送,收件人互可见
+        if (Cc != null) {
+            helper.setCc(Cc);
         }
+
+        // 加密抄送,收件人不可见
+        if (Bcc != null) {
+            helper.setBcc(Bcc);
+        }
+
+        // 默认使用配置发送人昵称
+        if (main == null || main == "") {
+            main = name;
+        }
+
+        if (pathMap != null && pathMap.size() != 0) {
+            // 上传文件
+            // Iterating entries using a For Each loop
+            Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry<String, String> entry = entries.next();
+                helper.addAttachment(entry.getKey(), new File(entry.getValue()));
+            }
+        }
+        // 使用默认模板
+        if (model == null) {
+            model = MessageTypeConstant.EMAIL_MODEL;
+        }
+        // 设置自定义发件人昵称
+        String nick = MimeUtility.encodeText(main);
+        helper.setFrom(new InternetAddress(nick + " <" + username + ">"));
+        helper.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
+        helper.setText(buildContent(model, content, src), true);
+        javaMailSender.send(message);
     }
 
     /**
@@ -265,6 +260,7 @@ public class MailWrapper {
             }
         } catch (Exception e) {
             logger.error("读取文件失败，fileName:{}", model, e);
+            throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         } finally {
             fileReader.close();
         }

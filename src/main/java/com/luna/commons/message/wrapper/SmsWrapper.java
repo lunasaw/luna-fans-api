@@ -32,21 +32,16 @@ public class SmsWrapper {
      * 
      * @param phone
      */
-    public boolean sendAuthCode(String phone, String code) {
+    public boolean sendAuthCode(String phone, String code) throws Exception {
         phone = "+86" + phone;
         stringRedisTemplate.delete(phone);
         stringRedisTemplate.opsForValue().append(phone, code);
         stringRedisTemplate.expire(phone, 3000, TimeUnit.SECONDS);
-        Map map = null;
-        try {
-            map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
-                new String[] {phone},
-                tencentSmsConfigValue.getAuthCode(),
-                new String[] {code},
-                tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Map map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
+            new String[] {phone},
+            tencentSmsConfigValue.getAuthCode(),
+            new String[] {code},
+            tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
         return map.containsValue("1") == true;
     }
 
@@ -56,18 +51,13 @@ public class SmsWrapper {
      * @param phone
      * @return
      */
-    public boolean resetPassword(String phone, String password) {
+    public boolean resetPassword(String phone, String password) throws Exception {
         phone = "+86" + phone;
-        Map map = null;
-        try {
-            map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
-                new String[] {phone},
-                tencentSmsConfigValue.getResetPassword(),
-                new String[] {password},
-                tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Map map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
+            new String[] {phone},
+            tencentSmsConfigValue.getResetPassword(),
+            new String[] {password},
+            tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
         return map.containsValue("1") == true;
     }
 }

@@ -17,7 +17,6 @@ public class FaceRecognitionDisplay {
     /**
      * 获取摄像 调用人脸检测 返回显示
      * 
-     * @throws ExceptionFace recognition display
      */
     public static void cameraJavaCv() throws Exception {
         OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);

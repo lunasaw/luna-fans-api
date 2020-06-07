@@ -1,6 +1,9 @@
 package com.luna.commons.javacv;
 
 import com.luna.commons.baidu.Config.GetBaiduKey;
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.FileException;
+import com.luna.commons.exception.JavaCvException;
 import com.luna.commons.ffmpeg.FfmpegUtil;
 import com.luna.commons.file.FileUtils;
 import com.luna.commons.utils.StringUtils;
@@ -126,7 +129,7 @@ public class VideoUtil {
     public static void videoIntercept(String inputPath, String outPrefix, String outPutPath, String outType,
         Integer frameNumber, String start, String end) {
         if (!FileUtils.isFileExists(inputPath)) {
-            return;
+            throw new FileException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(inputPath);
         int videoTime = FfmpegUtil.getTimelen(start);
@@ -161,14 +164,19 @@ public class VideoUtil {
             }
             fFmpegFrameGrabber.stop();
         } catch (IOException e) {
-            log.error("视频抽帧异常", e, inputPath);
+            log.error("图片抽帧异常 e={}, inputPath={}", e, inputPath);
+            e.printStackTrace();
         } finally {
-            try {
-                fFmpegFrameGrabber.stop();
-                fFmpegFrameGrabber.release();
-            } catch (FrameGrabber.Exception e) {
-                e.printStackTrace();
-            }
+            stopGrabber(fFmpegFrameGrabber);
+        }
+    }
+
+    public static void stopGrabber(FFmpegFrameGrabber grabber) {
+        try {
+            grabber.stop();
+            grabber.release();
+        } catch (FrameGrabber.Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -183,7 +191,7 @@ public class VideoUtil {
      */
     public static void doExecuteFrame(Frame frame, String outPrefix, String outType, String outPutPath, int index) {
         if (frame == null || frame.image == null) {
-            return;
+            throw new FileException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Java2DFrameConverter converter = new Java2DFrameConverter();
         String fileName = outPutPath + outPrefix + index + "." + outType;
@@ -192,7 +200,8 @@ public class VideoUtil {
         try {
             ImageIO.write(bi, outType, output);
         } catch (IOException e) {
-            log.error("图片输出异常", e, outPrefix);
+            log.error("图片输出异常 e={}, fileName={}", e, fileName);
+            throw new JavaCvException(ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
     }
 
@@ -202,19 +211,15 @@ public class VideoUtil {
      * @param videoPath
      * @return
      */
-    public static Double getVedioTime(String videoPath) {
-        if (FileUtils.isFileExists(videoPath)) {
-            FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(videoPath);
-            try {
-                fFmpegFrameGrabber.start();
-                int lengthInFrames = fFmpegFrameGrabber.getLengthInFrames();
-                double videoFrameRate = fFmpegFrameGrabber.getVideoFrameRate();
-                return lengthInFrames / videoFrameRate;
-            } catch (FrameGrabber.Exception e) {
-                e.printStackTrace();
-            }
+    public static Double getVedioTime(String videoPath) throws FrameGrabber.Exception {
+        if (!FileUtils.isFileExists(videoPath)) {
+            throw new FileException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        return null;
+        FFmpegFrameGrabber fFmpegFrameGrabber = new FFmpegFrameGrabber(videoPath);
+        fFmpegFrameGrabber.start();
+        int lengthInFrames = fFmpegFrameGrabber.getLengthInFrames();
+        double videoFrameRate = fFmpegFrameGrabber.getVideoFrameRate();
+        return lengthInFrames / videoFrameRate;
     }
 
     /**
@@ -234,7 +239,7 @@ public class VideoUtil {
     public static void createVideo(String savePath, String type, Integer times, String imgType, String prefix,
         String imgPath,
         Integer width, Integer height,
-        Integer frameRate) throws FrameRecorder.Exception {
+        Integer frameRate) {
         // 视频宽高最好是按照常见的视频的宽高 16：9 或者 9：16
         if (width == null) {
             width = 1600;
@@ -277,9 +282,16 @@ public class VideoUtil {
             log.error("视频生成失败", savePath);
             e.printStackTrace();
         } finally {
-            // 最后一定要结束并释放资源
+            stopRecorder(recorder);
+        }
+    }
+
+    public static void stopRecorder(FFmpegFrameRecorder recorder) {
+        try {
             recorder.stop();
             recorder.release();
+        } catch (FrameRecorder.Exception e) {
+            e.printStackTrace();
         }
     }
 
