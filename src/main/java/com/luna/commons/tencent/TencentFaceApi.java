@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.luna.commons.dto.constant.ResultCode;
+import com.luna.commons.exception.base.BaseException;
 import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
@@ -110,7 +112,12 @@ public class TencentFaceApi {
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CHECK, "/", postHeader, null, body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        return JSON.parseObject(response.getString("Response")).getString("Error") == null;
+        String string = JSON.parseObject(response.getString("Response")).getString("Error");
+        if ("".equals(string)) {
+            return true;
+        } else {
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, string);
+        }
     }
 
     /**
@@ -227,7 +234,7 @@ public class TencentFaceApi {
      * 
      * @param id
      * @param key
-     * @param personId
+     * @param personId 人员id
      * @return
      * @throws Exception
      */
@@ -251,8 +258,8 @@ public class TencentFaceApi {
      * 
      * @param id
      * @param key
-     * @param image64
-     * @param groupIds
+     * @param image64 人员图片
+     * @param groupIds 人员组 array of String
      * @return
      * @throws Exception
      */
@@ -299,8 +306,8 @@ public class TencentFaceApi {
      * 
      * @param id
      * @param key
-     * @param personId
-     * @param image64
+     * @param personId 人员id
+     * @param image64 人员照片
      * @return
      * @throws Exception
      */
@@ -375,7 +382,7 @@ public class TencentFaceApi {
         if ("".equals(string)) {
             return Double.parseDouble(JSON.parseObject(response.getString("Response")).getString("Score"));
         } else {
-            return null;
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, string);
         }
     }
 

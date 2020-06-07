@@ -7,22 +7,22 @@ import com.luna.commons.file.ImageUtils;
 import org.apache.http.HttpResponse;
 import java.util.Map;
 
-public class TencentAPI {
+public class TencentAuthAPI {
 
     /**
      * 腾讯身份证识别
      * 
-     * @param base64Str 身份证照片
+     * @param str 身份证照片可为URL
      * @return
      * @throws Exception
      */
-    public static JSONObject idOcrCheck(String id, String key, String base64Str) throws Exception {
+    public static JSONObject idOcrCheck(String id, String key, String str) throws Exception {
         String body;
         // 判断是否为base64编码
-        if (Base64Util.isBase64(base64Str)) {
-            body = "{" + "\"ImageBase64\": \"" + base64Str + "\"" + "}";
+        if (Base64Util.isBase64(str)) {
+            body = "{" + "\"ImageBase64\": \"" + str + "\"" + "}";
         } else {
-            body = "{" + "\"ImageBase64\": \"" + Base64Util.encodeBase64String(ImageUtils.getBytes(base64Str)) + "\""
+            body = "{" + "\"ImageBase64\": \"" + Base64Util.encodeBase64String(ImageUtils.getBytes(str)) + "\""
                 + "}";
         }
         Map postHeader = TencentCloudAPITC3.getPostHeader(id, key, "ocr",
@@ -36,6 +36,9 @@ public class TencentAPI {
 
     /**
      * 腾讯云手机号在网检查 不支持电信手机号
+     * <p>
+     * 0.4
+     * <p/>
      * 
      * @param mobile
      * @return
@@ -57,7 +60,11 @@ public class TencentAPI {
     }
 
     /**
-     * 腾讯云身份证两要素
+     * 身份证两要素
+     * <p>
+     * 0.3
+     * <p/>
+     * 建议测试采用云市场Api
      *
      * @param id
      * @param name
@@ -80,7 +87,10 @@ public class TencentAPI {
     }
 
     /**
-     * 腾讯云银行卡三要素 姓名 卡号 办理卡号证件
+     * 银行卡三要素 姓名 卡号 办理卡号证件
+     * <p>
+     * 0.4
+     * <p/>
      * 
      * @param id
      * @param name
@@ -106,8 +116,7 @@ public class TencentAPI {
     }
 
     /**
-     * ==收费,需安全级别较高==
-     * 腾讯人脸身份证识别
+     * 腾讯人脸照片核身
      * 
      * @param base64Str 人脸照片
      * @param name 姓名
@@ -115,8 +124,8 @@ public class TencentAPI {
      * @return
      * @throws Exception
      */
-    public static JSONObject idAndFaceCheck(String id, String key, String base64Str, String name,
-        String idCard) throws Exception {
+    public static JSONObject idAndFaceCheck(String id, String key, String base64Str, String name, String idCard)
+        throws Exception {
         String body = "{\n" +
             "\t\"IdCard\":\"" + idCard + "\",\n" +
             "   \"Name\":\"" + name + "\",\n" +
