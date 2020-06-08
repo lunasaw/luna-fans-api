@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
  * @author xiaotao
  */
 public class DealMedia {
-    public static String        PATH            = "D:\\ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
-
     /** 日志 */
     private final static Logger LOG             = LoggerFactory.getLogger("serviceLogger");
     /** 每秒帧数 */

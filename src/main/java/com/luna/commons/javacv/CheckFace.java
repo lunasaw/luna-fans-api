@@ -1,6 +1,7 @@
 package com.luna.commons.javacv;
 
 import com.luna.commons.baidu.Config.GetBaiduKey;
+import com.luna.commons.config.JavaCvConfigValue;
 import com.luna.commons.dto.constant.ResultCode;
 import com.luna.commons.exception.JavaCvException;
 import com.luna.commons.utils.StringUtils;
@@ -10,13 +11,9 @@ import org.bytedeco.opencv.opencv_core.*;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-
 import static org.bytedeco.flandmark.global.flandmark.flandmark_detect;
 import static org.bytedeco.flandmark.global.flandmark.flandmark_init;
 import static org.bytedeco.opencv.global.opencv_core.NORM_MINMAX;
@@ -32,21 +29,6 @@ import static org.bytedeco.opencv.global.opencv_imgproc.*;
 public class CheckFace {
 
     private static final Logger log = LoggerFactory.getLogger(GetBaiduKey.class);
-
-    private static String       modelPath;
-
-    public static String getModelPath() {
-        if (modelPath == null) {
-            URL flandMarkModel =
-                CheckFace.class.getClassLoader().getResource("static/faceData/flandmark_model.dat");
-            modelPath = flandMarkModel.getFile();
-        }
-        return modelPath;
-    }
-
-    public static void setModelPath(String modelPath) {
-        CheckFace.modelPath = modelPath;
-    }
 
     private static FLANDMARK_Model loadFLandmarkModel(final File file) throws IOException {
 
@@ -159,7 +141,7 @@ public class CheckFace {
      * @param image
      */
     public static void checkFace(Mat image) throws Exception {
-        final File flandmarkModelFile = new File(CheckFace.getModelPath());
+        final File flandmarkModelFile = new File(JavaCvConfigValue.getFaceModel());
         final FLANDMARK_Model model = loadFLandmarkModel(flandmarkModelFile);
         Mat imageBW = new Mat();
         cvtColor(image, imageBW, CV_BGR2GRAY);
@@ -182,7 +164,7 @@ public class CheckFace {
         Mat g_hist = new Mat();
         Mat hsrc = new Mat();
         Mat hsrc1 = new Mat();
-        System.out.println("\n==========直方图比较==========");
+        log.info("\n==========直方图比较==========");
         // 相关性阈值，应大于多少，越接近1表示越像，最大为1
         double HISTCMP_CORREL_THRESHOLD = 0.90;
         // 卡方阈值，应小于多少，越接近0表示越像

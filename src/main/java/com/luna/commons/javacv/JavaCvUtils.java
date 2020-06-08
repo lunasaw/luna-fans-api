@@ -1,10 +1,13 @@
 package com.luna.commons.javacv;
 
-
+import com.luna.commons.baidu.Config.GetBaiduKey;
+import com.luna.commons.config.JavaCvConfigValue;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -16,6 +19,7 @@ import static org.bytedeco.opencv.global.opencv_imgcodecs.*;
 
 /**
  * Javacv 工具类
+ * 
  * @author Luna@win10
  * @date 2020/5/16 10:12
  */
@@ -24,12 +28,14 @@ public class JavaCvUtils {
     /** 转换器 */
     public static OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
 
+    private static final Logger                   log       = LoggerFactory.getLogger(JavaCvUtils.class);
+
     public static CascadeClassifier               faceCascade;
 
     public static CascadeClassifier getFaceCascade() {
         if (faceCascade == null) {
             URL faceCascadeFile =
-                CheckFace.class.getClassLoader().getResource("static/faceData/haarcascade_frontalface_alt.xml");
+                CheckFace.class.getClassLoader().getResource(JavaCvConfigValue.getFrontalFace());
             try {
                 faceCascade =
                     new CascadeClassifier(new File(faceCascadeFile.getFile()).getCanonicalPath());
@@ -97,7 +103,7 @@ public class JavaCvUtils {
     public static Mat loadOrExit(File file, Integer flags) {
         Mat image = imread(file.getAbsolutePath(), flags);
         if (image.empty()) {
-            System.out.println("Couldn't load image: " + file.getAbsolutePath());
+            log.info("Couldn't load image: " + file.getAbsolutePath());
             System.exit(1);
         }
         return image;

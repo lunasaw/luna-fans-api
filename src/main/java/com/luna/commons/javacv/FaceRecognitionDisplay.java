@@ -45,4 +45,11 @@ public class FaceRecognitionDisplay {
         }
     }
 
+    public static void main(String[] args) {
+        try {
+            cameraJavaCv();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
