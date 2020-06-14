@@ -1,7 +1,6 @@
 package com.luna.commons;
 
 import com.luna.commons.config.JavaCvConfigValue;
-import com.luna.commons.ffmpeg.FfmpegConfigValue;
 import com.luna.commons.javacv.CheckFace;
 import org.junit.Test;
 import org.junit.runner.RunWith;

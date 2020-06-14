@@ -16,18 +16,15 @@ luna.baidu.appKey=xxxx
 luna.baidu.secretKey=xxx
 luna.baidu.appId=xxx
 luna.baidu.jsKey=xxx
-
 # 腾讯APi
 luna.tencent.secretId=xxx
 luna.tencent.secretKey=xxx
-
 # 腾讯短信服务
 # 短信模板Id
 luna.smstencent.authCode=xxx
 luna.smstencent.resetPassword=xxx
 luna.smstencent.appId=xxx
 luna.smstencent.sign=xxx
-
 #邮箱操作
 #自定义发送用户名
 spring.mail.name=xxx
@@ -35,21 +32,17 @@ spring.mail.username=xxx
 spring.mail.password=xxx
 spring.mail.host=xxx
 spring.mail.smtp.ssl.enable=true
-
 # 腾讯云市场APi
-
 # 天眼身份认证
 luna.tencent.skyEyeSecretid=xxx
 luna.tencent.skyEyeSecretkey=xxx
 # 腾讯地图
 luna.tencent.mapKey=xxx
-
 #阿里oss服务器
 luna.ali.ossId=xxx
 luna.ali.ossKey=xxx
 luna.ali.bucketName=xxx
 luna.ali.host=xxx
-
 # 支付宝
 # 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
 luna.alipay.appId=xxx
@@ -65,11 +58,9 @@ luna.alipay.returnUrl=xxx
 luna.alipay.signType=RSA2
 # 支付宝网关
 luna.alipay.gatewayUrl=https://openapi.alipaydev.com/gateway.do
-
 # redis
 spring.redis.host=xxx
 spring.redis.port=6379
-
 #ftp
 #地址
 luna.ftp.host=xxx
@@ -87,6 +78,10 @@ luna.ftp.voice=/pub/voice/
 luna.ftp.localPath=D:/
 # ffmpeg 安装路径 windows:D:/ffmpeg/ffmpeg/bin/ffmpeg.exe Linux: ffmpeg
 luna.ffmpeg.path=D:/ffmpeg/ffmpeg/bin/ffmpeg.exe
+
+# openCv人脸模型
+luna.face.faceModel=static/faceData/flandmark_model.dat
+luna.face.frontalFace=static/faceData/haarcascade_frontalface_alt.xml
   ```
 
   
