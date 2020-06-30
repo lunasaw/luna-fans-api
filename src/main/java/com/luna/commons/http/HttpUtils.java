@@ -1,18 +1,9 @@
 package com.luna.commons.http;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.net.ssl.SSLContext;
-
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.luna.commons.dto.constant.ResultCode;
 import com.luna.commons.exception.base.BaseException;
 import org.apache.commons.collections4.MapUtils;
@@ -40,7 +31,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
-import com.google.common.collect.Lists;
+import javax.net.ssl.SSLContext;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tony
@@ -349,6 +348,24 @@ public class HttpUtils {
                 new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
             String jsonText = readAll(reader);
             return JSONObject.parseObject(jsonText);
+        } catch (IOException e) {
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, "读取失败,请检查网络连接后重试" + e);
+        }
+    }
+
+    /**
+     * 解析返回JSON数组
+     * 
+     * @param httpResponse
+     * @return
+     */
+    public static List<JSONObject> getResponseToArray(HttpResponse httpResponse) {
+        try {
+            BufferedReader reader =
+                new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
+            String jsonText = readAll(reader);
+            List<JSONObject> datas = JSON.parseArray(jsonText, JSONObject.class);
+            return datas;
         } catch (IOException e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, "读取失败,请检查网络连接后重试" + e);
         }

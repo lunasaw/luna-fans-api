@@ -1,17 +1,16 @@
 package com.luna.commons.xuexiaoyi;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.luna.commons.http.HttpUtils;
+import com.luna.commons.http.HttpUtilsConstant;
+import org.apache.http.HttpResponse;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import com.luna.commons.http.HttpUtilsConstant;
-import org.apache.http.HttpResponse;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.luna.commons.http.HttpUtils;
 
 /**
  * @author Luna@win10
@@ -33,11 +32,11 @@ public class XueXiaoYi {
         Map<String, String> map = new HashMap<>();
         map.put("Content-Type", HttpUtilsConstant.JSON);
         map.put("Accept-Language", language);
-        map.put("token", XueXiaoYiConstant.TOKEN);
-        map.put("t", "1589445251850");
+        map.put("token", XueXiaoYiConstant.NEW_TOKEN);
+        map.put("t", "1592575114331");
         map.put("app-version", "null");
-        map.put("device", "26908752fd5dfa3a5444c8d7fa2e351cac25f32838cf2f3c008f0a4926c2a844");
-        map.put("s", "2a8b885209846ee116eb4d7fcd989235");
+        map.put("device", "c5a0c5e3e113aac2583a203f696a63a16faf1d7b254db7d8d1914faccfc8a36b");
+        map.put("s", "c88602c7632a9cfcb499ca506fd48f00");
         HttpResponse httpResponse =
             HttpUtils.doPost(XueXiaoYiConstant.HOST, XueXiaoYiConstant.PATH, map, null, s);
         return HttpUtils.getResponse(httpResponse);
@@ -66,6 +65,7 @@ public class XueXiaoYi {
             Scanner scanner = new Scanner(System.in);
             String word = scanner.nextLine();
             JSONObject answer1 = getAnswer(word, XueXiaoYiConstant.EN_US);
+            System.out.println(answer1);
             String answer = getWord(answer1);
             System.out.println(answer);
         }
