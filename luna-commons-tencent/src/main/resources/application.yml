@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+
+  # 数据库
+
+
+logging:
+  level:
+    root: info
+  config: classpath:log/logback.xml

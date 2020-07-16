@@ -1,0 +1,6 @@
+2020-07-16 15:52:20,926  INFO [main] (StartupInfoLogger.java:55) - Starting FtpTest on luna with PID 16756 (started by improve in D:\myproject\luna-commons-loc\luna-commons-file) 
+2020-07-16 15:52:20,927  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-16 15:52:21,325  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-16 15:52:21,329  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-16 15:52:21,369  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces. 
+2020-07-16 15:52:22,472  INFO [main] (StartupInfoLogger.java:61) - Started FtpTest in 6.606 seconds (JVM running for 8.911) 
