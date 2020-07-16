@@ -1,4 +1,4 @@
-package com.luna.media.ffmpeg;
+package com.luna.media.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
