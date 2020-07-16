@@ -13,7 +13,6 @@
         <module>luna-commons-message</module>
         <module>luna-commons-api</module>
         <module>luna-commons-media</module>
-        <module>luna-commons-api</module>
     </modules>
 
     <parent>
@@ -102,12 +101,6 @@
             <artifactId>commons-net</artifactId>
             <version>3.6</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.68</version>
-        </dependency>
         <!-- JSON工具类 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -142,8 +135,9 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.68</version>
+            <version>1.2.72</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
