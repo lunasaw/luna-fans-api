@@ -1,18 +1,19 @@
-2020-07-16 16:13:11,770  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 672 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
-2020-07-16 16:13:11,771  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 16:13:12,146  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 16:13:12,148  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 16:13:12,182  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces. 
-2020-07-16 16:13:13,249  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
-2020-07-16 16:13:13,303  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 7.2 seconds (JVM running for 9.479) 
-2020-07-16 16:13:13,480  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
-2020-07-16 16:15:06,201  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 1776 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
-2020-07-16 16:15:06,202  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 16:15:06,581  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 16:15:06,584  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 16:15:06,614  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
-2020-07-16 16:15:07,544  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
-2020-07-16 16:15:07,599  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 6.839 seconds (JVM running for 7.944) 
-2020-07-16 16:15:07,760  INFO [main] (GetBaiduKey.java:42) - 执行定时任务获取百度Key 
-2020-07-16 16:15:09,078  INFO [main] (GetBaiduKey.java:79) - get token success！ 
-2020-07-16 16:15:09,089  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-07-17 14:52:41,567  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-07-17 14:52:41,581  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 15680 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-07-17 14:52:41,581  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-17 14:52:41,956  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-17 14:52:41,959  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-17 14:52:41,994  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-07-17 14:52:42,883  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-07-17 14:52:42,923  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 6.809 seconds (JVM running for 7.977) 
+2020-07-17 14:52:43,114  INFO [main] (GetBaiduKey.java:42) - 执行定时任务获取百度Key 
+2020-07-17 14:52:44,493  INFO [main] (GetBaiduKey.java:79) - get token success！ 
+2020-07-17 14:52:44,505  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
