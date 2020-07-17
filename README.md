@@ -199,7 +199,7 @@ email Keyluna@126.com  &ensp; qq:1173288254
 [license-shield]: https://img.shields.io/github/license/czy1024/luna-commons.svg?style=flat-square
 [license-url]: https://github.com/czy1024/luna-commons/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/shaojintian
+[linkedin-url]: https://linkedin.com/in/luna-commons
 
 
 
