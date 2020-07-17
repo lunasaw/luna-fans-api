@@ -13,7 +13,7 @@
 
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo</id>
+            <id>luna-commons-mvn-repo-api</id>
             <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-api/</url>
             <snapshots>
                 <enabled>true</enabled>

@@ -13,7 +13,7 @@
 
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo</id>
+            <id>luna-commons-mvn-repo-message</id>
             <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-message/</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -38,17 +38,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
-        <!-- Mysql驱动包 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

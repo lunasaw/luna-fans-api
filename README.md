@@ -2,7 +2,7 @@
 
 # ProjectName
 
-ProjectName and Description
+luna-commons
 
 <!-- PROJECT SHIELDS -->
 
@@ -45,30 +45,23 @@ ProjectName and Description
   - [开发前的配置要求](#开发前的配置要求)
   - [安装步骤](#安装步骤)
 - [文件目录说明](#文件目录说明)
-- [开发的架构](#开发的架构)
 - [部署](#部署)
 - [使用到的框架](#使用到的框架)
 - [贡献者](#贡献者)
   - [如何参与开源项目](#如何参与开源项目)
-- [版本控制](#版本控制)
 - [作者](#作者)
 - [鸣谢](#鸣谢)
 
 ### 上手指南
 
 
-
-
-
-###### 开发前的配置要求
-
-1. xxxxx x.x.x
-2. xxxxx x.x.x
-
 ###### **安装步骤**
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Get a free API Key at [https://ai.baidu.com/sdk#ocr](https://ai.baidu.com/sdk#ocr)
+2. Get a free API Key at [https://cloud.tencent.com](https://cloud.tencent.com)
+3. Get a free API Key at [https://account.aliyun.com](https://account.aliyun.com)
+4. 找到config目录下的xxxConfigValue,application.properties
+5. Clone the repo
 
 ```sh
 git clone https://github.com/czy1024/luna-commons.git
@@ -189,11 +182,9 @@ email Keyluna@126.com  &ensp; qq:1173288254
 ### 鸣谢[]()
 
 
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
+- [ffmpeg]()
+- [Javacv]()
+
 
 <!-- links -->
 [your-project-path]:czy1024/luna-commons
