@@ -377,7 +377,6 @@ public class TencentFaceApi {
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CHECK, "/", postHeader, null, body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        System.out.println(response);
         String string = JSON.parseObject(response.getString("Response")).getString("Error");
         if ("".equals(string)) {
             return Double.parseDouble(JSON.parseObject(response.getString("Response")).getString("Score"));
@@ -405,7 +404,6 @@ public class TencentFaceApi {
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CHECK, "/", postHeader, null, body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        System.out.println(response);
         return JSON.parseObject(response.getString("Response")).getBoolean("IsLiveness");
     }
 

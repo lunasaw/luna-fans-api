@@ -2,7 +2,7 @@
 
 # ProjectName
 
-luna-commons-ali
+luna-commons-baidu
 
 <!-- PROJECT SHIELDS -->
 
@@ -66,8 +66,8 @@ git clone https://github.com/czy1024/luna-commons.git
 ```xml
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo</id>
-            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-ali/</url>
+            <id>luna-commons-mvn-repo-baidu</id>
+            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-baidu/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -85,29 +85,40 @@ git clone https://github.com/czy1024/luna-commons.git
 将com/luna/**/config 下的配置文件复制到自己的项目中
 在配置文件application.properties加入可选配置
 
-```text#阿里oss服务器
-       luna.ali.ossId=xxx
-       luna.ali.ossKey=xxx
-       luna.ali.bucketName=xxx
-       luna.ali.host=xxx
-       # 支付宝
-       # 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
-       luna.alipay.appId=xxx
-       # 商户私钥，您的PKCS8格式RSA2私钥
-       luna.alipay.privateKey=xxx
-       # 支付宝公钥,查看地址：https://openhome.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
-       luna.alipay.publicKey=xxx
-       # 服务器异步通知页面路径需http://格式的完整路径，不能加?id=123这类自定义参数
-       luna.alipay.notifyUrl=xxx
-       # 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数
-       luna.alipay.returnUrl=xxx
-       # 签名方式
-       luna.alipay.signType=RSA2
-       # 支付宝网关
-       luna.alipay.gatewayUrl=https://openapi.alipaydev.com/gateway.do
+```text
+       # 百度API
+       luna.baidu.appKey=xxxx
+       luna.baidu.secretKey=xxx
+       luna.baidu.appId=xxx
+       luna.baidu.jsKey=xxx
+
 ```
 
-[引用示例见](./luna-commons-baidu/README)
+引用示例
+
+```java
+
+/**
+ * @author Luna@win10
+ * @date 2020/5/6 12:46
+ */
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class BaiduApiTest {
+
+	@Resource
+	BaiduConfig baiduConfig;
+
+	@Test
+	public void aTest() throws IOException {
+		System.out.println(baiduConfig.getAppId());
+	}
+
+}
+
+```
+
+结果即刻得到配置数据,进而调用api里的静态方法完成调用
 
 
 ### 文件目录说明
