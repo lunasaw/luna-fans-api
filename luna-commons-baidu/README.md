@@ -18,7 +18,7 @@ luna-commons-baidu
 
 <p align="center">
   <a href="https://github.com/czy1024/luna-commons/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/czy1024/luna-commons/raw/master/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">"完美的"开发工具</h3>

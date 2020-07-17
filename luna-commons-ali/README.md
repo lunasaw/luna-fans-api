@@ -18,7 +18,7 @@ luna-commons-ali
 
 <p align="center">
   <a href="https://github.com/czy1024/luna-commons/">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/czy1024/luna-commons/raw/master/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">"完美的"开发工具</h3>
@@ -107,7 +107,7 @@ git clone https://github.com/czy1024/luna-commons.git
        luna.alipay.gatewayUrl=https://openapi.alipaydev.com/gateway.do
 ```
 
-[引用示例见](./luna-commons-baidu/README)
+[引用示例见](https://github.com/czy1024/luna-commons/tree/master/luna-commons-baidu)
 
 
 ### 文件目录说明
