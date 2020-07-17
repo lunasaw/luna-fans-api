@@ -1,104 +1,215 @@
-# luna-commons
-![](https://img.shields.io/badge/luna--common-1.0--SNAPSHOT-green)
 
-一款集合市面众多接口和工具类的集合,包括图像处理人脸识别等api 
 
-# Update log
+# ProjectName
 
-###
-+Add JavaCv video processing, including picture synthesis video and video capture pictures
+ProjectName and Description
 
-+Add Baidu Weather Return, Week of Hot Search, Word Matching
+<!-- PROJECT SHIELDS -->
 
-+Add Baidu Text Comparison and Error Correction Api
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-+Change Baidu Key Acquisition to Timing Task
+<!-- PROJECT LOGO -->
+<br />
 
-+Join Alipay Black Box Test including order inquiry, payment connection, etc
+<p align="center">
+  <a href="https://github.com/czy1024/luna-commons/">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-+Introducing environment configuration files to eliminate the risk of possible key disclosure
+  <h3 align="center">"完美的"开发工具</h3>
+  <p align="center">
+    市场上许多界面和工具的集合,例如ftp,httpd等文件与工具操作，包括但不限于图像处理、人脸识别等的api。让你免去寻找工具的烦恼
+    <br />
+    <a href="https://github.com/czy1024/luna-commons"><strong>探索本项目的文档 »</strong></a>
+    <br />
+    <br />
+    <a href="">查看Demo</a>
+    ·
+    <a href="">报告Bug</a>
+    ·
+    <a href="https://github.com/czy1024/luna-commons/issues">提出新特性</a>
+  </p>
 
-+Increase Baidu Human Body Identification
+</p>
 
-+Increase Baidu Speech Synthesis
 
-+Add Tencent map ip latitude and longitude to return location information
+ 
+## 目录
 
-+Add Baidu Ocr text position general version and accurate version
+- [上手指南](#上手指南)
+  - [开发前的配置要求](#开发前的配置要求)
+  - [安装步骤](#安装步骤)
+- [文件目录说明](#文件目录说明)
+- [开发的架构](#开发的架构)
+- [部署](#部署)
+- [使用到的框架](#使用到的框架)
+- [贡献者](#贡献者)
+  - [如何参与开源项目](#如何参与开源项目)
+- [版本控制](#版本控制)
+- [作者](#作者)
+- [鸣谢](#鸣谢)
 
-+Add ffmpeg Image Processing Intercept Frame Synthesis Video Intercept Video Capture
+### 上手指南
 
-+Add Baidu Object Recognition, Link Baidu Encyclopedia, Automatically Identify Celebrities, Famous Buildings, etc
 
-+Add Rectangle Frame to Sketch Face Combined with Baidu Face Detection Api
 
-+Increase Baidu Witness Audit
 
-+Increase the search Api for easy answers
 
-+Add Baidu Ocr Face Recognition Face Detection Face Comparison Live Detection Api Call
+###### 开发前的配置要求
 
-## Maven依赖
+1. xxxxx x.x.x
+2. xxxxx x.x.x
+
+###### **安装步骤**
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+
+```sh
+git clone https://github.com/czy1024/luna-commons.git
 ```
 
-<repositories>
-        <repository>
-            <id>luna-common-mvn-repo</id>
-            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-</repositories>
+### 文件目录说明
+eg:
 
-<dependency>
-    <groupId>com.luna</groupId>
-    <artifactId>common</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
 ```
+luna-commons-loc
+├── ARCHITECTURE.md
+├── LICENSE.txt
+├── .gitignore
+├── README.md
+├── luna-commons-ali
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-api
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-baidu
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-common
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-file
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-media
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-message
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-tencent
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+└── pom.xml
 
-## 使用说明
+```
+## 各 Module 介绍
 
-+ 参见Wiki 《组件基础API使用说明》
+| Module 名称                                                  | Module 介绍                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [luna-commons-ali](./luna-commons-ali) | 关于阿里oss和alpay支付宝的使用                               |
+| [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作                            |
+| [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口(待完善)                            |
+| [luna-commons-baidu](./luna-commons-baidu)     | 百度Api集合,包含人脸识别,人证审核百度地图等api封装 |
+| [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs(待完善) |
+| [luna-commons-media](./luna-commons-media) | 媒体流处理工具,包含ffmpeg工具封装,JavaCv图像处理 |
+| [luna-commons-message](./luna-commons-message)       |  消息发送,短信邮件消息发送,有html模板附赠 [HTML邮件模板](https://github.com/czy1024/luna-commons/blob/master/luna-commons-message/src/main/resources/static/luna-message.html)
+| [luna-commons-tencent](./luna-commons-tencent) | 腾讯Api集合,包含人脸识别,人证审核腾讯地图等api封装 |
 
 
-## 更新日志
 
-### 1.0--SNAPSHOT
-+ 增加JavaCv 视频处理, 包含图片合成视频和视频截取图片 
+### 开发的架构 
 
-+ 增加百度天气返回,一周热点搜索,词语匹配
+请阅读[ARCHITECTURE.md](https://github.com/czy1024/luna-commons/blob/master/ARCHITECTURE.md) 查阅为该项目的架构。
 
-+ 增加百度文本比对纠错Api
+### 部署
 
-+ 改变百度Key获取为定时任务
+暂无
 
-+ 加入支付宝黑盒测试包括查询订单,付款连接等
+### 使用到的框架
 
-+ 引入环境配置文件,免去可能密钥泄露风险
+- [springboot](https://spring.io/)
 
-+ 增加百度人体识别
+### 贡献者
 
-+ 增加百度语音合成
+请阅读**CONTRIBUTING.md** 查阅为该项目做出贡献的开发者。
 
-+ 增加腾讯地图 ip 经纬度返回位置信息
+#### 如何参与开源项目
 
-+ 增加百度Ocr文字位置 通用版和精确版
+贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是**非常感谢**的。
 
-+ 增加ffmpeg图像处理 截帧 合成 视频截取 视频截图
 
-+ 增加百度物体识别,链接百度百科,自动识别名人,著名建筑物等
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-+ 增加勾画人脸矩形框结合百度人脸检测Api
 
-+ 增加百度人证审核
 
-+ 增加学小易答案搜索Api
+### 版本控制
 
-+ 增加百度Ocr 人脸识别 人脸检测 人脸比对 活体检测 Api调用
+该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
 
+### 作者
+
+luna
+
+email Keyluna@126.com  &ensp; qq:1173288254
+
+ *您也可以在贡献者名单中参看所有参与该项目的开发者。*
 
 ### 版权说明
-![](https://img.shields.io/badge/License-Apache%20License%202.0-yellowgreen)
+
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/czy1024/luna-commons/blob/master/LICENSE.txt)
+
+### 鸣谢[]()
+
+
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Img Shields](https://shields.io)
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Pages](https://pages.github.com)
+- [Animate.css](https://daneden.github.io/animate.css)
+
+<!-- links -->
+[your-project-path]:czy1024/luna-commons
+[contributors-shield]: https://img.shields.io/github/contributors/czy1024/luna-commons.svg?style=flat-square
+[contributors-url]: https://github.com/czy1024/luna-commons/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/czy1024/luna-commons.svg?style=flat-square
+[forks-url]: https://github.com/czy1024/luna-commons/network/members
+[stars-shield]: https://img.shields.io/github/stars/czy1024/luna-commons.svg?style=flat-square
+[stars-url]: https://github.com/czy1024/luna-commons/stargazers
+[issues-shield]: https://img.shields.io/github/issues/czy1024/luna-commons.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/czy1024/luna-commons.svg
+[license-shield]: https://img.shields.io/github/license/czy1024/luna-commons.svg?style=flat-square
+[license-url]: https://github.com/czy1024/luna-commons/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/shaojintian
+
+
+
+
