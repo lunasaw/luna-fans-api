@@ -177,7 +177,7 @@ email Keyluna@126.com  &ensp; qq:1173288254
 
 ### 版权说明
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/czy1024/luna-commons/blob/master/LICENSE.txt)
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/czy1024/luna-commons/blob/master/LICENSE)
 
 ### 鸣谢[]()
 
