@@ -1,4 +1,4 @@
-package com.luna.common.domain;
+package com.luna.common.entity;
 
 import java.io.Serializable;
 
