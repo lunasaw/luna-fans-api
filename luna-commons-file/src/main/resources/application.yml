@@ -3,7 +3,10 @@ spring:
     active: dev
 
   # 数据库
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 logging:
   level:
     root: info
