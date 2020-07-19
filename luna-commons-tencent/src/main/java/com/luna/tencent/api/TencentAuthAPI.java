@@ -3,7 +3,7 @@ package com.luna.tencent.api;
 import com.alibaba.fastjson.JSONObject;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.ImageUtils;
+import com.luna.common.utils.img.ImageUtils;
 import org.apache.http.HttpResponse;
 
 import java.util.Map;

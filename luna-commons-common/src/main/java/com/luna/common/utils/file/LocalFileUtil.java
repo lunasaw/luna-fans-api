@@ -1,4 +1,4 @@
-package com.luna.file.local;
+package com.luna.common.utils.file;
 
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * @Package: com.luna.file.local
+ * @Package: com.luna.file.file
  * @ClassName: LocalFileUtil
  * @Author: luna
  * @CreateTime: 2020/7/16 15:31

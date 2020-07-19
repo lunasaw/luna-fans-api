@@ -9,7 +9,7 @@ import com.luna.baidu.api.BaiduFaceApi;
 import com.luna.baidu.config.BaiduConfigValue;
 import com.luna.baidu.config.GetBaiduKey;
 import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.ImageUtils;
+import com.luna.common.utils.img.ImageUtils;
 
 /**
  * @Package: com.luna.baidu.tests

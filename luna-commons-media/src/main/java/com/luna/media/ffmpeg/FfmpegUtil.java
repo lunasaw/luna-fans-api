@@ -3,7 +3,7 @@ package com.luna.media.ffmpeg;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
 import com.luna.common.exception.JavaCvException;
-import com.luna.file.local.LocalFileUtil;
+import com.luna.file.file.LocalFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

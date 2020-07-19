@@ -4,7 +4,7 @@ import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
 import com.luna.common.exception.JavaCvException;
 import com.luna.common.utils.StringUtils;
-import com.luna.file.local.LocalFileUtil;
+import com.luna.file.file.LocalFileUtil;
 import com.luna.media.ffmpeg.FfmpegUtil;
 import org.bytedeco.ffmpeg.global.avcodec;
 import org.bytedeco.ffmpeg.global.avutil;
