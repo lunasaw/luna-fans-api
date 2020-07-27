@@ -64,6 +64,6 @@ public class BaiduApiContent {
 
     /** TODO Key 30天更换一次 暂定固定值 */
     public static String BAIDU_KEY           =
-        "24.a6610a2137c77fc9db29c29d64f8d8f0.2592000.1592999017.282335-19618961";
+        "24.7dfa7aa0c9057d09575b07fd98dc15fa.2592000.1598414403.282335-19618961";
 
 }

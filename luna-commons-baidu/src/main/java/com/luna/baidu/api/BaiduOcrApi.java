@@ -29,10 +29,10 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<String> baiDuOcr(String base64String) {
+    public static List<String> baiDuOcr(String key,String base64String) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED), null,
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "image", base64String));
+            ImmutableMap.of("access_token", key, "image", base64String));
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<String> words = new ArrayList<>();
         List<JSONObject> datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
@@ -50,10 +50,10 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<Word> baiduOcrAndAddress(String base64String) throws UnsupportedEncodingException {
+    public static List<Word> baiduOcrAndAddress(String key,String base64String) throws UnsupportedEncodingException {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY),
+            ImmutableMap.of("access_token", key),
             "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
         return getWords(httpResponse);
     }
@@ -65,10 +65,10 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<Word> baiduOcrAndAddressNormal(String base64String) throws UnsupportedEncodingException {
+    public static List<Word> baiduOcrAndAddressNormal(String key,String base64String) throws UnsupportedEncodingException {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS_NORMAL,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY),
+            ImmutableMap.of("access_token", key),
             "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
         return getWords(httpResponse);
     }
@@ -81,7 +81,6 @@ public class BaiduOcrApi {
      */
     private static List<Word> getWords(HttpResponse httpResponse) {
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        System.out.println(response);
         List<Word> words = new ArrayList<>();
         List<JSONObject> datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
         for (int i = 0; i < datas.size(); i++) {

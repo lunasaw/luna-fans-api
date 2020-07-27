@@ -16,10 +16,20 @@ public class BaiduConfigValue {
 
     private String          appId;
 
+    private String          baiduKey;
+
     /** 语音识别 */
     private AipSpeech       aipSpeech;
     /** 人体识别 */
     private AipBodyAnalysis client;
+
+    public String getBaiduKey() {
+        return baiduKey;
+    }
+
+    public void setBaiduKey(String baiduKey) {
+        this.baiduKey = baiduKey;
+    }
 
     public String getAppKey() {
         return appKey;

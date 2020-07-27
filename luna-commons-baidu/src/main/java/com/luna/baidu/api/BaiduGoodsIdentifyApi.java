@@ -27,11 +27,11 @@ public class BaiduGoodsIdentifyApi {
      * @return List<String>
      * @throws IOException
      */
-    public static List<String> goodsIdentify(String base64Str) throws UnsupportedEncodingException {
+    public static List<String> goodsIdentify(String key,String base64Str) throws UnsupportedEncodingException {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.GOODS_IDENTIFY,
             ImmutableMap.of(
                 "Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED, "Connection", "Keep-Alive"),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY),
+            ImmutableMap.of("access_token", key),
             "image=" + URLEncoder.encode(base64Str, CharsetKit.UTF_8));
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<JSONObject> datas = JSON.parseArray(response.get("result").toString(), JSONObject.class);

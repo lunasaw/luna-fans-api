@@ -23,11 +23,11 @@ public class BaiduLanguageProcessingApi {
      * @param text
      * @throws IOException
      */
-    public static String correction(String text) {
+    public static String correction(String key,String text) {
         String body = "{\"text\": \"" + text + "\"" + "}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.LANGUAGE_PROCESSING,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
         JSONObject jsonObject = JSON.parseObject(response.get("item").toString());
@@ -48,7 +48,7 @@ public class BaiduLanguageProcessingApi {
      * @return
      * @throws IOException
      */
-    public static String similarityText(String text1, String text2, String model) {
+    public static String similarityText(String key,String text1, String text2, String model) {
         if (model == null || model.length() == 0) {
             model = "BOW";
         }
@@ -59,7 +59,7 @@ public class BaiduLanguageProcessingApi {
             "}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.TEXT_SIMILARITY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
         return response.get("score").toString();
@@ -73,14 +73,14 @@ public class BaiduLanguageProcessingApi {
      * @return
      * @throws IOException
      */
-    public static String similarityWords(String word1, String word2) {
+    public static String similarityWords(String key,String word1, String word2) {
         String body = "{\n" +
             "    \"word_1\":\"" + word1 + "\",\n" +
             "    \"word_2\":\"" + word2 + "\"\n" +
             "}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.WOEDS_SIMILARITY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
         return response.get("score").toString();

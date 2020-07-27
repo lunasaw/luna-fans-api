@@ -23,6 +23,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -161,6 +162,8 @@ public class HttpUtils {
      */
     public static HttpResponse doGet(String host, String path, Map<String, String> headers,
         Map<String, String> queries) {
+        headers.put("accept", "*/*");
+        headers.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         HttpGet request = new HttpGet(buildUrl(host, path, queries));
         if (MapUtils.isNotEmpty(headers)) {
             for (Map.Entry<String, String> e : headers.entrySet()) {
@@ -187,9 +190,12 @@ public class HttpUtils {
      */
     public static HttpResponse doPost(String host, String path, Map<String, String> headers,
         Map<String, String> queries, Map<String, String> bodies) {
+        HashMap<String, String> header = new HashMap<>(headers);
+        header.put("accept", "*/*");
+        header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
-        if (MapUtils.isNotEmpty(headers)) {
-            for (Map.Entry<String, String> e : headers.entrySet()) {
+        if (MapUtils.isNotEmpty(header)) {
+            for (Map.Entry<String, String> e : header.entrySet()) {
                 request.addHeader(e.getKey(), e.getValue());
             }
         }
@@ -227,15 +233,49 @@ public class HttpUtils {
      */
     public static HttpResponse doPost(String host, String path, Map<String, String> headers,
         Map<String, String> queries, String body) {
+        HashMap<String, String> header = new HashMap<>(headers);
+        header.put("accept", "*/*");
+        header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
-        if (MapUtils.isNotEmpty(headers)) {
-            for (Map.Entry<String, String> e : headers.entrySet()) {
+        if (MapUtils.isNotEmpty(header)) {
+            for (Map.Entry<String, String> e : header.entrySet()) {
                 request.addHeader(e.getKey(), e.getValue());
             }
         }
         if (StringUtils.isNotBlank(body)) {
             request.setEntity(new StringEntity(body, ENCODE));
+        }
+        try {
+            return httpClient.execute(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    /**
+     * Post File
+     *
+     * @param host
+     * @param path
+     * @param headers
+     * @param queries
+     * @param bodies
+     * @return
+     * @throws Exception
+     */
+    public static HttpResponse doPostFile(String host, String path, Map<String, String> headers,
+        Map<String, String> queries, Map<String, String> bodies) {
+        HashMap<String, String> header = new HashMap<>(headers);
+        header.put("accept", "*/*");
+        header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        HttpPost request = new HttpPost(buildUrl(host, path, queries));
+        if (MapUtils.isNotEmpty(header)) {
+            for (Map.Entry<String, String> e : header.entrySet()) {
+                request.addHeader(e.getKey(), e.getValue());
+            }
+        }
+        if (bodies != null || bodies.size() != 0) {
+            request.setEntity(new FileEntity(new File(bodies.get("smfile"))));
         }
         try {
             return httpClient.execute(request);
@@ -257,9 +297,12 @@ public class HttpUtils {
      */
     public static HttpResponse doPost(String host, String path, Map<String, String> headers,
         Map<String, String> queries, byte[] body) {
+        HashMap<String, String> header = new HashMap<>(headers);
+        header.put("accept", "*/*");
+        header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         HttpPost request = new HttpPost(buildUrl(host, path, queries));
-        if (MapUtils.isNotEmpty(headers)) {
-            for (Map.Entry<String, String> e : headers.entrySet()) {
+        if (MapUtils.isNotEmpty(header)) {
+            for (Map.Entry<String, String> e : header.entrySet()) {
                 request.addHeader(e.getKey(), e.getValue());
             }
         }

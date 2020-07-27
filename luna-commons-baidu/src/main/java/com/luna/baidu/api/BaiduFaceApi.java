@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author Luna@win10
  * @date 2020/4/20 11:46
@@ -31,10 +30,10 @@ public class BaiduFaceApi {
      * @return List<Face>
      * @throws IOException
      */
-    public static List<Face> faceDetect(String base64Str) {
+    public static List<Face> faceDetect(String key, String base64Str) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.FACE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "image_type", "BASE64", "max_face_num", "10",
+            ImmutableMap.of("access_token", key, "image_type", "BASE64", "max_face_num", "10",
                 "image", base64Str));
         JSONObject response = HttpUtils.getResponse(httpResponse);
         JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
@@ -64,7 +63,7 @@ public class BaiduFaceApi {
      * @return 比较数值
      * @throws IOException
      */
-    public static Double faceMathch(String base64Str1, String base64Str2) {
+    public static Double faceMathch(String key, String base64Str1, String base64Str2) {
         String s = "[\n" +
             "  {\n" +
             "\t\t\"image\": \"" + base64Str1 + "\",\n" +
@@ -78,7 +77,7 @@ public class BaiduFaceApi {
             "\t}\n" +
             "]";
         HttpResponse httpResponse =
-            HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.MATCH + "?access_token=" + BaiduApiContent.BAIDU_KEY,
+            HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.MATCH + "?access_token=" + key,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
                 s);
         JSONObject response = HttpUtils.getResponse(httpResponse);
@@ -94,7 +93,7 @@ public class BaiduFaceApi {
      * @return
      * @throws IOException
      */
-    public static boolean checkLive(String base64Str) {
+    public static boolean checkLive(String key, String base64Str) {
         String s = "[{\n" +
             "\t\"image\": \"" + base64Str + "\",\n" +
             "\t\"image_type\": \"BASE64\",\n" +
@@ -102,7 +101,7 @@ public class BaiduFaceApi {
             "\t\"option\": \"COMMON\"\n" +
             "}]";
         HttpResponse httpResponse =
-            HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.LIVE + "?access_token=" + BaiduApiContent.BAIDU_KEY,
+            HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.LIVE + "?access_token=" + key,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
                 s);
         JSONObject response = HttpUtils.getResponse(httpResponse);
@@ -125,11 +124,11 @@ public class BaiduFaceApi {
      * 4: 身份证证号和性别信息不一致
      * @throws IOException
      */
-    public static Map<String, String> checIdCard(String base64Str) throws UnsupportedEncodingException {
+    public static Map<String, String> checIdCard(String key, String base64Str) throws UnsupportedEncodingException {
         String param = "id_card_side=" + "front" + "&image=" + URLEncoder.encode(base64Str, CharsetKit.UTF_8);
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiContent.HOST,
-                BaiduApiContent.ID_OCR + "?access_token=" + BaiduApiContent.BAIDU_KEY,
+                BaiduApiContent.ID_OCR + "?access_token=" + key,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED), null,
                 param);
         JSONObject response = HttpUtils.getResponse(httpResponse);

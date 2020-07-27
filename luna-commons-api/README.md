@@ -84,7 +84,8 @@ git clone https://github.com/czy1024/luna-commons.git
 ```
 可直接引用api文件目录下的静态方法接口
 
-pom文件
+##pom文件
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -180,6 +181,8 @@ pom文件
 eg:
 
 ```
+
+
 luna-commons-api
 ├── README.md
 ├── src
@@ -187,14 +190,20 @@ luna-commons-api
 │──── /resource/
 └── pom.xml
 
-```
+
 
 ### 部署
 
-暂无
+引入依赖
 
-
-
+```text
+<dependency>
+  <groupId>com.luna.commons</groupId>
+  <artifactId>luna-commons-api</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+[使用部署](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)
 
 
 

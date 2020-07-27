@@ -1,0 +1,7 @@
+2020-07-16 16:50:04,005  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 1700 (started by improve in D:\myproject\luna-commons-loc\luna-commons-tencent) 
+2020-07-16 16:50:04,007  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-16 16:50:04,418  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-16 16:50:04,421  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-16 16:50:04,442  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 7ms. Found 0 Redis repository interfaces. 
+2020-07-16 16:50:04,549  WARN [main] (Logger.java:44) - No MyBatis mapper was found in '[com.luna.tencent]' package. Please check your configuration. 
+2020-07-16 16:50:05,953  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 5.073 seconds (JVM running for 7.134) 

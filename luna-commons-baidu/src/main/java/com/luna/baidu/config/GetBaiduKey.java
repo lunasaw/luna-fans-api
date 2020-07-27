@@ -2,7 +2,6 @@ package com.luna.baidu.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.luna.baidu.api.BaiduApiContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class GetBaiduKey {
              */
             JSONObject jsonObject = JSON.parseObject(result);
             System.out.println(jsonObject);
-            BaiduApiContent.BAIDU_KEY = jsonObject.get("access_token").toString();
+            configValue.setBaiduKey(jsonObject.get("access_token").toString());
             log.info("get token success！", jsonObject.toString());
         } catch (Exception e) {
             log.info("get token failed！");

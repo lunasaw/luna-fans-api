@@ -24,11 +24,11 @@ public class BaiduCreationApi {
      * @return
      * @throws IOException
      */
-    public static List<JSONObject> hotEvent(String domain) {
+    public static List<JSONObject> hotEvent(String key,String domain) {
         String body = "{\"domain\":\"" + domain + "\"}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.HOT_EVENT,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY),
+            ImmutableMap.of("access_token", key),
             body);
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<JSONObject> content = JSON.parseArray(response.getString("content"), JSONObject.class);
@@ -41,10 +41,10 @@ public class BaiduCreationApi {
      * @return
      * @throws IOException
      */
-    public static Map<String, List<JSONObject>> eventContext() {
+    public static Map<String, List<JSONObject>> eventContext(String key) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.EVENT_CONTEXT,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY),
+            ImmutableMap.of("access_token", key),
             "");
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<JSONObject> content = JSON.parseArray(response.getString("content"), JSONObject.class);
@@ -64,10 +64,10 @@ public class BaiduCreationApi {
      * @return
      * @throws IOException
      */
-    public static Map<String, String> writing(String city) {
+    public static Map<String, String> writing(String key,String city) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.WRITING,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", BaiduApiContent.BAIDU_KEY, "project_id", "41168", "city", city),
+            ImmutableMap.of("access_token", key, "project_id", "41168", "city", city),
             ImmutableMap.of());
         JSONObject response = HttpUtils.getResponse(httpResponse);
         JSONObject jsonObject = JSON.parseObject(response.get("result").toString());
@@ -82,7 +82,7 @@ public class BaiduCreationApi {
     }
 
     public static void main(String[] args) {
-        Map<String, List<JSONObject>> map = eventContext();
+        Map<String, List<JSONObject>> map = eventContext("this to set key");
         for (Map.Entry<String, List<JSONObject>> entry : map.entrySet()) {
             System.out.println(entry.getKey());
             System.out.println("===============================");

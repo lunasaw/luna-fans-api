@@ -1,26 +1,53 @@
-2020-07-16 16:10:39,978  INFO [main] (StartupInfoLogger.java:55) - Starting BaiduApplication on luna with PID 18300 (D:\myproject\luna-commons-loc\luna-commons-baidu\target\classes started by improve in D:\myproject\luna-commons-loc) 
-2020-07-16 16:10:39,980  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 16:10:40,322  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 16:10:40,323  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 16:10:40,345  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 11ms. Found 0 Redis repository interfaces. 
-2020-07-16 16:10:40,820  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
-2020-07-16 16:10:40,855  INFO [main] (StartupInfoLogger.java:61) - Started BaiduApplication in 4.719 seconds (JVM running for 5.738) 
-2020-07-16 16:11:01,157  INFO [main] (StartupInfoLogger.java:55) - Starting BaiduApplication on luna with PID 8616 (D:\myproject\luna-commons-loc\luna-commons-baidu\target\classes started by improve in D:\myproject\luna-commons-loc) 
-2020-07-16 16:11:01,159  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 16:11:01,497  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 16:11:01,499  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 16:11:01,521  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces. 
-2020-07-16 16:11:01,977  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
-2020-07-16 16:11:02,012  INFO [main] (StartupInfoLogger.java:61) - Started BaiduApplication in 3.911 seconds (JVM running for 5.021) 
-2020-07-16 16:28:15,425  INFO [main] (StartupInfoLogger.java:55) - Starting AliApplication on luna with PID 17780 (D:\myproject\luna-commons-loc\luna-commons-ali\target\classes started by improve in D:\myproject\luna-commons-loc) 
-2020-07-16 16:28:15,428  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 16:28:15,769  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 16:28:15,771  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 16:28:15,792  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces. 
-2020-07-16 16:28:16,260  INFO [main] (StartupInfoLogger.java:61) - Started AliApplication in 5.231 seconds (JVM running for 6.288) 
-2020-07-16 21:00:36,263  INFO [main] (StartupInfoLogger.java:55) - Starting MediaApplication on luna with PID 7600 (D:\myproject\luna-commons-loc\luna-commons-media\target\classes started by improve in D:\myproject\luna-commons-loc) 
-2020-07-16 21:00:36,266  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
-2020-07-16 21:00:36,674  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
-2020-07-16 21:00:36,677  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
-2020-07-16 21:00:36,707  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
-2020-07-16 21:00:37,309  INFO [main] (StartupInfoLogger.java:61) - Started MediaApplication in 4.931 seconds (JVM running for 7.006) 
+2020-07-27 16:56:29,307  INFO [main] (StartupInfoLogger.java:55) - Starting ApiApplication on luna with PID 17296 (D:\myproject\luna-commons-loc\luna-commons-api\target\classes started by improve in D:\myproject\luna-commons-loc) 
+2020-07-27 16:56:29,308  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-27 16:56:29,703  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-27 16:56:29,705  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-27 16:56:29,735  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-07-27 16:56:29,864  WARN [main] (AbstractApplicationContext.java:558) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'smMsConfigValue': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'luna.smms.username' in value "${luna.smms.username}" 
+2020-07-27 16:56:29,871  INFO [main] (ConditionEvaluationReportLoggingListener.java:136) - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+2020-07-27 16:56:29,879  ERROR [main] (SpringApplication.java:826) - Application run failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'smMsConfigValue': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'luna.smms.username' in value "${luna.smms.username}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:405)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:594)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:879)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:878)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:747)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
+	at com.luna.api.ApiApplication.main(ApiApplication.java:17)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'luna.smms.username' in value "${luna.smms.username}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:236)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:908)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1228)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1207)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:116)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	... 16 common frames omitted
+2020-07-27 16:56:52,784  INFO [main] (StartupInfoLogger.java:55) - Starting ApiApplication on luna with PID 1092 (D:\myproject\luna-commons-loc\luna-commons-api\target\classes started by improve in D:\myproject\luna-commons-loc) 
+2020-07-27 16:56:52,785  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-27 16:56:53,150  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-27 16:56:53,152  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-27 16:56:53,183  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-07-27 16:56:53,652  INFO [main] (StartupInfoLogger.java:61) - Started ApiApplication in 3.737 seconds (JVM running for 4.61) 
+2020-07-27 17:50:17,508  INFO [main] (StartupInfoLogger.java:55) - Starting AliApplication on luna with PID 1172 (D:\myproject\luna-commons-loc\luna-commons-ali\target\classes started by improve in D:\myproject\luna-commons-loc) 
+2020-07-27 17:50:17,509  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-27 17:50:17,836  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-27 17:50:17,838  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-27 17:50:17,860  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces. 
+2020-07-27 17:50:18,301  INFO [main] (StartupInfoLogger.java:61) - Started AliApplication in 3.617 seconds (JVM running for 4.51) 
