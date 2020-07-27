@@ -124,8 +124,8 @@ luna-commons-loc
 | Module 名称                                                  | Module 介绍                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [luna-commons-ali](./luna-commons-ali) | 关于阿里oss和alpay支付宝的使用                               |
-| [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作                            |
-| [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口(待完善)                            |
+| [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作,http网络操作                            |
+| [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口,[sm.ms 图床api](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)                           |
 | [luna-commons-baidu](./luna-commons-baidu)     | 百度Api集合,包含人脸识别,人证审核百度地图等api封装 |
 | [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs等文件操作 |
 | [luna-commons-media](./luna-commons-media) | 媒体流处理工具,包含ffmpeg工具封装,JavaCv图像处理 |
@@ -140,7 +140,7 @@ luna-commons-loc
 
 ### 部署
 
-暂无
+请前往各个小项目查看
 
 ### 使用到的框架
 
