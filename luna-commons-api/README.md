@@ -171,7 +171,7 @@ git clone https://github.com/czy1024/luna-commons.git
     </build>
 </project>
 
-``
+```
 
 
 [引用示例见](https://github.com/czy1024/luna-commons/tree/master/luna-commons-baidu)
@@ -187,9 +187,10 @@ luna-commons-api
 ├── README.md
 ├── src
 │  ├── /api/
+│  ├── /api/smms
 │──── /resource/
 └── pom.xml
-
+```
 
 
 ### 部署
@@ -205,7 +206,10 @@ luna-commons-api
 ```
 [使用部署](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)
 
+#### sm.ms 包括用户和图片两个操作
 
+[用户相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-User)
+[图片相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-Image)
 
 <!-- links -->
 [your-project-path]:czy1024/luna-commons
