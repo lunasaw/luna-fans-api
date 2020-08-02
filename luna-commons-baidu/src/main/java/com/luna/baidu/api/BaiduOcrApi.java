@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.baidu.entity.Word;
+import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.utils.text.CharsetKit;
@@ -14,7 +16,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author Luna@win10
@@ -29,16 +30,20 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<String> baiDuOcr(String key,String base64String) {
+    public static List<String> baiDuOcr(String key, String base64String) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED), null,
             ImmutableMap.of("access_token", key, "image", base64String));
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<String> words = new ArrayList<>();
-        List<JSONObject> datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
-        for (int i = 0; i < datas.size(); i++) {
-            String string = datas.get(i).get("words").toString();
-            words.add(string);
+        List<JSONObject> datas = null;
+        try {
+            datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
+        } catch (Exception e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
+        for (JSONObject data : datas) {
+            words.add(data.get("words").toString());
         }
         return words;
     }
@@ -50,11 +55,16 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<Word> baiduOcrAndAddress(String key,String base64String) throws UnsupportedEncodingException {
-        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key),
-            "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
+    public static List<Word> baiduOcrAndAddress(String key, String base64String) {
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
+                ImmutableMap.of("access_token", key),
+                "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, e.getMessage());
+        }
         return getWords(httpResponse);
     }
 
@@ -65,16 +75,21 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<Word> baiduOcrAndAddressNormal(String key,String base64String) throws UnsupportedEncodingException {
-        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS_NORMAL,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key),
-            "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
+    public static List<Word> baiduOcrAndAddressNormal(String key, String base64String) {
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.OCR_ADDRESS_NORMAL,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
+                ImmutableMap.of("access_token", key), "image=" + URLEncoder.encode(base64String, CharsetKit.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, e.getMessage());
+        }
         return getWords(httpResponse);
     }
 
     /**
      * 文字结果解析
+     * 
      * @param httpResponse
      * @return
      * @throws IOException
@@ -82,16 +97,15 @@ public class BaiduOcrApi {
     private static List<Word> getWords(HttpResponse httpResponse) {
         JSONObject response = HttpUtils.getResponse(httpResponse);
         List<Word> words = new ArrayList<>();
-        List<JSONObject> datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
-        for (int i = 0; i < datas.size(); i++) {
-            Word word = new Word();
-            String string = datas.get(i).get("words").toString();
-            JSONObject jsonObject = JSON.parseObject(datas.get(i).get("location").toString());
-            word.setWold(string);
-            word.setLeft(Double.parseDouble(jsonObject.get("left").toString()));
-            word.setTop(Double.parseDouble(jsonObject.get("top").toString()));
-            word.setWidth(Double.parseDouble(jsonObject.get("width").toString()));
-            word.setHeight(Double.parseDouble(jsonObject.get("height").toString()));
+        List<JSONObject> datas = null;
+        try {
+            datas = JSON.parseArray(response.get("words_result").toString(), JSONObject.class);
+        } catch (Exception e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
+        for (JSONObject data : datas) {
+            Word word = JSON.parseObject(data.get("location").toString(), Word.class);
+            word.setWold(data.get("words").toString());
             words.add(word);
         }
         return words;

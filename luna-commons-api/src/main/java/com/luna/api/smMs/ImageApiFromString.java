@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.luna.api.smMs.constant.SmMsConstant;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.okHttp.HttpPost;
 import org.apache.http.HttpResponse;
 
 import java.util.HashMap;
@@ -30,7 +29,9 @@ public class ImageApiFromString {
         header.put("Authorization", token);
         HashMap<String, String> bodies = new HashMap<>();
         bodies.put("smfile", path);
-        return HttpPost.post(SmMsConstant.HOST + "/upload", null, header, bodies);
+        // return HttpPost.post(SmMsConstant.HOST + "/upload", null, header, bodies);
+
+        return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/upload", header, null, bodies));
     }
 
     /**

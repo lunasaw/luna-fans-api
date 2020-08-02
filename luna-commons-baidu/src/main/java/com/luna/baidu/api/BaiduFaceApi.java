@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.baidu.entity.Face;
+import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.utils.text.CharsetKit;
@@ -32,23 +34,23 @@ public class BaiduFaceApi {
      */
     public static List<Face> faceDetect(String key, String base64Str) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.FACE,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
-            ImmutableMap.of("access_token", key, "image_type", "BASE64", "max_face_num", "10",
-                "image", base64Str));
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
+            JSON.toJSONString(ImmutableMap.of("image_type", "BASE64", "max_face_num", "10",
+                "image", base64Str)));
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
-        List<JSONObject> datas = JSON.parseArray(jsonObject1.get("face_list").toString(), JSONObject.class);
+        List<JSONObject> datas = null;
+        try {
+            JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
+            datas = JSON.parseArray(jsonObject1.get("face_list").toString(), JSONObject.class);
+        } catch (Exception e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
         List<Face> faces = new ArrayList<>();
         JSONObject jsonObject2 = null;
-        for (int i = 0; i < datas.size(); i++) {
-            Face face = new Face();
-            if (datas.get(i).get("face_token") != null) {
-                face.setFaceToken(datas.get(i).get("face_token").toString());
-                jsonObject2 = JSON.parseObject(datas.get(i).get("location").toString());
-                face.setLeft(Double.parseDouble(jsonObject2.get("left").toString()));
-                face.setHeight(Double.parseDouble(jsonObject2.get("height").toString()));
-                face.setTop(Double.parseDouble(jsonObject2.get("top").toString()));
-                face.setWidth(Double.parseDouble(jsonObject2.get("width").toString()));
+        for (JSONObject data : datas) {
+            if (data.get("face_token") != null) {
+                Face face = JSON.parseObject(data.get("location").toString(), Face.class);
+                face.setFaceToken(data.get("face_token").toString());
                 faces.add(face);
             }
         }
@@ -58,56 +60,65 @@ public class BaiduFaceApi {
     /**
      * 人脸对比
      * 
-     * @param base64Str1 脸部生活照
-     * @param base64Str2 身份证照片
+     * @param live 脸部生活照
+     * @param idCard 身份证照片
      * @return 比较数值
      * @throws IOException
      */
-    public static Double faceMathch(String key, String base64Str1, String base64Str2) {
-        String s = "[\n" +
-            "  {\n" +
-            "\t\t\"image\": \"" + base64Str1 + "\",\n" +
-            "\t\t\"image_type\": \"BASE64\",\n" +
-            "\t\t\"face_type\": \"LIVE\"\n" +
-            "\t},\n" +
-            "\t{\n" +
-            "\t\t\"image\": \"" + base64Str2 + "\",\n" +
-            "\t\t\"image_type\": \"BASE64\",\n" +
-            "\t\t\"face_type\": \"IDCARD\"\n" +
-            "\t}\n" +
-            "]";
+    public static Double faceMathch(String key, String live, String idCard) {
+        HashMap<String, String> liveParam = new HashMap<>();
+        liveParam.put("image", live);
+        liveParam.put("image_type", "BASE64");
+        liveParam.put("face_type", "LIVE");
+
+        HashMap<String, String> cardParam = new HashMap<>();
+        cardParam.put("image", idCard);
+        cardParam.put("image_type", "BASE64");
+        cardParam.put("face_type", "LIVE");
+
+        String str = "[" + JSON.toJSONString(liveParam) + "," + JSON.toJSONString(cardParam) + "]";
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.MATCH + "?access_token=" + key,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
-                s);
+                str);
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
-        Double score = Double.parseDouble(jsonObject1.get("score").toString());
+        Double score = null;
+        try {
+            JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
+            score = Double.parseDouble(jsonObject1.get("score").toString());
+        } catch (NumberFormatException e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
         return score;
     }
 
     /**
      * 单张活体检测
      * 
-     * @param base64Str
+     * @param live
      * @return
      * @throws IOException
      */
-    public static boolean checkLive(String key, String base64Str) {
-        String s = "[{\n" +
-            "\t\"image\": \"" + base64Str + "\",\n" +
-            "\t\"image_type\": \"BASE64\",\n" +
-            "\t\"face_field\": \"age,beauty\",\n" +
-            "\t\"option\": \"COMMON\"\n" +
-            "}]";
+    public static boolean checkLive(String key, String live) {
+        HashMap<String, String> liveParam = new HashMap<>();
+        liveParam.put("image", live);
+        liveParam.put("image_type", "BASE64");
+        liveParam.put("face_field", "age,beauty");
+        liveParam.put("option", "COMMON");
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.LIVE + "?access_token=" + key,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null,
-                s);
+                "[" + JSON.toJSONString(liveParam) + "]");
         JSONObject response = HttpUtils.getResponse(httpResponse);
 
-        JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
-        return Double.parseDouble(jsonObject1.get("face_liveness").toString()) > 0.995;
+        boolean liveness = false;
+        try {
+            JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
+            liveness = Double.parseDouble(jsonObject1.get("face_liveness").toString()) > 0.995;
+        } catch (NumberFormatException e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
+        return liveness;
     }
 
     /**
@@ -132,9 +143,8 @@ public class BaiduFaceApi {
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED), null,
                 param);
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        Map<String, String> map = null;
+        Map<String, String> map = new HashMap<>();
         JSONObject jsonObject = JSON.parseObject(response.get("words_result").toString());
-        map = new HashMap<>();
         String address = JSON.parseObject(jsonObject.get("住址").toString()).get("words").toString();
         map.put("address", address);
         String idCard = JSON.parseObject(jsonObject.get("公民身份号码").toString()).get("words").toString();

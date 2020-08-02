@@ -3,7 +3,6 @@ package com.luna.baidu.api;
 import com.alibaba.fastjson.JSON;
 import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
 import com.luna.baidu.entity.Body;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,10 +23,11 @@ public class BodySDK {
      * @param client
      * @param path
      */
-    public static List sample(AipBodyAnalysis client, String path) throws JSONException {
+    public static List sample(AipBodyAnalysis client, String path) {
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject res = client.bodyAttr(path, options);
+        System.out.println(res);
         String num = res.get("person_num").toString();
         List<com.alibaba.fastjson.JSONObject> datas =
             JSON.parseArray(res.get("person_info").toString(), com.alibaba.fastjson.JSONObject.class);
@@ -37,11 +37,7 @@ public class BodySDK {
         for (int i = 0; i < datas.size(); i++) {
             // 定位
             String location = datas.get(i).get("location").toString();
-            Body body = new Body();
-            body.setLeft(Double.parseDouble(JSON.parseObject(location).get("left").toString()));
-            body.setTop(Double.parseDouble(JSON.parseObject(location).get("top").toString()));
-            body.setHeight(Double.parseDouble(JSON.parseObject(location).get("height").toString()));
-            body.setWidth(Double.parseDouble(JSON.parseObject(location).get("width").toString()));
+            Body body = JSON.parseObject(location, Body.class);
             listBody.add(body);
             Map<String, String> status = new HashMap<>();
             // 是否正面

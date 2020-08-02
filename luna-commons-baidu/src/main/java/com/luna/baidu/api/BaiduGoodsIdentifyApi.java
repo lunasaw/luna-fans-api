@@ -3,6 +3,8 @@ package com.luna.baidu.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
+import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.utils.text.CharsetKit;
@@ -34,10 +36,15 @@ public class BaiduGoodsIdentifyApi {
             ImmutableMap.of("access_token", key),
             "image=" + URLEncoder.encode(base64Str, CharsetKit.UTF_8));
         JSONObject response = HttpUtils.getResponse(httpResponse);
-        List<JSONObject> datas = JSON.parseArray(response.get("result").toString(), JSONObject.class);
+        List<JSONObject> datas = null;
+        try {
+            datas = JSON.parseArray(response.get("result").toString(), JSONObject.class);
+        } catch (Exception e) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
+        }
         List<String> list = new ArrayList();
-        for (int i = 0; i < datas.size(); i++) {
-            list.add(datas.get(i).get("keyword").toString());
+        for (JSONObject data : datas) {
+            list.add(data.get("keyword").toString());
         }
         return list;
     }

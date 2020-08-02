@@ -7,6 +7,7 @@ import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.jsonfile.ConfInterface;
 import com.luna.common.jsonfile.ConfParent;
 import com.luna.common.jsonfile.InformationConverter;
+import com.luna.common.okHttp.HttpPost;
 
 import java.util.HashMap;
 
@@ -71,7 +72,8 @@ public class ImageApiFromRoot {
      */
     public static JSONObject upload(HashMap<String, String> header, HashMap<String, String> bodyForma) {
         header.put("Content-Type", HttpUtilsConstant.FORM_DATA);
-        return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/upload", header, null, bodyForma));
+        HashMap<String, String> para = new HashMap<>();
+        return HttpPost.post(SmMsConstant.HOST + "/upload", para, header, bodyForma);
     }
 
     /**

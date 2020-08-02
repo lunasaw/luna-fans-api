@@ -1,5 +1,6 @@
 package com.luna.common.http;
 
+import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -7,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,8 +25,10 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -38,18 +42,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Tony
  */
 public class HttpUtils {
     /** urlEncode编码 */
-    private static final String        ENCODE            = "utf-8";
-
-    private static final String        FORM_CONTENT_TYPE = "application/x-www-form-urlencoded; charset=UTF-8";
+    private static final String        ENCODE = "utf-8";
 
     private static CloseableHttpClient httpClient;
 
@@ -178,49 +178,6 @@ public class HttpUtils {
     }
 
     /**
-     * Post form
-     *
-     * @param host 主机
-     * @param path 路径
-     * @param headers 请求头
-     * @param queries 请求参数
-     * @param bodies 请求体
-     * @return
-     * @throws Exception
-     */
-    public static HttpResponse doPost(String host, String path, Map<String, String> headers,
-        Map<String, String> queries, Map<String, String> bodies) {
-        HashMap<String, String> header = new HashMap<>(headers);
-        header.put("accept", "*/*");
-        header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-        HttpPost request = new HttpPost(buildUrl(host, path, queries));
-        if (MapUtils.isNotEmpty(header)) {
-            for (Map.Entry<String, String> e : header.entrySet()) {
-                request.addHeader(e.getKey(), e.getValue());
-            }
-        }
-        if (MapUtils.isNotEmpty(bodies)) {
-            List<NameValuePair> nameValuePairList = Lists.newArrayList();
-            for (String key : bodies.keySet()) {
-                nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
-            }
-            UrlEncodedFormEntity formEntity = null;
-            try {
-                formEntity = new UrlEncodedFormEntity(nameValuePairList, ENCODE);
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-            formEntity.setContentType(FORM_CONTENT_TYPE);
-            request.setEntity(formEntity);
-        }
-        try {
-            return httpClient.execute(request);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
      * Post String
      *
      * @param host
@@ -253,6 +210,49 @@ public class HttpUtils {
     }
 
     /**
+     * Post form
+     *
+     * @param host 主机
+     * @param path 路径
+     * @param headers 请求头
+     * @param queries 请求参数
+     * @param bodies 请求体
+     * @return
+     * @throws Exception
+     */
+    // public static HttpResponse doPost(String host, String path, Map<String, String> headers,
+    // Map<String, String> queries, Map<String, String> bodies) {
+    // HashMap<String, String> header = new HashMap<>(headers);
+    // header.put("accept", "*/*");
+    // header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+    // HttpPost request = new HttpPost(buildUrl(host, path, queries));
+    // if (MapUtils.isNotEmpty(header)) {
+    // for (Map.Entry<String, String> e : header.entrySet()) {
+    // request.addHeader(e.getKey(), e.getValue());
+    // }
+    // }
+    // if (MapUtils.isNotEmpty(bodies)) {
+    // List<NameValuePair> nameValuePairList = Lists.newArrayList();
+    // for (String key : bodies.keySet()) {
+    // nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
+    // }
+    // UrlEncodedFormEntity formEntity = null;
+    // try {
+    // formEntity = new UrlEncodedFormEntity(nameValuePairList, ENCODE);
+    // } catch (UnsupportedEncodingException e) {
+    // throw new RuntimeException(e);
+    // }
+    // formEntity.setContentType(HttpUtilsConstant.X_WWW_FORM_URLENCODED);
+    // request.setEntity(formEntity);
+    // }
+    // try {
+    // return httpClient.execute(request);
+    // } catch (IOException e) {
+    // throw new RuntimeException(e);
+    // }
+    // }
+
+    /**
      * Post File
      *
      * @param host
@@ -263,7 +263,7 @@ public class HttpUtils {
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPostFile(String host, String path, Map<String, String> headers,
+    public static HttpResponse doPost(String host, String path, Map<String, String> headers,
         Map<String, String> queries, Map<String, String> bodies) {
         HashMap<String, String> header = new HashMap<>(headers);
         header.put("accept", "*/*");
@@ -274,9 +274,33 @@ public class HttpUtils {
                 request.addHeader(e.getKey(), e.getValue());
             }
         }
-        if (bodies != null || bodies.size() != 0) {
-            request.setEntity(new FileEntity(new File(bodies.get("smfile"))));
+        if (MapUtils.isNotEmpty(bodies)) {
+            Set<String> set = bodies.keySet();
+            Iterator<String> iterator = set.iterator();
+            while (iterator.hasNext()) {
+                String next = iterator.next();
+                File file = FileUtils.getFile(bodies.get(next));
+                if (FileUtil.exist(file)) {
+                    // 将文件放置在请求体中
+                    MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create();
+                    entityBuilder.addPart(next, new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
+                    request.setEntity(entityBuilder.build());
+                } else {
+                    // 将参数放置在请求体中
+                    List<NameValuePair> nameValuePairList = Lists.newArrayList();
+                    nameValuePairList.add(new BasicNameValuePair(next, bodies.get(next)));
+                    UrlEncodedFormEntity formEntity = null;
+                    try {
+                        formEntity = new UrlEncodedFormEntity(nameValuePairList, ENCODE);
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
+                    }
+                    formEntity.setContentType(HttpUtilsConstant.X_WWW_FORM_URLENCODED);
+                    request.setEntity(formEntity);
+                }
+            }
         }
+
         try {
             return httpClient.execute(request);
         } catch (IOException e) {
@@ -392,7 +416,7 @@ public class HttpUtils {
             String jsonText = readAll(reader);
             return JSONObject.parseObject(jsonText);
         } catch (IOException e) {
-            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, "读取失败,请检查网络连接后重试" + e);
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }
     }
 
@@ -410,7 +434,7 @@ public class HttpUtils {
             List<JSONObject> datas = JSON.parseArray(jsonText, JSONObject.class);
             return datas;
         } catch (IOException e) {
-            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, "读取失败,请检查网络连接后重试" + e);
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }
     }
 
@@ -430,7 +454,7 @@ public class HttpUtils {
             }
             return sb.toString();
         } catch (IOException e) {
-            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, "读取失败,请检查网络连接后重试" + e);
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }
     }
 

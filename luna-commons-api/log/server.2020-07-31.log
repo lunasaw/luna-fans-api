@@ -1,0 +1,12 @@
+2020-07-31 21:39:36,739  INFO [main] (StartupInfoLogger.java:55) - Starting SmMsTest on luna with PID 5784 (started by improve in D:\myproject\luna-commons-loc\luna-commons-api) 
+2020-07-31 21:39:36,741  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-31 21:39:37,184  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-31 21:39:37,188  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-31 21:39:37,231  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-07-31 21:39:38,313  INFO [main] (StartupInfoLogger.java:61) - Started SmMsTest in 3.536 seconds (JVM running for 5.241) 
+2020-07-31 21:40:12,106  INFO [main] (StartupInfoLogger.java:55) - Starting SmMsTest on luna with PID 7792 (started by improve in D:\myproject\luna-commons-loc\luna-commons-api) 
+2020-07-31 21:40:12,108  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-07-31 21:40:12,577  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-07-31 21:40:12,581  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-07-31 21:40:12,631  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 20ms. Found 0 Redis repository interfaces. 
+2020-07-31 21:40:13,668  INFO [main] (StartupInfoLogger.java:61) - Started SmMsTest in 4.674 seconds (JVM running for 6.364) 

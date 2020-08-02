@@ -20,29 +20,25 @@ public class HttpPost {
 
     /**
      * change hashMap parameter to String, make it be addable to url
+     * 
      * @param para the parameter hasMap
      * @return a String value which can be added after url
      */
-    public static String returnPara(HashMap<String,String> para)
-    {
+    public static String returnPara(HashMap<String, String> para) {
         String res = "";
         boolean first = true;
         Set<String> set = para.keySet();
         Iterator<String> iterator = set.iterator();
-        while (iterator.hasNext())
-        {
-            String next ;
-            String one ;
+        while (iterator.hasNext()) {
+            String next;
+            String one;
             next = iterator.next();
-            one = next +"="+para.get(next);
-            if(first)
-            {
+            one = next + "=" + para.get(next);
+            if (first) {
                 res += "?";
                 first = false;
-            }
-            else
-            {
-                res +="&";
+            } else {
+                res += "&";
             }
             res += one;
         }
@@ -51,16 +47,15 @@ public class HttpPost {
 
     /**
      * change hashMap header to Request.Builder object
+     * 
      * @param header the hasHMap header
      * @return the Request.builder
      */
-    public static Request.Builder returnHeaders(HashMap<String,String> header)
-    {
+    public static Request.Builder returnHeaders(HashMap<String, String> header) {
         Request.Builder builder = new Request.Builder();
         Set<String> set = header.keySet();
         Iterator<String> iterator = set.iterator();
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             String next;
             next = iterator.next();
             builder.addHeader(next, header.get(next));
@@ -70,30 +65,25 @@ public class HttpPost {
 
     /**
      * change bodyformat hashMap to RequestBody objects
+     * 
      * @param bodyFormat the body hashMap, if use none, put("none",""), if form-data, put(key,value)
      * @return RequestBody
      */
-    public static RequestBody returnBody(HashMap<String,String> bodyFormat)
-    {
+    public static RequestBody returnBody(HashMap<String, String> bodyFormat) {
 
         MediaType mediaType = MediaType.parse("text/plain");
 
-        if(bodyFormat.containsKey("none"))
-        {
+        if (bodyFormat.containsKey("none")) {
             return RequestBody.create(mediaType, "");
-        }
-        else
-        {
+        } else {
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
             Set<String> set = bodyFormat.keySet();
             Iterator<String> iterator = set.iterator();
-            while (iterator.hasNext())
-            {
-                String next;
-                next = iterator.next();
-                builder = builder.addFormDataPart("smfile",bodyFormat.get(next),
+            while (iterator.hasNext()) {
+                String next = iterator.next();
+                builder = builder.addFormDataPart(next, bodyFormat.get(next),
                     RequestBody.create(MediaType.parse("application/octet-stream"),
-                            new File(bodyFormat.get(next))));
+                        new File(bodyFormat.get(next))));
             }
             return builder.build();
         }
@@ -101,26 +91,28 @@ public class HttpPost {
 
     /**
      * send a post to a site
+     * 
      * @param url the website url
      * @param para the parameter hashMap, use put to add
      * @param header the header hasMap, use put to add
      * @param bodyFormat the body hashMap, if use none, put("none",""), if form-data, put(key,value)
      * @return a response json object
      */
-    public static JSONObject post(String url, HashMap<String,String> para, HashMap<String,String> header, HashMap<String,String> bodyFormat)
-    {
+    public static JSONObject post(String url, HashMap<String, String> para, HashMap<String, String> header,
+        HashMap<String, String> bodyFormat) {
         String wholeUrl = url + returnPara(para);
         RequestBody body = returnBody(bodyFormat);
+
         OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
+            .build();
 
         Request.Builder builder = returnHeaders(header);
         Request request = builder.url(wholeUrl)
-                            .method("POST", body)
-                            .addHeader("accept", "*/*")
-                            .addHeader("connection", "Keep-Alive")
-                            .addHeader("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)")
-                            .build();
+            .method("POST", body)
+            .addHeader("accept", "*/*")
+            .addHeader("connection", "Keep-Alive")
+            .addHeader("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)")
+            .build();
 
         try {
             Response response = client.newCall(request).execute();

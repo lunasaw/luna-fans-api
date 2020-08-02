@@ -1,0 +1,739 @@
+2020-08-02 16:41:56,401  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 16:41:56,416  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 8396 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 16:41:56,416  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 16:41:56,788  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 16:41:56,791  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 16:41:56,822  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 13ms. Found 0 Redis repository interfaces. 
+2020-08-02 16:41:57,703  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 16:41:57,761  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.672 seconds (JVM running for 5.692) 
+2020-08-02 16:41:57,937  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 16:43:28,847  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 16:43:28,862  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 1336 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 16:43:28,862  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 16:43:29,246  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 16:43:29,250  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 16:43:29,284  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 16:43:30,221  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 16:43:30,287  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.878 seconds (JVM running for 4.997) 
+2020-08-02 16:43:30,505  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 16:44:07,340  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 16:44:07,354  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 16724 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 16:44:07,355  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 16:44:07,724  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 16:44:07,726  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 16:44:07,756  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 16:44:08,628  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 16:44:08,680  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.112 seconds (JVM running for 4.114) 
+2020-08-02 16:44:08,840  INFO [main] (GetBaiduKey.java:39) - 执行定时任务获取百度Key 
+2020-08-02 16:44:10,123  INFO [main] (GetBaiduKey.java:70) - get token success！ 
+2020-08-02 16:44:10,133  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 16:54:40,326  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 16:54:40,341  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 12576 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 16:54:40,342  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 16:54:40,722  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 16:54:40,726  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 16:54:40,759  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 16:54:41,640  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 16:54:41,694  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.154 seconds (JVM running for 4.203) 
+2020-08-02 16:54:43,619  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="920BB6CAA3F60582FEBB1B073FECAC65:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 16:54:43,620  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="920BB6CAA3F60582E468F0BD635B15C0:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 16:54:43,699  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 16:59:57,847  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 16:59:57,861  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 2640 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 16:59:57,862  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 16:59:58,259  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 16:59:58,262  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 16:59:58,298  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces. 
+2020-08-02 16:59:59,200  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 16:59:59,257  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.802 seconds (JVM running for 5.802) 
+2020-08-02 17:00:01,149  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="6D22CE153714B7DB5F59A459EA769E43:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 16:59:59 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:00:01,150  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="9FED9C019BEDF03E107D1539E7CA1D2D:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:00:01,150  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="9FED9C019BEDF03ECB052F4E1C250186:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:00:01,257  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 17:03:45,851  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 17:03:45,865  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 2420 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 17:03:45,866  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 17:03:46,246  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 17:03:46,250  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 17:03:46,284  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 17:03:47,170  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 17:03:47,227  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.553 seconds (JVM running for 5.751) 
+2020-08-02 17:03:49,120  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="C694C08494F9C1D197262774E2912DC7:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 17:03:47 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:03:49,121  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="56C73ADAE0C2E3C3B971630A7EE65FC5:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:03:49,121  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="56C73ADAE0C2E3C3CF1BDD6E4E02F57C:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:03:49,201  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 17:05:38,739  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 17:05:38,753  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 9548 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 17:05:38,754  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 17:05:39,121  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 17:05:39,124  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 17:05:39,154  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 17:05:40,015  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 17:05:40,075  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.04 seconds (JVM running for 4.007) 
+2020-08-02 17:05:41,613  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="8A5330EB11BA6583985F377029CACDF6:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 17:05:40 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:05:41,614  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="8B70B292946E65D8949681E08505407B:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:05:41,614  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="8B70B292946E65D846C7D5F97F7B6184:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:05:41,691  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 17:06:20,633  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 17:06:20,647  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 16148 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 17:06:20,647  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 17:06:21,016  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 17:06:21,019  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 17:06:21,050  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 17:06:21,941  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 17:06:21,998  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.442 seconds (JVM running for 4.495) 
+2020-08-02 17:06:23,615  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="FC7CAA6057AF11B1477772BF9490BB02:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 17:06:22 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:06:23,616  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="AF38152638B7AD013B3D679C274696E1:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:06:23,616  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="AF38152638B7AD014107F242CB9F55B6:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:06:23,698  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 17:08:33,918  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 17:08:33,932  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 2208 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 17:08:33,932  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 17:08:34,308  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 17:08:34,310  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 17:08:34,340  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 17:08:35,194  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 17:08:35,249  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.329 seconds (JVM running for 4.33) 
+2020-08-02 17:08:36,776  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="EFB04F97D7E08A1A15A4F38E86A9CCE5:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 17:08:35 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:08:36,776  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="762D6E4503A2A6C542DF7CB9A7897B19:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:08:36,777  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="762D6E4503A2A6C5A8080F99809C024F:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:08:36,867  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 17:13:44,699  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 17:13:44,713  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 13884 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 17:13:44,714  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 17:13:45,076  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 17:13:45,079  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 17:13:45,109  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 17:13:45,975  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 17:13:46,032  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.214 seconds (JVM running for 5.181) 
+2020-08-02 17:13:47,803  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="587EEC87585ADAC968C058255221D9D0:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 17:13:46 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:13:47,803  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="11081EBA0B0DDE3D9BE3615573942830:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:13:47,804  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="11081EBA0B0DDE3DE4BED6B009F700DC:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 17:13:47,902  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:14:53,804  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:14:53,821  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 7912 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:14:53,822  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:14:54,291  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:14:54,293  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:14:54,325  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:14:55,189  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:14:55,249  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.372 seconds (JVM running for 4.405) 
+2020-08-02 18:14:57,037  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5DE8212C994DA45C8C46C3AF5BD88687:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:14:55 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:14:57,038  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="7D42BAA4273ABC290E3C508385465311:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:14:57,067  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:15:37,445  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:15:37,458  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 4240 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:15:37,459  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:15:37,849  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:15:37,851  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:15:37,886  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:15:38,746  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:15:38,801  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.361 seconds (JVM running for 4.331) 
+2020-08-02 18:15:40,515  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="86B2E49E95641133A1D10793B335EE07:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:15:39 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:15:40,516  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="98C0E15D82326F5BDEC889F910C02AA1:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:15:40,541  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:16:13,193  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:16:13,207  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 6396 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:16:13,208  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:16:13,568  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:16:13,571  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:16:13,601  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:16:14,454  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:16:14,512  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.591 seconds (JVM running for 4.547) 
+2020-08-02 18:16:16,183  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="50CCC083A061EC79118A8C390332F2F7:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:16:14 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:16:16,184  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="CE3A580D8F9FE96E5C1C839C6ED42149:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:16:16,212  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:33:49,889  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:33:49,903  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 7792 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:33:49,904  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:33:50,277  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:33:50,280  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:33:50,312  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:33:51,225  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:33:51,282  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.167 seconds (JVM running for 4.176) 
+2020-08-02 18:33:52,895  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="78E7904BAC18FC7F8802219A1A52793B:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:33:52 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:33:52,895  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="D9E554D86EB0C68B9727B9C5ECB55857:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:33:52,920  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:34:18,361  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:34:18,374  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 12380 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:34:18,375  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:34:18,743  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:34:18,746  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:34:18,778  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:34:19,701  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:34:19,755  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.326 seconds (JVM running for 5.485) 
+2020-08-02 18:34:21,276  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="6401CD4A511E5AF05E43A4A8E5D88BD9:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:34:21 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:34:21,277  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="8DB67F035F739952A156D1BF970579EA:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:34:21,304  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:41:58,935  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:41:58,950  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 10756 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:41:58,951  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:41:59,335  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:41:59,339  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:41:59,371  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:42:00,224  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:42:00,283  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.365 seconds (JVM running for 4.349) 
+2020-08-02 18:42:02,011  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="12797653FF22091D5831CE48372F13FA:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:42:01 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:42:02,012  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="9D3AF08EA94BBE9DA562EED3C9D06EDD:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:42:02,038  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:43:35,954  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:43:35,969  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 1968 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:43:35,970  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:43:36,352  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:43:36,355  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:43:36,402  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 29ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:43:37,297  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:43:37,353  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.825 seconds (JVM running for 4.874) 
+2020-08-02 18:43:38,978  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="A8F447DBE412E1F30040A2B36CBF29C4:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:43:38 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:43:38,979  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="0E6A7E0888FFF0FC6F0F80F88ACD30A5:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:43:39,006  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:45:20,921  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:45:20,935  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 14936 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:45:20,936  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:45:21,309  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:45:21,312  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:45:21,345  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:45:22,198  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:45:22,254  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.068 seconds (JVM running for 4.115) 
+2020-08-02 18:45:22,437  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:45:50,172  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:45:50,190  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 13608 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:45:50,190  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:45:50,554  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:45:50,557  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:45:50,586  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:45:51,444  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:45:51,500  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.961 seconds (JVM running for 5.173) 
+2020-08-02 18:45:53,436  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="A2749EDC773BC226730941D841353463:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:45:53 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:45:53,437  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="B4934B49028A0E289DFC97A09773EF89:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:45:53,463  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:46:50,689  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:46:50,703  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 6156 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:46:50,703  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:46:51,089  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:46:51,092  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:46:51,123  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:46:51,976  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:46:52,039  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.947 seconds (JVM running for 4.9) 
+2020-08-02 18:46:54,169  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="12308F69872038879E45F8E7B578325D:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:46:54 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:46:54,169  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="BFBC46A492BCCFC5E4AEC3DCF4FD248B:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:46:54,193  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:54:20,242  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:54:20,256  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 13524 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:54:20,257  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:54:20,631  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:54:20,634  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:54:20,663  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:54:21,555  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:54:21,613  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.651 seconds (JVM running for 4.633) 
+2020-08-02 18:54:23,568  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="0EEBB167AFBF639B0C46FF043D802F4C:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:54:23 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:54:23,568  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="E792C28AC159B823638632BD0345B8EE:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:54:23,594  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 18:58:27,871  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 18:58:27,885  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 5188 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 18:58:27,886  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 18:58:28,256  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 18:58:28,259  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 18:58:28,291  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces. 
+2020-08-02 18:58:29,194  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 18:58:29,256  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.26 seconds (JVM running for 4.26) 
+2020-08-02 18:58:31,297  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="8E8D55B2044A0F975DEBF739C33E1D5A:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 18:58:31 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:58:31,297  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="FEEEBF043C2A984F0BF350C31E87F040:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 18:58:31,337  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 19:00:21,156  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 19:00:21,171  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 11116 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 19:00:21,171  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 19:00:21,544  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 19:00:21,547  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 19:00:21,577  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 19:00:22,437  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 19:00:22,495  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.665 seconds (JVM running for 4.8) 
+2020-08-02 19:00:24,529  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="93C3EF2961C2BC78FF1A091C5B8DD63D:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 19:00:24 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:00:24,530  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5DB070FF8636BDB6F21203AC09F7ECA0:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:00:24,568  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 19:01:11,971  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 19:01:11,986  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 16796 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 19:01:11,986  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 19:01:12,372  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 19:01:12,375  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 19:01:12,409  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 19:01:13,278  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 19:01:13,337  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.268 seconds (JVM running for 5.296) 
+2020-08-02 19:01:15,281  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="13D74613B4B23EA61804B4E4F545600F:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 19:01:15 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:01:15,282  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="798B7152F2BAA0291E4EC0B161E652D1:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:01:15,321  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 19:26:44,300  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 19:26:44,314  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 4060 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 19:26:44,314  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 19:26:44,678  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 19:26:44,681  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 19:26:44,711  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 19:26:45,573  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 19:26:45,630  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.05 seconds (JVM running for 4.015) 
+2020-08-02 19:26:47,803  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="26379B4B1F663DB390EA586BB537D254:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 19:26:47 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:26:47,804  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="2D48C0B98A4FB62534998BA2D9971A9D:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:26:47,843  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 19:27:07,074  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 19:27:07,088  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 16728 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 19:27:07,089  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 19:27:07,461  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 19:27:07,464  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 19:27:07,493  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 19:27:08,374  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 19:27:08,427  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.348 seconds (JVM running for 4.336) 
+2020-08-02 19:27:12,634  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="A08C3E736A1BC45F564DA72137B8FA4A:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 19:27:12 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:27:12,635  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="841F99EB0343211B2F71AF672E1FCF26:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 19:27:12,675  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 20:55:24,943  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 20:55:24,957  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 7356 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 20:55:24,958  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 20:55:25,350  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 20:55:25,353  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 20:55:25,389  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 20:55:26,274  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 20:55:26,327  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 5.06 seconds (JVM running for 6.058) 
+2020-08-02 20:55:29,363  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5315C9EA600D928648200EF7A50607E7:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 20:55:29,450  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 22:51:03,461  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 22:51:03,475  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 3372 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 22:51:03,476  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 22:51:03,854  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 22:51:03,858  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 22:51:03,890  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 22:51:04,734  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 22:51:04,787  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.709 seconds (JVM running for 4.789) 
+2020-08-02 22:51:08,549  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="A18499757F393F823F9E1ADC53004BFD:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 22:51:08,643  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:27:56,378  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:27:56,392  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 8100 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:27:56,393  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:27:56,789  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:27:56,793  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:27:56,829  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:27:57,766  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:27:57,828  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.525 seconds (JVM running for 4.537) 
+2020-08-02 23:28:00,660  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="538F2858298BFF5B63C4092FC86B249C:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:28:00 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:28:00,661  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="A7C6065A5B49644CB542FC0B51BC69AE:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:28:00,894  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:43:40,763  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:43:40,778  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 15464 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:43:40,778  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:43:41,158  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:43:41,161  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:43:41,194  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:43:42,143  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:43:42,200  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.247 seconds (JVM running for 4.37) 
+2020-08-02 23:43:45,000  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="76A672B810723D1F80770B4449D82575:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:43:45 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:43:45,001  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="AEEBD23C25B5A63D80DF92DB649B3245:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:43:45,189  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:44:38,027  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:44:38,041  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 6468 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:44:38,042  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:44:38,410  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:44:38,412  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:44:38,442  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:44:39,320  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:44:39,388  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.928 seconds (JVM running for 4.914) 
+2020-08-02 23:44:42,185  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="1C1B36654F3E6B8C5651C0591455F6B8:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:44:42 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:44:42,186  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="DD5DF34BFBCBBC7390073AEDCAAEA4AF:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:44:42,367  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:48:28,139  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:48:28,153  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 11216 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:48:28,154  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:48:28,525  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:48:28,527  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:48:28,557  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:48:29,426  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:48:29,482  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.08 seconds (JVM running for 4.095) 
+2020-08-02 23:48:32,196  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="9FA9719624B175B7E0A09618634F2124:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:48:32 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:48:32,197  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="40D0684A6B60AE1E79324C9F98300563:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:48:32,337  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:49:58,528  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:49:58,541  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 1448 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:49:58,541  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:49:58,928  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:49:58,931  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:49:58,972  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 20ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:49:59,881  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:49:59,943  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.256 seconds (JVM running for 4.287) 
+2020-08-02 23:50:02,074  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="72711010BBFB8C5ED75DE255E774CE6A:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:50:02 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:50:02,075  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5B57E43AC0827E7ECBB1CF7F7F5F27A9:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:50:02,224  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:51:47,761  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:51:47,774  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 6408 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:51:47,775  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:51:48,154  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:51:48,157  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:51:48,188  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:51:49,078  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:51:49,132  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.42 seconds (JVM running for 4.391) 
+2020-08-02 23:51:51,901  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5F5E99DE97191AB85C207A1CC55316BC:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:51:51 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:51:51,902  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="C5EF69A6BCB9338B16726F559C5432E4:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:51:52,047  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:53:54,602  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:53:54,617  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 13868 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:53:54,617  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:53:54,985  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:53:54,988  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:53:55,027  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:53:55,953  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:53:56,009  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.19 seconds (JVM running for 4.284) 
+2020-08-02 23:53:58,734  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="5555362B0277C8425CCBB26AB37DDE2B:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:53:58 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:53:58,735  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="0D63D3EBC4843ADDDD2784CE695A90DF:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:53:58,888  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:57:50,836  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:57:50,850  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 8112 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:57:50,850  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:57:51,210  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:57:51,213  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:57:51,243  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:57:52,132  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:57:52,191  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.178 seconds (JVM running for 5.313) 
+2020-08-02 23:57:54,948  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="74C0D2A2743D1B2C12188BE6FAAF2D96:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:57:55 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:57:54,948  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="1EF702810EC3233AF1CCFEF41BDB2AD9:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:57:55,094  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:58:27,213  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:58:27,240  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 5976 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:58:27,240  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:58:27,865  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:58:27,869  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:58:27,916  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 23ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:58:29,093  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:58:29,157  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.483 seconds (JVM running for 5.492) 
+2020-08-02 23:58:31,220  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="B0924C4435E346F8EC21A8658E20EDFE:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:58:31 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:58:31,220  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="BDF2EBC476BA2B72B8CF2F45C9A23FF5:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:58:31,366  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:58:52,660  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:58:52,673  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 13012 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:58:52,674  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:58:53,058  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:58:53,062  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:58:53,096  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:58:53,991  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:58:54,047  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 3.654 seconds (JVM running for 4.624) 
+2020-08-02 23:58:56,002  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="395F3AC7873693563FAD97B5DF87A75F:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:58:56 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:58:56,003  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="08011E685BA8FD7A62400153524F2FD2:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:58:56,147  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-08-02 23:59:40,142  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-08-02 23:59:40,155  INFO [main] (StartupInfoLogger.java:55) - Starting OcrTest on luna with PID 2856 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-08-02 23:59:40,156  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-02 23:59:40,523  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-02 23:59:40,526  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-02 23:59:40,557  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-02 23:59:41,435  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-08-02 23:59:41,488  INFO [main] (StartupInfoLogger.java:61) - Started OcrTest in 4.887 seconds (JVM running for 5.933) 
+2020-08-02 23:59:43,414  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="3830CC132A458D3349F26A448866EA44:FG=1", version:0, domain:baidu.com, path:/, expiry:Mon Aug 02 23:59:43 CST 2021] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:59:43,415  WARN [main] (ResponseProcessCookies.java:123) - Cookie rejected [BAIDUID="CF7A284A42B88CE3F22CBE77A36EADAE:FG=1", version:0, domain:baidu.com, path:/, expiry:Fri Jan 01 07:55:55 CST 2038] Illegal 'domain' attribute "baidu.com". Domain of origin: "aip.baidubce.com" 
+2020-08-02 23:59:43,555  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
