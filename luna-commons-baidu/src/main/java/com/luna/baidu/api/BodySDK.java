@@ -2,7 +2,7 @@ package com.luna.baidu.api;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
-import com.luna.baidu.entity.Body;
+import com.luna.common.entity.Body;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
