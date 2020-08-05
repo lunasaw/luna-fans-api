@@ -5,7 +5,6 @@ import com.luna.api.smMs.constant.SmMsConstant;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.jsonfile.ConfInterface;
-import com.luna.common.jsonfile.ConfParent;
 
 import java.util.HashMap;
 

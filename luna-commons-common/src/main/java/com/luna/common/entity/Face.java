@@ -8,6 +8,8 @@ public class Face extends Location {
 
     private String faceToken;
 
+    public Face() {}
+
     public String getFaceToken() {
         return faceToken;
     }

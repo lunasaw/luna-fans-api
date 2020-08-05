@@ -6,4 +6,5 @@ package com.luna.common.entity;
  */
 public class Body extends Location {
 
+
 }

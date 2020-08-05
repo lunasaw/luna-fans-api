@@ -1,6 +1,7 @@
-package com.luna.common.jsonfile;
+package com.luna.api.smMs;
 
 import com.alibaba.fastjson.JSONObject;
+import com.luna.common.jsonfile.ConfInterface;
 
 import java.util.HashMap;
 import java.util.Iterator;
