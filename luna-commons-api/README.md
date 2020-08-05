@@ -18,7 +18,7 @@ luna-commons-api
 
 <p align="center">
   <a href="https://github.com/czy1024/luna-commons/">
-    <img src="https://user-gold-cdn.xitu.io/2020/7/18/1736060af5cad8d0?w=128&h=128&f=png&s=2312" alt="Logo" width="80" height="80">
+    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">"完美的"开发工具</h3>
@@ -37,8 +37,9 @@ luna-commons-api
 
 </p>
 
-## 日志
-
+## 日志 使用见部署
+== 增加Sm.ms图床Api
+== 增加学小易网课答案Api
  
 ## 目录
 

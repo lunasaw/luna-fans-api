@@ -18,7 +18,7 @@ luna-commons-common
 
 <p align="center">
   <a href="https://github.com/czy1024/luna-commons/">
-    <img src="https://user-gold-cdn.xitu.io/2020/7/18/1736060af5cad8d0?w=128&h=128&f=png&s=2312" alt="Logo" width="80" height="80">
+    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">"完美的"开发工具</h3>
@@ -39,6 +39,7 @@ luna-commons-common
 
 ## 日志
 == 增加BufferedImage的画图操作,可结合百度腾讯APi返回值实现人脸面部勾画,或者文字识别勾画
+== HTTP相关请求及相应解析,包括发送文件流
  
 ## 目录
 
@@ -215,12 +216,11 @@ luna-commons-common
   <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-[使用部署](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)
 
-#### sm.ms 包括用户和图片两个操作
 
-[用户相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-User)
-[图片相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-Image)
+#### API
+
+
 
 <!-- links -->
 [your-project-path]:czy1024/luna-commons
