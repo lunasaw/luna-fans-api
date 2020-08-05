@@ -38,8 +38,9 @@ luna-commons-api
 </p>
 
 ## 日志 使用见部署
-== 增加Sm.ms图床Api
-== 增加学小易网课答案Api
+增加Sm.ms图床Api
+
+增加学小易网课答案Api
  
 ## 目录
 
