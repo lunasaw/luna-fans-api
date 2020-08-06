@@ -84,24 +84,27 @@ git clone https://github.com/czy1024/luna-commons.git
 ```
 在配置文件application.properties加入可选配置
 
-```text#阿里oss服务器
+```text
        # 腾讯APi
-       luna.tencent.secretId=xxx
-       luna.tencent.secretKey=xxx
+       luna.ten.secretId=xxx
+       luna.ten.secretKey=xxx
        # 腾讯云市场APi
        # 天眼身份认证
-       luna.tencent.skyEyeSecretid=xxx
-       luna.tencent.skyEyeSecretkey=xxx
+       luna.ten.skyEyeSecretid=xxx
+       luna.ten.skyEyeSecretkey=xxx
        # 腾讯地图
-       luna.tencent.mapKey=xxx
+       luna.ten.mapKey=xxx
        # redis
        spring.redis.host=xxx
        spring.redis.port=6379
+
 
 ```
 
 引用示例
 若采用SpringBoot构建项目可通过将第三方包中的BaiduConfigValue,GetBaiduKey通过Spring配置文件注入Spring管理
+
+需在properties配置文件中配置相应key
 
 若非Spring项目可直接通过调用静态APi传入key和id进行调用
 
