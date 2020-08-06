@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "luna.tencent")
+@ConfigurationProperties(prefix = "luna.dto")
 public class TencentConfigValue {
 
     private String secretid;

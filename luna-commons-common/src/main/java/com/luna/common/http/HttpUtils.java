@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
+import com.luna.common.utils.text.CharsetKit;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -48,8 +49,6 @@ import java.util.*;
  * @author Tony
  */
 public class HttpUtils {
-    /** urlEncode编码 */
-    private static final String        ENCODE = "utf-8";
 
     private static CloseableHttpClient httpClient;
 
@@ -200,7 +199,7 @@ public class HttpUtils {
             }
         }
         if (StringUtils.isNotBlank(body)) {
-            request.setEntity(new StringEntity(body, ENCODE));
+            request.setEntity(new StringEntity(body, CharsetKit.CHARSET_UTF_8));
         }
         try {
             return httpClient.execute(request);
@@ -210,50 +209,7 @@ public class HttpUtils {
     }
 
     /**
-     * Post form
-     *
-     * @param host 主机
-     * @param path 路径
-     * @param headers 请求头
-     * @param queries 请求参数
-     * @param bodies 请求体
-     * @return
-     * @throws Exception
-     */
-    // public static HttpResponse doPost(String host, String path, Map<String, String> headers,
-    // Map<String, String> queries, Map<String, String> bodies) {
-    // HashMap<String, String> header = new HashMap<>(headers);
-    // header.put("accept", "*/*");
-    // header.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
-    // HttpPost request = new HttpPost(buildUrl(host, path, queries));
-    // if (MapUtils.isNotEmpty(header)) {
-    // for (Map.Entry<String, String> e : header.entrySet()) {
-    // request.addHeader(e.getKey(), e.getValue());
-    // }
-    // }
-    // if (MapUtils.isNotEmpty(bodies)) {
-    // List<NameValuePair> nameValuePairList = Lists.newArrayList();
-    // for (String key : bodies.keySet()) {
-    // nameValuePairList.add(new BasicNameValuePair(key, bodies.get(key)));
-    // }
-    // UrlEncodedFormEntity formEntity = null;
-    // try {
-    // formEntity = new UrlEncodedFormEntity(nameValuePairList, ENCODE);
-    // } catch (UnsupportedEncodingException e) {
-    // throw new RuntimeException(e);
-    // }
-    // formEntity.setContentType(HttpUtilsConstant.X_WWW_FORM_URLENCODED);
-    // request.setEntity(formEntity);
-    // }
-    // try {
-    // return httpClient.execute(request);
-    // } catch (IOException e) {
-    // throw new RuntimeException(e);
-    // }
-    // }
-
-    /**
-     * Post File
+     * Post File/form
      *
      * @param host
      * @param path
@@ -289,18 +245,13 @@ public class HttpUtils {
                     // 将参数放置在请求体中
                     List<NameValuePair> nameValuePairList = Lists.newArrayList();
                     nameValuePairList.add(new BasicNameValuePair(next, bodies.get(next)));
-                    UrlEncodedFormEntity formEntity = null;
-                    try {
-                        formEntity = new UrlEncodedFormEntity(nameValuePairList, ENCODE);
-                    } catch (UnsupportedEncodingException e) {
-                        throw new RuntimeException(e);
-                    }
+                    UrlEncodedFormEntity formEntity =
+                        new UrlEncodedFormEntity(nameValuePairList, CharsetKit.CHARSET_UTF_8);
                     formEntity.setContentType(HttpUtilsConstant.X_WWW_FORM_URLENCODED);
                     request.setEntity(formEntity);
                 }
             }
         }
-
         try {
             return httpClient.execute(request);
         } catch (IOException e) {
@@ -362,9 +313,9 @@ public class HttpUtils {
                     if (StringUtils.isNotBlank(query.getValue())) {
                         sbQuery.append("=");
                         try {
-                            sbQuery.append(URLEncoder.encode(query.getValue(), ENCODE));
+                            sbQuery.append(URLEncoder.encode(query.getValue(), CharsetKit.UTF_8));
                         } catch (UnsupportedEncodingException e) {
-                            throw new RuntimeException(e);
+                            e.printStackTrace();
                         }
                     }
                 }
@@ -383,20 +334,19 @@ public class HttpUtils {
      * @param httpResponse
      * @return
      */
-    public static String checkResponseAndGetResult(HttpResponse httpResponse) {
+    public static String checkResponseAndGetResult(HttpResponse httpResponse, boolean isEnsure) {
         if (httpResponse == null) {
             throw new RuntimeException();
         }
         if (httpResponse.getStatusLine() == null) {
             throw new RuntimeException();
         }
-        if (HttpStatus.SC_OK != httpResponse.getStatusLine().getStatusCode()) {
+        if (isEnsure && HttpStatus.SC_OK != httpResponse.getStatusLine().getStatusCode()) {
             throw new RuntimeException();
         }
-
         HttpEntity entity = httpResponse.getEntity();
         try {
-            return EntityUtils.toString(entity, ENCODE);
+            return EntityUtils.toString(entity, CharsetKit.CHARSET_UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -58,6 +58,20 @@ public class TencentCloudAPITC3 {
         return DatatypeConverter.printHexBinary(d).toLowerCase();
     }
 
+    /**
+     * 获取请求头
+     * 
+     * @param id
+     * @param key
+     * @param service
+     * @param host
+     * @param region
+     * @param action
+     * @param version
+     * @param body
+     * @return
+     * @throws Exception
+     */
     public static TreeMap getPostHeader(String id, String key, String service, String host, String region,
         String action, String version,
         String body)

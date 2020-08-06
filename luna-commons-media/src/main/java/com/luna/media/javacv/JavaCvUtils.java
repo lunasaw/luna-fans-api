@@ -1,5 +1,7 @@
 package com.luna.media.javacv;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.setting.dialect.Props;
 import com.luna.media.config.JavaCvConfigValue;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
@@ -11,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 import static org.bytedeco.opencv.global.opencv_imgcodecs.*;
 
@@ -33,13 +33,14 @@ public class JavaCvUtils {
 
     public static CascadeClassifier getFaceCascade() {
         if (faceCascade == null) {
-            URL faceCascadeFile =
-                CheckFace.class.getClassLoader().getResource(JavaCvConfigValue.getFrontalFace());
-            try {
-                faceCascade =
-                    new CascadeClassifier(new File(faceCascadeFile.getFile()).getCanonicalPath());
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (JavaCvConfigValue.getFrontalFace() != null) {
+                String path = FileUtil.getAbsolutePath(JavaCvConfigValue.getFrontalFace());
+                faceCascade = new CascadeClassifier(path);
+            } else {
+                Props props = new Props("application-pro.properties");
+                props.get("luna.face.frontalFace");
+                faceCascade = new CascadeClassifier(
+                    "D:\\myproject\\luna-commons-loc\\luna-commons-media\\src\\main\\resources\\static.faceData\\haarcascade_frontalface_alt.xml");
             }
         }
         return faceCascade;

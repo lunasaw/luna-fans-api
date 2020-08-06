@@ -1,38 +1,78 @@
 package com.luna.tencent.api;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Maps;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.StringUtils;
 import com.luna.common.utils.img.ImageUtils;
+import com.luna.tencent.dto.*;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TencentAuthAPI {
 
+    private static final Logger log = LoggerFactory.getLogger(TencentAuthAPI.class);
+
     /**
-     * 腾讯身份证识别
+     *
      * 
-     * @param str 身份证照片可为URL
+     * @param ImageBase64 身份证照片可为URL
      * @return
      * @throws Exception
      */
-    public static JSONObject idOcrCheck(String id, String key, String str) throws Exception {
-        String body;
-        // 判断是否为base64编码
-        if (Base64Util.isBase64(str)) {
-            body = "{" + "\"ImageBase64\": \"" + str + "\"" + "}";
+
+    /**
+     * 腾讯身份证识别
+     * 
+     * @param id
+     * @param key
+     * @param image 身份证照片可为URL,地址,Base64
+     * @param cardSide 正反面 可为空 FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。
+     * @param config
+     * 以下可选字段均为bool 类型，默认false：
+     * CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
+     * CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
+     * CopyWarn，复印件告警
+     * BorderCheckWarn，边框和框内遮挡告警
+     * ReshootWarn，翻拍告警
+     * DetectPsWarn，PS检测告警
+     * TempIdWarn，临时身份证告警
+     * InvalidDateWarn，身份证有效日期不合法告警
+     * Quality，图片质量分数（评价图片的模糊程度）
+     * MultiCardDetect，是否开启多卡证检测
+     * @return
+     * @throws Exception
+     */
+    public static IdCardOcrDTO idOcrCheck(String id, String key, String image, String cardSide,
+        HashMap<String, Boolean> config) throws Exception {
+        HashMap<String, Object> map = Maps.newHashMap();
+        if (Base64Util.isBase64(image)) {
+            map.put("ImageBase64", image);
+        } else if (HttpUtils.isNetUrl(image)) {
+            map.put("ImageUrl", image);
         } else {
-            body = "{" + "\"ImageBase64\": \"" + Base64Util.encodeBase64String(ImageUtils.getBytes(str)) + "\""
-                + "}";
+            map.put("ImageBase64", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
         }
-        Map postHeader = TencentCloudAPITC3.getPostHeader(id, key, "ocr",
-            TencentConstant.HOST_OCR, "ap-beijing", "IDCardOCR",
-            "2018-11-19", body);
+        if (StringUtils.isNotEmpty(cardSide)) {
+            map.put("CardSide", cardSide);
+        }
+        if (MapUtils.isNotEmpty(config)) {
+            map.put("Config", JSON.toJSONString(config));
+        }
+        String body = JSON.toJSONString(map);
+        Map postHeader = TencentCloudAPITC3.getPostHeader(id, key, "ocr", TencentConstant.HOST_OCR, "ap-beijing",
+            "IDCardOCR", "2018-11-19", body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.HOST_OCR, "/", postHeader, null, body);
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        return response;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
+        log.info("idOcrCheck start id={}, key={}, response={}", id, key, s);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardOcrDTO.class);
     }
 
     /**
@@ -45,19 +85,18 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static JSONObject mobileCheck(String id, String key, String mobile) throws Exception {
-        String body = "{\n" +
-            "   \"Mobile\":\"" + mobile + "\"\n" +
-            "}";
+    public static MobileCheckInfoDTO mobileCheck(String id, String key, String mobile) throws Exception {
+        HashMap<String, Object> map = Maps.newHashMap();
+        map.put("Mobile", mobile);
+        String body = JSON.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(id, key, "faceid",
-                TencentConstant.FACE_CARD, "ap-beijing",
-                "MobileNetworkTimeVerification",
-                "2018-03-01", body);
+                TencentConstant.FACE_CARD, "ap-beijing", "MobileNetworkTimeVerification", "2018-03-01", body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        return response;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
+        log.info("mobileCheck start id={}, key={}, response={}", id, key, s);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), MobileCheckInfoDTO.class);
     }
 
     /**
@@ -72,19 +111,20 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static JSONObject idNameCheck(String id, String key, String idCard, String name) throws Exception {
-        String body = "{\n" +
-            "\t\"IdCard\":\"" + idCard + "\",\n" +
-            "   \"Name\":\"" + name + "\"\n" +
-            "}";
+    public static IdCardCheckInfoDTO idNameCheck(String id, String key, String idCard, String name) throws Exception {
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("IdCard", idCard);
+        map.put("Name", name);
+        String body = JSON.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(id, key, "faceid",
                 TencentConstant.FACE_CARD, "ap-beijing", "IdCardVerification",
                 "2018-03-01", body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        return response;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
+        log.info("idNameCheck start id={}, key={}, response={}", id, key, s);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardCheckInfoDTO.class);
     }
 
     /**
@@ -95,25 +135,26 @@ public class TencentAuthAPI {
      * 
      * @param id
      * @param name
-     * @param bank
+     * @param bankCard
      * @return 在网时长区间 格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
      * @throws Exception
      */
-    public static JSONObject bankCardIdNameCheck(String id, String key, String idCard, String name, String bank)
+    public static IdCardAndBankCardCheckInfoDTO bankCardIdNameCheck(String id, String key, String idCard, String name,
+        String bankCard)
         throws Exception {
-        String body = "{\n" +
-            "\t\"IdCard\":\"" + idCard + "\",\n" +
-            "   \"Name\":\"" + name + "\",\n" +
-            "   \"BankCard\":\"" + bank + "\"\n" +
-            "}";
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("IdCard", idCard);
+        map.put("Name", name);
+        map.put("BankCard", bankCard);
+        String body = JSON.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(id, key, "faceid",
-                TencentConstant.FACE_CARD, "ap-beijing", "BankCardVerification",
-                "2018-03-01", body);
+                TencentConstant.FACE_CARD, "ap-beijing", "BankCardVerification", "2018-03-01", body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        return response;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
+        log.info("bankCardIdNameCheck start id={}, key={}, response={}", id, key, s);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardAndBankCardCheckInfoDTO.class);
     }
 
     /**
@@ -125,21 +166,22 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static JSONObject idAndFaceCheck(String id, String key, String base64Str, String name, String idCard)
+    public static IdCardPictureCheckInfoDTO idAndFaceCheck(String id, String key, String base64Str, String name,
+        String idCard)
         throws Exception {
-        String body = "{\n" +
-            "\t\"IdCard\":\"" + idCard + "\",\n" +
-            "   \"Name\":\"" + name + "\",\n" +
-            "   \"ImageBase64\":\"" + base64Str + "\"\n" +
-            "}";
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("IdCard", idCard);
+        map.put("Name", name);
+        map.put("ImageBase64", base64Str);
+        String body = JSON.toJSONString(map);
         Map postHeader =
-            TencentCloudAPITC3.getPostHeader(id, key, "faceid",
-                TencentConstant.FACE_CARD, "ap-beijing", "ImageRecognition",
-                "2018-03-01", body);
+            TencentCloudAPITC3.getPostHeader(id, key, "faceid", TencentConstant.FACE_CARD, "ap-beijing",
+                "ImageRecognition", "2018-03-01", body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        return response;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
+        log.info("idAndFaceCheck start id={}, key={}, response={}", id, key, s);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardPictureCheckInfoDTO.class);
     }
 
 }

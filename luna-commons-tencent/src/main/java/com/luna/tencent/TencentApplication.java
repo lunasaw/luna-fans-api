@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @Package: com.luna.tencent
+ * @Package: com.luna.dto
  * @ClassName: TencentApplication
  * @Author: luna
  * @CreateTime: 2020/7/16 16:42

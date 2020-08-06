@@ -1,12 +1,16 @@
 package com.luna.tencent.api;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.luna.common.http.HttpUtils;
+import com.luna.tencent.dto.SendStatusDTO;
 import org.apache.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,6 +20,8 @@ import java.util.TreeMap;
  * @date 2020/5/14 20:46
  */
 public class TencentMessage {
+
+    private static final Logger log = LoggerFactory.getLogger(TencentMessage.class);
 
     /**
      * 发送短信
@@ -30,22 +36,24 @@ public class TencentMessage {
      * @return
      * @throws Exception
      */
-    public static JSONObject sendMsgReq(String id, String key, String[] phones, String appid, String sign,
-        String templateId, String[] message)
+    public static String sendMsgReq(String id, String key, List<String> phones, String appid, String sign,
+        String templateId, List<String> message)
         throws Exception {
-        Map<String, Object> map = new HashMap<>();
+        log.info("sendMsgReq start id={}, key={}, phones={}, appid={}, sign={}, templateId={}, message={}", id, key,
+            phones, appid, sign, templateId, message);
+        Map<String, Object> map = Maps.newHashMap();
         map.put("PhoneNumberSet", phones);
         map.put("TemplateID", templateId);
         map.put("SmsSdkAppid", appid);
         map.put("Sign", sign);
         map.put("TemplateParamSet", message);
-        String body = JSONArray.toJSONString(map);
+        String body = JSON.toJSONString(map);
         TreeMap postHeader =
             TencentCloudAPITC3.getPostHeader(id, key, "sms", TencentConstant.HOST_SMS, "", "SendSms", "2019-07-11",
                 body);
         HttpResponse httpResponse =
             HttpUtils.doPost("https://" + TencentConstant.HOST_SMS, "/", postHeader, null, body);
-        return HttpUtils.getResponse(httpResponse);
+        return HttpUtils.checkResponseAndGetResult(httpResponse, true);
     }
 
     /**
@@ -53,19 +61,23 @@ public class TencentMessage {
      *
      * @param phones +86手机 Arrays
      * @param templateId 模板编号
-     * @param param 参数
+     * @param message 参数
      * @return 包含对应手机号的发送信息结果集 1 成功 0 失败
      */
-    public static Map sendMsg(String id, String key, String[] phones, String templateId, String[] param, String appId,
-        String sign)
+    public static ArrayList<SendStatusDTO> sendMsg(String id, String key, List<String> phones, String templateId,
+        List<String> message, String appId, String sign)
         throws Exception {
-        JSONObject jsonObject = TencentMessage.sendMsgReq(id, key, phones, appId, sign, templateId, param);
+        log.info("sendMsgReq start id={}, key={}, phones={}, templateId={}, message={}, appId={}, sign={}", id, key,
+            phones, templateId, message, appId, sign);
+        String s = TencentMessage.sendMsgReq(id, key, phones, appId, sign, templateId, message);
+        JSONObject jsonObject = JSON.parseObject(s);
         String state = JSON.parseObject(jsonObject.get("Response").toString()).get("SendStatusSet").toString();
-        List<JSONObject> datas = JSON.parseArray(state, JSONObject.class);
-        Map<String, String> map = new HashMap<>(phones.length);
-        for (int i = 0; i < datas.size(); i++) {
-            map.put(datas.get(i).get("PhoneNumber").toString(), datas.get(i).get("Fee").toString());
+        List<String> datas = JSON.parseArray(state, String.class);
+        ArrayList<SendStatusDTO> list = Lists.newArrayList();
+        for (String data : datas) {
+            SendStatusDTO sendStatusDTO = JSON.parseObject(data, SendStatusDTO.class);
+            list.add(sendStatusDTO);
         }
-        return map;
+        return list;
     }
 }

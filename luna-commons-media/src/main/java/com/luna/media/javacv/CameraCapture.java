@@ -128,8 +128,8 @@ class camerThread extends Thread {
         }
     }
 
-    public static Frame detectFace1(Frame frame) throws InterruptedException, Exception {
-        String path = "C:\\Users\\improve\\Pictures\\javacv\\luna1.jpg";
+    public static Frame detectFace1(Frame frame) throws InterruptedException {
+        String path = "D:\\user-improve\\conf\\net\\luna1.jpg";
         Mat imread = opencv_imgcodecs.imread(path);
         OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
         Mat mat = converter.convertToMat(frame);

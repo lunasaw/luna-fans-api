@@ -2,6 +2,8 @@ package com.luna.tencent.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.luna.common.http.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -15,6 +17,8 @@ import java.util.*;
  */
 public class TencentMarketApi {
 
+    private static final Logger log = LoggerFactory.getLogger(TencentMarketApi.class);
+
     /**
      * 身份证审核
      *
@@ -26,6 +30,7 @@ public class TencentMarketApi {
      * @throws InvalidKeyException
      */
     public static JSONObject checkIdByLuna(String secretId, String secretKey, String name, String id) throws Exception {
+        log.info("checkIdByLuna start secretId={}, secretKey={}, name={}, id={}", secretId, secretKey, name, id);
         String source = "market";
         Calendar cd = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.US);
@@ -51,6 +56,8 @@ public class TencentMarketApi {
         String url = TencentConstant.TENCENT_MARK_AUTHENTICATION;
 
         JSONObject response = HttpUtils.doURL(url, method, headers, queryParams);
+        log.info("checkIdByLuna end secretId={}, secretKey={}, name={}, id={},response={}", secretId, secretKey, name,
+            id, response);
         return response;
     }
 

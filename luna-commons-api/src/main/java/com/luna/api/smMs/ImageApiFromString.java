@@ -29,8 +29,6 @@ public class ImageApiFromString {
         header.put("Authorization", token);
         HashMap<String, String> bodies = new HashMap<>();
         bodies.put("smfile", path);
-        // return HttpPost.post(SmMsConstant.HOST + "/upload", null, header, bodies);
-
         return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/upload", header, null, bodies));
     }
 

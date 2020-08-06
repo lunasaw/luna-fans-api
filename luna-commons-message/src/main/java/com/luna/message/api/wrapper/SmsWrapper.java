@@ -1,13 +1,17 @@
 package com.luna.message.api.wrapper;
 
+import com.google.common.collect.Lists;
 import com.luna.message.config.TencentConfigValue;
 import com.luna.message.config.TencentSmsConfigValue;
 import com.luna.tencent.api.TencentMessage;
+import com.luna.tencent.dto.SendStatusDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,13 +22,15 @@ import java.util.concurrent.TimeUnit;
 public class SmsWrapper {
 
     @Autowired
-    StringRedisTemplate   stringRedisTemplate;
+    StringRedisTemplate         stringRedisTemplate;
 
     @Autowired
-    TencentSmsConfigValue tencentSmsConfigValue;
+    TencentSmsConfigValue       tencentSmsConfigValue;
 
     @Autowired
-    TencentConfigValue    tencentConfigValue;
+    TencentConfigValue          tencentConfigValue;
+
+    private static final Logger log = LoggerFactory.getLogger(SmsWrapper.class);
 
     /**
      * +86 国内单个发送验证码短信
@@ -32,16 +38,23 @@ public class SmsWrapper {
      * @param phone
      */
     public boolean sendAuthCode(String phone, String code) throws Exception {
-        phone = "+86" + phone;
+        log.info("sendAuthCode start phone={}, code={}", phone, code);
+        if (!phone.startsWith("+86")) {
+            phone = "+86" + phone;
+        }
+        ArrayList<String> phones = Lists.newArrayList();
+        phones.add(phone);
+        ArrayList<String> codes = Lists.newArrayList();
+        codes.add(code);
         stringRedisTemplate.delete(phone);
         stringRedisTemplate.opsForValue().append(phone, code);
         stringRedisTemplate.expire(phone, 3000, TimeUnit.SECONDS);
-        Map map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
-            new String[] {phone},
-            tencentSmsConfigValue.getAuthCode(),
-            new String[] {code},
-            tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
-        return map.containsValue("1") == true;
+        ArrayList<SendStatusDTO> sendStatusDTOS =
+            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), phones,
+                tencentSmsConfigValue.getAuthCode(), codes, tencentSmsConfigValue.getAppId(),
+                tencentSmsConfigValue.getSign());
+        log.info("sendAuthCode start phone={}, code={}, sendStatusDTOS={}", phone, code, sendStatusDTOS);
+        return sendStatusDTOS.get(0).getCode() == "Ok";
     }
 
     /**
@@ -51,12 +64,19 @@ public class SmsWrapper {
      * @return
      */
     public boolean resetPassword(String phone, String password) throws Exception {
-        phone = "+86" + phone;
-        Map map = TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(),
-            new String[] {phone},
-            tencentSmsConfigValue.getResetPassword(),
-            new String[] {password},
-            tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
-        return map.containsValue("1") == true;
+        log.info("resetPassword start phone={}, password={}", phone, password);
+        if (!phone.startsWith("+86")) {
+            phone = "+86" + phone;
+        }
+        ArrayList<String> phones = Lists.newArrayList();
+        phones.add(phone);
+        ArrayList<String> passwords = Lists.newArrayList();
+        passwords.add(password);
+        ArrayList<SendStatusDTO> sendStatusDTOS =
+            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), phones,
+                tencentSmsConfigValue.getResetPassword(), passwords,
+                tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
+        log.info("resetPassword start phone={}, password={}, sendStatusDTOS={}", phone, password, sendStatusDTOS);
+        return sendStatusDTOS.get(0).getCode() == "Ok";
     }
 }
