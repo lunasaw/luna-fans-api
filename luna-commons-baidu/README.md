@@ -99,6 +99,37 @@ git clone https://github.com/czy1024/luna-commons.git
 
 ```java
 
+若采用SpringBoot构建项目可通过将第三方包中的BaiduConfigValue,GetBaiduKey通过Spring配置文件注入Spring管理
+
+package com.luna.springdemo.config;
+
+import com.luna.common.utils.SpringUtils;
+import com.luna.tencent.config.TencentConfigValue;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
+
+/**
+ * @Package: com.luna.springdemo.config
+ * @ClassName: Config
+ * @Author: luna
+ * @CreateTime: 2020/8/6 21:23
+ * @Description:
+ */
+@SpringBootConfiguration
+public class Config {
+
+    @Bean
+    public GetBaiduKey getBaiduKey(){
+        return new GetBaiduKey();
+    }
+
+    @Bean
+    public BaiduConfigValue baiduConfigValue(){
+        return new BaiduConfigValue();
+    }
+}
+
+
 /**
  * @author Luna@win10
  * @date 2020/5/6 12:46

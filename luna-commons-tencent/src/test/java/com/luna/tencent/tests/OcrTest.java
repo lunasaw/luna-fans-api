@@ -1,9 +1,10 @@
 package com.luna.tencent.tests;
 
-import com.luna.tencent.TencentApplicationTest;
-import com.luna.tencent.config.TencentConfigValue;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.luna.tencent.TencentApplicationTest;
+import com.luna.tencent.config.TencentConfigValue;
 
 /**
  * @Package: com.luna.baidu.tests

@@ -101,8 +101,40 @@ git clone https://github.com/czy1024/luna-commons.git
 ```
 
 引用示例
+若采用SpringBoot构建项目可通过将第三方包中的BaiduConfigValue,GetBaiduKey通过Spring配置文件注入Spring管理
+
+若非Spring项目可直接通过调用静态APi传入key和id进行调用
 
 ```java
+
+package com.luna.springdemo.config;
+
+import com.luna.common.utils.SpringUtils;
+import com.luna.tencent.config.TencentConfigValue;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
+
+/**
+ * @Package: com.luna.springdemo.config
+ * @ClassName: Config
+ * @Author: luna
+ * @CreateTime: 2020/8/6 21:23
+ * @Description:
+ */
+@SpringBootConfiguration
+public class Config {
+
+    @Bean
+    public SpringUtils springUtils(){
+        return new SpringUtils();
+    }
+
+    @Bean
+    public TencentConfigValue tencentConfigValue(){
+        return new TencentConfigValue();
+    }
+}
+
 
 
 /**
