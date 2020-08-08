@@ -72,7 +72,12 @@ public class MessageTask implements Runnable {
                 }
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
                 // TODO 暂不打开，发送要钱
-                // smsWrapper.sendAuthCode(toSms, messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
+                try {
+                    smsWrapper.sendAuthCode(toSms,
+                        messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else if (StringUtils.equals(MessageTypeConstant.RESET_PASSWORD, messageDO.getMessageType())) {
             // 发送
@@ -86,8 +91,12 @@ public class MessageTask implements Runnable {
                 }
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
                 // TODO 暂不打开，发送要钱
-                // smsWrapper.sendAuthCode(toSms,
-                // messageDO.getPlaceholderContent().get(MessageTypeConstant.RESET_PASSWORD));
+                try {
+                    smsWrapper.sendAuthCode(toSms,
+                        messageDO.getPlaceholderContent().get(MessageTypeConstant.RESET_PASSWORD));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
