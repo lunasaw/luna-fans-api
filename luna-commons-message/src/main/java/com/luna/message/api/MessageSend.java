@@ -1,16 +1,22 @@
 package com.luna.message.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.common.collect.ImmutableMap;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.CommonUtils;
 import com.luna.common.utils.HashUtils;
 import com.luna.common.utils.Md5Utils;
+import com.luna.message.api.constant.EmailContentsConstant;
+import com.luna.message.api.constant.MessageTypeConstant;
+import com.luna.message.api.constant.TargetTypeConstant;
 import com.luna.message.api.entity.MessageDO;
-import com.luna.message.api.service.MessageService;
+import com.luna.message.api.service.MessageEmailService;
+import com.luna.message.api.service.MessageMobileService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Luna@win10
@@ -20,7 +26,13 @@ import com.luna.message.api.service.MessageService;
 public class MessageSend {
 
     @Autowired
-    MessageService messageService;
+    private StringRedisTemplate  stringRedisTemplate;
+
+    @Autowired
+    private MessageMobileService messageMobileService;
+
+    @Autowired
+    private MessageEmailService  messageEmailService;
 
     /**
      * 重置密码
@@ -31,19 +43,19 @@ public class MessageSend {
     public void resetPassword(String userMark) {
         MessageDO messageDO = new MessageDO();
         String randomPassword = HashUtils.randomHex32();
-        messageDO.setPlaceholderContent(ImmutableMap.of("newPassword", randomPassword));
+        messageDO.setPlaceholderContent(ImmutableMap.of(MessageTypeConstant.RESET_PASSWORD, randomPassword));
         if (CommonUtils.isEmailAddress(userMark)) {
-            messageDO.setTargetMap(ImmutableMap.of("email", userMark));
-            messageDO.setMessageType("newPassword");
-            messageDO.setTargetType("email");
-            messageDO.setTemplateId(13);
-            messageService.asyncSendMessage(messageDO, userMark, "");
+            messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.EMAIL, userMark));
+            messageDO.setMessageType(MessageTypeConstant.RESET_PASSWORD);
+            messageDO.setTargetType(TargetTypeConstant.EMAIL);
+            messageDO.setTemplateId(EmailContentsConstant.RESET_PASSWORD);
+            messageEmailService.asyncSendMessage(messageDO, userMark, "");
         } else if (CommonUtils.isMobilePhoneNumber(userMark)) {
-            messageDO.setTargetMap(ImmutableMap.of("mobile", userMark));
-            messageDO.setMessageType("newPassword");
-            messageDO.setTargetType("mobile");
-            messageDO.setTemplateId(13);
-            messageService.asyncSendMessage(messageDO, "", userMark);
+            messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
+            messageDO.setMessageType(MessageTypeConstant.RESET_PASSWORD);
+            messageDO.setTargetType(TargetTypeConstant.MOBILE);
+            messageDO.setTemplateId(EmailContentsConstant.RESET_PASSWORD);
+            messageMobileService.asyncSendMessage(messageDO, "", userMark);
         } else {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");
         }
@@ -59,19 +71,25 @@ public class MessageSend {
     public void authCode(String userMark) {
         MessageDO messageDO = new MessageDO();
         String validationCode = Md5Utils.getValidationCode();
-        messageDO.setPlaceholderContent(ImmutableMap.of("authCode", validationCode));
+        messageDO.setPlaceholderContent(ImmutableMap.of(MessageTypeConstant.AUTH_OCDE, validationCode));
         if (CommonUtils.isEmailAddress(userMark)) {
-            messageDO.setTargetMap(ImmutableMap.of("email", userMark));
-            messageDO.setMessageType("authCode");
-            messageDO.setTargetType("email");
-            messageDO.setTemplateId(14);
-            messageService.asyncSendMessage(messageDO, userMark, "");
+            messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.EMAIL, userMark));
+            messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
+            messageDO.setTargetType(TargetTypeConstant.EMAIL);
+            messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
+            stringRedisTemplate.delete(userMark);
+            stringRedisTemplate.opsForValue().append(userMark, validationCode);
+            stringRedisTemplate.expire(userMark, 300, TimeUnit.SECONDS);
+            messageEmailService.asyncSendMessage(messageDO, userMark, null);
         } else if (CommonUtils.isMobilePhoneNumber(userMark)) {
-            messageDO.setTargetMap(ImmutableMap.of("mobile", userMark));
-            messageDO.setMessageType("authCode");
-            messageDO.setTargetType("mobile");
-            messageDO.setTemplateId(14);
-            messageService.asyncSendMessage(messageDO, "", userMark);
+            messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
+            messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
+            messageDO.setTargetType(TargetTypeConstant.MOBILE);
+            messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
+            stringRedisTemplate.delete(userMark);
+            stringRedisTemplate.opsForValue().append(userMark, validationCode);
+            stringRedisTemplate.expire(userMark, 300, TimeUnit.SECONDS);
+            messageMobileService.asyncSendMessage(messageDO, null, userMark);
         } else {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");
         }

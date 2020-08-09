@@ -9,6 +9,12 @@ package com.luna.message.api.constant;
  */
 public class EmailContentsConstant {
 
+    // 重置密码
+    public static final Integer RESET_PASSWORD                     = 13;
+
+    // 验证码
+    public static final Integer AUTH_CODE                          = 14;
+
     public static final String COPY_RIGHT_NAME                    = "copyRightName";
 
     public static final String COPY_RIGHT_NAME_VALUE              = "luna - message";

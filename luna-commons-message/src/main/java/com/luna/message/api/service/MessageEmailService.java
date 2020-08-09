@@ -10,7 +10,6 @@ import com.luna.message.api.constant.TargetTypeConstant;
 import com.luna.message.api.dao.TemplateDAO;
 import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.wrapper.MailWrapper;
-import com.luna.message.api.wrapper.SmsWrapper;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2019年10月4日 下午10:11:46
  */
 @Component
-public class MessageService {
+public class MessageEmailService {
 
     /** 发消息用线程池 */
     private static ThreadPoolExecutor sendMessageThreadPoolExecutor =
@@ -36,10 +35,10 @@ public class MessageService {
 
     @Autowired
     private TemplateDAO               templateDAO;
+
     @Autowired
     private MailWrapper               mailWrapper;
-    @Autowired
-    private SmsWrapper                smsWrapper;
+
 
     public void asyncSendMessage(MessageDO messageDO, String email, String phone) {
         if (MapUtils.isEmpty(messageDO.getTargetMap())) {
@@ -59,16 +58,13 @@ public class MessageService {
             if (CommonUtils.isEmailAddress(messageDO.getTargetMap().get(TargetKeyConstant.EMAIL)) == false) {
                 throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
             }
-        } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
-            if (messageDO.getTargetMap().containsKey(TargetKeyConstant.MOBILE) == false) {
-                throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-            }
-            if (CommonUtils.isMobilePhoneNumber(messageDO.getTargetMap().get(TargetKeyConstant.MOBILE)) == false) {
-                throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-            }
         }
-        // 异步提交任务
-        sendMessageThreadPoolExecutor
-            .execute(new MessageTask(messageDO, templateDAO, mailWrapper, smsWrapper, email, phone));
+
+        if (messageDO.getTargetMap().containsKey(TargetKeyConstant.EMAIL) == true) {
+            // 异步提交任务
+            sendMessageThreadPoolExecutor
+                .execute(new MessageTask(messageDO, templateDAO, mailWrapper, email));
+        }
+
     }
 }

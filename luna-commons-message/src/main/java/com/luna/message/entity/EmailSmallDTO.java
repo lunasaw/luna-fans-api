@@ -1,5 +1,8 @@
 package com.luna.message.entity;
 
+import javax.validation.constraints.NotEmpty;
+import java.util.Map;
+
 /**
  * @Package: com.luna.message.entity
  * @ClassName: EmailSmallDTO
@@ -13,9 +16,11 @@ public class EmailSmallDTO {
     private String   userName;
 
     /** 接收人 */
+    @NotEmpty
     private String   to;
 
     /** 主题 */
+    @NotEmpty
     private String   subject;
 
     /** 内容 */
@@ -26,6 +31,15 @@ public class EmailSmallDTO {
 
     /** 抄送人 */
     private String[] cc;
+
+    /** 附件地址<名称,路径> */
+    private Map<String, String> pathMap;
+
+    public EmailSmallDTO(@NotEmpty String to, @NotEmpty String subject, String content) {
+        this.to = to;
+        this.subject = subject;
+        this.content = content;
+    }
 
     public EmailSmallDTO(String userName, String to, String subject, String content) {
         this.userName = userName;
@@ -43,6 +57,14 @@ public class EmailSmallDTO {
         this.content = content;
         this.bcc = bcc;
         this.cc = cc;
+    }
+
+    public Map<String, String> getPathMap() {
+        return pathMap;
+    }
+
+    public void setPathMap(Map<String, String> pathMap) {
+        this.pathMap = pathMap;
     }
 
     public String getUserName() {

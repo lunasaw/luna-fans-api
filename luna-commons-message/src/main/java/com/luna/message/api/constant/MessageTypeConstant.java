@@ -14,8 +14,6 @@ public class MessageTypeConstant {
 
     /** 发送模板 */
     public static final String        EMAIL_MODEL    = "luna-message.html";
-
-    public static final String        EMAIL_MODE_2   = "luna-message2.html";
     /** 重置密码 */
     public static final String        RESET_PASSWORD = "newPassword";
     /** 验证码 */

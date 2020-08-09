@@ -1,5 +1,6 @@
 package com.luna.message.api.wrapper;
 
+import cn.hutool.core.date.DatePattern;
 import com.alibaba.fastjson.JSON;
 import com.luna.common.utils.StringUtils;
 import com.luna.common.utils.text.CharsetKit;
@@ -13,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -30,7 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Luna@win10
@@ -39,9 +38,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class MailWrapper {
     private final static Logger log = LoggerFactory.getLogger(MailWrapper.class);
-
-    @Autowired
-    StringRedisTemplate         stringRedisTemplate;
 
     @Autowired
     JavaMailSenderImpl          javaMailSender;
@@ -70,122 +66,93 @@ public class MailWrapper {
 
     /**
      * 简单发送文本邮件
-     *
-     * @param to 接收者
-     * @param subject 标题
-     * @param content 内容
-     * @param authCode 验证码 可选
+     * 
+     * @param emailSmallDTO
+     * @throws UnsupportedEncodingException
+     * @throws AddressException
      */
-    public void sendEmail(String to, String subject, String content, String authCode)
-        throws UnsupportedEncodingException, AddressException {
-        if (authCode != null) {
-            stringRedisTemplate.delete(to);
-            stringRedisTemplate.opsForValue().append(to, authCode);
-            stringRedisTemplate.expire(to, 300, TimeUnit.SECONDS);
+    public void sendSimpleEmail(EmailSmallDTO emailSmallDTO) {
+        log.info("sendSimpleEmail start emailSmallDTO={}", JSON.toJSONString(emailSmallDTO));
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        // 标题
+        simpleMailMessage.setSubject(
+            emailSmallDTO.getSubject() + DateFormatUtils.format(new Date(), DatePattern.NORM_DATETIME_MINUTE_PATTERN));
+        // 内容
+        if (StringUtils.isNotEmpty(emailSmallDTO.getContent())) {
+            simpleMailMessage.setText(emailSmallDTO.getContent());
         }
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        // 标题
-        simpleMailMessage.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
-        // 内容
-        simpleMailMessage.setText(content);
         // 发送人地址
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setFrom(username);
-        // 设置自定义发件人昵称
-        String nick = MimeUtility.encodeText(name);
-        simpleMailMessage.setFrom(new InternetAddress(nick + " <" + username + ">").toString());
-        log.info("simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
-        javaMailSender.send(simpleMailMessage);
-        log.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
-    }
-
-    /**
-     * 发送简单邮件
-     *
-     * @param to 接收者
-     * @param subject 标题
-     * @param content 内容
-     * @param Cc 抄送者 可选
-     * @param Bcc 密抄送 可选
-     */
-    public void sendEmail(String main, String to, String subject, String content, String[] Cc, String[] Bcc) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        // 邮件设置
-        // 标题
-        simpleMailMessage.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
-        // 内容
-        simpleMailMessage.setText(content);
-        // 发送人地址
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setFrom(username);
+        simpleMailMessage.setTo(emailSmallDTO.getTo());
         try {
-            // 设置自定义发件人昵称
-            if (main == null || main == "") {
-                main = name;
+            // 默认使用配置发送人昵称
+            if (StringUtils.isNotEmpty(emailSmallDTO.getUserName())) {
+                // 设置自定义发件人昵称
+                String nick = MimeUtility.encodeText(emailSmallDTO.getUserName());
+                simpleMailMessage.setFrom(new InternetAddress(nick + " <" + username + ">").toString());
+            } else {
+                simpleMailMessage.setFrom(new InternetAddress(name + " <" + username + ">").toString());
             }
-            String nick = MimeUtility.encodeText(main);
-            simpleMailMessage.setFrom(new InternetAddress(nick + " <" + username + ">").toString());
         } catch (Exception e) {
+            log.error("javaMailSender.send error, simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
             e.printStackTrace();
         }
-        // 普通抄送,收件人互可见
-        if (Cc != null) {
-            simpleMailMessage.setCc(Cc);
-        }
-        // 加密抄送,收件人不可见
-        if (Bcc != null) {
-            simpleMailMessage.setBcc(Bcc);
-        }
-        log.info("simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
         javaMailSender.send(simpleMailMessage);
         log.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(simpleMailMessage));
     }
 
     /**
      * 发送复杂邮件
-     *
-     * @param main 昵称
-     * @param to 给谁
-     * @param subject 标题
-     * @param content 发送内容
-     * @param pathMap 文件名 和文件地址的Map
+     * 
+     * @param emailSmallDTO
+     * @throws MessagingException
+     * @throws UnsupportedEncodingException
      */
-    public void sendEmail(String main, String to, String subject, String content, String[] Cc, String[] Bcc,
-        Map<String, String> pathMap) throws MessagingException, UnsupportedEncodingException {
+    public void sendEmail(EmailSmallDTO emailSmallDTO) throws MessagingException, UnsupportedEncodingException {
+        log.info("sendEmail start emailSmallDTO={}", JSON.toJSONString(emailSmallDTO));
         // 创建复杂邮件
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, CharsetKit.UTF_8);
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, CharsetKit.UTF_8);
         // 发送人地址
-        mimeMessageHelper.setTo(to);
+        helper.setTo(emailSmallDTO.getTo());
         // 标题
-        mimeMessageHelper.setSubject(subject + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
+        helper.setSubject(
+            emailSmallDTO.getSubject() + DateFormatUtils.format(new Date(), DatePattern.NORM_DATETIME_MINUTE_PATTERN));
+
         // 内容
-        mimeMessageHelper.setText("<b style='color:blue'>" + content + "</b>", true);
+        if (StringUtils.isNotEmpty(emailSmallDTO.getContent())) {
+            helper.setText("<b style='color:blue'>" + emailSmallDTO.getContent() + "</b>", true);
+        }
+
         // 普通抄送,收件人互可见
-        if (Cc != null) {
-            mimeMessageHelper.setCc(Cc);
+        if (emailSmallDTO.getCc() != null && emailSmallDTO.getCc().length != 0) {
+            helper.setCc(emailSmallDTO.getCc());
         }
+
         // 加密抄送,收件人不可见
-        if (Bcc != null) {
-            mimeMessageHelper.setBcc(Bcc);
+        if (emailSmallDTO.getBcc() != null && emailSmallDTO.getBcc().length != 0) {
+            helper.setBcc(emailSmallDTO.getBcc());
         }
+
         // 默认使用配置发送人昵称
-        if (main == null || main.length() == 0) {
-            main = name;
+        if (StringUtils.isNotEmpty(emailSmallDTO.getUserName())) {
+            // 设置自定义发件人昵称
+            String nick = MimeUtility.encodeText(emailSmallDTO.getUserName());
+            helper.setFrom(new InternetAddress(nick + " <" + username + ">"));
+        } else {
+            helper.setFrom(new InternetAddress(name + " <" + username + ">"));
         }
-        if (pathMap != null && pathMap.size() != 0) {
+
+        if (MapUtils.isNotEmpty(emailSmallDTO.getPathMap())) {
             // 上传文件
+            Map<String, String> pathMap = emailSmallDTO.getPathMap();
             // Iterating entries using a For Each loop
             Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
             while (entries.hasNext()) {
                 Map.Entry<String, String> entry = entries.next();
-                mimeMessageHelper.addAttachment(entry.getKey(), new File(entry.getValue()));
+                helper.addAttachment(entry.getKey(), new File(entry.getValue()));
             }
         }
-        // 设置自定义发件人昵称
-        String nick = MimeUtility.encodeText(main);
-        mimeMessage.setFrom(new InternetAddress(nick + " <" + username + ">"));
-        log.info("simpleMailMessage={}", JSON.toJSONString(mimeMessage));
+
         javaMailSender.send(mimeMessage);
         log.info("javaMailSender.send success, simpleMailMessage={}", JSON.toJSONString(mimeMessage));
     }
@@ -223,9 +190,9 @@ public class MailWrapper {
                 helper.setFrom(new InternetAddress(name + " <" + username + ">"));
             }
 
-            if (MapUtils.isNotEmpty(emailDTO.getPathMap())) {
+            if (MapUtils.isNotEmpty(smallDTO.getPathMap())) {
                 // 上传文件
-                Map<String, String> pathMap = emailDTO.getPathMap();
+                Map<String, String> pathMap = smallDTO.getPathMap();
                 // Iterating entries using a For Each loop
                 Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
                 while (entries.hasNext()) {
@@ -233,13 +200,15 @@ public class MailWrapper {
                     helper.addAttachment(entry.getKey(), new File(entry.getValue()));
                 }
             }
+
             // 使用默认模板
             if (StringUtils.isEmpty(emailDTO.getModelName())) {
                 emailDTO.setModelName(MessageTypeConstant.EMAIL_MODEL);
             }
 
             if (StringUtils.isNotEmpty(smallDTO.getSubject())) {
-                helper.setSubject(smallDTO.getSubject() + DateFormatUtils.format(new Date(), "yyyy/MM/dd HH:mm:ss"));
+                helper.setSubject(smallDTO.getSubject()
+                    + DateFormatUtils.format(new Date(), DatePattern.NORM_DATETIME_MINUTE_PATTERN));
             }
 
             if (emailDTO.getModelContentDTO() != null) {

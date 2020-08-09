@@ -30,7 +30,7 @@ public class SendMessage extends MessageApplicationTest {
 
     @Test
     public void atest() throws InterruptedException {
-        EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "15696756582@163.com", "", "");
+        EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "15696756582@163.com", "这是测试邮件", "");
         EmailDTO emailDTO = new EmailDTO();
         HashMap<String, String> map = Maps.newHashMap();
         map.put(EmailContentsConstant.COPY_RIGHT_NAME, "luna");
@@ -39,8 +39,10 @@ public class SendMessage extends MessageApplicationTest {
         map.put(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER_SRC,
             "https://gitee.com/Iszychen/luna/raw/master/img/20200808-162340-0536.png");
         map.put(EmailContentsConstant.EMAIL_HEAD_COLOR_VALUE, "blue");
-        emailSmallDTO.setSubject("这是测试邮件");
         emailSmallDTO.setContent("这是测试邮件");
+        HashMap<String, String> pathMap = Maps.newHashMap();
+        pathMap.put("luna.png", "C:\\Users\\improve\\Pictures\\Camera Roll\\luna-logo.png");
+        emailSmallDTO.setPathMap(pathMap);
         emailDTO.setEmailSmallDTO(emailSmallDTO);
         ModelContentDTO modelContentDTO = new ModelContentDTO();
         modelContentDTO.setContents(map);
@@ -48,5 +50,11 @@ public class SendMessage extends MessageApplicationTest {
         emailDTO.setModelContentDTO(modelContentDTO);
         emailDTO.setModelName(MessageTypeConstant.EMAIL_MODEL);
         mailWrapper.sendEmail(emailDTO);
+    }
+
+    @Test
+    public void btest() throws InterruptedException {
+        messageSend.authCode("15696756582@163.com");
+        Thread.sleep(30000);
     }
 }

@@ -26,7 +26,7 @@ public class MessageDO {
     @Min(1)
     private long                templateId;
 
-    /** 占位内容 */
+    /** 发送目标 */
     public Map<String, String> getTargetMap() {
         return targetMap;
     }

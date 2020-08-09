@@ -8,15 +8,12 @@ import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.entity.TemplateDO;
 import com.luna.message.api.wrapper.MailWrapper;
 import com.luna.message.api.wrapper.SmsWrapper;
+import com.luna.message.entity.EmailSmallDTO;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.mail.internet.AddressException;
-import java.io.UnsupportedEncodingException;
-
 
 /**
  * @author Tony
@@ -32,13 +29,17 @@ public class MessageTask implements Runnable {
     private String              toMail;
     private String              toSms;
 
-    public MessageTask(MessageDO messageDO, TemplateDAO templateDAO,
-        MailWrapper mailWrapper, SmsWrapper smsWrapper, String toMail, String toSms) {
+    public MessageTask(MessageDO messageDO, TemplateDAO templateDAO, MailWrapper mailWrapper, String toMail) {
         this.messageDO = messageDO;
         this.templateDAO = templateDAO;
         this.mailWrapper = mailWrapper;
-        this.smsWrapper = smsWrapper;
         this.toMail = toMail;
+    }
+
+    public MessageTask(MessageDO messageDO, TemplateDAO templateDAO, SmsWrapper smsWrapper, String toSms) {
+        this.messageDO = messageDO;
+        this.templateDAO = templateDAO;
+        this.smsWrapper = smsWrapper;
         this.toSms = toSms;
     }
 
@@ -50,53 +51,37 @@ public class MessageTask implements Runnable {
             logger.error("templateDO is null, messageDO={}", JSON.toJSONString(messageDO));
             return;
         }
+
+        // 内容占位符替换
         String content = templateDO.getContent();
         if (MapUtils.isNotEmpty(messageDO.getPlaceholderContent())) {
             content = new StringSubstitutor(messageDO.getPlaceholderContent()).replace(content);
         }
+
+        // 标题占位符替换
         String subject = templateDO.getSubject();
         if (MapUtils.isNotEmpty(messageDO.getPlaceholderContent())) {
             subject = new StringSubstitutor(messageDO.getPlaceholderContent()).replace(subject);
         }
 
         if (StringUtils.equals(MessageTypeConstant.AUTH_OCDE, messageDO.getMessageType())) {
-            // 发送
+            // 发送验证码
             if (StringUtils.equals(TargetTypeConstant.EMAIL, messageDO.getTargetType())) {
-                try {
-                    mailWrapper.sendEmail(toMail, subject, content,
-                        messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (AddressException e) {
-                    e.printStackTrace();
-                }
+                // 邮件发送
+                mailWrapper.sendSimpleEmail(new EmailSmallDTO(toMail, subject, content));
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
-                // TODO 暂不打开，发送要钱
-                try {
-                    smsWrapper.sendAuthCode(toSms,
-                        messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                // TODO 短信发送暂不打开，发送要钱
+                // smsWrapper.sendAuthCode(toSms, messageDO.getPlaceholderContent().get(MessageTypeConstant.AUTH_OCDE));
+
             }
         } else if (StringUtils.equals(MessageTypeConstant.RESET_PASSWORD, messageDO.getMessageType())) {
-            // 发送
+            // 发送重置密码
             if (StringUtils.equals(TargetTypeConstant.EMAIL, messageDO.getTargetType())) {
-                try {
-                    mailWrapper.sendEmail(toMail, subject, content, null);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (AddressException e) {
-                    e.printStackTrace();
-                }
+                mailWrapper.sendSimpleEmail(new EmailSmallDTO(toMail, subject, content));
             } else if (StringUtils.equals(TargetTypeConstant.MOBILE, messageDO.getTargetType())) {
                 // TODO 暂不打开，发送要钱
-                try {
-                    smsWrapper.sendAuthCode(toSms,
-                        messageDO.getPlaceholderContent().get(MessageTypeConstant.RESET_PASSWORD));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                // smsWrapper.sendAuthCode(toSms,
+                // messageDO.getPlaceholderContent().get(MessageTypeConstant.RESET_PASSWORD));
             }
         }
 

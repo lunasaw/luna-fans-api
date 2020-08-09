@@ -3,16 +3,15 @@ package com.luna.message.api.wrapper;
 import com.google.common.collect.Lists;
 import com.luna.message.config.TencentConfigValue;
 import com.luna.message.config.TencentSmsConfigValue;
-import com.luna.tencent.api.TencentMessage;
+import com.luna.message.entity.SmsDTO;
+import com.luna.message.util.TencentMessage;
 import com.luna.tencent.dto.SendStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Luna@win10
@@ -20,10 +19,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class SmsWrapper {
-
-    @Autowired
-    StringRedisTemplate         stringRedisTemplate;
-
     @Autowired
     TencentSmsConfigValue       tencentSmsConfigValue;
 
@@ -37,24 +32,23 @@ public class SmsWrapper {
      * 
      * @param phone
      */
-    public boolean sendAuthCode(String phone, String code) throws Exception {
+    public boolean sendAuthCode(String phone, String code) {
         log.info("sendAuthCode start phone={}, code={}", phone, code);
         if (!phone.startsWith("+86")) {
             phone = "+86" + phone;
         }
+
         ArrayList<String> phones = Lists.newArrayList();
         phones.add(phone);
         ArrayList<String> codes = Lists.newArrayList();
         codes.add(code);
-        stringRedisTemplate.delete(phone);
-        stringRedisTemplate.opsForValue().append(phone, code);
-        stringRedisTemplate.expire(phone, 3000, TimeUnit.SECONDS);
+
+        SmsDTO smsDTO = new SmsDTO(phones, tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign(),
+            tencentSmsConfigValue.getAuthCode(), codes);
         ArrayList<SendStatusDTO> sendStatusDTOS =
-            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), phones,
-                tencentSmsConfigValue.getAuthCode(), codes, tencentSmsConfigValue.getAppId(),
-                tencentSmsConfigValue.getSign());
-        log.info("sendAuthCode start phone={}, code={}, sendStatusDTOS={}", phone, code, sendStatusDTOS);
-        return sendStatusDTOS.get(0).getCode() == "Ok";
+            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
+        log.info("sendAuthCode ends msDTO={}, sendStatusDTOS={}", smsDTO, sendStatusDTOS);
+        return "Ok".equals(sendStatusDTOS.get(0).getCode());
     }
 
     /**
@@ -68,15 +62,17 @@ public class SmsWrapper {
         if (!phone.startsWith("+86")) {
             phone = "+86" + phone;
         }
+
         ArrayList<String> phones = Lists.newArrayList();
         phones.add(phone);
         ArrayList<String> passwords = Lists.newArrayList();
         passwords.add(password);
+
+        SmsDTO smsDTO = new SmsDTO(phones, tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign(),
+            tencentSmsConfigValue.getResetPassword(), passwords);
         ArrayList<SendStatusDTO> sendStatusDTOS =
-            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), phones,
-                tencentSmsConfigValue.getResetPassword(), passwords,
-                tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign());
-        log.info("resetPassword start phone={}, password={}, sendStatusDTOS={}", phone, password, sendStatusDTOS);
-        return sendStatusDTOS.get(0).getCode() == "Ok";
+            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
+        log.info("resetPassword end smsDTO={}, sendStatusDTOS={}", smsDTO, sendStatusDTOS);
+        return "Ok".equals(sendStatusDTOS.get(0).getCode());
     }
 }
