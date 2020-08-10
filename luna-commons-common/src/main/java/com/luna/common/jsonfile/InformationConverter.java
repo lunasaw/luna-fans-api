@@ -15,8 +15,9 @@ import java.util.Set;
  */
 public class InformationConverter {
     /**
-     * reader json file and convert to JSONObject
-     * @param path the json's file path
+     * 读取json文件并转换为JSONObject
+     * 
+     * @param path JSON文件路径
      * @return a fastjson JSONObject
      */
     public static JSONObject fileToJson(String path)
@@ -50,7 +51,6 @@ public class InformationConverter {
             BufferedWriter out =  new BufferedWriter(writer)
         ){
             out.write(text);
-            System.out.println("world");
         } catch (IOException e) {
             e.printStackTrace();
         }

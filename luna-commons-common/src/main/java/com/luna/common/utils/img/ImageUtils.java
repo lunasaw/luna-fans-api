@@ -1,7 +1,9 @@
 package com.luna.common.utils.img;
 
+import cn.hutool.core.io.FileUtil;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
+import com.luna.common.utils.StringUtils;
 
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.File;
@@ -17,10 +19,14 @@ public class ImageUtils {
     /**
      * 图片转字节
      * 
-     * @param imgFile
+     * @param imgFile 文件路径
      * @return
      */
     public static byte[] getBytes(String imgFile) {
+        File file = new File(imgFile);
+        if (FileUtil.isEmpty(file)) {
+            throw new FileException(ResultCode.PARAMETER_INVALID, "文件路径不存在");
+        }
         InputStream in = null;
         byte[] data = null;
         // 读取图片字节数组
@@ -39,12 +45,12 @@ public class ImageUtils {
     /**
      * 字节转图片
      * 
-     * @param data
-     * @param path
+     * @param data 数据
+     * @param path 输出路径
      */
     public static void byte2image(byte[] data, String path) {
-        if (data.length < 3 || path.equals("")) {
-            return;
+        if (StringUtils.isEmpty(path) || data.length == 0) {
+            throw new FileException(ResultCode.PARAMETER_INVALID, "文件路径不能为空或者字节不能为0");
         }
         try {
             FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path));

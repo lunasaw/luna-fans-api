@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @Package: com.luna.file.file
@@ -21,7 +19,7 @@ import java.nio.file.Paths;
 public class LocalFileUtil {
 
     /**
-     * 获取文件数目
+     * 获取文件夹内文件数目
      *
      * @param path
      * @return
@@ -44,15 +42,12 @@ public class LocalFileUtil {
     /**
      * 批量转换文件类型
      *
-     * @param path
-     * @param oldExt
-     * @param newExt
+     * @param path 文件夹路径
+     * @param oldExt 原本类型
+     * @param newExt 转换后类型
      */
     public static void renameFiles(String path, String oldExt, String newExt) {
         File file = new File(path);
-        if (!file.exists()) {
-            throw new FileException(ResultCode.PARAMETER_INVALID, "文件路径不存在", new Object[] {path});
-        }
         File[] files = file.listFiles();
         if (files.length <= 0) {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "当前路径文件不存在", new Object[] {path});
@@ -138,15 +133,5 @@ public class LocalFileUtil {
             }
         }
         return cont;
-    }
-
-    /**
-     * 判断一个文件是否存在
-     *
-     * @param fileName
-     * @return
-     */
-    public static boolean isFileExists(String fileName) {
-        return Files.exists(Paths.get(fileName));
     }
 }

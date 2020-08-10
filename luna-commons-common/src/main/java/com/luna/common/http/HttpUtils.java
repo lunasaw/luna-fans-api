@@ -179,11 +179,11 @@ public class HttpUtils {
     /**
      * Post String
      *
-     * @param host
-     * @param path
-     * @param headers
-     * @param queries
-     * @param body
+     * @param host 主机
+     * @param path 路径
+     * @param headers 请求头
+     * @param queries 请求参数
+     * @param body 字符串
      * @return
      * @throws Exception
      */
@@ -211,11 +211,14 @@ public class HttpUtils {
     /**
      * Post File/form
      *
-     * @param host
-     * @param path
-     * @param headers
-     * @param queries
+     * @param host 主机
+     * @param path 路径
+     * @param headers 请求头
+     * @param queries 请求参数
      * @param bodies
+     * <p>
+     * Map<文件名或者参数key,文件地址或者参数value>
+     * <p/>
      * @return
      * @throws Exception
      */
@@ -262,11 +265,11 @@ public class HttpUtils {
     /**
      * Post stream
      *
-     * @param host
-     * @param path
-     * @param headers
-     * @param queries
-     * @param body
+     * @param host 主机
+     * @param path 路径
+     * @param headers 请求头
+     * @param queries 请求参数
+     * @param body 字节流
      * @return
      * @throws Exception
      */
