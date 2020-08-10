@@ -11,7 +11,7 @@ import java.net.URL;
  */
 
 @Component
-@ConfigurationProperties(prefix = "luna.face")
+@ConfigurationProperties(prefix = "luna.location")
 public class JavaCvConfigValue {
 
     private static String faceModel;

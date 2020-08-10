@@ -17,4 +17,5 @@ public class FileException extends BaseException {
     public FileException(int code, String message) {
         super(code, message);
     }
+
 }

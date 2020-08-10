@@ -6,10 +6,7 @@ import com.luna.common.exception.FileException;
 import com.luna.common.utils.StringUtils;
 
 import javax.imageio.stream.FileImageOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * 图片文件，与 byte[] 互转

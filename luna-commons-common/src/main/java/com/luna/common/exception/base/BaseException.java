@@ -1,5 +1,7 @@
 package com.luna.common.exception.base;
 
+import java.util.Arrays;
+
 /**
  * 异常类
  * 
@@ -33,6 +35,15 @@ public class BaseException extends RuntimeException {
 
     public int getCode() {
         return code;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseException{" +
+            "code=" + code +
+            ", message='" + message + '\'' +
+            ", args=" + Arrays.toString(args) +
+            '}';
     }
 
     @Override

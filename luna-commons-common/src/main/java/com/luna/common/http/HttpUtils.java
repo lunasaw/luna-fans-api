@@ -39,9 +39,7 @@ import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -294,6 +292,14 @@ public class HttpUtils {
         }
     }
 
+    /**
+     * 构建请求路径
+     * 
+     * @param host
+     * @param path
+     * @param queries
+     * @return
+     */
     private static String buildUrl(String host, String path, Map<String, String> queries) {
         StringBuilder sbUrl = new StringBuilder();
         sbUrl.append(host);
@@ -350,6 +356,30 @@ public class HttpUtils {
         HttpEntity entity = httpResponse.getEntity();
         try {
             return EntityUtils.toString(entity, CharsetKit.CHARSET_UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 检测响应体获取相应流
+     *
+     * @param httpResponse
+     * @return
+     */
+    public static byte[] checkResponseStreamAndGetResult(HttpResponse httpResponse) {
+        if (httpResponse == null) {
+            throw new RuntimeException();
+        }
+        if (httpResponse.getStatusLine() == null) {
+            throw new RuntimeException();
+        }
+        if (HttpStatus.SC_OK != httpResponse.getStatusLine().getStatusCode()) {
+            throw new RuntimeException();
+        }
+        HttpEntity entity = httpResponse.getEntity();
+        try {
+            return EntityUtils.toByteArray(entity);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -446,5 +476,24 @@ public class HttpUtils {
             }
         }
         return reault;
+    }
+
+    private static String getLocalMac(InetAddress ia) throws SocketException {
+        byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
+        StringBuffer sb = new StringBuffer("");
+        for (int i = 0; i < mac.length; i++) {
+            if (i != 0) {
+                sb.append("-");
+            }
+            // 字节转换为整数
+            int temp = mac[i] & 0xff;
+            String str = Integer.toHexString(temp);
+            if (str.length() == 1) {
+                sb.append("0" + str);
+            } else {
+                sb.append(str);
+            }
+        }
+        return sb.toString().toUpperCase();
     }
 }

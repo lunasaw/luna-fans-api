@@ -3,20 +3,20 @@ package com.luna.baidu.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
+import com.luna.baidu.dto.FaceCheckDTO;
 import com.luna.common.dto.constant.ResultCode;
-import com.luna.common.entity.Face;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
+import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.img.ImageUtils;
 import com.luna.common.utils.text.CharsetKit;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,29 +32,20 @@ public class BaiduFaceApi {
      * @return List<Face>
      * @throws IOException
      */
-    public static List<Face> faceDetect(String key, String base64Str) {
+    public static FaceCheckDTO faceDetect(String key, String base64Str) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.FACE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("image_type", "BASE64", "max_face_num", "10",
                 "image", base64Str)));
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        List<JSONObject> datas = null;
-        try {
-            JSONObject jsonObject1 = JSON.parseObject(response.get("result").toString());
-            datas = JSON.parseArray(jsonObject1.get("face_list").toString(), JSONObject.class);
-        } catch (Exception e) {
-            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
-        }
-        List<Face> faces = new ArrayList<>();
-        JSONObject jsonObject2 = null;
-        for (JSONObject data : datas) {
-            if (data.get("face_token") != null) {
-                Face face = JSON.parseObject(data.get("location").toString(), Face.class);
-                face.setFaceToken(data.get("face_token").toString());
-                faces.add(face);
-            }
-        }
-        return faces;
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        FaceCheckDTO faceCheckDTO = JSON.parseObject(JSON.parseObject(s).getString("result"), FaceCheckDTO.class);
+        return faceCheckDTO;
+    }
+
+    public static void main(String[] args) {
+        String s3 = Base64Util
+            .encodeBase64String(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg"));
+        BaiduFaceApi.faceDetect("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961", s3);
     }
 
     /**

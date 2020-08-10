@@ -4,10 +4,7 @@ import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
 import com.luna.common.exception.base.BaseException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @Package: com.luna.file.file
@@ -17,6 +14,60 @@ import java.io.IOException;
  * @Description:
  */
 public class LocalFileUtil {
+
+    /**
+     *
+     * @param filePath 文件路径
+     * @return file bytes
+     * @throws IOException 读取文件错误
+     */
+    public static byte[] readFileByBytes(String filePath) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new FileException(ResultCode.PARAMETER_INVALID, "文件无法读取或文件不存在,请检查文件路径和文件权限", new Object[] {filePath});
+        }
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(((int)file.length()));
+        BufferedInputStream in = null;
+        try {
+            in = new BufferedInputStream(new FileInputStream(file));
+            int bufSize = 1024;
+            byte[] buffer = new byte[bufSize];
+            int len = 0;
+            while (-1 != (len = in.read(buffer, 0, bufSize))) {
+                bos.write(buffer, 0, len);
+            }
+            return bos.toByteArray();
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            bos.close();
+        }
+    }
+
+    /**
+     * 数据转文件
+     * 
+     * @param data
+     * @param output
+     * @throws IOException
+     */
+    public static void writeBytesToFileSystem(byte[] data, String output) throws IOException {
+        DataOutputStream out = null;
+        try {
+            out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(output)));
+            out.write(data);
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+        }
+    }
 
     /**
      * 获取文件夹内文件数目

@@ -1,17 +1,12 @@
 package com.luna.baidu.tests;
 
 import com.luna.baidu.BaiduApplicationTest;
-import com.luna.baidu.api.BaiduFaceApi;
 import com.luna.baidu.config.BaiduConfigValue;
 import com.luna.baidu.config.GetBaiduKey;
-import com.luna.common.entity.Face;
 import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.PaintImageUtils;
 import com.luna.common.utils.img.ImageUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * @Package: com.luna.baidu.tests
@@ -47,10 +42,10 @@ public class OcrTest extends BaiduApplicationTest {
         String s3 = Base64Util
             .encodeBase64String(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg"));
 
-        List<Face> faces = BaiduFaceApi.faceDetect(baiduConfigValue.getBaiduKey(), s3);
-
-        boolean b =
-            PaintImageUtils.paintFace("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg", faces, "a.jpg");
-        System.out.println(b);
+        // List<Face> faces = BaiduFaceApi.faceDetect(baiduConfigValue.getBaiduKey(), s3);
+        //
+        // boolean b =
+        // PaintImageUtils.paintFace("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg", faces, "a.jpg");
+        // System.out.println(b);
     }
 }

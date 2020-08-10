@@ -1,0 +1,156 @@
+package com.luna.baidu.api;
+
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.luna.baidu.dto.VoiceCheckDTO;
+import com.luna.baidu.dto.VoiceSynthesisDTO;
+import com.luna.common.http.HttpUtils;
+import com.luna.common.http.HttpUtilsConstant;
+import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.file.LocalFileUtil;
+import com.luna.common.utils.text.CharsetKit;
+import org.apache.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * @Package: com.luna.baidu.api
+ * @ClassName: BaiduVoiceApi
+ * @Author: luna
+ * @CreateTime: 2020/8/10 20:10
+ * @Description:
+ */
+public class BaiduVoiceApi {
+    private static final Logger log          = LoggerFactory.getLogger(BaiduVoiceApi.class);
+
+    // 采样率固定值
+    public static final int     RATE         = 16000;
+
+    // 仅支持单声道，请填写固定值 1
+    public static final int     CHANNEL      = 1;
+
+    // 标准版默认ID
+    public static final int     DEV_PID      = 1537;
+
+    // 极速版限定ID
+    public static final int     FAST_DEV_PID = 80001;
+
+    /**
+     * 语音识别标准版
+     * 
+     * @param token
+     * @param voiceCheckDTO
+     * @return
+     */
+    public static List<String> checkVoice(String token, VoiceCheckDTO voiceCheckDTO) {
+        log.info("checkVoice start token={},voiceCheckDTO={}", token, JSON.toJSONString(voiceCheckDTO));
+        Map<String, Object> body = Maps.newHashMap();
+        body.put("dev_pid", voiceCheckDTO.getDev_pid());
+        // body.put("lm_id", voiceCheckDTO.getLm_id());// 测试自训练平台需要打开注释
+        body.put("format", voiceCheckDTO.getFormat());
+        body.put("rate", voiceCheckDTO.getRate());
+        body.put("token", token);
+        body.put("cuid", voiceCheckDTO.getCuid());
+        body.put("channel", voiceCheckDTO.getChannel());
+        body.put("len", voiceCheckDTO.getLen());
+        body.put("speech", voiceCheckDTO.getSpeech());
+        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.VOICE_HOST, BaiduApiContent.VOICE_SPEECH,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(body));
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        System.out.println(s);
+        return JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+    }
+
+    /**
+     * 极速版限定dev_pid为 80001
+     * 语音识别
+     * 
+     * @param token
+     * @param voiceCheckDTO
+     * @return
+     */
+    public static List<String> checkVoiceFast(String token, VoiceCheckDTO voiceCheckDTO) {
+        log.info("checkVoice start token={},voiceCheckDTO={}", token, JSON.toJSONString(voiceCheckDTO));
+        Map<String, Object> body = Maps.newHashMap();
+        body.put("dev_pid", voiceCheckDTO.getDev_pid());
+        // body.put("lm_id", voiceCheckDTO.getLm_id());// 测试自训练平台需要打开注释
+        body.put("format", voiceCheckDTO.getFormat());
+        body.put("rate", voiceCheckDTO.getRate());
+        body.put("token", token);
+        body.put("cuid", voiceCheckDTO.getCuid());
+        body.put("channel", voiceCheckDTO.getChannel());
+        body.put("len", voiceCheckDTO.getLen());
+        body.put("speech", voiceCheckDTO.getSpeech());
+        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.VOICE_HOST, BaiduApiContent.VOICE_SPEECH_FAST,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(body));
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        System.out.println(s);
+        return JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+    }
+
+    /**
+     * 语音合成
+     * 
+     * @param token
+     * @param voiceSynthesisDTO
+     * @return
+     * @throws IOException
+     */
+    public static String voiceSynthesis(String token, VoiceSynthesisDTO voiceSynthesisDTO) throws IOException {
+        log.info("voiceSynthesis start token={},voiceSynthesisDTO={}", token, JSON.toJSONString(voiceSynthesisDTO));
+        Map<String, String> map = Maps.newHashMap();
+        map.put("tex", URLEncoder.encode(voiceSynthesisDTO.getTex(), CharsetKit.UTF_8));
+        map.put("per", voiceSynthesisDTO.getPer());
+        map.put("spd", voiceSynthesisDTO.getSpd());
+        map.put("pit", voiceSynthesisDTO.getPit());
+        map.put("vol", voiceSynthesisDTO.getVol());
+        map.put("cuid", voiceSynthesisDTO.getCuid());
+        map.put("tok", token);
+        map.put("aue", voiceSynthesisDTO.getAue());
+        map.put("lan", voiceSynthesisDTO.getLan());
+        map.put("ctp", voiceSynthesisDTO.getCtp());
+        HttpResponse httpResponse =
+            HttpUtils.doPost(BaiduApiContent.VOICE_SYNTHESIS, BaiduApiContent.VOICE_SYNTHESIS_PATH,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), map, "");
+        byte[] bytes = HttpUtils.checkResponseStreamAndGetResult(httpResponse);
+        String path =
+            voiceSynthesisDTO.getSavePath() + "\\" + voiceSynthesisDTO.getCuid() + "." + voiceSynthesisDTO.getAue();
+        LocalFileUtil.writeBytesToFileSystem(bytes, path);
+        return path;
+    }
+
+    public static void main(String[] args) throws Exception {
+        VoiceCheckDTO voiceCheckDTO = new VoiceCheckDTO();
+        voiceCheckDTO.setCuid(UUID.randomUUID().toString());
+        voiceCheckDTO.setRate(BaiduVoiceApi.RATE);
+        voiceCheckDTO.setFormat("PCM");
+        byte[] bytes = LocalFileUtil
+            .readFileByBytes(
+                "D:\\myproject\\luna-commons-loc\\luna-commons-baidu\\src\\main\\resources\\static\\16k.pcm");
+        voiceCheckDTO.setSpeech(Base64Util.encodeBase64String(bytes));
+        voiceCheckDTO.setLen(bytes.length);
+        voiceCheckDTO.setChannel(CHANNEL);
+        voiceCheckDTO.setDev_pid(DEV_PID);
+        // List<String> list =
+        // checkVoice("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961", voiceCheckDTO);
+        // System.out.println(JSON.toJSONString(list));
+        // List<String> list = checkVoiceFast("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961",
+        // voiceCheckDTO);
+        // System.out.println(JSON.toJSONString(list));
+
+        VoiceSynthesisDTO voiceSynthesisDTO = new VoiceSynthesisDTO();
+        voiceSynthesisDTO.setPer("103");
+        voiceSynthesisDTO.setTex("傻逼");
+        voiceSynthesisDTO.setCuid(UUID.randomUUID().toString());
+        voiceSynthesisDTO.setAue("mp3");
+        voiceSynthesisDTO.setSavePath("D:\\luna");
+        voiceSynthesis("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961", voiceSynthesisDTO);
+    }
+}

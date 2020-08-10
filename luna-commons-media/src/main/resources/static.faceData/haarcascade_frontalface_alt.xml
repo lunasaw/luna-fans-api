@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-    Stump-based 20x20 gentle adaboost frontal face detector.
+    Stump-based 20x20 gentle adaboost frontal location detector.
     Created by Rainer Lienhart.
 
 ////////////////////////////////////////////////////////////////////////////////////////
