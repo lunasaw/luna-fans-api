@@ -1,5 +1,7 @@
 package com.luna.baidu.dto;
 
+import com.luna.common.dto.FaceDTO;
+
 import java.util.List;
 
 /**
