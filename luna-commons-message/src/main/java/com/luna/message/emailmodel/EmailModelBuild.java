@@ -6,7 +6,8 @@ import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
 import com.luna.common.utils.StringUtils;
 import com.luna.message.api.constant.EmailContentsConstant;
-import com.luna.message.dto.ModelContentDTO;
+import com.luna.message.api.constant.MessageTypeConstant;
+import com.luna.message.dto.EmailDTO;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,58 +34,69 @@ public class EmailModelBuild {
     /**
      * 模板加载
      *
-     * @param modelName 模板名称
-     * @param modelContentDTO 填充内容
+     * @param emailDTO 填充信息
      * @return
      * @throws IOException
      */
-    public static String buildContentOne(String modelName, String content, ModelContentDTO modelContentDTO) {
-        log.info("build model modelName={}, modelContentDTO={}", modelName, JSON.toJSONString(modelContentDTO));
+    public static String buildContentOne(EmailDTO emailDTO) {
+        log.info("build model emailDTO={}", JSON.toJSONString(emailDTO));
+
+        String modelName = emailDTO.getModelName();
+        if (StringUtils.isEmpty(modelName)) {
+            modelName = MessageTypeConstant.EMAIL_MODEL;
+        }
         String model = getModel(modelName);
-        Map<String, String> contents = modelContentDTO.getContents();
+        Map<String, String> contents = emailDTO.getContents();
         String contentText = StringUtils.EMPTY;
         // 版权链接地址
         String copyRight = StringUtils.EMPTY;
-
+        // 版权地址
         String path = StringUtils.EMPTY;
         // 头部颜色
         String emailHeadColor = StringUtils.EMPTY;
-
+        // 昵称
+        String outName = StringUtils.EMPTY;
         // 版权名称
-        if (StringUtils.isEmpty(contents.get(EmailContentsConstant.COPY_RIGHT_NAME))) {
-            copyRight = EmailContentsConstant.COPY_RIGHT_NAME_VALUE + EmailContentsConstant.COPY_RIGHT_VALUE;
-        } else {
+        if (contents.containsKey(EmailContentsConstant.COPY_RIGHT_NAME)) {
             copyRight = contents.get(EmailContentsConstant.COPY_RIGHT_NAME) + EmailContentsConstant.COPY_RIGHT_VALUE;
+        } else {
+            copyRight = EmailContentsConstant.COPY_RIGHT_NAME_VALUE + EmailContentsConstant.COPY_RIGHT_VALUE;
         }
 
         // 版权地址
-        if (StringUtils.isEmpty(contents.get(EmailContentsConstant.COPY_RIGHT_SRC))) {
-            path = EmailContentsConstant.COPY_RIGHT_SRC_VALUE;
-        } else {
+        if (contents.containsKey(EmailContentsConstant.COPY_RIGHT_SRC)) {
             path = contents.get(EmailContentsConstant.COPY_RIGHT_SRC);
+        } else {
+            path = EmailContentsConstant.COPY_RIGHT_SRC_VALUE;
         }
 
         // 默认绿色
-        if (StringUtils.isEmpty(contents.get(EmailContentsConstant.EMAIL_HEAD_COLOR))) {
-            emailHeadColor = EmailContentsConstant.EMAIL_HEAD_COLOR_VALUE;
-        } else {
+        if (contents.containsKey(EmailContentsConstant.EMAIL_HEAD_COLOR)) {
             emailHeadColor = contents.get(EmailContentsConstant.EMAIL_HEAD_COLOR);
+        } else {
+            emailHeadColor = EmailContentsConstant.EMAIL_HEAD_COLOR_VALUE;
         }
+
         String emailContentBeforeOuterUser = StringUtils.EMPTY;
         // 用户信息之前
-        if (StringUtils.isNotEmpty(contents.get(EmailContentsConstant.EMAIL_CONTENT_BEFORE_OUTER_USER))) {
+        if (contents.containsKey(EmailContentsConstant.EMAIL_CONTENT_BEFORE_OUTER_USER)) {
             emailContentBeforeOuterUser = contents.get(EmailContentsConstant.EMAIL_CONTENT_BEFORE_OUTER_USER);
+        }
+
+        // 昵称
+        if (contents.containsKey(EmailContentsConstant.EMAIL_CONTENT_USER_NAME)) {
+            outName = contents.get(EmailContentsConstant.EMAIL_CONTENT_USER_NAME);
         }
 
         // 用户信息之后
         String emailContentAfterOuterUser = StringUtils.EMPTY;
-        if (StringUtils.isNotEmpty(contents.get(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER))) {
+        if (contents.containsKey(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER)) {
             emailContentAfterOuterUser = contents.get(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER);
         }
 
         // 用户信息之后的链接
         String emailContentAfterOuterUserSrc = StringUtils.EMPTY;
-        if (StringUtils.isNotEmpty(contents.get(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER_SRC))) {
+        if (contents.containsKey(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER_SRC)) {
             emailContentAfterOuterUserSrc = contents.get(EmailContentsConstant.EMAIL_CONTENT_AFTER_OUTER_USER_SRC);
         }
 
@@ -92,9 +104,9 @@ public class EmailModelBuild {
         // 填充html模板中的参数
         String htmlText =
             MessageFormat.format(model, emailHeadColor,
-                emailContentBeforeOuterUser, modelContentDTO.getOuterName(),
-                content, emailContentAfterOuterUserSrc, emailContentAfterOuterUser, date, path, copyRight);
-        log.info("build model success modelName={}, modelContentDTO={}", modelName, modelContentDTO);
+                emailContentBeforeOuterUser, outName,
+                emailDTO.getEmailSmallDTO().getContent(), emailContentAfterOuterUserSrc, emailContentAfterOuterUser,
+                date, path, copyRight);
         return htmlText;
     }
 

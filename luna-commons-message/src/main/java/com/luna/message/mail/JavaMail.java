@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.luna.common.utils.StringUtils;
 import com.luna.message.config.JavaMailConfigValue;
+import com.luna.message.dto.EmailDTO;
 import com.luna.message.dto.EmailSmallDTO;
+import com.luna.message.emailmodel.EmailModelBuild;
 import com.luna.message.util.MailUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
@@ -103,6 +105,7 @@ public class JavaMail {
         log.info("sendSimpleMail start emailSmallDTO={},javaMailConfigValue={}", JSON.toJSONString(emailSmallDTO),
             JSON.toJSONString(javaMailConfigValue));
         HashMap<String, InputStream> maps = Maps.newHashMap();
+
         if (MapUtils.isNotEmpty(emailSmallDTO.getPathMap())) {
             // 上传文件
             Map<String, String> pathMap = emailSmallDTO.getPathMap();
@@ -116,6 +119,36 @@ public class JavaMail {
 
         MailUtil.send(MailUtils.javaMailConfigValue2MailAccount(javaMailConfigValue), emailSmallDTO.getTo(),
             emailSmallDTO.getSubject(), emailSmallDTO.getContent(), maps, false);
+    }
+
+    /**
+     * 带附件发送 Hutools工具类
+     *
+     * @param emailDTO
+     * @param javaMailConfigValue
+     * @throws Exception
+     */
+    public static void sendModelMail(EmailDTO emailDTO,
+        JavaMailConfigValue javaMailConfigValue) throws FileNotFoundException {
+        log.info("sendSimpleMail start emailDTO={},javaMailConfigValue={}", JSON.toJSONString(emailDTO),
+            JSON.toJSONString(javaMailConfigValue));
+        EmailSmallDTO emailSmallDTO = emailDTO.getEmailSmallDTO();
+        HashMap<String, InputStream> maps = Maps.newHashMap();
+
+        if (MapUtils.isNotEmpty(emailSmallDTO.getPathMap())) {
+            // 上传文件
+            Map<String, String> pathMap = emailSmallDTO.getPathMap();
+            // Iterating entries using a For Each loop
+            Iterator<Map.Entry<String, String>> entries = pathMap.entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry<String, String> entry = entries.next();
+                maps.put(entry.getKey(), new FileInputStream(entry.getValue()));
+            }
+        }
+
+        emailSmallDTO.setContent(EmailModelBuild.buildContentOne(emailDTO));
+        MailUtil.send(MailUtils.javaMailConfigValue2MailAccount(javaMailConfigValue), emailSmallDTO.getTo(),
+            emailSmallDTO.getSubject(), emailSmallDTO.getContent(), maps, true);
     }
 
 }

@@ -32,6 +32,9 @@ public class EmailContentsConstant {
     // 在发送用户昵称之前的内容
     public static final String EMAIL_CONTENT_BEFORE_OUTER_USER    = "emailContentBeforeOuterUser";
 
+    // 用户昵称
+    public static final String  EMAIL_CONTENT_USER_NAME            = "emailContentUserName";
+
     // 在发送用户昵称之后的内容
     public static final String EMAIL_CONTENT_AFTER_OUTER_USER     = "emailContentAfterOuterUser";
 

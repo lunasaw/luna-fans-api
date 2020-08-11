@@ -1,5 +1,7 @@
 package com.luna.message.dto;
 
+import java.util.Map;
+
 /**
  * @Package: com.luna.message
  * @ClassName: dto
@@ -14,7 +16,8 @@ public class EmailDTO {
 
     private EmailSmallDTO       emailSmallDTO;
 
-    private ModelContentDTO     modelContentDTO;
+    /** 介绍 */
+    private Map<String, String> contents;
 
     public String getModelName() {
         return modelName;
@@ -32,11 +35,11 @@ public class EmailDTO {
         this.emailSmallDTO = emailSmallDTO;
     }
 
-    public ModelContentDTO getModelContentDTO() {
-        return modelContentDTO;
+    public Map<String, String> getContents() {
+        return contents;
     }
 
-    public void setModelContentDTO(ModelContentDTO modelContentDTO) {
-        this.modelContentDTO = modelContentDTO;
+    public void setContents(Map<String, String> contents) {
+        this.contents = contents;
     }
 }

@@ -211,9 +211,8 @@ public class MailWrapper {
                     + DateFormatUtils.format(new Date(), DatePattern.NORM_DATETIME_MINUTE_PATTERN));
             }
 
-            if (emailDTO.getModelContentDTO() != null) {
-                helper.setText(EmailModelBuild.buildContentOne(emailDTO.getModelName(), smallDTO.getContent(),
-                    emailDTO.getModelContentDTO()), true);
+            if (MapUtils.isNotEmpty(emailDTO.getContents())) {
+                helper.setText(EmailModelBuild.buildContentOne(emailDTO), true);
             }
         } catch (Exception e) {
             e.printStackTrace();

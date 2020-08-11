@@ -95,7 +95,7 @@ public class MailUtils {
         mailAccount.setAuth(Boolean.parseBoolean(javaMailConfigValue.getAuth()));
         mailAccount.setUser(javaMailConfigValue.getMailFrom());
         mailAccount.setPass(javaMailConfigValue.getPassword());
-        mailAccount.setFrom(javaMailConfigValue.getMailFrom());
+        mailAccount.setFrom(javaMailConfigValue.getUsername() + '<' + javaMailConfigValue.getMailFrom() + '>');
         mailAccount.setDebug(Boolean.parseBoolean(javaMailConfigValue.getMailDebug()));
         return mailAccount;
     }
