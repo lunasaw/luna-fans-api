@@ -6,9 +6,10 @@ import com.luna.message.api.MessageSend;
 import com.luna.message.api.constant.EmailContentsConstant;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.api.wrapper.MailWrapper;
-import com.luna.message.entity.EmailDTO;
-import com.luna.message.entity.EmailSmallDTO;
-import com.luna.message.entity.ModelContentDTO;
+import com.luna.message.config.JavaMailConfigValue;
+import com.luna.message.dto.EmailDTO;
+import com.luna.message.dto.EmailSmallDTO;
+import com.luna.message.dto.ModelContentDTO;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,10 +24,13 @@ import java.util.HashMap;
  */
 public class SendMessage extends MessageApplicationTest {
     @Autowired
-    private MessageSend messageSend;
+    private MessageSend         messageSend;
 
     @Autowired
-    private MailWrapper mailWrapper;
+    private MailWrapper         mailWrapper;
+
+    @Autowired
+    private JavaMailConfigValue javaMailConfigValue;
 
     @Test
     public void atest() throws InterruptedException {
@@ -56,5 +60,15 @@ public class SendMessage extends MessageApplicationTest {
     public void btest() throws InterruptedException {
         messageSend.authCode("15696756582@163.com");
         Thread.sleep(30000);
+    }
+
+    @Test
+    public void ctest() throws Exception {
+        EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "15696756582@163.com", "这是测试邮件", "这是测试邮件");
+        HashMap<String, String> pathMap = Maps.newHashMap();
+        pathMap.put("luna.png", "C:\\Users\\improve\\Pictures\\Camera Roll\\luna-logo.png");
+        emailSmallDTO.setPathMap(pathMap);
+        // JavaMail.sendSimpleMail(emailSmallDTO, javaMailConfigValue);
+        // JavaMail.sendMail(emailSmallDTO, javaMailConfigValue);
     }
 }

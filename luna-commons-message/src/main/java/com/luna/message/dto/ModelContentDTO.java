@@ -1,9 +1,9 @@
-package com.luna.message.entity;
+package com.luna.message.dto;
 
 import java.util.Map;
 
 /**
- * @Package: com.luna.message.entity
+ * @Package: com.luna.message.dto
  * @ClassName: ModelContentDTO
  * @Author: luna
  * @CreateTime: 2020/8/8 17:21

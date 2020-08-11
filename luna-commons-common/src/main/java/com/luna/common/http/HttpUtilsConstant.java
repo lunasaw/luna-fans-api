@@ -11,4 +11,8 @@ public interface HttpUtilsConstant {
     String JSON                  = "application/json; charset=utf-8";
 
     String FORM_DATA             = "multipart/form-data";
+
+    String MSEXCEL               = "application/msexcel";
+
+    String TEXT                  = "text/html; charset=UTF-8";
 }

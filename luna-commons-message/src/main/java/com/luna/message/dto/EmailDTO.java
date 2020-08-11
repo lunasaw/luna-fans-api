@@ -1,8 +1,8 @@
-package com.luna.message.entity;
+package com.luna.message.dto;
 
 /**
  * @Package: com.luna.message
- * @ClassName: entity
+ * @ClassName: dto
  * @Author: luna
  * @CreateTime: 2020/8/8 17:20
  * @Description:

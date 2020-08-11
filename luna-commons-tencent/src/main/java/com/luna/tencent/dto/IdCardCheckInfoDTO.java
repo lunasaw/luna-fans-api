@@ -1,7 +1,7 @@
 package com.luna.tencent.dto;
 
 /**
- * @Package: com.luna.common.entity
+ * @Package: com.luna.common.dto
  * @ClassName: MobileCheckInfoDTO
  * @Author: luna
  * @CreateTime: 2020/8/6 14:02

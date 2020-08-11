@@ -3,8 +3,8 @@ package com.luna.message.api.wrapper;
 import com.google.common.collect.Lists;
 import com.luna.message.config.TencentConfigValue;
 import com.luna.message.config.TencentSmsConfigValue;
-import com.luna.message.entity.SmsDTO;
-import com.luna.message.util.TencentMessage;
+import com.luna.message.dto.SmsDTO;
+import com.luna.message.sms.TencentSmsMessage;
 import com.luna.tencent.dto.SendStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public class SmsWrapper {
         SmsDTO smsDTO = new SmsDTO(phones, tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign(),
             tencentSmsConfigValue.getAuthCode(), codes);
         ArrayList<SendStatusDTO> sendStatusDTOS =
-            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
+            TencentSmsMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
         log.info("sendAuthCode ends msDTO={}, sendStatusDTOS={}", smsDTO, sendStatusDTOS);
         return "Ok".equals(sendStatusDTOS.get(0).getCode());
     }
@@ -71,7 +71,7 @@ public class SmsWrapper {
         SmsDTO smsDTO = new SmsDTO(phones, tencentSmsConfigValue.getAppId(), tencentSmsConfigValue.getSign(),
             tencentSmsConfigValue.getResetPassword(), passwords);
         ArrayList<SendStatusDTO> sendStatusDTOS =
-            TencentMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
+            TencentSmsMessage.sendMsg(tencentConfigValue.getSecretid(), tencentConfigValue.getSecretKey(), smsDTO);
         log.info("resetPassword end smsDTO={}, sendStatusDTOS={}", smsDTO, sendStatusDTOS);
         return "Ok".equals(sendStatusDTOS.get(0).getCode());
     }

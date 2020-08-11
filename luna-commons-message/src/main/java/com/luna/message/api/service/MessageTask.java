@@ -8,7 +8,7 @@ import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.entity.TemplateDO;
 import com.luna.message.api.wrapper.MailWrapper;
 import com.luna.message.api.wrapper.SmsWrapper;
-import com.luna.message.entity.EmailSmallDTO;
+import com.luna.message.dto.EmailSmallDTO;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringSubstitutor;

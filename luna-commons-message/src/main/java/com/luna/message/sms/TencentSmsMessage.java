@@ -1,9 +1,9 @@
-package com.luna.message.util;
+package com.luna.message.sms;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import com.luna.message.entity.SmsDTO;
+import com.luna.message.dto.SmsDTO;
 import com.luna.tencent.api.TencentMessageApi;
 import com.luna.tencent.dto.SendStatusDTO;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import java.util.List;
  * @author Luna@win10
  * @date 2020/5/14 20:46
  */
-public class TencentMessage {
+public class TencentSmsMessage {
 
-    private static final Logger log = LoggerFactory.getLogger(TencentMessage.class);
+    private static final Logger log = LoggerFactory.getLogger(TencentSmsMessage.class);
 
     /**
      * 发送短信结果解析

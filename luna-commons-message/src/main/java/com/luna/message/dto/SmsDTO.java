@@ -1,9 +1,9 @@
-package com.luna.message.entity;
+package com.luna.message.dto;
 
 import java.util.List;
 
 /**
- * @Package: com.luna.message.entity
+ * @Package: com.luna.message.dto
  * @ClassName: SmsDTO
  * @Author: luna
  * @CreateTime: 2020/8/9 13:19
