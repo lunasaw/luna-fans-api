@@ -38,7 +38,11 @@ luna-commons-message
 </p>
 
 ## 日志
-== 增加百度人脸识别,卡证审核等Api请求封装
+增加腾讯短信发送Api
+
+增加邮件模板 "luna-message",支持信息自定义 替换字符为{x}
+
+增加JavaMail 邮件发送
  
 ## 目录
 
