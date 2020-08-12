@@ -37,10 +37,10 @@ public class JavaCvUtils {
                 String path = FileUtil.getAbsolutePath(JavaCvConfigValue.getFrontalFace());
                 faceCascade = new CascadeClassifier(path);
             } else {
-                Props props = new Props("application-pro.properties");
-                props.get("luna.face.frontalFace");
-                faceCascade = new CascadeClassifier(
-                    "D:\\myproject\\luna-commons-loc\\luna-commons-media\\src\\main\\resources\\static.faceData\\haarcascade_frontalface_alt.xml");
+                Props props = new Props("application.properties");
+                String path = JavaCvUtils.class.getResource("/static/").getPath();
+                path = path + props.get("luna.face.frontalFace");
+                faceCascade = new CascadeClassifier(path.substring(1));
             }
         }
         return faceCascade;

@@ -1,5 +1,6 @@
 package com.luna.media.javacv;
 
+import cn.hutool.setting.dialect.Props;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber.Exception;
@@ -25,7 +26,6 @@ import static org.opencv.imgproc.Imgproc.COLOR_BGRA2GRAY;
  * @date 202015:37
  */
 public class CameraCapture {
-
 
     public static void main(String[] args) {
         try {
@@ -89,7 +89,6 @@ public class CameraCapture {
 class camerThread extends Thread {
     private static final Logger       log   = LoggerFactory.getLogger(camerThread.class);
 
-
     static int                        x     = 0, y = 0, width = 0, height = 0;
     private volatile static boolean   stop  = true;
     private volatile static boolean   stop3 = true;
@@ -129,7 +128,8 @@ class camerThread extends Thread {
     }
 
     public static Frame detectFace1(Frame frame) throws InterruptedException {
-        String path = "D:\\user-improve\\conf\\net\\luna1.jpg";
+        Props props = new Props("application.properties");
+        String path = String.valueOf(props.get("luna.face.baseImage"));
         Mat imread = opencv_imgcodecs.imread(path);
         OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
         Mat mat = converter.convertToMat(frame);

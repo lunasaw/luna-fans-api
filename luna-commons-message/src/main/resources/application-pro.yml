@@ -1,0 +1,50 @@
+spring:
+
+  # 数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://xxx:3307/luna-message?serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: xxx
+
+
+  mail:
+    host: xxx
+    name: xxx
+    password: xxx
+    smtp:
+      ssl:
+        enable: true
+    username: xxx
+    # redis
+  redis:
+    host: xxx
+    password: xxx
+    port: 6379
+
+
+luna:
+  # java mail
+  mail:
+    auth: xxx
+    host: xxx
+    mailDebug: xxx
+    mailFrom: xxx
+    password: xxx
+    port: xxx
+    protocol: xxx
+    username: xxx
+    # 腾讯短信
+  smstencent:
+    appId: xxx
+    authCode: xxx
+    resetPassword: xxx
+    sign: xxx
+    # 腾讯Api
+  tencent:
+    mapKey: xxx
+    secretId: xxx
+    secretKey: xxx
+    skyEyeSecretid: xxx
+    skyEyeSecretkey: xxx
+    # spring mail

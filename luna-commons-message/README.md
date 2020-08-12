@@ -2,7 +2,7 @@
 
 # luna-commons
 
-luna-commons-api
+luna-commons-message
 
 <!-- PROJECT SHIELDS -->
 
@@ -37,10 +37,8 @@ luna-commons-api
 
 </p>
 
-## 日志 使用见部署
-增加Sm.ms图床Api
-
-增加学小易网课答案Api
+## 日志
+== 增加百度人脸识别,卡证审核等Api请求封装
  
 ## 目录
 
@@ -69,8 +67,8 @@ git clone https://github.com/czy1024/luna-commons.git
 ```xml
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo</id>
-            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-api/</url>
+            <id>luna-commons-mvn-repo-message</id>
+            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-message/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -81,47 +79,73 @@ git clone https://github.com/czy1024/luna-commons.git
 
     <dependency>
         <groupId>com.luna</groupId>
-        <artifactId>luna-commons-api</artifactId>
+        <artifactId>luna-commons-message</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
 ```
-可直接引用api文件目录下的静态方法接口
+将com/luna/**/config 下的配置文件复制到自己的项目中
+在配置文件application.properties加入可选配置
 
-##pom文件
+```text
+      spring:
+      
+        # 数据库
+        datasource:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://xxx:3307/luna-message?serverTimezone=GMT%2B8&useSSL=false
+          username: root
+          password: xxx
+      
+      
+        mail:
+          host: xxx
+          name: xxx
+          password: xxx
+          smtp:
+            ssl:
+              enable: true
+          username: xxx
+          # redis
+        redis:
+          host: xxx
+          password: xxx
+          port: 6379
+      
+      
+      luna:
+        # java mail
+        mail:
+          auth: xxx
+          host: xxx
+          mailDebug: xxx
+          mailFrom: xxx
+          password: xxx
+          port: xxx
+          protocol: xxx
+          username: xxx
+          # 腾讯短信
+        smstencent:
+          appId: xxx
+          authCode: xxx
+          resetPassword: xxx
+          sign: xxx
+          # 腾讯Api
+        tencent:
+          mapKey: xxx
+          secretId: xxx
+          secretKey: xxx
+          skyEyeSecretid: xxx
+          skyEyeSecretkey: xxx
+          # spring mail
 
-```yaml
-
-luna:
-  smms:
-    authorizationCode: xxx
-    password: xxx
-    username: xxx
 
 ```
 
+引用示例
 
-### 文件目录说明
-eg:
-
-```
-
-
-luna-commons-api
-├── README.md
-├── src
-│  ├── /api/
-│  ├── /api/smms
-│──── /resource/
-└── pom.xml
-```
-
-
-### 部署
-
-引入依赖
 ```java
 
-若采用SpringBoot构建项目可通过将第三方包中的 SmMsConfigValue通过Spring配置文件注入Spring管理
+若采用SpringBoot构建项目可通过将第三方包中的 JavaMailConfigValue,TencentSmsConfigValue,TencentConfigValue通过Spring配置文件注入Spring管理
 
 
 /**
@@ -135,8 +159,18 @@ luna-commons-api
 public class Config {
 
     @Bean
-    public SmMsConfigValue smMsConfigValue(){
-        return new SmMsConfigValue();
+    public JavaMailConfigValue javaMailConfigValue(){
+        return new JavaMailConfigValue();
+    }
+
+    @Bean
+    public TencentSmsConfigValue tencentSmsConfigValue(){
+        return new TencentSmsConfigValue();
+    }
+
+    @Bean
+    public TencentConfigValue tencentConfigValue(){
+        return new TencentConfigValue();
     }
 
 }
@@ -151,12 +185,12 @@ public class Config {
 public class messageApiTest {
 
 	@Resource
-	SmMsConfigValue smMsConfigValue;
+	TencentConfigValue tencentConfigValue;
 
     // 测试是否拿到配置文件的数据
 	@Test
 	public void aTest() throws IOException {
-		System.out.println(smMsConfigValue.getAuthorizationCode());
+		System.out.println(tencentConfigValue.getSecretid());
 	}
 
 }
@@ -165,12 +199,27 @@ public class messageApiTest {
 
 [结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
 
-[使用部署](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)
 
-#### sm.ms 包括用户和图片两个操作
+### 文件目录说明
+eg:
 
-[用户相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-User)
-[图片相关](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-Image)
+```
+luna-commons-ali
+├── README.md
+├── src
+│  ├── /config/
+│  ├── /api/
+│──── /resource/
+└── pom.xml
+
+```
+
+### 部署
+
+暂无
+
+
+
 
 <!-- links -->
 [your-project-path]:czy1024/luna-commons

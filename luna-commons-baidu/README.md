@@ -79,7 +79,7 @@ git clone https://github.com/czy1024/luna-commons.git
 
     <dependency>
         <groupId>com.luna</groupId>
-        <artifactId>luna-commons-ali</artifactId>
+        <artifactId>luna-commons-baidu</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
 ```
@@ -150,7 +150,7 @@ public class BaiduApiTest {
 
 ```
 
-结果即刻得到配置数据,进而调用api里的静态方法完成调用
+[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
 
 
 ### 文件目录说明
@@ -162,8 +162,6 @@ luna-commons-ali
 ├── src
 │  ├── /config/
 │  ├── /entity/
-│  ├── /oss/
-│  ├── /pay/
 │──── /resource/
 └── pom.xml
 
@@ -172,10 +170,6 @@ luna-commons-ali
 ### 部署
 
 暂无
-
-
-
-
 
 
 <!-- links -->

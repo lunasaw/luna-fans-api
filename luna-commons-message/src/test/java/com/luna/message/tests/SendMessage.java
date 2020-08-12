@@ -61,7 +61,7 @@ public class SendMessage extends MessageApplicationTest {
 
     @Test
     public void ctest() throws Exception {
-        EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "864636142@qq.com", "王者荣耀欢迎你", "上号!");
+        EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "15696756582@163.com", "王者荣耀欢迎你", "上号!");
         HashMap<String, String> pathMap = Maps.newHashMap();
         // pathMap.put("luna-x.png", "C:\\Users\\improve\\Pictures\\Camera Roll\\luna-logo.png");
         emailSmallDTO.setPathMap(pathMap);
