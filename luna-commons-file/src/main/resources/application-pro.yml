@@ -12,7 +12,7 @@ luna:
     picture: /pub/picture/
     voice: /pub/voice/
     #\u5730\u5740
-    host: iszychen.club
+    host: xxx
     # \u672C\u5730\u4E34\u65F6\u8DEF\u5F84
     local: xxx
     #\u5BC6\u7801
@@ -21,3 +21,10 @@ luna:
     port: 21
     #\u7528\u6237\u540D
     username: xxx
+
+    file:
+      name: luna
+      version: 1.0
+      copyrightYear: 2020
+      profile: luna
+      addressEnabled: true

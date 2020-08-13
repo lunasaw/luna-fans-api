@@ -38,9 +38,9 @@ public class JavaCvUtils {
                 faceCascade = new CascadeClassifier(path);
             } else {
                 Props props = new Props("application.properties");
-                String path = JavaCvUtils.class.getResource("/static/").getPath();
-                path = path + props.get("luna.face.frontalFace");
-                faceCascade = new CascadeClassifier(path.substring(1));
+                String absolutePath =
+                    FileUtil.getAbsolutePath(String.valueOf(props.get("luna.face.frontalFace")), JavaCvUtils.class);
+                faceCascade = new CascadeClassifier(absolutePath);
             }
         }
         return faceCascade;

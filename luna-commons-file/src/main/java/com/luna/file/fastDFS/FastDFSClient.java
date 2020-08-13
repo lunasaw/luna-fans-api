@@ -26,7 +26,7 @@ public class FastDFSClient {
 
     static {
         // 从classpath下获取文件对象获取路径
-        String path = new ClassPathResource("fdfs_client.conf").getPath();
+        String path = new ClassPathResource("config/fdfs_client.conf").getPath();
         try {
             ClientGlobal.init(path);
         } catch (Exception e) {

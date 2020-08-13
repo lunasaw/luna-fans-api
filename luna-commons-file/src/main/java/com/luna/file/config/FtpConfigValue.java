@@ -12,13 +12,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class FtpConfigValue {
 
+    /** 地址 */
     public String    host;
 
     /** ftp端口号 */
     public int       port = 21;
 
+    /** 用户名 */
     public String    username;
 
+    /** 密码 */
     public String    password;
 
     /** 请求图片路径 */
