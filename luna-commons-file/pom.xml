@@ -29,7 +29,7 @@
             <artifactId>jersey-client</artifactId>
             <version>1.19.1</version>
         </dependency>
-        <!--    fastDFS 文件服务-->
+        <!--    fastDfs 文件服务-->
         <dependency>
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>

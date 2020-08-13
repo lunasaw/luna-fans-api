@@ -1,4 +1,4 @@
-package com.luna.file.fastDFS;
+package com.luna.file.fastDfs;
 
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
@@ -17,12 +17,12 @@ import java.io.InputStream;
  *
  * @author luna
  * @version 1.0
- * @package com\luna\file\fastDFS
+ * @package com\luna\file\fastDfs
  * @since 1.0
  */
-public class FastDFSClient {
+public class FastDfsClient {
 
-    private static final Logger log = LoggerFactory.getLogger(FastDFSClient.class);
+    private static final Logger log = LoggerFactory.getLogger(FastDfsClient.class);
 
     static {
         // 从classpath下获取文件对象获取路径
@@ -41,7 +41,7 @@ public class FastDFSClient {
      * @param file
      * @return
      */
-    public static String[] upload(FastDFSFile file) {
+    public static String[] upload(FastDfsFile file) {
         try {
             TrackerClient trackerClient = new TrackerClient();
             TrackerServer trackerServer = trackerClient.getConnection();

@@ -1,4 +1,4 @@
-package com.luna.file.fastDFS;
+package com.luna.file.fastDfs;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @package com.changgou.file *
  * @since 1.0
  */
-public class FastDFSFile implements Serializable {
+public class FastDfsFile implements Serializable {
 
     //文件名字
     private String name;
@@ -23,7 +23,7 @@ public class FastDFSFile implements Serializable {
     //文件创建作者
     private String author;
 
-    public FastDFSFile(String name, byte[] content, String ext, String md5, String author) {
+    public FastDfsFile(String name, byte[] content, String ext, String md5, String author) {
         this.name = name;
         this.content = content;
         this.ext = ext;
@@ -31,13 +31,13 @@ public class FastDFSFile implements Serializable {
         this.author = author;
     }
 
-    public FastDFSFile(String name, byte[] content, String ext) {
+    public FastDfsFile(String name, byte[] content, String ext) {
         this.name = name;
         this.content = content;
         this.ext = ext;
     }
 
-    public FastDFSFile() {
+    public FastDfsFile() {
     }
 
     public String getName() {
