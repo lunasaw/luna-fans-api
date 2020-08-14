@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.luna.message.dto.SmsDTO;
 import com.luna.tencent.api.TencentMessageApi;
-import com.luna.tencent.dto.SendStatusDTO;
+import com.luna.tencent.dto.message.SendStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

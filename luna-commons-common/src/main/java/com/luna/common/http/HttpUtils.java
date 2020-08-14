@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.text.CharsetKit;
@@ -159,6 +160,9 @@ public class HttpUtils {
      */
     public static HttpResponse doGet(String host, String path, Map<String, String> headers,
         Map<String, String> queries) {
+        if (MapUtils.isEmpty(headers)) {
+            headers = Maps.newHashMap();
+        }
         headers.put("accept", "*/*");
         headers.put("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         HttpGet request = new HttpGet(buildUrl(host, path, queries));

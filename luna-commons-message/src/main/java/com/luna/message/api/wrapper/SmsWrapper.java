@@ -5,7 +5,7 @@ import com.luna.message.config.TencentConfigValue;
 import com.luna.message.config.TencentSmsConfigValue;
 import com.luna.message.dto.SmsDTO;
 import com.luna.message.sms.TencentSmsMessage;
-import com.luna.tencent.dto.SendStatusDTO;
+import com.luna.tencent.dto.message.SendStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

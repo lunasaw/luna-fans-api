@@ -1,4 +1,4 @@
-package com.luna.tencent.dto;
+package com.luna.tencent.dto.idCard;
 
 /**
  * @Package: com.luna.common.dto

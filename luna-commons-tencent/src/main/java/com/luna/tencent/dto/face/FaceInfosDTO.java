@@ -1,4 +1,6 @@
-package com.luna.tencent.dto;
+package com.luna.tencent.dto.face;
+
+import com.luna.tencent.dto.personGroup.FaceAttributesInfoDTO;
 
 /**
  * @Package: com.luna.dto.dto
@@ -16,6 +18,8 @@ public class FaceInfosDTO {
     private String width;
 
     private String height;
+
+    private FaceAttributesInfoDTO faceAttributesInfoDTO;
 
     public String getX() {
         return x;
@@ -47,5 +51,13 @@ public class FaceInfosDTO {
 
     public void setHeight(String height) {
         this.height = height;
+    }
+
+    public FaceAttributesInfoDTO getFaceAttributesInfoDTO() {
+        return faceAttributesInfoDTO;
+    }
+
+    public void setFaceAttributesInfoDTO(FaceAttributesInfoDTO faceAttributesInfoDTO) {
+        this.faceAttributesInfoDTO = faceAttributesInfoDTO;
     }
 }

@@ -1,4 +1,4 @@
-package com.luna.tencent.dto;
+package com.luna.tencent.dto.idCard;
 
 /**
  * @Package: com.luna.common.dto
@@ -7,24 +7,22 @@ package com.luna.tencent.dto;
  * @CreateTime: 2020/8/6 14:02
  * @Description:
  */
-public class MobileCheckInfoDTO {
+public class IdCardCheckInfoDTO {
 
     /**
      * 收费结果码：
-     * 0: 成功
-     * -2: 手机号不存在
-     * -3: 手机号存在，但无法查询到在网时长
+     * 0: 姓名和身份证号一致
+     * -1: 姓名和身份证号不一致
      * 不收费结果码：
-     * -1: 手机号格式不正确
-     * -4: 验证中心服务繁忙
-     *
+     * -2: 非法身份证号（长度、校验位等不正确）
+     * -3: 非法姓名（长度、格式等不正确）
+     * -4: 证件库服务异常
+     * -5: 证件库中无此身份证记录
      */
     private String Result;
 
     /** 业务结果描述。 */
     private String Description;
-
-    private String Range;
 
     public String getResult() {
         return Result;
@@ -40,13 +38,5 @@ public class MobileCheckInfoDTO {
 
     public void setDescription(String description) {
         Description = description;
-    }
-
-    public String getRange() {
-        return Range;
-    }
-
-    public void setRange(String range) {
-        Range = range;
     }
 }

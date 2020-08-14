@@ -1,4 +1,4 @@
-package com.luna.tencent.dto;
+package com.luna.tencent.dto.message;
 
 /**
  * @Package: com.luna.tencent.dto

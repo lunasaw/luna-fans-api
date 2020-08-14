@@ -27,7 +27,7 @@ public class XueXiaoYi {
      * @return
      * @throws IOException
      */
-    public static JSONObject getAnswer(String key, String language) throws IOException {
+    public static JSONObject getAnswer(String key, String language) {
 
         String s = "{\"keyword\":\"" + key + "\"}";
         Map<String, String> map = new HashMap<>();
