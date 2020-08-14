@@ -1,4 +1,4 @@
-package com.luna.baidu.dto;
+package com.luna.baidu.dto.face;
 
 import com.luna.common.dto.FaceDTO;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @CreateTime: 2020/8/10 17:01
  * @Description:
  */
-public class FaceCheckDTO {
+public class FaceCheckResultDTO {
 
     private String        faceNum;
 

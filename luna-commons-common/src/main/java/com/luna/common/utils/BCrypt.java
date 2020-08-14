@@ -495,14 +495,14 @@ public class BCrypt {
 
 		l ^= P[0];
 		for (i = 0; i <= BLOWFISH_NUM_ROUNDS - 2;) {
-			// Feistel substitution on left word
+            // Feistel substitution on left goods
 			n = S[(l >> 24) & 0xff];
 			n += S[0x100 | ((l >> 16) & 0xff)];
 			n ^= S[0x200 | ((l >> 8) & 0xff)];
 			n += S[0x300 | (l & 0xff)];
 			r ^= n ^ P[++i];
 
-			// Feistel substitution on right word
+            // Feistel substitution on right goods
 			n = S[(r >> 24) & 0xff];
 			n += S[0x100 | ((r >> 16) & 0xff)];
 			n ^= S[0x200 | ((r >> 8) & 0xff)];
@@ -514,12 +514,13 @@ public class BCrypt {
 	}
 
 	/**
-	 * Cycically extract a word of key material
-	 * @param data	the string to extract the data from
-	 * @param offp	a "pointer" (as a one-entry array) to the
-	 * current offset into data
-	 * @return	the next word of material from data
-	 */
+     * Cycically extract a goods of key material
+     * 
+     * @param data the string to extract the data from
+     * @param offp a "pointer" (as a one-entry array) to the
+     * current offset into data
+     * @return the next goods of material from data
+     */
 	private static int streamtoword(byte data[], int offp[]) {
 		int i;
 		int word = 0;

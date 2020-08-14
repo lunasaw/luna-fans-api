@@ -156,7 +156,7 @@ public class BaiduApiTest {
 	public void atest() throws Exception {
 		tencentConfigValue.getSkyEyeSecretid();
 
-		TencentFaceApi.faceLiveCheck(tencentConfigValue.getSecretid(),tencentConfigValue.getSecretKey(), Base64Util.encodeBase64String(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\girl.png")));
+		TencentFaceApi.faceLiveCheck(tencentConfigValue.getSecretid(),tencentConfigValue.getSecretKey(), Base64Util.encodeBase64(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\girl.png")));
 	}
 }
 

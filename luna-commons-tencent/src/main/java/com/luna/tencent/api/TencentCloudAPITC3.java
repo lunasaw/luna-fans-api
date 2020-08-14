@@ -38,7 +38,7 @@ public class TencentCloudAPITC3 {
         Key sKey = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), mac.getAlgorithm());
         mac.init(sKey);
         byte[] hash = mac.doFinal(signStr.getBytes(StandardCharsets.UTF_8));
-        String sig = Base64Util.encodeBase64String(hash);
+        String sig = Base64Util.encodeBase64(hash);
 
         String auth = "hmac id=\"" + secretId + "\", algorithm=\"hmac-sha1\", headers=\"x-date x-source\", signature=\""
             + sig + "\"";

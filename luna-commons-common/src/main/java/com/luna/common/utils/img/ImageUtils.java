@@ -1,12 +1,14 @@
 package com.luna.common.utils.img;
 
-import cn.hutool.core.io.FileUtil;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
 import com.luna.common.utils.StringUtils;
 
 import javax.imageio.stream.FileImageOutputStream;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 图片文件，与 byte[] 互转
@@ -21,7 +23,7 @@ public class ImageUtils {
      */
     public static byte[] getBytes(String imgFile) {
         File file = new File(imgFile);
-        if (FileUtil.isEmpty(file)) {
+        if (file == null || file.isFile() == false) {
             throw new FileException(ResultCode.PARAMETER_INVALID, "文件路径不存在");
         }
         InputStream in = null;

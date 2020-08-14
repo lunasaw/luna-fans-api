@@ -45,7 +45,7 @@ public class TencentFaceApi {
         } else if (Base64Util.isBase64(image)) {
             map.put("Image", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         if (maxFaceNum != null) {
             map.put("MaxFaceNum", maxFaceNum);
@@ -175,7 +175,7 @@ public class TencentFaceApi {
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         map.put("GroupId", groupId);
         map.put("Gender", gender);
@@ -334,7 +334,7 @@ public class TencentFaceApi {
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         map.put("PersonId", personId);
         String body = JSONArray.toJSONString(map);
@@ -367,7 +367,7 @@ public class TencentFaceApi {
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         map.put("PersonId", personId);
         String body = JSONArray.toJSONString(map);
@@ -401,14 +401,14 @@ public class TencentFaceApi {
         } else if (HttpUtils.isNetUrl(imageA)) {
             map.put("UrlA", imageA);
         } else {
-            map.put("ImageA", Base64Util.encodeBase64String(ImageUtils.getBytes(imageA)));
+            map.put("ImageA", Base64Util.encodeBase64(ImageUtils.getBytes(imageA)));
         }
         if (Base64Util.isBase64(imageB)) {
             map.put("ImageB", imageB);
         } else if (HttpUtils.isNetUrl(imageB)) {
             map.put("UrlB", imageB);
         } else {
-            map.put("ImageB", Base64Util.encodeBase64String(ImageUtils.getBytes(imageB)));
+            map.put("ImageB", Base64Util.encodeBase64(ImageUtils.getBytes(imageB)));
         }
         String body = JSONArray.toJSONString(map);
         Map postHeader =
@@ -444,7 +444,7 @@ public class TencentFaceApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         String body = JSON.toJSONString(map);
         Map postHeader =

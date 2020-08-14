@@ -142,16 +142,16 @@
             </plugin>
         </plugins>
 
-        <!-- 过滤配置文件 -->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/application-dev.yml</exclude>
-                </excludes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+        <!--        &lt;!&ndash; 过滤配置文件 &ndash;&gt;-->
+        <!--        <resources>-->
+        <!--            <resource>-->
+        <!--                <directory>src/main/resources</directory>-->
+        <!--                <excludes>-->
+        <!--                    <exclude>**/application-dev.yml</exclude>-->
+        <!--                </excludes>-->
+        <!--                <filtering>true</filtering>-->
+        <!--            </resource>-->
+        <!--        </resources>-->
     </build>
 
 </project>

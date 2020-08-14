@@ -1,4 +1,4 @@
-package com.luna.baidu.dto;
+package com.luna.baidu.dto.voice;
 
 /**
  * @Package: com.luna.baidu.dto

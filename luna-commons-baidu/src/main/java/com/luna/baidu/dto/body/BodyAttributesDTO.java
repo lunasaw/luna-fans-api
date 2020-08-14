@@ -1,4 +1,4 @@
-package com.luna.baidu.dto;
+package com.luna.baidu.dto.body;
 
 /**
  * @Package: com.luna.baidu.dto

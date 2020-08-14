@@ -1,4 +1,4 @@
-package com.luna.baidu.dto;
+package com.luna.baidu.dto.body;
 
 import com.luna.common.entity.Location;
 

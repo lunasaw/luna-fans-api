@@ -39,7 +39,6 @@ public class AliOssUtil {
         PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
         /** 保留返回tag */
         String eTag = putObjectResult.getETag();
-        System.out.println(eTag);
         // 关闭OSSClient。
         ossClient.shutdown();
     }

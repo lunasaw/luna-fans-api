@@ -1,12 +1,17 @@
 package com.luna.baidu.tests;
 
-import com.luna.baidu.BaiduApplicationTest;
-import com.luna.baidu.config.BaiduConfigValue;
-import com.luna.baidu.config.GetBaiduKey;
-import com.luna.common.utils.Base64Util;
-import com.luna.common.utils.img.ImageUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.luna.baidu.BaiduApplicationTest;
+import com.luna.baidu.api.BaiduFaceApi;
+import com.luna.baidu.config.BaiduConfigValue;
+import com.luna.baidu.config.GetBaiduKey;
+import com.luna.baidu.dto.face.IdCardCheckResultDTO;
+import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.img.ImageUtils;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * @Package: com.luna.baidu.tests
@@ -26,11 +31,11 @@ public class OcrTest extends BaiduApplicationTest {
     @Test
     public void atest() {
         // List<Word> words = BaiduOcrApi.baiduOcrAndAddressNormal(baiduConfigValue.getBaiduKey(),
-        // Base64Util.encodeBase64String(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved
+        // Base64Util.encodeBase64(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved
         // Pictures\\lunaqr_code.png")));
         // System.out.println(words);
-        String s = Base64Util.encodeBase64String(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\luna.jpg"));
-        String s2 = Base64Util.encodeBase64String(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\zheng.jpg"));
+        String s = Base64Util.encodeBase64(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\luna.jpg"));
+        String s2 = Base64Util.encodeBase64(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\zheng.jpg"));
 
         // Double aDouble = BaiduFaceApi.faceMathch(baiduConfigValue.getBaiduKey(), s, s2);
         // System.out.println(aDouble);
@@ -40,12 +45,23 @@ public class OcrTest extends BaiduApplicationTest {
         // List list = BodySDK.sample(baiduConfigValue.getClient(), "C:\\Users\\improve\\Pictures\\Saved
         // Pictures\\friends2.jpg");
         String s3 = Base64Util
-            .encodeBase64String(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg"));
+            .encodeBase64(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg"));
 
         // List<Face> faces = BaiduFaceApi.faceDetect(baiduConfigValue.getBaiduKey(), s3);
         //
         // boolean b =
         // PaintImageUtils.paintFace("C:\\Users\\improve\\Pictures\\Saved Pictures\\friends.jpg", faces, "a.jpg");
         // System.out.println(b);
+    }
+
+    @Test
+    public void btest() throws UnsupportedEncodingException {
+        String s3 = Base64Util
+            .encodeBase64(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\luna.jpg"));
+        String s4 = Base64Util.encodeBase64(ImageUtils.getBytes("D:\\user-improve\\conf\\net\\zheng.jpg"));
+
+        IdCardCheckResultDTO idCardCheckResultDTO = BaiduFaceApi.checIdCardFront(
+            baiduConfigValue.getBaiduKey(), s4);
+
     }
 }

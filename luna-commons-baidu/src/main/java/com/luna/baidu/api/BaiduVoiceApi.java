@@ -3,11 +3,10 @@ package com.luna.baidu.api;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.luna.baidu.dto.VoiceCheckDTO;
-import com.luna.baidu.dto.VoiceSynthesisDTO;
+import com.luna.baidu.dto.voice.VoiceCheckDTO;
+import com.luna.baidu.dto.voice.VoiceSynthesisDTO;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.utils.Base64Util;
 import com.luna.common.utils.file.LocalFileUtil;
 import com.luna.common.utils.text.CharsetKit;
 import org.apache.http.HttpResponse;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @Package: com.luna.baidu.api
@@ -64,8 +62,9 @@ public class BaiduVoiceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.VOICE_HOST, BaiduApiContent.VOICE_SPEECH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(body));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
-        return JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+        List<String> list = JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+        log.info("checkVoice success list={}", JSON.toJSONString(list));
+        return list;
     }
 
     /**
@@ -91,8 +90,9 @@ public class BaiduVoiceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.VOICE_HOST, BaiduApiContent.VOICE_SPEECH_FAST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(body));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
-        return JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+        List<String> list = JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
+        log.info("checkVoiceFast success list={}", JSON.toJSONString(list));
+        return list;
     }
 
     /**
@@ -123,34 +123,8 @@ public class BaiduVoiceApi {
         String path =
             voiceSynthesisDTO.getSavePath() + "\\" + voiceSynthesisDTO.getCuid() + "." + voiceSynthesisDTO.getAue();
         LocalFileUtil.writeBytesToFileSystem(bytes, path);
+        log.info("voiceSynthesis success path={}", path);
+
         return path;
-    }
-
-    public static void main(String[] args) throws Exception {
-        VoiceCheckDTO voiceCheckDTO = new VoiceCheckDTO();
-        voiceCheckDTO.setCuid(UUID.randomUUID().toString());
-        voiceCheckDTO.setRate(BaiduVoiceApi.RATE);
-        voiceCheckDTO.setFormat("PCM");
-        byte[] bytes = LocalFileUtil
-            .readFileByBytes(
-                "D:\\myproject\\luna-commons-loc\\luna-commons-baidu\\src\\main\\resources\\static\\16k.pcm");
-        voiceCheckDTO.setSpeech(Base64Util.encodeBase64String(bytes));
-        voiceCheckDTO.setLen(bytes.length);
-        voiceCheckDTO.setChannel(CHANNEL);
-        voiceCheckDTO.setDev_pid(DEV_PID);
-        // List<String> list =
-        // checkVoice("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961", voiceCheckDTO);
-        // System.out.println(JSON.toJSONString(list));
-        // List<String> list = checkVoiceFast("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961",
-        // voiceCheckDTO);
-        // System.out.println(JSON.toJSONString(list));
-
-        VoiceSynthesisDTO voiceSynthesisDTO = new VoiceSynthesisDTO();
-        voiceSynthesisDTO.setPer("103");
-        voiceSynthesisDTO.setTex("傻逼");
-        voiceSynthesisDTO.setCuid(UUID.randomUUID().toString());
-        voiceSynthesisDTO.setAue("mp3");
-        voiceSynthesisDTO.setSavePath("D:\\luna");
-        voiceSynthesis("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961", voiceSynthesisDTO);
     }
 }

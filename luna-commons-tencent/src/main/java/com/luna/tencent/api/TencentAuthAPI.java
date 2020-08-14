@@ -57,7 +57,7 @@ public class TencentAuthAPI {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("ImageUrl", image);
         } else {
-            map.put("ImageBase64", Base64Util.encodeBase64String(ImageUtils.getBytes(image)));
+            map.put("ImageBase64", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
         }
         if (StringUtils.isNotEmpty(cardSide)) {
             map.put("CardSide", cardSide);

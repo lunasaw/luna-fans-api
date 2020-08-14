@@ -1,19 +1,19 @@
 package com.luna.baidu.api;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
-import com.luna.common.dto.constant.ResultCode;
-import com.luna.common.exception.base.BaseException;
+import com.google.common.collect.Maps;
+import com.luna.baidu.dto.goods.GoodsInfoDTO;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.utils.text.CharsetKit;
+import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.img.ImageUtils;
 import org.apache.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,31 +22,46 @@ import java.util.List;
  */
 public class BaiduGoodsIdentifyApi {
 
+    private static final Logger log = LoggerFactory.getLogger(BaiduGoodsIdentifyApi.class);
+
     /**
      * 物品人像识别 可联系百度百科
-     *
-     * @param base64Str
-     * @return List<String>
-     * @throws IOException
+     * 
+     * @param key
+     * @param image
+     * @param baikeNum 联系百度百科条目结果数
+     * @return
+     * @throws UnsupportedEncodingException
      */
-    public static List<String> goodsIdentify(String key,String base64Str) throws UnsupportedEncodingException {
+    public static List<GoodsInfoDTO> goodsIdentify(String key, String image, Integer baikeNum)
+        throws UnsupportedEncodingException {
+        log.info("goodsIdentify start");
+        HashMap<String, Object> params = Maps.newHashMap();
+        if (Base64Util.isBase64(image)) {
+            params.put("image", image);
+        } else {
+            params.put("image", Base64Util.encodeBase64(ImageUtils.getBytes(image)));
+        }
+
+        if (baikeNum != null) {
+            params.put("baike_num", baikeNum);
+        }
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiContent.HOST, BaiduApiContent.GOODS_IDENTIFY,
-            ImmutableMap.of(
-                "Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED, "Connection", "Keep-Alive"),
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
             ImmutableMap.of("access_token", key),
-            "image=" + URLEncoder.encode(base64Str, CharsetKit.UTF_8));
-        JSONObject response = HttpUtils.getResponse(httpResponse);
-        List<JSONObject> datas = null;
-        try {
-            datas = JSON.parseArray(response.get("result").toString(), JSONObject.class);
-        } catch (Exception e) {
-            throw new BaseException(ResultCode.PARAMETER_INVALID, response.toString());
-        }
-        List<String> list = new ArrayList();
-        for (JSONObject data : datas) {
-            list.add(data.get("keyword").toString());
-        }
-        return list;
+            HttpUtils.urlencode(params));
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        List<GoodsInfoDTO> goodsInfoDTOS = JSON.parseArray(JSON.parseObject(s).getString("result"), GoodsInfoDTO.class);
+        log.info("goodsIdentify success goodsInfoDTOS={}", goodsInfoDTOS);
+
+        return goodsInfoDTOS;
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        List<GoodsInfoDTO> goodsInfoDTOS =
+            goodsIdentify("24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961",
+                "C:\\Users\\improve\\Pictures\\Camera Roll\\Pikachu.jpg", 3);
+        System.out.println(JSON.toJSONString(goodsInfoDTOS));
     }
 
 }

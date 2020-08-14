@@ -36,10 +36,10 @@ public class BaiduApiContent {
     public static String NAME_IDCARD          = "/rest/2.0/location/v3/person/idmatch";
 
     /** 人脸搜索 */
-    public static String MATCH                = "/rest/2.0/location/v3/match";
+    public static String MATCH                = "/rest/2.0/face/v3/match";
 
     /** 单张活体检测 */
-    public static String LIVE                 = "/rest/2.0/location/v3/faceverify";
+    public static String LIVE                 = "/rest/2.0/face/v3/faceverify";
 
     /** 通用物体识别 */
     public static String GOODS_IDENTIFY       = "/rest/2.0/image-classify/v2/advanced_general";
