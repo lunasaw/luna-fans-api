@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-log/
 
 ### STS ###
 .apt_generated
@@ -27,6 +26,7 @@ log/
 /nbdist/
 /.nb-gradle/
 build/
+/log/
 
 ### VS Code ###
 .vscode/
