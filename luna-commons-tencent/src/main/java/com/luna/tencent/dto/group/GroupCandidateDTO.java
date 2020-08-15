@@ -13,54 +13,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.personGroup;
+package com.luna.tencent.dto.group;
 
-public class PersonGroupInfoDTO {
+public class GroupCandidateDTO {
 
     /**
-     * 包含此人员的人员库ID
+     * 人员库ID 。
      */
-    private String   GroupId;
+    private String         GroupId;
 
     /**
-     * 人员描述字段内容
+     * 识别出的最相似候选人。
      */
-    private String[] PersonExDescriptions;
+    private CandidateDTO[] Candidates;
 
     /**
-     * Get 包含此人员的人员库ID
+     * Get 人员库ID 。
      * 
-     * @return GroupId 包含此人员的人员库ID
+     * @return GroupId 人员库ID 。
      */
     public String getGroupId() {
         return this.GroupId;
     }
 
     /**
-     * Set 包含此人员的人员库ID
+     * Set 人员库ID 。
      * 
-     * @param GroupId 包含此人员的人员库ID
+     * @param GroupId 人员库ID 。
      */
     public void setGroupId(String GroupId) {
         this.GroupId = GroupId;
     }
 
     /**
-     * Get 人员描述字段内容
+     * Get 识别出的最相似候选人。
      * 
-     * @return PersonExDescriptions 人员描述字段内容
+     * @return Candidates 识别出的最相似候选人。
      */
-    public String[] getPersonExDescriptions() {
-        return this.PersonExDescriptions;
+    public CandidateDTO[] getCandidates() {
+        return Candidates;
     }
 
     /**
-     * Set 人员描述字段内容
+     * Set 识别出的最相似候选人。
      * 
-     * @param PersonExDescriptions 人员描述字段内容
+     * @param Candidates 识别出的最相似候选人。
      */
-    public void setPersonExDescriptions(String[] PersonExDescriptions) {
-        this.PersonExDescriptions = PersonExDescriptions;
+    public void setCandidates(CandidateDTO[] candidates) {
+        Candidates = candidates;
     }
-
 }

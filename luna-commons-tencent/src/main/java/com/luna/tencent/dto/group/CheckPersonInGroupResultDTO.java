@@ -1,4 +1,4 @@
-package com.luna.tencent.dto.personGroup;
+package com.luna.tencent.dto.group;
 
 import java.util.List;
 

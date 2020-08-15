@@ -1,4 +1,4 @@
-package com.luna.tencent.dto.personGroup;
+package com.luna.tencent.dto.group;
 
 /**
  * @Package: com.luna.dto.dto

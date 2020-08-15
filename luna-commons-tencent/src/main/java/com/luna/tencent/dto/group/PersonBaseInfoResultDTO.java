@@ -1,6 +1,6 @@
-package com.luna.tencent.dto.personGroup;
+package com.luna.tencent.dto.group;
 
-import com.luna.tencent.dto.ErrorDTO;
+import com.luna.tencent.dto.error.ErrorDTO;
 
 import java.util.List;
 

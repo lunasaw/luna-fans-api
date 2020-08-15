@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.utils.Base64Util;
 import com.luna.common.utils.img.ImageUtils;
-import com.luna.tencent.dto.personGroup.CompareFaceResultDTO;
+import com.luna.tencent.dto.group.CompareFaceResultDTO;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class TencentFaceApi {
      * @return
      * @throws Exception
      */
-    public static CompareFaceResultDTO faceCheck(String id, String key, String imageA, String imageB)
+    public static CompareFaceResultDTO faceComparison(String id, String key, String imageA, String imageB)
         throws Exception {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(imageA)) {

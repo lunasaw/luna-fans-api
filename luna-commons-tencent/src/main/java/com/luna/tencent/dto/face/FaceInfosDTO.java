@@ -1,6 +1,6 @@
 package com.luna.tencent.dto.face;
 
-import com.luna.tencent.dto.personGroup.FaceAttributesInfoDTO;
+import com.luna.tencent.dto.group.FaceAttributesInfoDTO;
 
 /**
  * @Package: com.luna.dto.dto

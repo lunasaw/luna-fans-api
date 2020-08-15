@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.personGroup;
+package com.luna.tencent.dto.group;
 
 public class PersonExDescriptionInfoDTO {
 
