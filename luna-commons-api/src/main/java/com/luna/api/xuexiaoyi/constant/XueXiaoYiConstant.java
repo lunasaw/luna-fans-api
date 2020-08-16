@@ -1,4 +1,4 @@
-package com.luna.api.xuexiaoyi;
+package com.luna.api.xuexiaoyi.constant;
 
 /**
  * @author Luna@win10

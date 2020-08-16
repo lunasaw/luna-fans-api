@@ -1,10 +1,11 @@
-package com.luna.api.smMs;
+package com.luna.api.smms.api;
 
-import com.alibaba.fastjson.JSONObject;
-import com.luna.api.smMs.constant.SmMsConstant;
+import com.luna.api.smms.constant.SmMsConstant;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import org.apache.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -17,6 +18,8 @@ import java.util.HashMap;
  */
 public class ImageApiFromString {
 
+    private static final Logger log = LoggerFactory.getLogger(ImageApiFromString.class);
+
     /**
      * 上传文件
      * 
@@ -24,12 +27,14 @@ public class ImageApiFromString {
      * @param path
      * @return
      */
-    public static JSONObject upload(String token, String path) {
+    public static String upload(String token, String path) {
+        log.info("smms upload start token={},path={}", token, path);
         HashMap<String, String> header = new HashMap<>();
         header.put("Authorization", token);
         HashMap<String, String> bodies = new HashMap<>();
         bodies.put("smfile", path);
-        return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/upload", header, null, bodies));
+        return HttpUtils.checkResponseAndGetResult(HttpUtils.doPost(SmMsConstant.HOST, "/upload", header, null, bodies),
+            true);
     }
 
     /**
@@ -38,13 +43,13 @@ public class ImageApiFromString {
      * @param token
      * @return
      */
-    public static JSONObject getHistory(String token) {
+    public static String getHistory(String token) {
         HashMap<String, String> map = new HashMap<>();
         map.put("Content-Type", HttpUtilsConstant.FORM_DATA);
         map.put("Authorization", token);
         HttpResponse smfile =
             HttpUtils.doGet(SmMsConstant.HOST, "/history", map, null);
-        return HttpUtils.getResponse(smfile);
+        return HttpUtils.checkResponseAndGetResult(smfile, true);
     }
 
     /**
@@ -53,12 +58,12 @@ public class ImageApiFromString {
      * @param token
      * @return
      */
-    public static JSONObject getAllHistory(String token) {
+    public static String getAllHistory(String token) {
         HashMap<String, String> map = new HashMap<>();
         map.put("Content-Type", HttpUtilsConstant.FORM_DATA);
         map.put("Authorization", token);
         HttpResponse smfile =
             HttpUtils.doGet(SmMsConstant.HOST, "/upload_history", map, null);
-        return HttpUtils.getResponse(smfile);
+        return HttpUtils.checkResponseAndGetResult(smfile, true);
     }
 }

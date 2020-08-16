@@ -1,7 +1,9 @@
-package com.luna.api.smMs;
+package com.luna.api.smms.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.luna.api.smMs.constant.SmMsConstant;
+import com.luna.api.smms.ConfParent;
+import com.luna.api.smms.constant.SmMsConstant;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.jsonfile.ConfInterface;
@@ -26,7 +28,9 @@ public class UserApiFromRoot {
      */
     public static JSONObject getProfile(HashMap<String, String> header) {
         header.put("Content-Type", HttpUtilsConstant.FORM_DATA);
-        return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/profile", header, null, ""));
+        String s = HttpUtils
+            .checkResponseAndGetResult(HttpUtils.doPost(SmMsConstant.HOST, "/profile", header, null, ""), true);
+        return JSON.parseObject(s);
     }
 
     /**
@@ -38,7 +42,9 @@ public class UserApiFromRoot {
      */
     public static JSONObject getToken(HashMap<String, String> para, HashMap<String, String> header) {
         header.put("Content-Type", HttpUtilsConstant.FORM_DATA);
-        return HttpUtils.getResponse(HttpUtils.doPost(SmMsConstant.HOST, "/token", header, para, ""));
+        String s =
+            HttpUtils.checkResponseAndGetResult(HttpUtils.doPost(SmMsConstant.HOST, "/token", header, para, ""), true);
+        return JSON.parseObject(s);
     }
 
     /**

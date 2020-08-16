@@ -1,4 +1,4 @@
-package com.luna.api.smMs.constant;
+package com.luna.api.smms.constant;
 
 /**
  * @Package: com.luna.api.smMs

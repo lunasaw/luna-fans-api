@@ -32,7 +32,7 @@ public class SendMessage extends MessageApplicationTest {
     private JavaMailConfigValue javaMailConfigValue;
 
     @Test
-    public void atest() throws InterruptedException {
+    public void atest() {
         EmailSmallDTO emailSmallDTO = new EmailSmallDTO("Luna", "15696756582@163.com", "这是测试邮件", "");
         EmailDTO emailDTO = new EmailDTO();
         HashMap<String, String> map = Maps.newHashMap();

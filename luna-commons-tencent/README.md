@@ -37,7 +37,12 @@ luna-commons-tencent
 
 </p>
 
+## 日志
+增加微信支付Api接口
 
+增加腾讯地图Api接口
+
+增加腾讯人脸识别等Api接口
  
 ## 目录
 
@@ -54,7 +59,7 @@ luna-commons-tencent
 ###### **安装步骤**
 
 1. Get a free API Key at [https://account.aliyun.com](https://account.aliyun.com)
-2. 找到config目录下的xxxConfigValue,application.properties
+2. 找到config目录下的xxxConfigValue,TencentPayConfigValue
 3. Clone the repo
 
 ```sh
@@ -85,26 +90,40 @@ git clone https://github.com/czy1024/luna-commons.git
 在配置文件application.properties加入可选配置
 
 ```text
-       # 腾讯APi
-       luna.ten.secretId=xxx
-       luna.ten.secretKey=xxx
-       # 腾讯云市场APi
-       # 天眼身份认证
-       luna.ten.skyEyeSecretid=xxx
-       luna.ten.skyEyeSecretkey=xxx
-       # 腾讯地图
-       luna.ten.mapKey=xxx
-       # redis
-       spring.redis.host=xxx
-       spring.redis.port=6379
+      luna:
+        ten:
+          # 腾讯地图api
+          mapKey: xxx
+          # 腾讯api
+          secretId: xxx
+          secretKey: xxx
+          # 腾讯市场api
+          skyEyeSecretid: xxx
+          skyEyeSecretkey: xxx
+      
+        #微信支付信息配置
+        weixin:
+          appid: xxx
+          partner: xxx
+          partnerkey: xxx
+          notifyurl: xxx
+      spring:
+        redis:
+          host: xxx
+          port: 6379
+      
+      server:
+        port: 8080
+      
+
 
 
 ```
 
 引用示例
-若采用SpringBoot构建项目可通过将第三方包中的BaiduConfigValue,GetBaiduKey通过Spring配置文件注入Spring管理
+若采用SpringBoot构建项目可通过将第三方包中的TencentConfigValue,TencentPayConfigValue通过Spring配置文件注入Spring管理
 
-需在properties配置文件中配置相应key
+需在properties或者yml配置文件中配置相应key
 
 若非Spring项目可直接通过调用静态APi传入key和id进行调用
 

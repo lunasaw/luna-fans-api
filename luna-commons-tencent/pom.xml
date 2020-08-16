@@ -41,6 +41,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!--微信支付-->
+        <dependency>
+            <groupId>com.github.wxpay</groupId>
+            <artifactId>wxpay-sdk</artifactId>
+            <version>0.0.3</version>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -101,15 +108,6 @@
             </plugin>
         </plugins>
 
-        <!-- 过滤配置文件 -->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.properties</exclude>
-                </excludes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+
     </build>
 </project>

@@ -1,7 +1,8 @@
 package com.luna.common.utils.text;
 
-import com.luna.common.utils.md5.SignUtil;
 import com.luna.common.utils.xml.XmlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -23,13 +24,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  * 类型转换器
  *
  * @author luna
  */
 public class ConvertUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(ConvertUtil.class);
+
     /**
      * 将Map转换为XML格式的字符串
      *
@@ -97,8 +100,8 @@ public class ConvertUtil {
             }
             return data;
         } catch (Exception ex) {
-            SignUtil.getLogger().warn("Invalid XML, can not convert to map. Error message: {}. XML content: {}",
-                ex.getMessage(), strXML);
+            log.warn("Invalid XML, can not convert to map. Error message: {}. XML content: {}", ex.getMessage(),
+                strXML);
             throw ex;
         }
 

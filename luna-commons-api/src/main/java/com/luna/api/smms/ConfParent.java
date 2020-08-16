@@ -1,4 +1,4 @@
-package com.luna.api.smMs;
+package com.luna.api.smms;
 
 import com.alibaba.fastjson.JSONObject;
 import com.luna.common.jsonfile.ConfInterface;

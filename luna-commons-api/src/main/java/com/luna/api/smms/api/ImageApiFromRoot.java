@@ -1,7 +1,9 @@
-package com.luna.api.smMs;
+package com.luna.api.smms.api;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.luna.api.smMs.constant.SmMsConstant;
+import com.luna.api.smms.ConfParent;
+import com.luna.api.smms.constant.SmMsConstant;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
 import com.luna.common.jsonfile.ConfInterface;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 public class ImageApiFromRoot {
     /**
      * access smms user key value from user home and upload image
-     * 
+     *
      * @param path the file you want to upload
      * @return the upload response json object
      */
@@ -34,7 +36,7 @@ public class ImageApiFromRoot {
 
     /**
      * access smms user key value from user home and get temporary History
-     * 
+     *
      * @return the temporary History response json object
      */
     public static JSONObject temporaryHistoryFromRoot(String JSONPath) {
@@ -49,7 +51,7 @@ public class ImageApiFromRoot {
 
     /**
      * access smms user key value from user home and get upload History
-     * 
+     *
      * @return the tupload History response json object
      */
     public static JSONObject uploadHistoryFromRoot(String JSONPath) {
@@ -64,7 +66,7 @@ public class ImageApiFromRoot {
 
     /**
      * upload image file to sm.ms
-     * 
+     *
      * @param header put authorization to header hashMap
      * @param bodyForma put key, and value(image file path)
      * @return response json object
@@ -77,24 +79,28 @@ public class ImageApiFromRoot {
 
     /**
      * base ip and get temporaryHistory
-     * 
+     *
      * @param header header hashMap, should put Authorization
      * @return json response object contains temporaryHistory information
      */
     public static JSONObject temporaryHistory(HashMap<String, String> header) {
         header.put("Content-Type", HttpUtilsConstant.FORM_DATA);
-        return HttpUtils.getResponse(HttpUtils.doGet(SmMsConstant.HOST, "/history", header, null));
+        String s =
+            HttpUtils.checkResponseAndGetResult(HttpUtils.doGet(SmMsConstant.HOST, "/history", header, null), true);
+        return JSON.parseObject(s);
     }
 
     /**
      * get all upload History
-     * 
+     *
      * @param header header hashMap, should put Authorization
      * @return json response object contains upload history information
      */
     public static JSONObject uploadHistory(HashMap<String, String> header) {
         header.put("Content-Type", HttpUtilsConstant.FORM_DATA);
-        return HttpUtils.getResponse(HttpUtils.doGet(SmMsConstant.HOST, "/upload_history", header, null));
+        String s = HttpUtils
+            .checkResponseAndGetResult(HttpUtils.doGet(SmMsConstant.HOST, "/upload_history", header, null), true);
+        return JSON.parseObject(s);
     }
 
 }

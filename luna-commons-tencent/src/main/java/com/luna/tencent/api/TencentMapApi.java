@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
+import com.luna.common.utils.text.IPAddressUtil;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.tencent.dto.map.AddressResultDTO;
 import com.luna.tencent.dto.map.Ip2AddressResultDTO;
@@ -15,7 +16,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.net.util.IPAddressUtil;
 
 import java.util.HashMap;
 import java.util.List;

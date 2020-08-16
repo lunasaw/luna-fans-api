@@ -8,7 +8,18 @@ luna:
     # 腾讯市场api
     skyEyeSecretid: xxx
     skyEyeSecretkey: xxx
+
+  #微信支付信息配置
+  weixin:
+    appid: xxx
+    partner: xxx
+    partnerkey: xxx
+    notifyurl: xxx
 spring:
   redis:
     host: xxx
     port: 6379
+
+server:
+  port: 8080
+

@@ -1,7 +1,6 @@
 package com.luna.common.http;
 
 import cn.hutool.core.io.FileUtil;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
@@ -39,6 +38,7 @@ import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.Charset;
@@ -408,18 +408,17 @@ public class HttpUtils {
     }
 
     /**
-     * 解析返回JSON数组
+     * 解析请求体
      * 
-     * @param httpResponse
+     * @param httpRequest
      * @return
      */
-    public static List<JSONObject> getResponseToArray(HttpResponse httpResponse) {
+    public static String getRequest(HttpServletRequest httpRequest) {
         try {
             BufferedReader reader =
-                new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
-            String jsonText = readAll(reader);
-            List<JSONObject> datas = JSON.parseArray(jsonText, JSONObject.class);
-            return datas;
+                new BufferedReader(new InputStreamReader(httpRequest.getInputStream(), "UTF-8"));
+            String text = readAll(reader);
+            return text;
         } catch (IOException e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }

@@ -1,4 +1,4 @@
-package com.luna.api.smMs.config;
+package com.luna.api.smms.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

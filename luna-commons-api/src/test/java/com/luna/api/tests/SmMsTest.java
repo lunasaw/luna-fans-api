@@ -1,9 +1,8 @@
 package com.luna.api.tests;
 
-import com.alibaba.fastjson.JSONObject;
 import com.luna.api.ApiApplicationTest;
-import com.luna.api.smMs.ImageApiFromString;
-import com.luna.api.smMs.config.SmMsConfigValue;
+import com.luna.api.smms.api.ImageApiFromString;
+import com.luna.api.smms.config.SmMsConfigValue;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,8 +31,8 @@ public class SmMsTest extends ApiApplicationTest {
         // JSONObject jsonObject1 = ImageApiFromRoot.uploadFromRoot(file.getAbsolutePath(),
         // "C:\\Users\\improve\\Pictures\\Camera Roll\\Pikachu.jpg");
         // System.out.println(jsonObject1);
-        JSONObject jsonObject = ImageApiFromString.upload("NFfqBMvYH6RfXaqEgjo79oDfQ7Ckrchg",
-            "C:\\Users\\improve\\Pictures\\Camera Roll\\Pikachu.jpg");
-        System.out.println(jsonObject);
+        String upload = ImageApiFromString.upload("NFfqBMvYH6RfXaqEgjo79oDfQ7Ckrchg",
+            "C:\\Users\\improve\\Pictures\\Camera Roll\\luna-logo.png");
+        System.out.println(upload);
     }
 }
