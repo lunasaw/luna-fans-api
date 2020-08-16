@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.tencent.dto.map.AddressResultDTO;
 import com.luna.tencent.dto.map.Ip2AddressResultDTO;
 import com.luna.tencent.dto.map.KeyWordSearchResultDTO;
@@ -36,6 +36,9 @@ public class TencentMapApi {
      * @return
      */
     public static AddressResultDTO findAddr(String key, String longitude, String latitude) {
+        if (StringUtils.isEmpty(key)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, "缺少可用的key");
+        }
         log.info("findAddr start key={},longitude={},latitude={}", key, longitude, latitude);
         // 腾讯坐标反查
         String address = latitude + "," + longitude;
@@ -55,6 +58,9 @@ public class TencentMapApi {
      * @return
      */
     public static Ip2AddressResultDTO ip2Address(String key, String ip) {
+        if (StringUtils.isEmpty(key)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, "缺少可用的key");
+        }
         if (!IPAddressUtil.isIPv4LiteralAddress(ip) || IPAddressUtil.isIPv6LiteralAddress(ip)) {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "ip地址非法");
         }
@@ -76,6 +82,9 @@ public class TencentMapApi {
      * @param region 城市,默认本地城市搜索,没有结果则扩散全国
      */
     public static List<KeyWordSearchResultDTO> keyWordSearch(String key, String keyWord, String region) {
+        if (StringUtils.isEmpty(key)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, "缺少可用的key");
+        }
         HashMap<String, String> param = Maps.newHashMap();
         param.put("key", key);
         param.put("region", region);

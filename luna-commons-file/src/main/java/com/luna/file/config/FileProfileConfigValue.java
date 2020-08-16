@@ -1,6 +1,6 @@
 package com.luna.file.config;
 
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 

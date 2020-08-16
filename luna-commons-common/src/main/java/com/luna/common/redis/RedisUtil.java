@@ -1,5 +1,6 @@
-package com.luna.common.utils;
+package com.luna.common.redis;
 
+import com.luna.common.utils.mask.MaskUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,10 @@ public class RedisUtil {
      */
     public String getAutchCode(String mark) {
         String s = "";
-        if (CommonUtils.isMobilePhoneNumber(mark)) {
+        if (MaskUtils.isMobilePhoneNumber(mark)) {
             mark = "+86" + mark;
             s = stringRedisTemplate.opsForValue().get(mark);
-        } else if (CommonUtils.isEmailAddress(mark)) {
+        } else if (MaskUtils.isEmailAddress(mark)) {
             s = stringRedisTemplate.opsForValue().get(mark);
         } else {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");

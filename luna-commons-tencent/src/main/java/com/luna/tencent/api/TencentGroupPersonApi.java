@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.luna.common.http.HttpUtils;
-import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.md5.Base64Util;
 import com.luna.common.utils.img.ImageUtils;
 import com.luna.tencent.dto.error.ErrorDTO;
 import com.luna.tencent.dto.face.FaceInfosDTO;

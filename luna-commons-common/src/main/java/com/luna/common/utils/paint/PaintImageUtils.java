@@ -1,4 +1,4 @@
-package com.luna.common.utils;
+package com.luna.common.utils.paint;
 
 import cn.hutool.core.io.FileUtil;
 import com.luna.common.dto.constant.ResultCode;
@@ -20,14 +20,6 @@ import java.util.List;
  * @date 2020/5/3 10:15
  */
 public class PaintImageUtils {
-
-    /**
-     *
-     *
-     * @param filePath 图片路径
-     * @throws Exception
-     */
-
     /**
      * 框出图片中的人脸
      * 

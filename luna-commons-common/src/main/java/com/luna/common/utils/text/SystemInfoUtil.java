@@ -12,12 +12,12 @@ import java.util.Properties;
 /**
  * 获取当前系统信息
  */
-public class SystemInfo {
+public class SystemInfoUtil {
     // 当前实例
-    private static SystemInfo currentSystem = null;
+    private static SystemInfoUtil currentSystem = null;
     private InetAddress       localHost     = null;
 
-    private SystemInfo() {
+    private SystemInfoUtil() {
         try {
             localHost = InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
@@ -31,9 +31,9 @@ public class SystemInfo {
      *
      * @return
      */
-    public static SystemInfo getInstance() {
+    public static SystemInfoUtil getInstance() {
         if (currentSystem == null)
-            currentSystem = new SystemInfo();
+            currentSystem = new SystemInfoUtil();
         return currentSystem;
     }
 

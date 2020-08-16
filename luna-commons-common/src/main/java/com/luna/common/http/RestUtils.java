@@ -1,7 +1,6 @@
-package com.luna.common.utils;
+package com.luna.common.http;
 
 import com.google.common.collect.Maps;
-import com.luna.common.http.HttpUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.http.HttpResponse;
 

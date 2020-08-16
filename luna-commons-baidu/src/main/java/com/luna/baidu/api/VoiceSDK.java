@@ -3,7 +3,7 @@ package com.luna.baidu.api;
 import com.baidu.aip.speech.AipSpeech;
 import com.baidu.aip.speech.TtsResponse;
 import com.baidu.aip.util.Util;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 

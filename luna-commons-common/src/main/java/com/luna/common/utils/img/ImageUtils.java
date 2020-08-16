@@ -2,7 +2,7 @@ package com.luna.common.utils.img;
 
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.File;

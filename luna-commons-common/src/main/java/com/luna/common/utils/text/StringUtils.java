@@ -1,6 +1,4 @@
-package com.luna.common.utils;
-
-import com.luna.common.utils.text.StrFormatter;
+package com.luna.common.utils.text;
 
 import java.util.Collection;
 import java.util.Map;

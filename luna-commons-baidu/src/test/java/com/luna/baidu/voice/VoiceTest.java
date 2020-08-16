@@ -4,7 +4,7 @@ import com.luna.baidu.BaiduApplicationTest;
 import com.luna.baidu.api.BaiduVoiceApi;
 import com.luna.baidu.dto.voice.VoiceCheckDTO;
 import com.luna.baidu.dto.voice.VoiceSynthesisDTO;
-import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.md5.Base64Util;
 import com.luna.common.utils.file.LocalFileUtil;
 import org.junit.Test;
 

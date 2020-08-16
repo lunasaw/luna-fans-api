@@ -3,7 +3,7 @@ package com.luna.message.api.service;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
-import com.luna.common.utils.CommonUtils;
+import com.luna.common.utils.mask.MaskUtils;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.api.constant.TargetKeyConstant;
 import com.luna.message.api.constant.TargetTypeConstant;
@@ -55,7 +55,7 @@ public class MessageEmailService {
             if (messageDO.getTargetMap().containsKey(TargetKeyConstant.EMAIL) == false) {
                 throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
             }
-            if (CommonUtils.isEmailAddress(messageDO.getTargetMap().get(TargetKeyConstant.EMAIL)) == false) {
+            if (MaskUtils.isEmailAddress(messageDO.getTargetMap().get(TargetKeyConstant.EMAIL)) == false) {
                 throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
             }
         }

@@ -1,7 +1,5 @@
 package com.luna.common.utils.text;
 
-import com.luna.common.utils.StringUtils;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 

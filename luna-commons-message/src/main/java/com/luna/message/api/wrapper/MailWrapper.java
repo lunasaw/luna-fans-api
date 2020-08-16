@@ -2,7 +2,7 @@ package com.luna.message.api.wrapper;
 
 import cn.hutool.core.date.DatePattern;
 import com.alibaba.fastjson.JSON;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.common.utils.text.CharsetKit;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.emailmodel.EmailModelBuild;

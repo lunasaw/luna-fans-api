@@ -1,4 +1,4 @@
-package com.luna.common.utils;
+package com.luna.common.spring;
 
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;

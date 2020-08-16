@@ -1,7 +1,7 @@
 package com.luna.tencent.api;
 
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.md5.Base64Util;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;

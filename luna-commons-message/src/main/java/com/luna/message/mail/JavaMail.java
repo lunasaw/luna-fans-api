@@ -3,7 +3,7 @@ package com.luna.message.mail;
 import cn.hutool.extra.mail.MailUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.message.config.JavaMailConfigValue;
 import com.luna.message.dto.EmailDTO;
 import com.luna.message.dto.EmailSmallDTO;

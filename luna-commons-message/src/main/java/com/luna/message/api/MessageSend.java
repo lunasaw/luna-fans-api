@@ -3,9 +3,9 @@ package com.luna.message.api;
 import com.google.common.collect.ImmutableMap;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
-import com.luna.common.utils.CommonUtils;
-import com.luna.common.utils.HashUtils;
-import com.luna.common.utils.Md5Utils;
+import com.luna.common.utils.mask.MaskUtils;
+import com.luna.common.utils.md5.HashUtils;
+import com.luna.common.utils.md5.Md5Utils;
 import com.luna.message.api.constant.EmailContentsConstant;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.api.constant.TargetTypeConstant;
@@ -44,13 +44,13 @@ public class MessageSend {
         MessageDO messageDO = new MessageDO();
         String randomPassword = HashUtils.randomHex32();
         messageDO.setPlaceholderContent(ImmutableMap.of(MessageTypeConstant.RESET_PASSWORD, randomPassword));
-        if (CommonUtils.isEmailAddress(userMark)) {
+        if (MaskUtils.isEmailAddress(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.EMAIL, userMark));
             messageDO.setMessageType(MessageTypeConstant.RESET_PASSWORD);
             messageDO.setTargetType(TargetTypeConstant.EMAIL);
             messageDO.setTemplateId(EmailContentsConstant.RESET_PASSWORD);
             messageEmailService.asyncSendMessage(messageDO, userMark, "");
-        } else if (CommonUtils.isMobilePhoneNumber(userMark)) {
+        } else if (MaskUtils.isMobilePhoneNumber(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
             messageDO.setMessageType(MessageTypeConstant.RESET_PASSWORD);
             messageDO.setTargetType(TargetTypeConstant.MOBILE);
@@ -72,7 +72,7 @@ public class MessageSend {
         MessageDO messageDO = new MessageDO();
         String validationCode = Md5Utils.getValidationCode();
         messageDO.setPlaceholderContent(ImmutableMap.of(MessageTypeConstant.AUTH_OCDE, validationCode));
-        if (CommonUtils.isEmailAddress(userMark)) {
+        if (MaskUtils.isEmailAddress(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.EMAIL, userMark));
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.EMAIL);
@@ -81,7 +81,7 @@ public class MessageSend {
             stringRedisTemplate.opsForValue().append(userMark, validationCode);
             stringRedisTemplate.expire(userMark, 300, TimeUnit.SECONDS);
             messageEmailService.asyncSendMessage(messageDO, userMark, null);
-        } else if (CommonUtils.isMobilePhoneNumber(userMark)) {
+        } else if (MaskUtils.isMobilePhoneNumber(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.MOBILE);

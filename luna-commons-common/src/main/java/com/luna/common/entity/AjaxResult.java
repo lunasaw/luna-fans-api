@@ -1,6 +1,6 @@
 package com.luna.common.entity;
 
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 
 import java.util.HashMap;
 

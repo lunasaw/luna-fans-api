@@ -1,6 +1,6 @@
 package com.luna.media.ffmpeg;
 
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

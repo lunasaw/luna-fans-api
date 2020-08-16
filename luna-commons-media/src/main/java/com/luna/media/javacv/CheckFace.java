@@ -2,7 +2,7 @@ package com.luna.media.javacv;
 
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.media.config.JavaCvConfigValue;
 import org.bytedeco.flandmark.FLANDMARK_Model;
 import org.bytedeco.opencv.global.opencv_imgproc;

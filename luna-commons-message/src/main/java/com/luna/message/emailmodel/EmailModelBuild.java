@@ -4,7 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import com.alibaba.fastjson.JSON;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.message.api.constant.EmailContentsConstant;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.dto.EmailDTO;

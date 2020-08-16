@@ -112,7 +112,7 @@ git clone https://github.com/czy1024/luna-commons.git
 
 package com.luna.springdemo.config;
 
-import com.luna.common.utils.SpringUtils;
+import com.luna.common.spring.SpringUtils;
 import com.luna.tencent.config.TencentConfigValue;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;

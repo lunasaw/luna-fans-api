@@ -9,7 +9,7 @@ import com.luna.baidu.dto.face.FaceMatchResultDTO;
 import com.luna.baidu.dto.face.IdCardCheckResultDTO;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.utils.Base64Util;
+import com.luna.common.utils.md5.Base64Util;
 import com.luna.common.utils.img.ImageUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;

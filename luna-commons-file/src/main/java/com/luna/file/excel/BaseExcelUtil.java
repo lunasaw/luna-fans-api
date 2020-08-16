@@ -4,9 +4,9 @@ import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.entity.AjaxResult;
 import com.luna.common.exception.FileException;
 import com.luna.common.reflect.ReflectUtils;
-import com.luna.common.utils.StringUtils;
-import com.luna.common.utils.text.Convert;
-import com.luna.common.utils.text.DateUtils;
+import com.luna.common.utils.text.StringUtils;
+import com.luna.common.utils.text.ConvertUtil;
+import com.luna.common.utils.text.DateUtil;
 import com.luna.file.config.FileProfileConfigValue;
 import com.luna.file.excel.anno.Excel;
 import com.luna.file.excel.anno.Excels;
@@ -175,32 +175,32 @@ public class BaseExcelUtil<T> {
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType) {
-                        String s = Convert.toStr(val);
+                        String s = ConvertUtil.toStr(val);
                         if (StringUtils.endsWith(s, ".0")) {
                             val = StringUtils.substringBefore(s, ".0");
                         } else {
                             String dateFormat = field.getAnnotation(Excel.class).dateFormat();
                             if (StringUtils.isNotEmpty(dateFormat)) {
-                                val = DateUtils.parseDateToStr(dateFormat, (Date)val);
+                                val = DateUtil.parseDateToStr(dateFormat, (Date)val);
                             } else {
-                                val = Convert.toStr(val);
+                                val = ConvertUtil.toStr(val);
                             }
                         }
                     } else if ((Integer.TYPE == fieldType) || (Integer.class == fieldType)) {
-                        val = Convert.toInt(val);
+                        val = ConvertUtil.toInt(val);
                     } else if ((Long.TYPE == fieldType) || (Long.class == fieldType)) {
-                        val = Convert.toLong(val);
+                        val = ConvertUtil.toLong(val);
                     } else if ((Double.TYPE == fieldType) || (Double.class == fieldType)) {
-                        val = Convert.toDouble(val);
+                        val = ConvertUtil.toDouble(val);
                     } else if ((Float.TYPE == fieldType) || (Float.class == fieldType)) {
-                        val = Convert.toFloat(val);
+                        val = ConvertUtil.toFloat(val);
                     } else if (BigDecimal.class == fieldType) {
-                        val = Convert.toBigDecimal(val);
+                        val = ConvertUtil.toBigDecimal(val);
                     } else if (Date.class == fieldType) {
                         if (val instanceof String) {
-                            val = DateUtils.parseDate(val);
+                            val = DateUtil.parseDate(val);
                         } else if (val instanceof Double) {
-                            val = DateUtil.getJavaDate((Double)val);
+                            val = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double)val);
                         }
                     }
                     if (StringUtils.isNotNull(fieldType)) {
@@ -433,7 +433,7 @@ public class BaseExcelUtil<T> {
                 String dateFormat = attr.dateFormat();
                 String readConverterExp = attr.readConverterExp();
                 if (StringUtils.isNotEmpty(dateFormat) && StringUtils.isNotNull(value)) {
-                    cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date)value));
+                    cell.setCellValue(DateUtil.parseDateToStr(dateFormat, (Date)value));
                 } else if (StringUtils.isNotEmpty(readConverterExp) && StringUtils.isNotNull(value)) {
                     cell.setCellValue(convertByExp(String.valueOf(value), readConverterExp));
                 } else {
@@ -686,7 +686,7 @@ public class BaseExcelUtil<T> {
                 if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA) {
                     val = cell.getNumericCellValue();
                     if (HSSFDateUtil.isCellDateFormatted(cell)) {
-                        val = DateUtil.getJavaDate((Double)val); // POI Excel 日期格式转换
+                        val = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double)val); // POI Excel 日期格式转换
                     } else {
                         if ((Double)val % 1 > 0) {
                             val = new DecimalFormat("0.00").format(val);

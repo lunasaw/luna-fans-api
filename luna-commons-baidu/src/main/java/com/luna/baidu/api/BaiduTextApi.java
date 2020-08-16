@@ -8,7 +8,7 @@ import com.luna.baidu.dto.text.TextSimilarResultDTO;
 import com.luna.baidu.dto.text.TextSimnetResultDTO;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.http.HttpUtilsConstant;
-import com.luna.common.utils.StringUtils;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.common.utils.text.CharsetKit;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;

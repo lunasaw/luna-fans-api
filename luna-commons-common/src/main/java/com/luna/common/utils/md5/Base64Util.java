@@ -1,4 +1,4 @@
-package com.luna.common.utils;
+package com.luna.common.utils.md5;
 
 import java.util.regex.Pattern;
 

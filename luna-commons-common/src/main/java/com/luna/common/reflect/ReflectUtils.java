@@ -1,7 +1,7 @@
 package com.luna.common.reflect;
 
-import com.luna.common.utils.text.Convert;
-import com.luna.common.utils.text.DateUtils;
+import com.luna.common.utils.text.ConvertUtil;
+import com.luna.common.utils.text.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -136,21 +136,21 @@ public class ReflectUtils {
             for (int i = 0; i < cs.length; i++) {
                 if (args[i] != null && !args[i].getClass().equals(cs[i])) {
                     if (cs[i] == String.class) {
-                        args[i] = Convert.toStr(args[i]);
+                        args[i] = ConvertUtil.toStr(args[i]);
                         if (StringUtils.endsWith((String)args[i], ".0")) {
                             args[i] = StringUtils.substringBefore((String)args[i], ".0");
                         }
                     } else if (cs[i] == Integer.class) {
-                        args[i] = Convert.toInt(args[i]);
+                        args[i] = ConvertUtil.toInt(args[i]);
                     } else if (cs[i] == Long.class) {
-                        args[i] = Convert.toLong(args[i]);
+                        args[i] = ConvertUtil.toLong(args[i]);
                     } else if (cs[i] == Double.class) {
-                        args[i] = Convert.toDouble(args[i]);
+                        args[i] = ConvertUtil.toDouble(args[i]);
                     } else if (cs[i] == Float.class) {
-                        args[i] = Convert.toFloat(args[i]);
+                        args[i] = ConvertUtil.toFloat(args[i]);
                     } else if (cs[i] == Date.class) {
                         if (args[i] instanceof String) {
-                            args[i] = DateUtils.parseDate(args[i]);
+                            args[i] = DateUtil.parseDate(args[i]);
                         } else {
                             args[i] = new Date((Long)args[i]);
                         }

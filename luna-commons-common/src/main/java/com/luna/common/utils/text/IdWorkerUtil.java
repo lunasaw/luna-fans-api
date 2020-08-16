@@ -22,7 +22,7 @@ import java.net.NetworkInterface;
  *
  * @author Polim
  */
-public class IdWorker {
+public class IdWorkerUtil {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
     private final static long twepoch = 1288834974657L;
     // 机器标识位数
@@ -52,7 +52,7 @@ public class IdWorker {
     // 数据标识id部分
     private final long datacenterId;
 
-    public IdWorker(){
+    public IdWorkerUtil() {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
@@ -62,7 +62,7 @@ public class IdWorker {
      * @param datacenterId
      *            序列号
      */
-    public IdWorker(long workerId, long datacenterId) {
+    public IdWorkerUtil(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
@@ -163,9 +163,9 @@ public class IdWorker {
     public static void main(String[] args) {
         //推特  26万个不重复的ID
         //参数1 参数2 是在0 -31 之间
-        IdWorker idWorker = new IdWorker(0,1);
+        IdWorkerUtil idWorkerUtil = new IdWorkerUtil(0, 1);
         for (int i = 0; i <100 ; i++) {
-            System.out.println(idWorker.nextId());//用于生成唯一的ID
+            System.out.println(idWorkerUtil.nextId());// 用于生成唯一的ID
         }
     }
 
