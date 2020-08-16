@@ -132,4 +132,22 @@ public class DateUtil extends org.apache.commons.lang3.time.DateUtils {
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
     }
+
+    /**
+     * 获取当前时间戳，单位秒
+     * 
+     * @return
+     */
+    public static long getCurrentTimestamp() {
+        return System.currentTimeMillis() / 1000;
+    }
+
+    /**
+     * 获取当前时间戳，单位毫秒
+     * 
+     * @return
+     */
+    public static long getCurrentTimestampMs() {
+        return System.currentTimeMillis();
+    }
 }

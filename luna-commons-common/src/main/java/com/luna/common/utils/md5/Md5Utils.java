@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,6 +25,7 @@ public class Md5Utils {
     /** 首先初始化一个字符数组，用来存放每个16进制字符 */
     private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
         'e', 'f'};
+
 
     /**
      * 获得一个字符串的MD5值
@@ -49,6 +52,26 @@ public class Md5Utils {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             return null;
         }
+    }
+
+    /**
+     * 生成 HMACSHA256
+     * 
+     * @param data 待处理数据
+     * @param key 密钥
+     * @return 加密结果
+     * @throws Exception
+     */
+    public static String hmacsha256(String data, String key) throws Exception {
+        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
+        SecretKeySpec secret_key = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
+        sha256_HMAC.init(secret_key);
+        byte[] array = sha256_HMAC.doFinal(data.getBytes("UTF-8"));
+        StringBuilder sb = new StringBuilder();
+        for (byte item : array) {
+            sb.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
+        }
+        return sb.toString().toUpperCase();
     }
 
     /**

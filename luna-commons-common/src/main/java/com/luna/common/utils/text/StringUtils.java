@@ -228,7 +228,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         if (isEmpty(params) || isEmpty(template)) {
             return template;
         }
-        return StrFormatter.format(template, params);
+        return StrFormatterUtil.format(template, params);
     }
 
     /**
