@@ -108,7 +108,7 @@ public class TencentPayApi {
      * 签名失败
      * 参数格式校验错误
      */
-    public static String retrunOrder(String returnCode, String returnMsg) throws Exception {
+    public static String retrunOrder(String returnCode, String returnMsg) {
         log.info("retrunOrder start returnCode={},returnMsg={}", returnCode, returnMsg);
         Map<String, String> paramMap = new HashMap<>();
         if (StringUtils.isEmpty(returnCode)) {
@@ -118,6 +118,10 @@ public class TencentPayApi {
         if (StringUtils.isNotEmpty(returnMsg)) {
             paramMap.put("return_msg", returnMsg);
         }
-        return ConvertUtil.mapToXml(paramMap);
+        try {
+            return ConvertUtil.mapToXml(paramMap);
+        } catch (Exception e) {
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
+        }
     }
 }

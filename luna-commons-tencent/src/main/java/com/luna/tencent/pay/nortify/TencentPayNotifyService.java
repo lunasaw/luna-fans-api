@@ -31,7 +31,7 @@ public class TencentPayNotifyService {
             Map<String, String> map = ConvertUtil.xmlToMap(data);
             NotifyResultDTO notifyResultDTO = JSON.parseObject(JSON.toJSONString(map), NotifyResultDTO.class);
             /** 作相应处理后返回数据 */
-            String success = TencentPayApi.retrunOrder("SUCCESS", "");
+            String success = TencentPayApi.retrunOrder("SUCCESS", "OK");
             return success;
         } catch (Exception e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());

@@ -27,10 +27,20 @@ public class NotifyResultDTO {
     private String totalFee;
     /** 交易类型 JSAPI、NATIVE、APP */
     private String tradeType;
+    /** 支付结果 */
+    private String resultCode;
     /** 支付完成时间 */
     private String timeEnd;
     /** 是否关注公众号 */
     private String isSubscribe;
+
+    public String getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(String resultCode) {
+        this.resultCode = resultCode;
+    }
 
     public String getTransactionId() {
         return transactionId;

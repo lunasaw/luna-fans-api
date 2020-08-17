@@ -30,6 +30,6 @@
 
     <!-- 控制台输出日志 -->
     <root level="info">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="serverLog"/>
     </root>
 </configuration>
