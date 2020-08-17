@@ -12,6 +12,7 @@ import com.luna.common.utils.text.RandomStrUtil;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.tencent.config.TencentPayConfigValue;
 import com.luna.tencent.pay.constant.TencentPayConstant;
+import com.luna.tencent.pay.dto.CloseOderResultDTO;
 import com.luna.tencent.pay.dto.QueryResultDTO;
 import com.luna.tencent.pay.entity.TencentPayEntity;
 import org.apache.http.HttpResponse;
@@ -80,9 +81,8 @@ public class TencentPayApi {
      * @return
      * @throws Exception
      */
-    public static QueryResultDTO queryStatus(TencentPayConfigValue configValue, String outTradeNo)
-        throws Exception {
-        log.info("queryStatus start out_trade_no={}", outTradeNo);
+    public static QueryResultDTO queryStatus(TencentPayConfigValue configValue, String outTradeNo) {
+        log.info("queryStatus start outTradeNo={}", outTradeNo);
         Map<String, String> paramMap = new HashMap<>();
 
         // 2.设置参数值(根据文档来写)
@@ -91,13 +91,54 @@ public class TencentPayApi {
         paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
         paramMap.put("out_trade_no", outTradeNo);
 
-        String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
-        HttpResponse httpResponse =
-            HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.QUERY_ORDER, ImmutableMap.of(), null, body);
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Map<String, String> map = ConvertUtil.xmlToMap(s);
-        QueryResultDTO queryResultDTO = JSON.parseObject(JSON.toJSONString(map), QueryResultDTO.class);
+        QueryResultDTO queryResultDTO = null;
+        try {
+            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
+            HttpResponse httpResponse =
+                HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.QUERY_ORDER, ImmutableMap.of(), null,
+                    body);
+            String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+            Map<String, String> map = ConvertUtil.xmlToMap(s);
+            queryResultDTO = JSON.parseObject(JSON.toJSONString(map), QueryResultDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("queryStatus success queryResultDTO={}", JSON.toJSONString(queryResultDTO));
         return queryResultDTO;
+    }
+
+    /**
+     * 订单关闭
+     * 
+     * @param configValue
+     * @param outTradeNo
+     * @return
+     * @throws Exception
+     */
+    public static CloseOderResultDTO closeOrder(TencentPayConfigValue configValue, String outTradeNo) {
+        log.info("closeOrder start outTradeNo={}", outTradeNo);
+        Map<String, String> paramMap = new HashMap<>();
+        // 2.设置参数值(根据文档来写)
+        paramMap.put("appid", configValue.getAppid());
+        paramMap.put("mch_id", configValue.getPartner());
+        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+        paramMap.put("out_trade_no", outTradeNo);
+        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+
+        CloseOderResultDTO closeOderResultDTO = null;
+        try {
+            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
+            HttpResponse httpResponse =
+                HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.CLOSE_ORDER, ImmutableMap.of(), null,
+                    body);
+            String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+            Map<String, String> map = ConvertUtil.xmlToMap(s);
+            closeOderResultDTO = JSON.parseObject(JSON.toJSONString(map), CloseOderResultDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("closeOrder success closeOderResultDTO={}", JSON.toJSONString(closeOderResultDTO));
+        return closeOderResultDTO;
     }
 
     /**

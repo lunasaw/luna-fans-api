@@ -59,4 +59,9 @@ public class PayApiTest extends TencentApplicationTest {
 
         System.out.println(JSON.toJSONString(map));
     }
+
+    @Test
+    public void ctest() throws Exception {
+        TencentPayApi.closeOrder(tencentPayConfigValue, "123712837193");
+    }
 }

@@ -17,7 +17,7 @@ import org.springframework.core.env.Environment;
  * @Description:
  */
 @Configuration
-public class TencentPayMqConfigValue {
+public class TencentPayMqConfig {
 
     @Autowired
     private Environment env;

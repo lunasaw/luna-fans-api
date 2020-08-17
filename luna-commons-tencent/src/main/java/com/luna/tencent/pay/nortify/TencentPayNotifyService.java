@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.text.ConvertUtil;
-import com.luna.tencent.pay.api.TencentPayApi;
 import com.luna.tencent.pay.dto.NotifyResultDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +29,7 @@ public class TencentPayNotifyService {
      * @param data
      * @return
      */
-    public String analysisNotify(String data) {
+    public NotifyResultDTO analysisNotify(String data) {
         log.info("analysisNotify start data={}", data);
         try {
             Map<String, String> map = ConvertUtil.xmlToMap(data);
@@ -38,11 +37,11 @@ public class TencentPayNotifyService {
             if ("SUCCESS".equals(notifyResultDTO.getReturnCode())) {
                 // TODO 通讯成功,进行订单处理
                 log.info("analysisNotify success notifyResultDTO={}", JSON.toJSONString(notifyResultDTO));
-                return TencentPayApi.retrunOrder("SUCCESS", "OK");
+                return notifyResultDTO;
             } else {
                 // TODO 关闭订单 取消回滚
                 log.info("analysisNotify failed notifyResultDTO={},data={}", JSON.toJSONString(notifyResultDTO), data);
-                return TencentPayApi.retrunOrder("FAIL", "");
+                return null;
             }
         } catch (Exception e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());

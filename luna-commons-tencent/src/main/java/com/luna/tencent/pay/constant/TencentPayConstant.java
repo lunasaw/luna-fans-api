@@ -17,4 +17,7 @@ public class TencentPayConstant {
     /** 查询订单 */
     public static final String QUERY_ORDER  = "/pay/orderquery";
 
+    /** 订单关闭 */
+    public static final String CLOSE_ORDER  = "/pay/closeorder";
+
 }

@@ -1,5 +1,6 @@
 package com.luna.tencent.pay.mq;
 
+import com.luna.tencent.pay.dto.NotifyResultDTO;
 import com.luna.tencent.pay.nortify.TencentPayNotifyService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,13 +17,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RabbitListener(queues = "${mq.pay.queue.order}")
-public class OrderUpdateListener {
+public class OrderMessageListener {
 
     @Autowired
     private TencentPayNotifyService tencentPayNotifyService;
 
     @RabbitHandler
     public void handlerData(String msg) {
-        tencentPayNotifyService.analysisNotify(msg);
+        NotifyResultDTO notifyResultDTO = tencentPayNotifyService.analysisNotify(msg);
     }
 }
