@@ -417,8 +417,7 @@ public class HttpUtils {
         try {
             BufferedReader reader =
                 new BufferedReader(new InputStreamReader(httpRequest.getInputStream(), "UTF-8"));
-            String text = readAll(reader);
-            return text;
+            return readAll(reader);
         } catch (IOException e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }

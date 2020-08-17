@@ -28,7 +28,7 @@ public class PayApiTest extends TencentApplicationTest {
     public void atest() throws Exception {
         System.out.println(tencentPayConfigValue.getNotifyurl());
 
-        TencentPayEntity tencentPayEntity = new TencentPayEntity("测试", "123712837197",
+        TencentPayEntity tencentPayEntity = new TencentPayEntity("测试", "123712837199",
             AmountUtil.changeY2F("0.01"), "127.0.0.1");
         String aNative = TencentPayApi.createNative(tencentPayConfigValue, tencentPayEntity);
         System.out.println(aNative);
@@ -38,7 +38,7 @@ public class PayApiTest extends TencentApplicationTest {
 
     @Test
     public void btest() throws Exception {
-        Map<String, String> map = ConvertUtil.xmlToMap("" +
+        Map<String, String> map = ConvertUtil.xmlToMap(
             "<xml><appid><![CDATA[wx8397f8696b538317]]></appid>;" +
             "<bank_type><![CDATA[OTHERS]]></bank_type>;" +
             "<cash_fee><![CDATA[1]]></cash_fee>;" +

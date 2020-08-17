@@ -19,7 +19,20 @@ spring:
   redis:
     host: xxx
     port: 6379
-
+    password: xxx
+  rabbitmq:
+    host: xxx
+    port: 5672
+    username: admin
+    password: xxx
 server:
   port: 8080
 
+mq:
+  pay:
+    exchange:
+      order: exchange.order
+    queue:
+      order: queue.order
+    routing:
+      key: queue.order

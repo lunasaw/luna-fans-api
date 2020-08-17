@@ -1,15 +1,15 @@
 package com.luna.tencent.pay.nortify;
 
-import com.alibaba.fastjson.JSON;
 import com.luna.common.http.HttpUtils;
-import com.luna.common.utils.text.ConvertUtil;
+import com.luna.tencent.pay.api.TencentPayApi;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @Package: com.luna.tencent.pay.nortify
@@ -25,18 +25,24 @@ public class TencentPayNotifyController {
     @Autowired
     private TencentPayNotifyService tencentPayNotifyService;
 
+    @Autowired
+    private RabbitTemplate          rabbitTemplate;
+
+    @Autowired
+    private Environment             env;
+
     /**
      * 支付回调同步接口
      * 
      * @param request
      */
     @PostMapping("/notify")
-    public String notify(HttpServletRequest request) throws Exception {
+    public String notify(HttpServletRequest request) {
         String data = HttpUtils.getRequest(request);
-        Map<String, String> map = ConvertUtil.xmlToMap(data);
-        String s = tencentPayNotifyService.analysisNotify(data);
-        System.out.println(JSON.toJSONString(map));
-        return s;
+        // Mq监听处理
+        rabbitTemplate.convertAndSend(env.getProperty("mq.pay.exchange.order"), env.getProperty("mq.pay.routing.key"),
+            data);
+        return TencentPayApi.retrunOrder("SUCCESS", "OK");
     }
 
 }

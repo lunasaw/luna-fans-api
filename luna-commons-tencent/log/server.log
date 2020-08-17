@@ -1,0 +1,15 @@
+2020-08-17 14:48:42,261  INFO [main] (StartupInfoLogger.java:55) - Starting PayApiTest on luna with PID 8300 (started by improve in D:\myproject\luna-commons-loc\luna-commons-tencent) 
+2020-08-17 14:48:42,262  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-17 14:48:42,941  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-17 14:48:42,945  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-17 14:48:42,987  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 22ms. Found 0 Redis repository interfaces. 
+2020-08-17 14:48:44,575  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-17 14:48:45,622  INFO [main] (AbstractConnectionFactory.java:524) - Attempting to connect to: [iszychen.club:5672] 
+2020-08-17 14:48:47,124  INFO [main] (AbstractConnectionFactory.java:497) - Created new connection: rabbitConnectionFactory#7a5b769b:0/SimpleConnection@6fcd31c3 [delegate=amqp://admin@111.229.114.126:5672/, localPort= 2933] 
+2020-08-17 14:48:47,524  INFO [main] (StartupInfoLogger.java:61) - Started PayApiTest in 16.487 seconds (JVM running for 17.837) 
+2020-08-17 14:48:47,842  INFO [main] (TencentPayApi.java:44) - createNative start configValue={"appid":"wx8397f8696b538317","notifyurl":"http://111.229.114.126:7777/tencent/pay/notify","partner":"1473426802","partnerkey":"T6m9iK73b0kn9g5v426MKfHQH7X8rKwb"},payEntity={"body":"测试","outTradeNo":"123712837199","spbillCreateIp":"127.0.0.1","totalFee":"1","tradeType":"NATIVE"} 
+2020-08-17 14:48:49,006  INFO [main] (TencentPayApi.java:70) - createNative success configValue={"appid":"wx8397f8696b538317","notifyurl":"http://111.229.114.126:7777/tencent/pay/notify","partner":"1473426802","partnerkey":"T6m9iK73b0kn9g5v426MKfHQH7X8rKwb"},payEntity={"body":"测试","outTradeNo":"123712837199","spbillCreateIp":"127.0.0.1","totalFee":"1","tradeType":"NATIVE"},code_url=weixin://wxpay/bizpayurl?pr=c7nIPlb 
+2020-08-17 14:48:49,061  INFO [SpringContextShutdownHook] (SimpleMessageListenerContainer.java:640) - Waiting for workers to finish. 
+2020-08-17 14:48:49,580  INFO [SpringContextShutdownHook] (SimpleMessageListenerContainer.java:643) - Successfully waited for workers to finish. 
+2020-08-17 14:48:49,617  INFO [SpringContextShutdownHook] (AbstractMessageListenerContainer.java:1231) - Shutdown ignored - container is not active already 
+2020-08-17 14:48:49,619  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 

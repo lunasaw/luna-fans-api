@@ -33,6 +33,16 @@ public class NotifyResultDTO {
     private String timeEnd;
     /** 是否关注公众号 */
     private String isSubscribe;
+    /** 是否通讯成功 */
+    private String returnCode;
+
+    public String getReturnCode() {
+        return returnCode;
+    }
+
+    public void setReturnCode(String returnCode) {
+        this.returnCode = returnCode;
+    }
 
     public String getResultCode() {
         return resultCode;
