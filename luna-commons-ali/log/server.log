@@ -1,0 +1,71 @@
+2020-08-18 12:04:44,751  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 15568 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 12:04:44,753  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 12:04:45,458  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 12:04:45,462  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 12:04:45,499  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-18 12:04:46,703  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:04:48,132  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 12.914 seconds (JVM running for 14.424) 
+2020-08-18 12:04:49,109  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:05:15,982  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 13912 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 12:05:15,983  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 12:05:16,660  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 12:05:16,662  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 12:05:16,692  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-18 12:05:17,713  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:05:19,078  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 11.971 seconds (JVM running for 13.339) 
+2020-08-18 12:05:19,923  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:31:02,492  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 4180 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 12:31:02,494  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 12:31:03,289  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 12:31:03,292  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 12:31:03,322  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 16ms. Found 0 Redis repository interfaces. 
+2020-08-18 12:31:04,467  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:31:05,942  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 12.686 seconds (JVM running for 14.117) 
+2020-08-18 12:31:06,780  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:33:08,293  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 16844 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 12:33:08,294  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 12:33:08,982  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 12:33:08,985  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 12:33:09,015  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces. 
+2020-08-18 12:33:10,077  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 12:33:11,482  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 24.5 seconds (JVM running for 25.668) 
+2020-08-18 12:33:12,321  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:40:41,848  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 2784 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 13:40:41,849  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 13:40:42,516  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 13:40:42,519  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 13:40:42,554  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces. 
+2020-08-18 13:40:43,697  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:40:43,787  INFO [main] (WelcomePageHandlerMapping.java:54) - Adding welcome page: class path resource [static/index.html] 
+2020-08-18 13:40:45,076  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 7.121 seconds (JVM running for 8.187) 
+2020-08-18 13:40:46,466  ERROR [main] (AlipayLogger.java:242) - 2020-08-18 13:40:46^_^{"alipay_trade_query_response":{"code":"40004","msg":"Business Failed","sub_code":"ACQ.TRADE_NOT_EXIST","sub_msg":"交易不存在","buyer_pay_amount":"0.00","invoice_amount":"0.00","out_trade_no":"dzcp1123112312310001","point_amount":"0.00","receipt_amount":"0.00"},"sign":"iNohOJPOlNALwp/ClR6j15r6Fe0a3BQ/8s/1I71z1B7TpCLU1kPdP4DBzDzzcf79FmFWrXbLxq/T9OkUtPWpFRFh6Ul5a71Sw1HkwFwGUTX4poYZwxFHmbGze9AUUfQ4KqYlSieEvZggXYrXqjgeoHgOJ0CBzBK5Z2a0Jb1jt1qIC5AQSxsUBWpdOlf9ByG4QOBDtQe24zTZmM6fgztH1jM0AtQkzDj3aaDFsU9yDfmgxCv5J9PDr8WRkvP4udymvR1cwr/hYCGVJLT+QawvyfLw8mUbs/wv2/XuvYKQA+t9cMdprMLd95Nx856VmGVXwi/iHndu88gd5LGWK1JnWQ=="}^_^466ms,656ms,nullms 
+2020-08-18 13:40:46,513  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:49:46,738  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 9676 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 13:49:46,739  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 13:49:47,446  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 13:49:47,449  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 13:49:47,479  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-18 13:49:48,548  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:49:48,642  INFO [main] (WelcomePageHandlerMapping.java:54) - Adding welcome page: class path resource [static/index.html] 
+2020-08-18 13:49:49,988  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 13.097 seconds (JVM running for 14.168) 
+2020-08-18 13:49:51,367  ERROR [main] (AlipayLogger.java:242) - 2020-08-18 13:49:51^_^{"alipay_trade_query_response":{"code":"40004","msg":"Business Failed","sub_code":"ACQ.TRADE_NOT_EXIST","sub_msg":"交易不存在","buyer_pay_amount":"0.00","invoice_amount":"0.00","out_trade_no":"dzcp1123112312310001","point_amount":"0.00","receipt_amount":"0.00"},"sign":"iNohOJPOlNALwp/ClR6j15r6Fe0a3BQ/8s/1I71z1B7TpCLU1kPdP4DBzDzzcf79FmFWrXbLxq/T9OkUtPWpFRFh6Ul5a71Sw1HkwFwGUTX4poYZwxFHmbGze9AUUfQ4KqYlSieEvZggXYrXqjgeoHgOJ0CBzBK5Z2a0Jb1jt1qIC5AQSxsUBWpdOlf9ByG4QOBDtQe24zTZmM6fgztH1jM0AtQkzDj3aaDFsU9yDfmgxCv5J9PDr8WRkvP4udymvR1cwr/hYCGVJLT+QawvyfLw8mUbs/wv2/XuvYKQA+t9cMdprMLd95Nx856VmGVXwi/iHndu88gd5LGWK1JnWQ=="}^_^536ms,471ms,nullms 
+2020-08-18 13:49:51,421  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:51:52,713  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 12004 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 13:51:52,714  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 13:51:53,417  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 13:51:53,421  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 13:51:53,458  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces. 
+2020-08-18 13:51:54,602  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:51:54,697  INFO [main] (WelcomePageHandlerMapping.java:54) - Adding welcome page: class path resource [static/index.html] 
+2020-08-18 13:51:55,950  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 9.523 seconds (JVM running for 10.638) 
+2020-08-18 13:51:57,313  ERROR [main] (AlipayLogger.java:242) - 2020-08-18 13:51:57^_^{"alipay_trade_query_response":{"code":"40004","msg":"Business Failed","sub_code":"ACQ.TRADE_NOT_EXIST","sub_msg":"交易不存在","buyer_pay_amount":"0.00","invoice_amount":"0.00","out_trade_no":"dzcp1123112312310001","point_amount":"0.00","receipt_amount":"0.00"},"sign":"iNohOJPOlNALwp/ClR6j15r6Fe0a3BQ/8s/1I71z1B7TpCLU1kPdP4DBzDzzcf79FmFWrXbLxq/T9OkUtPWpFRFh6Ul5a71Sw1HkwFwGUTX4poYZwxFHmbGze9AUUfQ4KqYlSieEvZggXYrXqjgeoHgOJ0CBzBK5Z2a0Jb1jt1qIC5AQSxsUBWpdOlf9ByG4QOBDtQe24zTZmM6fgztH1jM0AtQkzDj3aaDFsU9yDfmgxCv5J9PDr8WRkvP4udymvR1cwr/hYCGVJLT+QawvyfLw8mUbs/wv2/XuvYKQA+t9cMdprMLd95Nx856VmGVXwi/iHndu88gd5LGWK1JnWQ=="}^_^513ms,470ms,nullms 
+2020-08-18 13:51:57,366  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:53:51,235  INFO [main] (StartupInfoLogger.java:55) - Starting AliPayTest on luna with PID 16968 (started by improve in D:\myproject\luna-commons-loc\luna-commons-ali) 
+2020-08-18 13:53:51,236  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-08-18 13:53:51,919  INFO [main] (RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode! 
+2020-08-18 13:53:51,922  INFO [main] (RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode. 
+2020-08-18 13:53:51,950  INFO [main] (RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 14ms. Found 0 Redis repository interfaces. 
+2020-08-18 13:53:52,983  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-08-18 13:53:53,078  INFO [main] (WelcomePageHandlerMapping.java:54) - Adding welcome page: class path resource [static/index.html] 
+2020-08-18 13:53:54,327  INFO [main] (StartupInfoLogger.java:61) - Started AliPayTest in 8.668 seconds (JVM running for 9.704) 
+2020-08-18 13:53:55,133  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 

@@ -3,10 +3,6 @@ package com.luna.ali.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import com.alipay.api.AlipayClient;
-import com.alipay.api.DefaultAlipayClient;
-import com.luna.common.utils.text.CharsetKit;
-
 /**
  * 应用启动加载文件
  *
@@ -26,24 +22,6 @@ public class AlipayConfigValue {
     private String       notifyUrl;
 
     private String       returnUrl;
-
-    private String       signType;
-
-    private String       gatewayUrl;
-
-    private AlipayClient alipayClient;
-
-    public AlipayClient getAlipayClient() {
-        if (alipayClient == null) {
-            this.alipayClient =
-                new DefaultAlipayClient(gatewayUrl, appId, privateKey, "json", CharsetKit.UTF_8, publicKey, signType);
-        }
-        return alipayClient;
-    }
-
-    public void setAlipayClient(AlipayClient alipayClient) {
-        this.alipayClient = alipayClient;
-    }
 
     public String getAppId() {
         return appId;
@@ -83,21 +61,5 @@ public class AlipayConfigValue {
 
     public void setReturnUrl(String returnUrl) {
         this.returnUrl = returnUrl;
-    }
-
-    public String getSignType() {
-        return signType;
-    }
-
-    public void setSignType(String signType) {
-        this.signType = signType;
-    }
-
-    public String getGatewayUrl() {
-        return gatewayUrl;
-    }
-
-    public void setGatewayUrl(String gatewayUrl) {
-        this.gatewayUrl = gatewayUrl;
     }
 }

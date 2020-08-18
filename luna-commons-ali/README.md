@@ -37,7 +37,8 @@ luna-commons-ali
 
 </p>
 
-
+## 日志
+增加支付宝Api操作
  
 ## 目录
 
@@ -86,28 +87,80 @@ git clone https://github.com/czy1024/luna-commons.git
 在配置文件application.properties加入可选配置
 
 ```text#阿里oss服务器
-       luna.ali.ossId=xxx
-       luna.ali.ossKey=xxx
-       luna.ali.bucketName=xxx
-       luna.ali.host=xxx
-       # 支付宝
-       # 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
-       luna.alipay.appId=xxx
-       # 商户私钥，您的PKCS8格式RSA2私钥
-       luna.alipay.privateKey=xxx
-       # 支付宝公钥,查看地址：https://openhome.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
-       luna.alipay.publicKey=xxx
-       # 服务器异步通知页面路径需http://格式的完整路径，不能加?id=123这类自定义参数
-       luna.alipay.notifyUrl=xxx
-       # 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数
-       luna.alipay.returnUrl=xxx
-       # 签名方式
-       luna.alipay.signType=RSA2
-       # 支付宝网关
-       luna.alipay.gatewayUrl=https://openapi.alipaydev.com/gateway.do
+     luna:
+       ali:
+         # 阿里云oss
+         bucketName: xxx
+         host: xxx
+         ossId: xxx
+         ossKey: xxx
+       alipay:
+         # 应用ID
+         appId: xxx
+         # 异步数据返回地址
+         notifyUrl: xxx
+         # 私钥
+         privateKey: xxx
+         # 公钥
+         publicKey: xxx
+         # 同步返回地址
+         returnUrl: xxx
+     
+
 ```
 
-[引用示例见](https://github.com/czy1024/luna-commons/tree/master/luna-commons-baidu)
+
+引用示例
+若采用SpringBoot构建项目可通过将第三方包中的AliConfigValue,AlipayConfigValue通过Spring配置文件注入Spring管理
+
+需在properties或者yml配置文件中配置相应key
+
+若非Spring项目可直接通过调用静态APi传入key和id进行调用
+
+```java
+
+/**
+ * @Package: com.luna.springdemo.config
+ * @ClassName: Config
+ * @Author: luna
+ * @CreateTime: 2020/8/6 21:23
+ * @Description:
+ */
+@SpringBootConfiguration
+public class Config {
+
+    @Bean
+    public AlipayConfigValue alipayConfigValue(){
+        return new AlipayConfigValue();
+    }
+
+    @Bean
+    public AliConfigValue aliConfigValue(){
+        return new AliConfigValue();
+    }
+}
+
+
+
+/**
+ * @author Luna@win10
+ * @date 2020/5/6 12:46
+ */
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class BaiduApiTest {
+
+
+	@Autowired
+	private AlipayConfigValue alipayConfigValue;
+
+	@Test
+	public void atest() throws Exception {
+		alipayConfigValue.getAppId();
+	}
+}
+
+```
 
 
 ### 文件目录说明
@@ -128,9 +181,149 @@ luna-commons-ali
 
 ### 部署
 
-暂无
+静态Api调用
 
+```java
 
+/**
+ * 支付宝支付接口
+ * 
+ * @author Luna@win10
+ * @date 2020/4/26 15:40
+ */
+public class AlipayApi {
+
+    /**
+     * 网页支付
+     * 
+     * @param alipayConfigValue
+     * @param alipayOrderDTO
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String pagePay(AlipayConfigValue alipayConfigValue, AlipayOrderDTO alipayOrderDTO)
+        throws AlipayApiException {
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .pagePay(alipayOrderDTO.getSubject(), alipayOrderDTO.getOutTradeNo(), alipayOrderDTO.getTotalAmount())
+            .builder()
+            .pay(alipayConfigValue.getReturnUrl(), alipayConfigValue.getNotifyUrl());
+    }
+
+    /**
+     * 交易查询
+     * 
+     * @param alipayConfigValue
+     * @param queryOrderDTO
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String payQuery(AlipayConfigValue alipayConfigValue, QueryOrderDTO queryOrderDTO)
+        throws AlipayApiException {
+        AlipayTradeQueryModel queryModel = new AlipayTradeQueryModel();
+        queryModel.setOutTradeNo(queryOrderDTO.getOutTradeNo());
+        queryModel.setTradeNo(queryOrderDTO.getTradeNo());
+        queryModel.setQueryOptions(queryOrderDTO.getQueryOptions());
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .queryPay(queryModel)
+            .builder()
+            .query();
+    }
+
+    /**
+     * 关闭交易
+     * 
+     * @param alipayConfigValue
+     * @param closeOrderDTO
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String payClose(AlipayConfigValue alipayConfigValue, CloseOrderDTO closeOrderDTO)
+        throws AlipayApiException {
+        AlipayTradeCloseModel closeModel = new AlipayTradeCloseModel();
+        closeModel.setOutTradeNo(closeOrderDTO.getOutTradeNo());
+        closeModel.setTradeNo(closeOrderDTO.getTradeNo());
+        closeModel.setOperatorId(closeOrderDTO.getTradeNo());
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .closePay(closeModel)
+            .builder()
+            .close();
+    }
+
+    /**
+     * 交易退款
+     * 
+     * @param alipayConfigValue
+     * @param refundAmountDTO
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String payRefund(AlipayConfigValue alipayConfigValue, RefundAmountDTO refundAmountDTO)
+        throws AlipayApiException {
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .refundPay(refundAmountDTO.getOutTradeNo(), refundAmountDTO.getTradeNo(), refundAmountDTO.getRefundAmount(),
+                refundAmountDTO.getRefundReason(), refundAmountDTO.getOutRequestNo())
+            .builder()
+            .refund();
+    }
+
+    /**
+     * 退款查询
+     * 
+     * @param alipayConfigValue
+     * @param refundQueryDTO
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String payRefundQuery(AlipayConfigValue alipayConfigValue, RefundQueryDTO refundQueryDTO)
+        throws AlipayApiException {
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .refundQueryPay(refundQueryDTO.getOutTradeNo(), refundQueryDTO.getTradeNo(),
+                refundQueryDTO.getOutRequestNo())
+            .builder()
+            .refundQuery();
+    }
+
+    /**
+     * 查询账单下载地址
+     * 
+     * @return
+     * @throws AlipayApiException
+     */
+    public static String payDownloadQuery(AlipayConfigValue alipayConfigValue, QueryBillDTO queryBillDTO)
+        throws AlipayApiException {
+        return PayRootChainFactory
+            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
+                alipayConfigValue.getPublicKey())
+            .downloadQueryPay(queryBillDTO.getBillType(), queryBillDTO.getBillDate())
+            .builder()
+            .downloadQuery();
+    }
+
+    /**
+     * 支付验证
+     * @param alipayConfigValue
+     * @param request
+     * @return
+     * @throws AlipayApiException
+     */
+    public static boolean payCheck(AlipayConfigValue alipayConfigValue, HttpServletRequest request) throws AlipayApiException {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        Map<String, String> reload = PayCheckFactory.reload(parameterMap);
+        return PayCheckFactory.check(reload, alipayConfigValue.getPublicKey());
+    }
+}
+
+```
 
 
 
