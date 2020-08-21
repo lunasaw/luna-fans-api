@@ -13,6 +13,7 @@
         <module>luna-commons-message</module>
         <module>luna-commons-api</module>
         <module>luna-commons-media</module>
+        <module>luna-commons-template</module>
     </modules>
 
     <parent>
@@ -45,6 +46,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>8.16</version>
+            </dependency>
+
             <!--Mysql驱动包-->
             <dependency>
                 <groupId>mysql</groupId>

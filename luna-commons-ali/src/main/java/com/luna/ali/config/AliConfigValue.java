@@ -3,6 +3,7 @@ package com.luna.ali.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import com.aliyun.oss.ClientBuilderConfiguration;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 
@@ -22,6 +23,16 @@ public class AliConfigValue {
 
     private String host;
 
+    private String domain;
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
     public String getHost() {
         return host;
     }
@@ -33,7 +44,13 @@ public class AliConfigValue {
     /** 创建OSSClient实例 */
     private OSS ossClient;
 
-    public OSS getOssClient() {
+    public OSS getOssClient(Boolean isCname) {
+        if (isCname) {
+            ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
+            // 设置是否支持CNAME。CNAME是指将自定义域名绑定到存储空间上。
+            conf.setSupportCname(true);
+            return new OSSClientBuilder().build(domain, ossId, ossKey, conf);
+        }
         if (ossClient == null) {
             this.ossClient = new OSSClientBuilder().build(host, ossId, ossKey);
         }

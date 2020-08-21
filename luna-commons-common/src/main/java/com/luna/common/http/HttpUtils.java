@@ -430,7 +430,7 @@ public class HttpUtils {
      * @return
      * @throws IOException
      */
-    private static String readAll(Reader rd) {
+    public static String readAll(Reader rd) {
         try {
             StringBuilder sb = new StringBuilder();
             int cp;

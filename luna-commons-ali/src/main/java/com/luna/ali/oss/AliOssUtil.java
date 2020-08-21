@@ -2,12 +2,14 @@ package com.luna.ali.oss;
 
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.model.GeneratePresignedUrlRequest;
-import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.PutObjectRequest;
-import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.internal.OSSHeaders;
+import com.aliyun.oss.model.*;
+import com.luna.ali.config.AliConfigValue;
+import com.luna.common.utils.text.RandomStrUtil;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 
@@ -18,29 +20,69 @@ import java.util.Date;
 public class AliOssUtil {
 
     /**
-     * 上传
+     * 上传文件
      * 
      * @param imagePath
-     * @param name
+     * @param bucketName
+     * @param imgFolder
+     * @param configVale
      */
-    public static void ossUpload(String imagePath, String name, String bucketName, OSS ossClient) {
-        String objectName = name;
+    public static String ossUpload(String imagePath, String bucketName, String imgFolder,
+        AliConfigValue configVale) {
         // 创建PutObjectRequest对象。
+        File file = new File(imagePath);
+        String fileName = file.getName();
+        if (!imgFolder.endsWith("/")) {
+            imgFolder = imgFolder + "/";
+        }
+        fileName = System.currentTimeMillis() + "_" + RandomStrUtil.generateNonceStrWithUUID() + "_" + fileName;
         PutObjectRequest putObjectRequest =
-            new PutObjectRequest(bucketName, objectName, new File(imagePath));
+            new PutObjectRequest(bucketName, imgFolder + fileName, file);
 
         // 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。
-        // ObjectMetadata metadata = new ObjectMetadata();
-        // metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
-        // metadata.setObjectAcl(CannedAccessControlList.Private);
-        // putObjectRequest.setMetadata(metadata);
-
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
+        metadata.setObjectAcl(CannedAccessControlList.PublicRead);
+        putObjectRequest.setMetadata(metadata);
+        OSS ossClient = configVale.getOssClient(false);
         /** 上传文件 */
         PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
-        /** 保留返回tag */
-        String eTag = putObjectResult.getETag();
+        ossClient.shutdown();
+        return configVale.getDomain() + "/" + imgFolder + file.getName();
+    }
+
+    /**
+     * 创建自定义域名oss服务
+     * 使用自定义域名时无法使用ossClient.listBuckets方法。
+     * 
+     * @param configVale
+     * @return
+     */
+    public static OSS createOssWithCname(AliConfigValue configVale) {
+        return configVale.getOssClient(true);
+    }
+
+    /**
+     * 上传图片并返回图片的url地址的方法
+     * 
+     * @param img
+     * @return
+     * @throws Exception
+     */
+    public static String uploadImg(MultipartFile img, String imgFolder, String bucketName, AliConfigValue configVale)
+        throws Exception {
+        String fileName = img.getName();
+        InputStream inputStream = img.getInputStream();
+        // 创建OSSClient实例。 阿里云OSSapi
+        OSS ossClient = configVale.getOssClient(false);
+        fileName = System.currentTimeMillis() + "_" + RandomStrUtil.generateNonceStrWithUUID() + "_" + fileName;
+        if (!imgFolder.endsWith("/")) {
+            imgFolder = imgFolder + "/";
+        }
+        PutObjectResult putObjectResult = ossClient.putObject(bucketName, imgFolder + fileName, inputStream);
         // 关闭OSSClient。
         ossClient.shutdown();
+        return configVale.getDomain() + "/" + imgFolder + fileName;
     }
 
     /**
