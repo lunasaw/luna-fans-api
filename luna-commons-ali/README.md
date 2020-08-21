@@ -38,7 +38,9 @@ luna-commons-ali
 </p>
 
 ## 日志
-增加支付宝Api操作
+8.19 增加支付宝Api操作
+
+8.21 增加阿里Oss存储Api调用
  
 ## 目录
 
