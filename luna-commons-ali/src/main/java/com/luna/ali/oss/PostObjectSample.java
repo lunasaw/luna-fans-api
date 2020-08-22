@@ -165,15 +165,4 @@ public class PostObjectSample {
             }
         }
     }
-
-    public static void main(String[] args) throws Exception {
-        AliConfigValue aliConfigValue = new AliConfigValue();
-        aliConfigValue.setBucketName("luna97");
-        aliConfigValue.setOssId("LTAI4GA22TT9cBUC529Xuvft");
-        aliConfigValue.setOssKey("0WBgw5qR3Ik4rXDwj3dyVA2j11ZfN7");
-        aliConfigValue.setHost("http://oss-cn-beijing.aliyuncs.com");
-        PostObjectSample ossPostObject = new PostObjectSample();
-        ossPostObject.postObjectByForm("C:\\Users\\improve\\Pictures\\Camera Roll\\logo.png", "luna97", "test",
-            aliConfigValue);
-    }
 }
