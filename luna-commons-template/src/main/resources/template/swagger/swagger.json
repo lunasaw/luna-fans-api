@@ -16,48 +16,20 @@
   "host": "127.0.0.1:8080",
   "basePath": "",
   "tags": [
-    <
-    #
-    list
-    swaggerPathList
-    as
-    sph>
+    <#list swaggerPathList as sph>
     {
       "name": "${sph.model}Controller",
       "description": "${sph.model}Controller"
-    }
-    <
-    #
-    if
-    ((sph_index
-    +
-    1)<(swaggerPathList
-    ?
-    size))>,
-    </
-    #
-    if>
-    </
-    #
-    list>
+    }<#if ((sph_index+1)<(swaggerPathList?size))>,</#if>
+    </#list>
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    <
-    #
-    list
-    swaggerPathList
-    as
-    spath>
+    <#list swaggerPathList as spath>
     "${spath.path}": {
-      <
-      #
-      list
-      spath.methods
-      as
-      smethod>
+      <#list spath.methods as smethod>
       "${smethod.method}": {
         "tags": [
           "${spath.model}Controller"
@@ -72,144 +44,41 @@
           "${smethod.produces}"
         ],
         "parameters": [
-          <
-          #
-          if
-          smethod.swaggerParameters
-          ?
-          ?
-          >
-          <
-          #
-          list
-          smethod.swaggerParameters
-          as
-          sp>
+          <#if smethod.swaggerParameters??>
+          <#list smethod.swaggerParameters as sp>
           {
             "in": "${sp.in}",
             "name": "${sp.name}",
             "description": "${sp.description}",
-            "required": $
-          {
-            sp.required
-            ?
-            string(
-            "true",
-            "false"
-            )
-          }
-          <
-          #
-          if
-          sp.schema
-          ?
-          ?
-          >,
-          "schema"
-          :
-          {
-            "$ref": "${sp.schema}"
-          }
-          </
-          #
-          if>
-          }
-          <
-          #
-          if
-          ((sp_index
-          +
-          1)<(smethod.swaggerParameters
-          ?
-          size))>,
-          </
-          #
-          if>
-          </
-          #
-          list>
-          </
-          #
-          if>
+            "required": ${sp.required?string("true","false")}
+            <#if sp.schema??>
+              ,
+              "schema": {
+                "$ref": "${sp.schema}"
+              }
+            </#if>
+          }<#if ((sp_index+1)<(smethod.swaggerParameters?size))>,</#if>
+          </#list>
+          </#if>
         ],
         "responses": {
-          <
-          #
-          if
-          smethod.responses
-          ?
-          ?
-          >
-          <
-          #
-          list
-          smethod.responses
-          as
-          resp>
+          <#if smethod.responses??>
+          <#list smethod.responses as resp>
           "${resp.code}": {
             "description": "${resp.description}"
-            <
-            #
-            if
-            resp.schema
-            ?
-            ?
-            >,
+            <#if resp.schema??>,
             "schema": {
               "$ref": "${resp.schema}"
             }
-            </
-            #
-            if>
-          }
-          <
-          #
-          if
-          ((resp_index
-          +
-          1)<(smethod.responses
-          ?
-          size))>,
-          </
-          #
-          if>
-          </
-          #
-          list>
-          </
-          #
-          if>
+            </#if>
+          }<#if ((resp_index+1)<(smethod.responses?size))>,</#if>
+          </#list>
+          </#if>
         }
-      }
-      <
-      #
-      if
-      ((smethod_index
-      +
-      1)<(spath.methods
-      ?
-      size))>,
-      </
-      #
-      if>
-      </
-      #
-      list>
-    }
-    <
-    #
-    if
-    ((spath_index
-    +
-    1)<(swaggerPathList
-    ?
-    size))>,
-    </
-    #
-    if>
-    </
-    #
-    list>
+      }<#if ((smethod_index+1)<(spath.methods?size))>,</#if>
+      </#list>
+    }<#if ((spath_index+1)<(swaggerPathList?size))>,</#if>
+  </#list>
   },
   "definitions": {
     "Result": {
@@ -242,12 +111,7 @@
       },
       "description": "Result"
     },
-    <
-    #
-    list
-    swaggerModels
-    as
-    sm>
+    <#list swaggerModels as sm>
     "Result«List«${sm.name}»»": {
       "type": "object",
       "required": [
@@ -314,78 +178,23 @@
     "${sm.name}": {
       "type": "${sm.type}",
       "properties": {
-        <
-        #
-        list
-        sm.properties
-        as
-        smp>
+        <#list sm.properties as smp>
         "${smp.name}": {
-          <
-          #
-          if
-          smp.type
-          ?
-          ?
-          >
+          <#if smp.type??>
           "type": "${smp.type}",
-          </
-          #
-          if>
-          <
-          #
-          if
-          smp.format
-          ?
-          ?
-          >
+          </#if>
+          <#if smp.format??>
           "format": "${smp.format}",
-          </
-          #
-          if>
-          <
-          #
-          if
-          smp.description
-          ?
-          ?
-          >
+          </#if>
+          <#if smp.description??>
           "description": "${smp.description}"
-          </
-          #
-          if>
-        }
-        <
-        #
-        if
-        ((smp_index
-        +
-        1)<(sm.properties
-        ?
-        size))>,
-        </
-        #
-        if>
-        </
-        #
-        list>
+          </#if>
+        }<#if ((smp_index+1)<(sm.properties?size))>,</#if>
+        </#list>
       },
       "description": "${sm.name}"
-    }
-    <
-    #
-    if
-    ((sm_index
-    +
-    1)<(swaggerModels
-    ?
-    size))>,
-    </
-    #
-    if>
-    </
-    #
-    list>
+    }<#if ((sm_index+1)<(swaggerModels?size))>,</#if>
+    </#list>
   },
   "externalDocs": {
     "description": "黑马训练营畅购微服务商城(http://www.itheima.com)",
