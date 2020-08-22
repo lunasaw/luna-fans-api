@@ -9,7 +9,7 @@ import java.io.Serializable;
 import ${set};
 </#list>
 /****
- * @Author:shenkunlin
+ * @Author:luna
  * @Description:${Table}构建
  * @Date 2019/6/14 19:13
  *****/
@@ -29,19 +29,19 @@ public class ${Table} implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	</#if>
 	</#if>
+	/** ${model.desc!""} */
     @Column(name = "${model.column}")
-	private ${model.simpleType} ${model.name};//${model.desc!""}
+	private ${model.simpleType} ${model.name};
 
 </#list>
 
 
 <#list models as model>
-	//get方法
+
 	public ${model.simpleType} get${model.upperName}() {
 		return ${model.name};
 	}
 
-	//set方法
 	public void set${model.upperName}(${model.simpleType} ${model.name}) {
 		this.${model.name} = ${model.name};
 	}

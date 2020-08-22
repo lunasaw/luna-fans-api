@@ -1,11 +1,12 @@
-package com.luna.message.service;
+package com.luna.message.template.service;
 
-import com.luna.message.pojo.Template;
 import com.github.pagehelper.PageInfo;
+import com.luna.message.template.pojo.TemplateDO;
+
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:luna
  * @Description:Template业务层接口
  * @Date 2019/6/14 0:16
  *****/
@@ -14,33 +15,31 @@ public interface TemplateService {
     /***
      * Template多条件分页查询
      * 
-     * @param template
+     * @param templateDO
      * @param page
      * @param size
      * @return
      */
-    PageInfo<Template> findPage(Template template, int page, int size);
+    PageInfo<TemplateDO> findPage(TemplateDO templateDO, int page, int size);
 
     /***
      * Template分页查询
-     * 
      * @param page
      * @param size
      * @return
      */
-    PageInfo<Template> findPage(int page, int size);
+    PageInfo<TemplateDO> findPage(int page, int size);
 
     /***
      * Template多条件搜索方法
      * 
-     * @param template
+     * @param templateDO
      * @return
      */
-    List<Template> findList(Template template);
+    List<TemplateDO> findList(TemplateDO templateDO);
 
     /***
      * 删除Template
-     * 
      * @param id
      */
     void delete(Long id);
@@ -48,29 +47,27 @@ public interface TemplateService {
     /***
      * 修改Template数据
      * 
-     * @param template
+     * @param templateDO
      */
-    void update(Template template);
+    void update(TemplateDO templateDO);
 
     /***
      * 新增Template
      * 
-     * @param template
+     * @param templateDO
      */
-    void add(Template template);
+    void add(TemplateDO templateDO);
 
     /**
      * 根据ID查询Template
-     * 
      * @param id
      * @return
      */
-    Template findById(Long id);
+    TemplateDO findById(Long id);
 
     /***
      * 查询所有Template
-     * 
      * @return
      */
-    List<Template> findAll();
+    List<TemplateDO> findAll();
 }

@@ -1,20 +1,20 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "代码生成器,生成Dao、Service、Controller、Pojo、Feign、Swagger的JSON脚本",
+    "description": "微服务工程代码生成器,生成Dao、Service、Controller、Pojo、Feign、Swagger的JSON脚本",
     "version": "1.0.0",
-    "title": "代码生成器",
+    "title": "训练营代码生成器",
     "termsOfService": "https://github.com/czy1024/luna-commons.git",
     "contact": {
-      "email": "hexo.iszychen.club"
+      "email": "luna_nov@163.com"
     },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "petstore.swagger.io",
-  "basePath": "/v2",
+  "host": "127.0.0.1:8080",
+  "basePath": "",
   "tags": [
     <
     #
@@ -388,7 +388,7 @@
     list>
   },
   "externalDocs": {
-    "description": "luna-template",
+    "description": "黑马训练营畅购微服务商城(http://www.itheima.com)",
     "url": "https://github.com/czy1024/luna-commons.git"
   }
 }

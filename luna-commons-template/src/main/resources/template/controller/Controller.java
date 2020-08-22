@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:luna
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
@@ -65,7 +65,7 @@ public class ${Table}Controller {
     }
 
     /***
-     * 多条件搜索品牌数据
+     * 多条件搜索数据
      * @param ${table}
      * @return
      */
@@ -80,7 +80,7 @@ public class ${Table}Controller {
     }
 
     /***
-     * 根据ID删除品牌数据
+     * 根据ID删除数据
      * @param id
      * @return
      */

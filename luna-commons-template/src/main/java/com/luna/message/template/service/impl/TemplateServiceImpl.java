@@ -1,8 +1,8 @@
-package com.luna.message.service.impl;
+package com.luna.message.template.service.impl;
 
-import com.luna.message.dao.TemplateMapper;
-import com.luna.message.pojo.Template;
-import com.luna.message.service.TemplateService;
+import com.luna.message.template.dao.TemplateMapper;
+import com.luna.message.template.pojo.Template;
+import com.luna.message.template.service.TemplateService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:luna
  * @Description:Template业务层接口实现类
  * @Date 2019/6/14 0:16
  *****/

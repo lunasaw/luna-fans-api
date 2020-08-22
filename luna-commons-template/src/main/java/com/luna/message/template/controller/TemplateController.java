@@ -1,7 +1,7 @@
-package com.luna.message.controller;
+package com.luna.message.template.controller;
 
-import com.luna.message.pojo.Template;
-import com.luna.message.service.TemplateService;
+import com.luna.message.template.pojo.Template;
+import com.luna.message.template.service.TemplateService;
 import com.github.pagehelper.PageInfo;
 import com.luna.common.dto.ResultDTO;
 import com.luna.common.dto.constant.ResultCode;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /****
- * @Author:shenkunlin
+ * @Author:luna
  * @Description:
  * @Date 2019/6/14 0:18
  *****/
@@ -65,7 +65,7 @@ public class TemplateController {
     }
 
     /***
-     * 多条件搜索品牌数据
+     * 多条件搜索数据
      * 
      * @param template
      * @return
@@ -80,7 +80,7 @@ public class TemplateController {
     }
 
     /***
-     * 根据ID删除品牌数据
+     * 根据ID删除数据
      * 
      * @param id
      * @return
