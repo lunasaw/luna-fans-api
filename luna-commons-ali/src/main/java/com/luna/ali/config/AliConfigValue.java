@@ -25,6 +25,20 @@ public class AliConfigValue {
 
     private String domain;
 
+    private String serverUrl;
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public OSS getOssClient() {
+        return ossClient;
+    }
+
     public String getDomain() {
         return domain;
     }

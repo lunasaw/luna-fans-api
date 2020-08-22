@@ -1,5 +1,6 @@
 package com.luna.ali.oss;
 
+import com.google.common.collect.Lists;
 import com.luna.ali.AliApplicationTest;
 import com.luna.ali.config.AliConfigValue;
 import org.junit.Test;
@@ -24,9 +25,11 @@ public class Tests extends AliApplicationTest {
         // aliConfigValue);
         // System.out.println(s);
 
-        String img = AliOssUploadApi.uploadByFilePath("C:\\Users\\improve\\Pictures\\Camera Roll\\logo.png",
-            aliConfigValue.getBucketName(), "img", "", "", aliConfigValue);
-        System.out.println(img);
+        // String img = AliOssUploadApi.uploadByFilePath("C:\\Users\\improve\\Pictures\\Camera Roll\\logo.png",
+        // aliConfigValue.getBucketName(), "img", "", "", aliConfigValue);
+        // System.out.println(img);
+
+        AliOssUploadGoOnApi.uploadGoOn("luna97", Lists.newArrayList(), "test2", aliConfigValue);
     }
 
     @Test

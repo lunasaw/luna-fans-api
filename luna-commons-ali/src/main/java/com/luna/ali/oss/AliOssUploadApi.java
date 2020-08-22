@@ -200,12 +200,10 @@ public class AliOssUploadApi {
         ObjectMetadata metadata = new ObjectMetadata();
         if (StringUtils.isNotEmpty(access)) {
             metadata.setObjectAcl(CannedAccessControlList.parse(access));
-
         }
 
         if (StringUtils.isNotEmpty(type)) {
             metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.parse(type));
-
         }
         return metadata;
     }

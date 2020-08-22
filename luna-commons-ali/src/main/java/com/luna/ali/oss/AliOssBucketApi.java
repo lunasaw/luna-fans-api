@@ -24,26 +24,21 @@ public class AliOssBucketApi {
      * 必须以小写字母或者数字开头和结尾。
      * 长度必须在3~63字节之间。
      * @param aliConfigValue
-     *
-     * @param isLowFrequency 创建低频或归档类型的存储空间
      */
-    public void createBucket(String bucketName, Boolean isLowFrequency, AliConfigValue aliConfigValue) {
+    public void createBucket(String bucketName, String accress, String type, AliConfigValue aliConfigValue) {
         // 创建OSSClient实例。
         OSS ossClient = aliConfigValue.getOssClient(false);
 
         // 创建CreateBucketRequest对象。
         CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
-        // 如果创建存储空间的同时需要指定存储类型以及数据容灾类型, 可以参考以下代码。
-        // 此处以设置存储空间的存储类型为标准存储为例。
-        // createBucketRequest.setStorageClass(StorageClass.Standard);
-        // 默认情况下，数据容灾类型为本地冗余存储，即DataRedundancyType.LRS。如果需要设置数据容灾类型为同城冗余存储，请替换为DataRedundancyType.ZRS。
-        // createBucketRequest.setDataRedundancyType(DataRedundancyType.LRS);
 
-        if (isLowFrequency) {
-            // 设置存储空间的权限为公共读，默认是私有。
-            createBucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
-            // 设置存储空间的存储类型为低频访问类型，默认是标准类型。
-            createBucketRequest.setStorageClass(StorageClass.IA);
+        // 设置存储空间的权限为公共读，默认是私有。
+        if (StringUtils.isNotEmpty(accress)) {
+            createBucketRequest.setCannedACL(CannedAccessControlList.parse(accress));
+        }
+        // 设置存储空间的存储类型为低频访问类型，默认是标准类型。
+        if (StringUtils.isNotEmpty(type)) {
+            createBucketRequest.setStorageClass(StorageClass.parse(type));
         }
 
         // 创建存储空间。
