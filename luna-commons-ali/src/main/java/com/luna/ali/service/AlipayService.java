@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * @Package: com.luna.ali.alipay.controller.com.luna.ali.alipay.service
+ * @Package: com.luna.ali.alipay.com.luna.message.controller.com.luna.ali.alipay.com.luna.message.service
  * @ClassName: AlipayService
  * @Author: luna
  * @CreateTime: 2020/8/18 12:35

@@ -1,0 +1,6437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "luna-template",
+    "version": "1.0",
+    "title": "swagger-api",
+    "termsOfService": "http://localhost:18081"
+  },
+  "host": "localhost:18081",
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/album": {
+      "get": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album查询所有",
+        "description": "查询所Album有方法详情",
+        "operationId": "findAllUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Album»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album添加",
+        "description": "添加Album方法详情",
+        "operationId": "addUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Album对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/album/search": {
+      "post": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album条件查询",
+        "description": "条件查询Album方法详情",
+        "operationId": "findListUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Album对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Album»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/album/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album分页查询",
+        "description": "分页查询Album方法详情",
+        "operationId": "findPageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album条件分页查询",
+        "description": "分页条件查询Album方法详情",
+        "operationId": "findPageUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Album对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/album/{id}": {
+      "get": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album根据ID查询",
+        "description": "根据ID查询Album方法详情",
+        "operationId": "findByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Album»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album根据ID修改",
+        "description": "根据ID修改Album方法详情",
+        "operationId": "updateUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Album对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Album"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AlbumController"
+        ],
+        "summary": "Album根据ID删除",
+        "description": "根据ID删除Album方法详情",
+        "operationId": "deleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/brand": {
+      "get": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "查询所有Brand",
+        "description": "查询所有Brand方法详情",
+        "operationId": "findAllUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Brand»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand添加",
+        "description": "添加Brand方法详情",
+        "operationId": "addUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Brand对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/brand/category/{id}": {
+      "get": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "根据分类ID查询Brand",
+        "description": "根据分类ID查询Brand方法详情",
+        "operationId": "getByCategoryIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Brand»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/brand/search": {
+      "post": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand条件查询",
+        "description": "条件查询Brand方法详情",
+        "operationId": "findListUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Brand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Brand»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/brand/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand分页查询",
+        "description": "分页查询Brand方法详情",
+        "operationId": "findPageUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand条件分页查询",
+        "description": "分页条件查询Brand方法详情",
+        "operationId": "findPageUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Brand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/brand/{id}": {
+      "get": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand根据ID查询",
+        "description": "根据ID查询Brand方法详情",
+        "operationId": "findByIdUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Brand»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand根据ID修改",
+        "description": "根据ID修改Brand方法详情",
+        "operationId": "updateUsingPUT_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Brand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Brand"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BrandController"
+        ],
+        "summary": "Brand根据ID删除",
+        "description": "根据ID删除Brand方法详情",
+        "operationId": "deleteUsingDELETE_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/cache/refresh": {
+      "get": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CacheController"
+        ],
+        "summary": "刷新分类、品牌、规格缓存",
+        "description": "刷新分类、品牌、规格方法详情",
+        "operationId": "refreshCacheUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category查询所有",
+        "description": "查询所Category有方法详情",
+        "operationId": "findAllUsingGET_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Category»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category添加",
+        "description": "添加Category方法详情",
+        "operationId": "addUsingPOST_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/category/list/{pid}": {
+      "get": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据父节点ID查询所有子节点",
+        "description": "根据父节点ID查询所有Category子节点方法详情",
+        "operationId": "findByPrantIdUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/category/search": {
+      "post": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category条件查询",
+        "description": "条件查询Category方法详情",
+        "operationId": "findListUsingPOST_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Category»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/category/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category分页查询",
+        "description": "分页查询Category方法详情",
+        "operationId": "findPageUsingGET_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category条件分页查询",
+        "description": "分页条件查询Category方法详情",
+        "operationId": "findPageUsingPOST_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据ID查询",
+        "description": "根据ID查询Category方法详情",
+        "operationId": "findByIdUsingGET_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Category»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据ID修改",
+        "description": "根据ID修改Category方法详情",
+        "operationId": "updateUsingPUT_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Category对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CategoryController"
+        ],
+        "summary": "Category根据ID删除",
+        "description": "根据ID删除Category方法详情",
+        "operationId": "deleteUsingDELETE_3",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/categoryBrand": {
+      "get": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand查询所有",
+        "description": "查询所CategoryBrand有方法详情",
+        "operationId": "findAllUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«CategoryBrand»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand添加",
+        "description": "添加CategoryBrand方法详情",
+        "operationId": "addUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CategoryBrand对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryBrand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/categoryBrand/search": {
+      "post": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand条件查询",
+        "description": "条件查询CategoryBrand方法详情",
+        "operationId": "findListUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CategoryBrand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CategoryBrand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«CategoryBrand»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/categoryBrand/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand分页查询",
+        "description": "分页查询CategoryBrand方法详情",
+        "operationId": "findPageUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand条件分页查询",
+        "description": "分页条件查询CategoryBrand方法详情",
+        "operationId": "findPageUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CategoryBrand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CategoryBrand"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/categoryBrand/{id}": {
+      "get": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand根据ID查询",
+        "description": "根据ID查询CategoryBrand方法详情",
+        "operationId": "findByIdUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«CategoryBrand»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand根据ID修改",
+        "description": "根据ID修改CategoryBrand方法详情",
+        "operationId": "updateUsingPUT_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CategoryBrand对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CategoryBrand"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CategoryBrandController"
+        ],
+        "summary": "CategoryBrand根据ID删除",
+        "description": "根据ID删除CategoryBrand方法详情",
+        "operationId": "deleteUsingDELETE_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/para": {
+      "get": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para查询所有",
+        "description": "查询所Para有方法详情",
+        "operationId": "findAllUsingGET_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Para»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para添加",
+        "description": "添加Para方法详情",
+        "operationId": "addUsingPOST_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Para对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Para"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/para/category/{id}": {
+      "get": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "根据分类ID查询Para",
+        "description": "根据分类ID查询Para方法详情",
+        "operationId": "getByCategoryIdUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Para»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/para/search": {
+      "post": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para条件查询",
+        "description": "条件查询Para方法详情",
+        "operationId": "findListUsingPOST_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Para对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Para"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Para»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/para/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para分页查询",
+        "description": "分页查询Para方法详情",
+        "operationId": "findPageUsingGET_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para条件分页查询",
+        "description": "分页条件查询Para方法详情",
+        "operationId": "findPageUsingPOST_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Para对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Para"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/para/{id}": {
+      "get": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para根据ID查询",
+        "description": "根据ID查询Para方法详情",
+        "operationId": "findByIdUsingGET_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Para»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para根据ID修改",
+        "description": "根据ID修改Para方法详情",
+        "operationId": "updateUsingPUT_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Para对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Para"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ParaController"
+        ],
+        "summary": "Para根据ID删除",
+        "description": "根据ID删除Para方法详情",
+        "operationId": "deleteUsingDELETE_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/pref": {
+      "get": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref查询所有",
+        "description": "查询所Pref有方法详情",
+        "operationId": "findAllUsingGET_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Pref»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref添加",
+        "description": "添加Pref方法详情",
+        "operationId": "addUsingPOST_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Pref对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pref"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/pref/search": {
+      "post": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref条件查询",
+        "description": "条件查询Pref方法详情",
+        "operationId": "findListUsingPOST_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Pref对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Pref"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Pref»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/pref/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref分页查询",
+        "description": "分页查询Pref方法详情",
+        "operationId": "findPageUsingGET_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref条件分页查询",
+        "description": "分页条件查询Pref方法详情",
+        "operationId": "findPageUsingPOST_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Pref对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Pref"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/pref/{id}": {
+      "get": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref根据ID查询",
+        "description": "根据ID查询Pref方法详情",
+        "operationId": "findByIdUsingGET_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Pref»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref根据ID修改",
+        "description": "根据ID修改Pref方法详情",
+        "operationId": "updateUsingPUT_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Pref对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Pref"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrefController"
+        ],
+        "summary": "Pref根据ID删除",
+        "description": "根据ID删除Pref方法详情",
+        "operationId": "deleteUsingDELETE_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/sku": {
+      "get": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku查询所有",
+        "description": "查询所Sku有方法详情",
+        "operationId": "findAllUsingGET_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Sku»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku添加",
+        "description": "添加Sku方法详情",
+        "operationId": "addUsingPOST_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sku对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/sku/imp/mk": {
+      "get": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataImportController"
+        ],
+        "summary": "随机生成所有分类品牌映射数据",
+        "description": "随机生成所有分类品牌映射数据方法详情",
+        "operationId": "importSkuUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/sku/search": {
+      "post": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku条件查询",
+        "description": "条件查询Sku方法详情",
+        "operationId": "findListUsingPOST_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sku对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Sku»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/sku/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku分页查询",
+        "description": "分页查询Sku方法详情",
+        "operationId": "findPageUsingGET_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku条件分页查询",
+        "description": "分页条件查询Sku方法详情",
+        "operationId": "findPageUsingPOST_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sku对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/sku/{id}": {
+      "get": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku根据ID查询",
+        "description": "根据ID查询Sku方法详情",
+        "operationId": "findByIdUsingGET_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Sku»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku根据ID修改",
+        "description": "根据ID修改Sku方法详情",
+        "operationId": "updateUsingPUT_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Sku对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SkuController"
+        ],
+        "summary": "Sku根据ID删除",
+        "description": "根据ID删除Sku方法详情",
+        "operationId": "deleteUsingDELETE_6",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spec": {
+      "get": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec查询所有",
+        "description": "查询所Spec有方法详情",
+        "operationId": "findAllUsingGET_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Spec»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec添加",
+        "description": "添加Spec方法详情",
+        "operationId": "addUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spec对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Spec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spec/search": {
+      "post": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec条件查询",
+        "description": "条件查询Spec方法详情",
+        "operationId": "findListUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spec对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Spec»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spec/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec分页查询",
+        "description": "分页查询Spec方法详情",
+        "operationId": "findPageUsingGET_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec条件分页查询",
+        "description": "分页条件查询Spec方法详情",
+        "operationId": "findPageUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spec对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spec"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spec/{id}": {
+      "get": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec根据ID查询",
+        "description": "根据ID查询Spec方法详情",
+        "operationId": "findByIdUsingGET_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Spec»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec根据ID修改",
+        "description": "根据ID修改Spec方法详情",
+        "operationId": "updateUsingPUT_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spec对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spec"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SpecController"
+        ],
+        "summary": "Spec根据ID删除",
+        "description": "根据ID删除Spec方法详情",
+        "operationId": "deleteUsingDELETE_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu": {
+      "get": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu查询所有",
+        "description": "查询所Spu有方法详情",
+        "operationId": "findAllUsingGET_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Spu»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu添加",
+        "description": "添加Spu方法详情",
+        "operationId": "addUsingPOST_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spu对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Spu"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/audit/{id}": {
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU审核",
+        "description": "SPU审核方法详情",
+        "operationId": "auditUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/goods/{id}": {
+      "get": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "根据ID查询Goods",
+        "description": "根据ID查询Goods方法详情",
+        "operationId": "findGoodsByIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Goods»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/logic/delete/{id}": {
+      "delete": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU逻辑删除",
+        "description": "SPU逻辑删除方法详情",
+        "operationId": "logicDeleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/pull/{id}": {
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU下架",
+        "description": "SPU下架方法详情",
+        "operationId": "pullUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/put/many": {
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU批量上架",
+        "description": "SPU批量上架方法详情",
+        "operationId": "putManyUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ids",
+            "description": "SPUID集合",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/put/{id}": {
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU上架",
+        "description": "SPU上架方法详情",
+        "operationId": "putUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/restore/{id}": {
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "SPU数据恢复",
+        "description": "SPU数据恢复方法详情",
+        "operationId": "restoreUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SPU主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/save": {
+      "post": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Goods(SPU+SKU)增加",
+        "description": "Goods(SPU+SKU)增加方法详情",
+        "operationId": "saveUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Goods对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Goods"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/search": {
+      "post": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu条件查询",
+        "description": "条件查询Spu方法详情",
+        "operationId": "findListUsingPOST_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spu对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spu"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Spu»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu分页查询",
+        "description": "分页查询Spu方法详情",
+        "operationId": "findPageUsingGET_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu条件分页查询",
+        "description": "分页条件查询Spu方法详情",
+        "operationId": "findPageUsingPOST_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spu对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spu"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/spu/{id}": {
+      "get": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu根据ID查询",
+        "description": "根据ID查询Spu方法详情",
+        "operationId": "findByIdUsingGET_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Spu»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu根据ID修改",
+        "description": "根据ID修改Spu方法详情",
+        "operationId": "updateUsingPUT_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Spu对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Spu"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SpuController"
+        ],
+        "summary": "Spu根据ID删除",
+        "description": "根据ID删除Spu方法详情",
+        "operationId": "deleteUsingDELETE_8",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/stockBack": {
+      "get": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack查询所有",
+        "description": "查询所StockBack有方法详情",
+        "operationId": "findAllUsingGET_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«StockBack»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack添加",
+        "description": "添加StockBack方法详情",
+        "operationId": "addUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "StockBack对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StockBack"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/stockBack/search": {
+      "post": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack条件查询",
+        "description": "条件查询StockBack方法详情",
+        "operationId": "findListUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "StockBack对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StockBack"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«StockBack»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/stockBack/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack分页查询",
+        "description": "分页查询StockBack方法详情",
+        "operationId": "findPageUsingGET_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack条件分页查询",
+        "description": "分页条件查询StockBack方法详情",
+        "operationId": "findPageUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "StockBack对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StockBack"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/stockBack/{id}": {
+      "get": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack根据ID查询",
+        "description": "根据ID查询StockBack方法详情",
+        "operationId": "findByIdUsingGET_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«StockBack»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack根据ID修改",
+        "description": "根据ID修改StockBack方法详情",
+        "operationId": "updateUsingPUT_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "StockBack对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StockBack"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StockBackController"
+        ],
+        "summary": "StockBack根据ID删除",
+        "description": "根据ID删除StockBack方法详情",
+        "operationId": "deleteUsingDELETE_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/template": {
+      "get": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template查询所有",
+        "description": "查询所Template有方法详情",
+        "operationId": "findAllUsingGET_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Template»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template添加",
+        "description": "添加Template方法详情",
+        "operationId": "addUsingPOST_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Template对象",
+            "description": "传入JSON数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/template/search": {
+      "post": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template条件查询",
+        "description": "条件查询Template方法详情",
+        "operationId": "findListUsingPOST_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Template对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«List«Template»»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/template/search/{page}/{size}": {
+      "get": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template分页查询",
+        "description": "分页查询Template方法详情",
+        "operationId": "findPageUsingGET_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template条件分页查询",
+        "description": "分页条件查询Template方法详情",
+        "operationId": "findPageUsingPOST_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Template对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "当前页",
+            "required": true,
+            "type": "ref"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "每页显示条数",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«PageInfo»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    },
+    "/template/{id}": {
+      "get": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template根据ID查询",
+        "description": "根据ID查询Template方法详情",
+        "operationId": "findByIdUsingGET_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result«Template»"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template根据ID修改",
+        "description": "根据ID修改Template方法详情",
+        "operationId": "updateUsingPUT_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Template对象",
+            "description": "传入JSON数据",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TemplateController"
+        ],
+        "summary": "Template根据ID删除",
+        "description": "根据ID删除Template方法详情",
+        "operationId": "deleteUsingDELETE_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "主键ID",
+            "required": true,
+            "type": "ref"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "500": {
+            "description": "服务器异常"
+          },
+          "403": {
+            "description": "拒绝请求"
+          },
+          "404": {
+            "description": "找不到路径"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StockBack": {
+      "type": "object",
+      "properties": {
+        "backTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "回滚时间"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "回滚数量"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "订单id"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "SKU的id"
+        },
+        "status": {
+          "type": "string",
+          "description": "回滚状态"
+        }
+      },
+      "description": "StockBack"
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "goodsNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "商品数量"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "分类ID"
+        },
+        "isMenu": {
+          "type": "string",
+          "description": "是否导航"
+        },
+        "isShow": {
+          "type": "string",
+          "description": "是否显示"
+        },
+        "name": {
+          "type": "string",
+          "description": "分类名称"
+        },
+        "parentId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "上级ID"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "templateId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "模板ID"
+        }
+      },
+      "description": "Category"
+    },
+    "Result«PageInfo»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/PageInfo"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Sku»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Album": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "编号"
+        },
+        "image": {
+          "type": "string",
+          "description": "相册封面"
+        },
+        "imageItems": {
+          "type": "string",
+          "description": "图片列表"
+        },
+        "title": {
+          "type": "string",
+          "description": "相册名称"
+        }
+      },
+      "description": "Album"
+    },
+    "Result«Album»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Album"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "object",
+          "description": "逻辑数据"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Album»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Album"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "模板名称"
+        },
+        "paraNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "参数数量"
+        },
+        "specNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "规格数量"
+        }
+      },
+      "description": "Template"
+    },
+    "Result«CategoryBrand»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/CategoryBrand"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«StockBack»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/StockBack"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Goods»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Goods"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Brand»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Brand"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Spu": {
+      "type": "object",
+      "properties": {
+        "brandId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "品牌ID"
+        },
+        "caption": {
+          "type": "string",
+          "description": "副标题"
+        },
+        "category1Id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "一级分类"
+        },
+        "category2Id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "二级分类"
+        },
+        "category3Id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "三级分类"
+        },
+        "commentNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "评论数"
+        },
+        "freightId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "运费模板id"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "主键"
+        },
+        "image": {
+          "type": "string",
+          "description": "图片"
+        },
+        "images": {
+          "type": "string",
+          "description": "图片列表"
+        },
+        "introduction": {
+          "type": "string",
+          "description": "介绍"
+        },
+        "isDelete": {
+          "type": "string",
+          "description": "是否删除"
+        },
+        "isEnableSpec": {
+          "type": "string",
+          "description": "是否启用规格"
+        },
+        "isMarketable": {
+          "type": "string",
+          "description": "是否上架"
+        },
+        "name": {
+          "type": "string",
+          "description": "SPU名"
+        },
+        "paraItems": {
+          "type": "string",
+          "description": "参数列表"
+        },
+        "saleNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "销量"
+        },
+        "saleService": {
+          "type": "string",
+          "description": "售后服务"
+        },
+        "sn": {
+          "type": "string",
+          "description": "货号"
+        },
+        "specItems": {
+          "type": "string",
+          "description": "规格列表"
+        },
+        "status": {
+          "type": "string",
+          "description": "审核状态"
+        },
+        "templateId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "模板ID"
+        }
+      },
+      "description": "Spu"
+    },
+    "Result«List«Category»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Category"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«CategoryBrand»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/CategoryBrand"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Spu»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Spu"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Template»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Brand»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Brand"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Para": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "名称"
+        },
+        "options": {
+          "type": "string",
+          "description": "选项"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "templateId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "模板ID"
+        }
+      },
+      "description": "Para"
+    },
+    "Pref": {
+      "type": "object",
+      "properties": {
+        "buyMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "消费金额"
+        },
+        "cateId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "分类ID"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "活动截至日期"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID"
+        },
+        "preMoney": {
+          "type": "integer",
+          "format": "int32",
+          "description": "优惠金额"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "活动开始日期"
+        },
+        "state": {
+          "type": "string",
+          "description": "状态,1:有效，0：无效"
+        },
+        "type": {
+          "type": "string",
+          "description": "类型,1:普通订单，2：限时活动"
+        }
+      },
+      "description": "Pref"
+    },
+    "Result«Sku»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Sku"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Goods": {
+      "type": "object",
+      "properties": {
+        "skuList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          }
+        },
+        "spu": {
+          "$ref": "#/definitions/Spu"
+        }
+      },
+      "description": "商品信息"
+    },
+    "Result«Pref»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Pref"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Spec»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Spec"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Template»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Template"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "品牌id"
+        },
+        "image": {
+          "type": "string",
+          "description": "品牌图片地址"
+        },
+        "letter": {
+          "type": "string",
+          "description": "品牌的首字母"
+        },
+        "name": {
+          "type": "string",
+          "description": "品牌名称"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        }
+      },
+      "description": "Brand"
+    },
+    "CategoryBrand": {
+      "type": "object",
+      "properties": {
+        "brandId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "品牌ID"
+        },
+        "categoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "分类ID"
+        }
+      },
+      "description": "CategoryBrand"
+    },
+    "PageInfo": {
+      "type": "object",
+      "properties": {
+        "endRow": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "firstPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasNextPage": {
+          "type": "boolean"
+        },
+        "hasPreviousPage": {
+          "type": "boolean"
+        },
+        "isFirstPage": {
+          "type": "boolean"
+        },
+        "isLastPage": {
+          "type": "boolean"
+        },
+        "lastPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "navigateFirstPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "navigateLastPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "navigatePages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "navigatepageNums": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "nextPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prePage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startRow": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Result«Para»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Para"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Para»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Para"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«List«Pref»»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "type": "array",
+          "description": "逻辑数据",
+          "items": {
+            "$ref": "#/definitions/Pref"
+          }
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Spu»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Spu"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Spec»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Spec"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Result«Category»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/Category"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "alertNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "库存预警数量"
+        },
+        "brandName": {
+          "type": "string",
+          "description": "品牌名称"
+        },
+        "categoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "类目ID"
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "类目名称"
+        },
+        "commentNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "评论数"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "商品id"
+        },
+        "image": {
+          "type": "string",
+          "description": "商品图片"
+        },
+        "images": {
+          "type": "string",
+          "description": "商品图片列表"
+        },
+        "name": {
+          "type": "string",
+          "description": "SKU名称"
+        },
+        "num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "库存数量"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32",
+          "description": "价格（分）"
+        },
+        "saleNum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "销量"
+        },
+        "sn": {
+          "type": "string",
+          "description": "商品条码"
+        },
+        "spec": {
+          "type": "string",
+          "description": "规格"
+        },
+        "spuId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "SPUID"
+        },
+        "status": {
+          "type": "string",
+          "description": "商品状态 1-正常，2-下架，3-删除"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "重量（克）"
+        }
+      },
+      "description": "Sku"
+    },
+    "Spec": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "名称"
+        },
+        "options": {
+          "type": "string",
+          "description": "规格选项"
+        },
+        "seq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "排序"
+        },
+        "templateId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "模板ID"
+        }
+      },
+      "description": "Spec"
+    },
+    "Result«StockBack»": {
+      "type": "object",
+      "required": [
+        "code",
+        "data",
+        "flag",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "返回状态码,20000:成功,20001:失败,20002:用户名或密码错误,20003:权限不足,20004:远程调用失败,20005:重复操作,20006:没有对应的数据"
+        },
+        "data": {
+          "description": "逻辑数据",
+          "$ref": "#/definitions/StockBack"
+        },
+        "flag": {
+          "type": "boolean",
+          "example": false,
+          "description": "执行是否成功,true:成功,false:失败"
+        },
+        "message": {
+          "type": "string",
+          "description": "提示信息"
+        }
+      },
+      "description": "Result"
+    }
+  }
+}

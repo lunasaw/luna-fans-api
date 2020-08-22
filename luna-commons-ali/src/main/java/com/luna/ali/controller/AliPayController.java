@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Package: com.luna.ali.alipay.controller
+ * @Package: com.luna.ali.alipay.com.luna.message.controller
  * @ClassName: AliPayController
  * @Author: luna
  * @CreateTime: 2020/8/18 12:35

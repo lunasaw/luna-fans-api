@@ -95,7 +95,7 @@ public class ExcelUtils<T> {
      * @param filePath
      * @return
      */
-    public List<Map<String, Object>> readExcel(String filePath) {
+    public static List<Map<String, Object>> readExcel(String filePath) {
         log.info("readExcel start filePath={}", filePath);
         ExcelReader reader = ExcelUtil.getReader(FileUtil.file(filePath));
         return reader.readAll();
