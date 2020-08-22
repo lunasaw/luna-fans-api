@@ -1,5 +1,4 @@
 package com.luna.message.template.pojo;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
@@ -7,7 +6,6 @@ import java.io.Serializable;
 import java.lang.Long;
 import java.util.Date;
 import java.lang.String;
-
 /****
  * @Author:luna
  * @Description:Template构建
@@ -83,5 +81,6 @@ public class Template implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
 
 }

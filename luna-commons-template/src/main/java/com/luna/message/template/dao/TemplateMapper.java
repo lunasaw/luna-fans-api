@@ -1,5 +1,4 @@
 package com.luna.message.template.dao;
-
 import com.luna.message.template.pojo.Template;
 import tk.mybatis.mapper.common.Mapper;
 

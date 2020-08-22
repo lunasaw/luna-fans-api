@@ -1,5 +1,4 @@
 package com.luna.message.template.controller;
-
 import com.luna.message.template.pojo.Template;
 import com.luna.message.template.service.TemplateService;
 import com.github.pagehelper.PageInfo;
@@ -26,7 +25,6 @@ public class TemplateController {
 
     /***
      * Template分页条件搜索实现
-     * 
      * @param template
      * @param page
      * @param size
@@ -47,7 +45,6 @@ public class TemplateController {
 
     /***
      * Template分页搜索实现
-     * 
      * @param page:当前页
      * @param size:每页显示多少条
      * @return
@@ -66,7 +63,6 @@ public class TemplateController {
 
     /***
      * 多条件搜索数据
-     * 
      * @param template
      * @return
      */
@@ -81,7 +77,6 @@ public class TemplateController {
 
     /***
      * 根据ID删除数据
-     * 
      * @param id
      * @return
      */
@@ -96,7 +91,6 @@ public class TemplateController {
 
     /***
      * 修改Template数据
-     * 
      * @param template
      * @param id
      * @return
@@ -116,7 +110,6 @@ public class TemplateController {
 
     /***
      * 新增Template数据
-     * 
      * @param template
      * @return
      */
@@ -131,7 +124,6 @@ public class TemplateController {
 
     /***
      * 根据ID查询Template数据
-     * 
      * @param id
      * @return
      */
@@ -146,7 +138,6 @@ public class TemplateController {
 
     /***
      * 查询Template全部数据
-     * 
      * @return
      */
     @ApiOperation(value = "查询所有Template", notes = "查询所Template有方法详情", tags = {"TemplateController"})

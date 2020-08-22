@@ -1,5 +1,4 @@
 package com.luna.message.template.service.impl;
-
 import com.luna.message.template.dao.TemplateMapper;
 import com.luna.message.template.pojo.Template;
 import com.luna.message.template.service.TemplateService;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
-
 /****
  * @Author:luna
  * @Description:Template业务层接口实现类
@@ -22,9 +20,9 @@ public class TemplateServiceImpl implements TemplateService {
     @Autowired
     private TemplateMapper templateMapper;
 
+
     /**
      * Template条件+分页查询
-     * 
      * @param template 查询条件
      * @param page 页码
      * @param size 页大小
@@ -42,7 +40,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * Template分页查询
-     * 
      * @param page
      * @param size
      * @return
@@ -57,7 +54,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * Template条件查询
-     * 
      * @param template
      * @return
      */
@@ -69,9 +65,9 @@ public class TemplateServiceImpl implements TemplateService {
         return templateMapper.selectByExample(example);
     }
 
+
     /**
      * Template构建查询对象
-     * 
      * @param template
      * @return
      */
@@ -105,7 +101,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * 删除
-     * 
      * @param id
      */
     @Override
@@ -115,7 +110,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * 修改Template
-     * 
      * @param template
      */
     @Override
@@ -125,7 +119,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * 增加Template
-     * 
      * @param template
      */
     @Override
@@ -135,7 +128,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * 根据ID查询Template
-     * 
      * @param id
      * @return
      */
@@ -146,7 +138,6 @@ public class TemplateServiceImpl implements TemplateService {
 
     /**
      * 查询Template全部数据
-     * 
      * @return
      */
     @Override

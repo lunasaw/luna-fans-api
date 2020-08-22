@@ -14,7 +14,6 @@ public interface TemplateService {
 
     /***
      * Template多条件分页查询
-     * 
      * @param templateDO
      * @param page
      * @param size
@@ -32,7 +31,6 @@ public interface TemplateService {
 
     /***
      * Template多条件搜索方法
-     * 
      * @param templateDO
      * @return
      */
@@ -46,14 +44,12 @@ public interface TemplateService {
 
     /***
      * 修改Template数据
-     * 
      * @param templateDO
      */
     void update(TemplateDO templateDO);
 
     /***
      * 新增Template
-     * 
      * @param templateDO
      */
     void add(TemplateDO templateDO);
