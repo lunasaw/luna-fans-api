@@ -16,18 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PostObjectSample {
-    // 上传文件
-    private String localFilePath   = "<yourLocalFile>";
-    // Endpoint以杭州为例，其它Region请按实际情况填写。
-    private String endpoint        = "http://oss-cn-hangzhou.aliyuncs.com";
-    // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
-    private String accessKeyId     = "<yourAccessKeyId>";
-    private String accessKeySecret = "<yourAccessKeySecret>";
-    // 设置存储空间名称。
-    private String bucketName      = "<yourBucketName>";
-    // 设置文件名称。
-    private String objectName      = "<yourObjectName>";
-
     /**
      * 表单上传
      * 
