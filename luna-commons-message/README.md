@@ -58,7 +58,7 @@ luna-commons-message
 
 ###### **安装步骤**
 
-1. Get a free API Key at [https://account.aliyun.com](https://account.aliyun.com)
+1. Get a free API Key at [https://console.cloud.tencent.com](https://console.cloud.tencent.com)
 2. 找到config目录下的xxxConfigValue,application.properties
 3. Clone the repo
 
@@ -208,7 +208,7 @@ public class messageApiTest {
 eg:
 
 ```
-luna-commons-ali
+luna-commons-message
 ├── README.md
 ├── src
 │  ├── /config/

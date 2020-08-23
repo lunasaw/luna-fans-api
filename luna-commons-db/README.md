@@ -2,7 +2,7 @@
 
 # luna-commons
 
-luna-commons-tencent
+luna-commons-db
 
 <!-- PROJECT SHIELDS -->
 
@@ -38,14 +38,10 @@ luna-commons-tencent
 </p>
 
 ## 日志
-增加微信支付Api接口
-   - 超时30分钟自动关闭订单
-   - Mq队列处理
+增加Redis模板二次封装,引用<Strig,Object>类型
+   - 
+   - 
 
-
-增加腾讯地图Api接口
-
-增加腾讯人脸识别等Api接口
 
 ## 目录
 
@@ -61,9 +57,6 @@ luna-commons-tencent
 
 ###### **安装步骤**
 
-1. Get a free API Key at [https://console.cloud.tencent.com](https://console.cloud.tencent.com)
-2. 找到config目录下的xxxConfigValue,TencentPayConfigValue
-3. Clone the repo
 
 ```sh
 git clone https://github.com/czy1024/luna-commons.git
@@ -74,8 +67,8 @@ git clone https://github.com/czy1024/luna-commons.git
 ```xml
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo-tencent</id>
-            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-tencent/</url>
+            <id>luna-commons-mvn-repo-db</id>
+            <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-db/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -86,45 +79,37 @@ git clone https://github.com/czy1024/luna-commons.git
 
     <dependency>
         <groupId>com.luna</groupId>
-        <artifactId>luna-commons-tencent</artifactId>
+        <artifactId>luna-commons-db</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
 ```
-在配置文件application.properties加入可选配置
+在配置文件application.yml加入可选配置,并自行配置活动文件
 
 ```text
-      luna:
-        ten:
-          # 腾讯地图api
-          mapKey: xxx
-          # 腾讯api
-          secretId: xxx
-          secretKey: xxx
-          # 腾讯市场api
-          skyEyeSecretid: xxx
-          skyEyeSecretkey: xxx
-      
-        #微信支付信息配置
-        weixin:
-          appid: xxx
-          partner: xxx
-          partnerkey: xxx
-          notifyurl: xxx
-      spring:
-        redis:
-          host: xxx
-          port: 6379
-      
-      server:
-        port: 8080
-      
-
-
+     spring:
+       # 数据库
+       datasource:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://xxx:3307/luna-message?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+         username: root
+         password: xxx
+         # redis
+       redis:
+         host: 127.0.0.1 # Redis服务器地址
+         database: 0 # Redis数据库索引（默认为0）
+         port: 6379 # Redis服务器连接端口
+         password: # Redis服务器连接密码（默认为空）
+       pool:
+         max-active: 200.0 # 连接池最大连接数（使用负值表示没有限制）
+         max-idle: 10.0 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+         max-wait: -1.0 # 连接池中的最大空闲连接
+         min-idle: 0.0 # 连接池中的最小空闲连接
+       timeout: 1000.0 # 连接超时时间（毫秒）
 
 ```
 
 引用示例
-若采用SpringBoot构建项目可通过将第三方包中的TencentConfigValue,TencentPayConfigValue通过Spring配置文件注入Spring管理
+若采用SpringBoot构建项目可通过将第三方包中的RedisUtil配置文件注入Spring管理
 
 需在properties或者yml配置文件中配置相应key
 
@@ -135,7 +120,7 @@ git clone https://github.com/czy1024/luna-commons.git
 package com.luna.springdemo.config;
 
 import com.luna.common.spring.SpringUtils;
-import com.luna.tencent.config.TencentConfigValue;
+import com.luna.db.config.dbConfigValue;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
@@ -150,13 +135,8 @@ import org.springframework.context.annotation.Bean;
 public class Config {
 
     @Bean
-    public SpringUtils springUtils(){
-        return new SpringUtils();
-    }
-
-    @Bean
-    public TencentConfigValue tencentConfigValue(){
-        return new TencentConfigValue();
+    public RedisUtil redisUtil(){
+        return new RedisUtil();
     }
 }
 
@@ -172,29 +152,21 @@ public class BaiduApiTest {
 
 
 	@Autowired
-	private TencentConfigValue tencentConfigValue;
+	private RedisUtil redisUtil;
 
 	@Test
 	public void atest() throws Exception {
-		tencentConfigValue.getSkyEyeSecretid();
-
-		TencentFaceApi.faceLiveCheck(tencentConfigValue.getSecretid(),tencentConfigValue.getSecretKey(), Base64Util.encodeBase64(ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\girl.png")));
+	redisUtil.set("luna","luna,redis");
 	}
 }
 
 ```
 
-结果
-```java
-{"Response":{"Score":0,"RequestId":"c9611df7-9efb-41c0-8f61-dc18604d9388","IsLiveness":false,"FaceModelVersion":"2.0"}}
-```
-
-
 ### 文件目录说明
 eg:
 
 ```
-luna-commons-tencent
+luna-commons-db
 ├── README.md
 ├── src
 │  ├── /config/
