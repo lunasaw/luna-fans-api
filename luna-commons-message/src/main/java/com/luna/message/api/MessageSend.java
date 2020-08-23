@@ -6,6 +6,7 @@ import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.mask.MaskUtils;
 import com.luna.common.utils.md5.HashUtils;
 import com.luna.common.utils.md5.Md5Utils;
+import com.luna.db.redis.util.RedisUtil;
 import com.luna.message.api.constant.EmailContentsConstant;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.api.constant.TargetTypeConstant;
@@ -13,10 +14,7 @@ import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.service.MessageEmailService;
 import com.luna.message.api.service.MessageMobileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Luna@win10
@@ -24,15 +22,14 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class MessageSend {
-
-    @Autowired
-    private StringRedisTemplate  stringRedisTemplate;
-
     @Autowired
     private MessageMobileService messageMobileService;
 
     @Autowired
     private MessageEmailService  messageEmailService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 重置密码
@@ -77,18 +74,16 @@ public class MessageSend {
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.EMAIL);
             messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
-            stringRedisTemplate.delete(userMark);
-            stringRedisTemplate.opsForValue().append(userMark, validationCode);
-            stringRedisTemplate.expire(userMark, 300, TimeUnit.SECONDS);
+            redisUtil.del(userMark);
+            redisUtil.set(userMark,validationCode,300);
             messageEmailService.asyncSendMessage(messageDO, userMark, null);
         } else if (MaskUtils.isMobilePhoneNumber(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.MOBILE);
             messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
-            stringRedisTemplate.delete(userMark);
-            stringRedisTemplate.opsForValue().append(userMark, validationCode);
-            stringRedisTemplate.expire(userMark, 300, TimeUnit.SECONDS);
+            redisUtil.del(userMark);
+            redisUtil.set(userMark,validationCode,300);
             messageMobileService.asyncSendMessage(messageDO, null, userMark);
         } else {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");
