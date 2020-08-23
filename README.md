@@ -141,7 +141,7 @@ luna-commons-loc
 | [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs等文件操作 |
 | [luna-commons-media](./luna-commons-media) | 媒体流处理工具,包含ffmpeg工具封装,JavaCv图像处理 |
 | [luna-commons-message](./luna-commons-message)       |  消息发送,短信邮件消息发送,有html模板附赠 [HTML邮件模板](https://github.com/czy1024/luna-commons/blob/master/luna-commons-message/src/main/resources/static/luna-message.html)
-| [luna-commons-tencent](./luna-commons-template) | 代码生成，包含swaggerApi生成，dao，service，controller |
+| [luna-commons-template](./luna-commons-template) | 代码生成，包含swaggerApi生成，dao，service，controller |
 | [luna-commons-tencent](./luna-commons-tencent) | 腾讯Api集合,包含人脸识别,人证审核腾讯地图等api封装 |
 
 
