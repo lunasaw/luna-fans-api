@@ -96,6 +96,11 @@ luna-commons-loc
 │  │  ├── /config/
 │  │  └── /api/
 │  └──── /resource/
+├── luna-commons-db
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
 ├── luna-commons-file
 │  ├── pom.xml
 │  │  ├── /config/
@@ -107,6 +112,11 @@ luna-commons-loc
 │  │  └── /api/
 │  └──── /resource/
 ├── luna-commons-message
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
+├── luna-commons-template
 │  ├── pom.xml
 │  │  ├── /config/
 │  │  └── /api/
@@ -125,11 +135,13 @@ luna-commons-loc
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [luna-commons-ali](./luna-commons-ali) | 关于阿里oss和alpay支付宝的使用                               |
 | [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作,http网络操作                            |
+| [luna-commons-db](./luna-commons-db) | 数据操作包，通用Mapper与PageHelper分页                            |
 | [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口,[sm.ms 图床api](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)                           |
 | [luna-commons-baidu](./luna-commons-baidu)     | 百度Api集合,包含人脸识别,人证审核百度地图等api封装 |
 | [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs等文件操作 |
 | [luna-commons-media](./luna-commons-media) | 媒体流处理工具,包含ffmpeg工具封装,JavaCv图像处理 |
 | [luna-commons-message](./luna-commons-message)       |  消息发送,短信邮件消息发送,有html模板附赠 [HTML邮件模板](https://github.com/czy1024/luna-commons/blob/master/luna-commons-message/src/main/resources/static/luna-message.html)
+| [luna-commons-tencent](./luna-commons-template) | 代码生成，包含swaggerApi生成，dao，service，controller |
 | [luna-commons-tencent](./luna-commons-tencent) | 腾讯Api集合,包含人脸识别,人证审核腾讯地图等api封装 |
 
 
