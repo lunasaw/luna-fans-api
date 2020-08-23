@@ -1,6 +1,7 @@
 package com.luna.common.http;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
@@ -36,11 +37,19 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import javax.net.ssl.SSLContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -80,6 +89,78 @@ public class HttpUtils {
         cm.setDefaultMaxPerRoute(200);
         httpClient =
             HttpClients.custom().setConnectionManager(cm).setDefaultRequestConfig(defaultRequestConfig).build();
+    }
+
+    /**
+     * 返回文件
+     * 
+     * @param file
+     * @param type
+     * @return
+     */
+    public static HttpServletResponse exportFile(HttpServletResponse response, File file, String type) {
+        if (FileUtil.isEmpty(file)) {
+            return response;
+        }
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Content-Disposition", "attachment; filename=" + System.currentTimeMillis() + type);
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
+        response.setHeader("Last-Modified", new Date().toString());
+        response.setHeader("ETag", String.valueOf(System.currentTimeMillis()));
+        response.setCharacterEncoding(CharsetKit.UTF_8);
+        InputStream in = null;
+        ServletOutputStream out = null;
+        // 获得字节输入流
+        try {
+            in = new FileInputStream(file);
+            // 获得字节输出流
+            out = response.getOutputStream();
+            // 读取并输出
+            int len = 0;
+            byte[] bytes = new byte[1024];
+            while ((len = in.read(bytes)) > 0) {
+                out.write(bytes, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 释放资源
+            IoUtil.close(in);
+            IoUtil.close(out);
+        }
+        response.setContentType("application/octet-stream");
+        response.setContentLength(Math.toIntExact(file.length()));
+        return response;
+    }
+
+    /**
+     * 返回文件
+     * 
+     * @param file
+     * @param type
+     * @return
+     */
+    public static ResponseEntity<FileSystemResource> exportFile(File file, String type) {
+        if (file == null) {
+            ResponseEntity
+                .status(400)
+                .body(null);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Content-Disposition", "attachment; filename=" + System.currentTimeMillis() + type);
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        headers.add("Last-Modified", new Date().toString());
+        headers.add("ETag", String.valueOf(System.currentTimeMillis()));
+
+        return ResponseEntity
+            .ok()
+            .headers(headers)
+            .contentLength(file.length())
+            .contentType(MediaType.parseMediaType("application/octet-stream"))
+            .body(new FileSystemResource(file));
     }
 
     /**
@@ -478,24 +559,5 @@ public class HttpUtils {
             }
         }
         return reault;
-    }
-
-    private static String getLocalMac(InetAddress ia) throws SocketException {
-        byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
-        StringBuffer sb = new StringBuffer("");
-        for (int i = 0; i < mac.length; i++) {
-            if (i != 0) {
-                sb.append("-");
-            }
-            // 字节转换为整数
-            int temp = mac[i] & 0xff;
-            String str = Integer.toHexString(temp);
-            if (str.length() == 1) {
-                sb.append("0" + str);
-            } else {
-                sb.append(str);
-            }
-        }
-        return sb.toString().toUpperCase();
     }
 }

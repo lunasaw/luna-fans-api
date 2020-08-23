@@ -15,7 +15,7 @@ import java.util.Properties;
 public class SystemInfoUtil {
     // 当前实例
     private static SystemInfoUtil currentSystem = null;
-    private InetAddress       localHost     = null;
+    private static InetAddress    localHost     = null;
 
     private SystemInfoUtil() {
         try {
@@ -32,8 +32,9 @@ public class SystemInfoUtil {
      * @return
      */
     public static SystemInfoUtil getInstance() {
-        if (currentSystem == null)
+        if (currentSystem == null) {
             currentSystem = new SystemInfoUtil();
+        }
         return currentSystem;
     }
 
@@ -42,7 +43,7 @@ public class SystemInfoUtil {
      *
      * @return IP地址
      */
-    public String getIP() {
+    public static String getIP() {
         String ip = localHost.getHostAddress();
         return ip;
     }
@@ -52,7 +53,7 @@ public class SystemInfoUtil {
      *
      * @return
      */
-    public String getHostName() {
+    public static String getHostName() {
         return localHost.getHostName();
     }
 
@@ -61,7 +62,7 @@ public class SystemInfoUtil {
      *
      * @return
      */
-    public String getDiskNumber() {
+    public static String getDiskNumber() {
         String line = "";
         String HdSerial = "";// 记录硬盘序列号
 
@@ -94,7 +95,7 @@ public class SystemInfoUtil {
      *
      * @return Mac地址，例如：F0-4D-A2-39-24-A6
      */
-    public String getMac() {
+    public static String getMac() {
         NetworkInterface byInetAddress;
         try {
             byInetAddress = NetworkInterface.getByInetAddress(localHost);
@@ -112,14 +113,14 @@ public class SystemInfoUtil {
      *
      * @return 当前系统名，例如： windows xp
      */
-    public String getSystemName() {
+    public static String getSystemName() {
         Properties sysProperty = System.getProperties();
         // 系统名称
         String systemName = sysProperty.getProperty("os.name");
         return systemName;
     }
 
-    private String getMacFromBytes(byte[] bytes) {
+    private static String getMacFromBytes(byte[] bytes) {
         StringBuffer mac = new StringBuffer();
         byte currentByte;
         boolean first = false;

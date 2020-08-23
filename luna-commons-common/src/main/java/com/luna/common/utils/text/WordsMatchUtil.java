@@ -1,4 +1,4 @@
-package com.luna.file.match;
+package com.luna.common.utils.text;
 
 import org.springframework.util.StringUtils;
 
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @CreateTime: 2020/7/16 15:34
  * @Description:
  */
-public class WordsMatch {
+public class WordsMatchUtil {
     /** 匹配中文正则表达式 */
     private final static String PATTERN = "[\\u4e00-\\u9fa5]+";
 
