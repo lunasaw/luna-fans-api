@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>luna-commons-db</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>luna-commons-elasticsearch-rest-high-level-client</module>
+        <module>luna-commons-redis</module>
+        <module>luna-commons-elasticsearch-template</module>
+    </modules>
     <repositories>
         <repository>
             <id>luna-commons-mvn-repo-message</id>

@@ -1,20 +1,21 @@
 package com.luna.message.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.common.collect.ImmutableMap;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.mask.MaskUtils;
 import com.luna.common.utils.md5.HashUtils;
 import com.luna.common.utils.md5.Md5Utils;
-import com.luna.db.redis.util.RedisUtil;
 import com.luna.message.api.constant.EmailContentsConstant;
 import com.luna.message.api.constant.MessageTypeConstant;
 import com.luna.message.api.constant.TargetTypeConstant;
 import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.service.MessageEmailService;
 import com.luna.message.api.service.MessageMobileService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.luna.redis.util.RedisUtil;
 
 /**
  * @author Luna@win10

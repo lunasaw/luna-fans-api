@@ -24,6 +24,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.luna</groupId>
             <artifactId>luna-commons-common</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -37,7 +42,7 @@
 
         <dependency>
             <groupId>com.luna</groupId>
-            <artifactId>luna-commons-db</artifactId>
+            <artifactId>luna-commons-redis</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

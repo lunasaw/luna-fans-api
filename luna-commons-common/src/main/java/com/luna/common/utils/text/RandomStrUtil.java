@@ -21,6 +21,10 @@ public class RandomStrUtil {
         return UUID.randomUUID().toString().replaceAll("-", "").substring(0, 32);
     }
 
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+    }
+
     /**
      * 获取随机字符串 Nonce Str
      *
