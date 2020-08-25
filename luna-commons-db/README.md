@@ -40,7 +40,7 @@ luna-commons-db
 ## 日志
 增加Redis模板二次封装,引用<Strig,Object>类型
    - 
-   - 
+增加elasticsearch restful模板二次封装 crud操作
 
 
 ## 目录
