@@ -105,7 +105,20 @@ git clone https://github.com/czy1024/luna-commons.git
          max-wait: -1.0 # 连接池中的最大空闲连接
          min-idle: 0.0 # 连接池中的最小空闲连接
        timeout: 1000.0 # 连接超时时间（毫秒）
-
+     luna:
+       data:
+         elasticsearch:
+           cluster-name: elasticsearch
+           cluster-nodes: [localhost:9200]
+           connect-timeout:
+           socket-timeout:
+           connection-request-timeout:
+           index:
+             number-of-replicas: 0
+             number-of-shards: 3
+           account:
+             username: luna
+             password: czy1024
 ```
 
 引用示例
@@ -168,12 +181,8 @@ eg:
 ```
 luna-commons-db
 ├── README.md
-├── src
-│  ├── /config/
-│  ├── /entity/
-│  ├── /oss/
-│  ├── /pay/
-│──── /resource/
+├── luna-commons-es
+├── luna-commons-redis
 └── pom.xml
 
 ```
