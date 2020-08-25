@@ -135,7 +135,7 @@ luna-commons-loc
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [luna-commons-ali](./luna-commons-ali) | 关于阿里oss和alpay支付宝的使用                               |
 | [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作,http网络操作                            |
-| [luna-commons-db](./luna-commons-db) | 数据操作包，通用Mapper与PageHelper分页                            |
+| [luna-commons-db](./luna-commons-db) | 数据操作包，通用Mapper与PageHelper分页 ,[redis](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-redis), [elasticsearch](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-elasticsearch-rest-high-level-client) 操作                           |
 | [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口,[sm.ms 图床api](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)                           |
 | [luna-commons-baidu](./luna-commons-baidu)     | 百度Api集合,包含人脸识别,人证审核百度地图等api封装 |
 | [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs等文件操作 |
