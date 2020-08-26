@@ -34,6 +34,7 @@ public class ElasticSearchUpdateUtil {
             UpdateRequest updateRequest =
                     new UpdateRequest(index, id).doc(BeanUtil.beanToMap(object), XContentType.JSON);
             ElasticsearchBase.client.update(updateRequest, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
                     "更新索引 {" + index + "} 数据 {" + object + "} 失败");

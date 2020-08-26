@@ -32,6 +32,7 @@ public class ElasticSearchDeleteUtil {
         DeleteIndexRequest deleteIndexRequest = buildDeleteIndexRequest(index);
         try {
             ElasticsearchBase.client.indices().delete(deleteIndexRequest, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION, "删除索引 {" + index + "} 失败");
         }
@@ -62,6 +63,7 @@ public class ElasticSearchDeleteUtil {
             DeleteRequest deleteRequest = new DeleteRequest(index, id);
             DeleteResponse response = ElasticsearchBase.client.delete(deleteRequest, ElasticsearchBase.COMMON_OPTIONS);
             log.info("deleteDataById response status:{},id:{}", response.status().getStatus(), response.getId());
+            ElasticsearchBase.client.close();
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
                 "删除索引 {" + index + "} 数据id {" + id + "} 失败");

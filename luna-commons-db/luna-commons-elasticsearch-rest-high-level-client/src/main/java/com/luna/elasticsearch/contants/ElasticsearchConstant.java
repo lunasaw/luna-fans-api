@@ -14,4 +14,6 @@ public interface ElasticsearchConstant {
      */
     String INDEX_NAME = "person";
 
+    String INDEX_USER = "luna-user";
+
 }

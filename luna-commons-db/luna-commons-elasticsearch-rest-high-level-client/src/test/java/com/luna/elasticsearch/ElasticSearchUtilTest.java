@@ -87,7 +87,7 @@ public class ElasticSearchUtilTest {
     @Test
     public void getDataTest() {
         Map<String, Object> stringObjectMap =
-            ElasticSearchGetUtil.searchDataById(ElasticsearchConstant.INDEX_NAME, "luna", null);
+            ElasticSearchGetUtil.searchDataById(ElasticsearchConstant.INDEX_USER, "2", "name,age");
         System.out.println(JSON.toJSONString(stringObjectMap));
     }
 
@@ -133,7 +133,8 @@ public class ElasticSearchUtilTest {
      */
     @Test
     public void searchDataByPage() {
-        EsPageDTO esPageDTO = ElasticSearchGetUtil.searchDataPage(ElasticsearchConstant.INDEX_NAME, 1, 2, null, "age", "remark", "50%",
+        EsPageDTO esPageDTO =
+            ElasticSearchGetUtil.searchDataPage(ElasticsearchConstant.INDEX_NAME, 1, 2, null, "age", "remark", "50%",
                 "age", null, null, null, "age");
         System.out.println(JSON.toJSONString(esPageDTO));
     }

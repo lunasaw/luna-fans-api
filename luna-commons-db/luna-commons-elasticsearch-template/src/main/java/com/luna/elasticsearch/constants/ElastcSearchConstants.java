@@ -5,7 +5,7 @@ package com.luna.elasticsearch.constants;
  * ES常量池
  * </p>
  *
- * @package: com.luna.elasticsearch.constants
+ * @package: com.luna.elasticsearch.ElastcSearchConstants
  * @description: ES常量池
  * @author: luna
  * @date: Created in 2018-12-20 17:30
@@ -13,14 +13,10 @@ package com.luna.elasticsearch.constants;
  * @version: V1.0
  * @modified: luna
  */
-public interface EsConsts {
+public interface ElastcSearchConstants {
     /**
      * 索引名称
      */
-    String INDEX_NAME = "person";
+    String INDEX_NAME = "jd-goods";
 
-    /**
-     * 类型名称
-     */
-    String TYPE_NAME = "person";
 }

@@ -16,6 +16,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
@@ -47,14 +48,15 @@ public class ElasticSearchGetUtil {
      * @param id
      * @return
      */
-    public static GetRequest buildGetRequest(String index, String id, String fields) {
+    public static GetRequest buildGetRequest(String index, String id, String includes) {
         if (StringUtils.isEmpty(index) || StringUtils.isEmpty(id)) {
             throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, "index, id 不能为空");
         }
 
-        if (StringUtils.isNotEmpty(fields)) {
-            String[] split = fields.split(",");
-            return new GetRequest(index).id(id).storedFields(split);
+        if (StringUtils.isNotEmpty(includes)) {
+            String[] includesField = includes.split(",");
+            FetchSourceContext  fetchSourceContext = new FetchSourceContext(true, includesField, null);
+            return new GetRequest(index).id(id).fetchSourceContext(fetchSourceContext);
         }
         return new GetRequest(index).id(id);
     }
@@ -64,17 +66,18 @@ public class ElasticSearchGetUtil {
      *
      * @param index 索引，类似数据库
      * @param id 数据ID
-     * @param fields 需要显示的字段，逗号分隔（缺省为全部字段）
+     * @param includes 需要显示的字段，逗号分隔（缺省为全部字段）
      * @return
      */
-    public static Map<String, Object> searchDataById(String index, String id, String fields) {
+    public static Map<String, Object> searchDataById(String index, String id, String includes) {
         try {
             GetResponse response =
-                ElasticsearchBase.client.get(buildGetRequest(index, id, fields), ElasticsearchBase.COMMON_OPTIONS);
+                ElasticsearchBase.client.get(buildGetRequest(index, id, includes), ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
             return response.getSourceAsMap();
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通过ID获取数据 {" + index + "} 数据id {" + id + "} 失败 {" + fields + "}");
+                "通过ID获取数据 {" + index + "} 数据id {" + id + "} 失败 {" + includes + "}");
         }
     }
 
@@ -96,6 +99,7 @@ public class ElasticSearchGetUtil {
         SearchResponse searchResponse = null;
         try {
             searchResponse = ElasticsearchBase.client.search(searchRequest, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
             SearchHit[] hits = searchResponse.getHits().getHits();
             List<Map<String, Object>> objects = new ArrayList<>();
             Arrays.stream(hits).forEach(hit -> {
@@ -201,6 +205,7 @@ public class ElasticSearchGetUtil {
             // 执行搜索,向ES发起http请求
             SearchResponse searchResponse =
                 ElasticsearchBase.client.search(searchRequest, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
             // 搜索结果
             SearchHits hits = searchResponse.getHits();
             // 匹配到的总记录数
@@ -295,7 +300,7 @@ public class ElasticSearchGetUtil {
             searchHit.getSourceAsMap().put("id", searchHit.getId());
             if (StringUtils.isNotEmpty(highlightField)) {
                 log.info("遍历 高亮结果集，覆盖 正常结果集:" + searchHit.getSourceAsMap());
-                Map<String, HighlightField> highlightFields = searchHit.getHighlightFields(); 
+                Map<String, HighlightField> highlightFields = searchHit.getHighlightFields();
                 Text[] text = searchHit.getHighlightFields().get(highlightField).getFragments();
                 if (text != null) {
                     for (Text str : text) {

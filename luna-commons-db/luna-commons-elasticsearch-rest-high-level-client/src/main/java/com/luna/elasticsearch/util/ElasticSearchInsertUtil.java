@@ -38,7 +38,9 @@ public class ElasticSearchInsertUtil {
         try {
             GetIndexRequest getIndexRequest = new GetIndexRequest(index);
             log.info("isIndexExist start index={}", index);
-            return ElasticsearchBase.client.indices().exists(getIndexRequest, ElasticsearchBase.COMMON_OPTIONS);
+            boolean exists = ElasticsearchBase.client.indices().exists(getIndexRequest, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
+            return exists;
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION, "判断索引 {" + index + "} 失败");
         }
@@ -61,6 +63,7 @@ public class ElasticSearchInsertUtil {
 
             CreateIndexResponse createIndexResponse =
                 ElasticsearchBase.client.indices().create(request, ElasticsearchBase.COMMON_OPTIONS);
+            ElasticsearchBase.client.close();
             log.info(" whether all of the nodes have acknowledged the request : {}",
                 createIndexResponse.isAcknowledged());
             log.info(
@@ -82,7 +85,7 @@ public class ElasticSearchInsertUtil {
      */
     public static IndexRequest buildIndexRequest(String index, String id, Object source) {
         if (StringUtils.isEmpty(index) || StringUtils.isEmpty(id)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, "index, id 不能为空");
+            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         return new IndexRequest(index).id(id).source(BeanUtil.beanToMap(source), XContentType.JSON);
     }

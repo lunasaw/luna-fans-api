@@ -1,8 +1,6 @@
 package com.luna.elasticsearch.model;
 
-import com.luna.elasticsearch.constants.EsConsts;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -21,7 +19,6 @@ import java.util.Date;
  * @version: V1.0
  * @modified: luna
  */
-@Document(indexName = EsConsts.INDEX_NAME, type = EsConsts.TYPE_NAME, shards = 1, replicas = 0)
 public class Person {
     /**
      * 主键
@@ -117,55 +114,5 @@ public class Person {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public static final class PersonBuilder {
-        private Long id;
-        private String name;
-        private String country;
-        private Integer age;
-        private Date birthday;
-        private String remark;
-
-        private PersonBuilder() {
-        }
-
-        public static PersonBuilder aPerson() {
-            return new PersonBuilder();
-        }
-
-        public PersonBuilder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public PersonBuilder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public PersonBuilder country(String country) {
-            this.country = country;
-            return this;
-        }
-
-        public PersonBuilder age(Integer age) {
-            this.age = age;
-            return this;
-        }
-
-        public PersonBuilder birthday(Date birthday) {
-            this.birthday = birthday;
-            return this;
-        }
-
-        public PersonBuilder remark(String remark) {
-            this.remark = remark;
-            return this;
-        }
-
-        public Person build() {
-            return new Person(id, name, country, age, birthday, remark);
-        }
     }
 }
