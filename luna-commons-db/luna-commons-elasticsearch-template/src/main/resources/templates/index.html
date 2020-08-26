@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Java-ES仿京东实战</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body class="pg">
@@ -31,8 +31,7 @@
                                             <div class="s-combobox" id="s-combobox-685">
                                                 <div class="s-combobox-input-wrap">
                                                     <input v-model="keyWord" type="text" autocomplete="off" value="dd"
-                                                           id="mq"
-                                                           class="s-combobox-input" aria-haspopup="true">
+                                                        id="mq" class="s-combobox-input" aria-haspopup="true">
                                                 </div>
                                             </div>
                                             <button type="submit" @click.prevent="searchKey" id="searchbtn">搜索</button>
@@ -87,7 +86,7 @@
                     <div class="view grid-nosku">
 
                         <div class="product" V-for="result in results">
-                            <div class="product-iWrap" >
+                            <div class="product-iWrap">
                                 <!--商品封面-->
                                 <div class="productImg-wrap">
                                     <a class="productImg">
@@ -143,4 +142,5 @@
         })
     </script>
 </body>
+
 </html>
