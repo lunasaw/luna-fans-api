@@ -100,7 +100,7 @@
                                 </p>
                                 <!--标题-->
                                 <p class="productTitle">
-                                    <a>{{result.title}}</a>
+                                    <a V-html="result.title"></a>
                                 </p>
                                 <!-- 店铺名 -->
                                 <div class="productShop">
@@ -141,8 +141,6 @@
                 }
             }
         })
-
     </script>
-
 </body>
 </html>

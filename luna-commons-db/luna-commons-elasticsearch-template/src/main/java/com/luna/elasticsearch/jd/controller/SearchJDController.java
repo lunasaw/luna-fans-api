@@ -26,12 +26,27 @@ public class SearchJDController {
     @Autowired
     private SearchJDService searchJDService;
 
+    /**
+     * 搜索导入数据
+     *
+     * @param keyword
+     * @return
+     */
     @GetMapping("/parse/{keyword}")
     public ResultDTO<Boolean> parseJD(@PathVariable(name = "keyword") String keyword) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
             searchJDService.parseJD(keyword));
     }
 
+    /**
+     * 精确查找
+     * 
+     * @param keyWord
+     * @param keyValue
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/search/{keyWord}/{keyValue}/{pageNo}/{pageSize}")
     public ResultDTO<List<Map<String, Object>>> search(@PathVariable(name = "keyWord") String keyWord,
         @PathVariable(name = "keyValue") String keyValue, @PathVariable(name = "pageNo") Integer pageNo,

@@ -57,7 +57,8 @@ public class SearchJDService {
             pageNo = 1;
         }
         // 条件搜索
-        return searchRestUtil.searchByField(ElastcSearchConstants.INDEX_NAME, keyWord, keyValue, pageNo, pageSize);
+        return searchRestUtil.searchByField(ElastcSearchConstants.INDEX_NAME, keyWord, keyValue, pageNo, pageSize,
+            keyWord);
     }
 
 }
