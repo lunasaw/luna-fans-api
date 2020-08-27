@@ -3,7 +3,7 @@ package com.luna.elasticsearch.util;
 import com.google.common.collect.Lists;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.utils.text.StringUtils;
-import com.luna.elasticsearch.dtp.EsPageDTO;
+import com.luna.elasticsearch.dto.PageDTO;
 import com.luna.elasticsearch.exception.ElasticsearchException;
 import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.get.GetRequest;
@@ -190,12 +190,12 @@ public class ElasticSearchGetUtil {
      * @param highlightField 高亮字段
      * @return
      */
-    public static EsPageDTO searchDataPage(String index, int startPage, int pageSize, String fields,
-        String include,
-        String export,
-        String miniMactch,
-        String sortField, SortOrder sortOrder, Integer size, QueryBuilder query,
-        String highlightField) {
+    public static PageDTO searchDataPage(String index, int startPage, int pageSize, String fields,
+                                         String include,
+                                         String export,
+                                         String miniMactch,
+                                         String sortField, SortOrder sortOrder, Integer size, QueryBuilder query,
+                                         String highlightField) {
         SearchRequest searchRequest = new SearchRequest(index);
         searchRequest.source(
             buildSearchSourceBuilder(startPage, pageSize, fields, include, export, miniMactch, sortField, sortOrder,
@@ -211,7 +211,7 @@ public class ElasticSearchGetUtil {
             // 匹配到的总记录数
             TotalHits totalHits = hits.getTotalHits();
             List<Map<String, Object>> sourceList = setSearchResponse(searchResponse, highlightField);
-            return new EsPageDTO(startPage, pageSize, Math.toIntExact(totalHits.value), sourceList);
+            return new PageDTO(startPage, pageSize, Math.toIntExact(totalHits.value), sourceList);
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
                 "使用分词查询,并分页失败" + e.getMessage());

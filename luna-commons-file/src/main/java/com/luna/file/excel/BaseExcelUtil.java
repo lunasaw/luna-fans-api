@@ -1,12 +1,11 @@
 package com.luna.file.excel;
 
 import com.luna.common.dto.constant.ResultCode;
-import com.luna.common.entity.AjaxResult;
 import com.luna.common.exception.FileException;
 import com.luna.common.reflect.ReflectUtils;
-import com.luna.common.utils.text.StringUtils;
 import com.luna.common.utils.text.ConvertUtil;
 import com.luna.common.utils.text.DateUtil;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.file.config.FileProfileConfigValue;
 import com.luna.file.excel.anno.Excel;
 import com.luna.file.excel.anno.Excels;
@@ -227,7 +226,7 @@ public class BaseExcelUtil<T> {
      * @param sheetName 工作表的名称
      * @return 结果
      */
-    public AjaxResult exportExcel(List<T> list, String basePath, String sheetName) {
+    public String exportExcel(List<T> list, String basePath, String sheetName) {
         log.info("exportExcel start basePath={},sheetName={}", basePath, sheetName);
         this.init(list, sheetName, Excel.Type.EXPORT);
         return exportExcel(basePath);
@@ -239,7 +238,7 @@ public class BaseExcelUtil<T> {
      * @param sheetName 工作表的名称
      * @return 结果
      */
-    public AjaxResult importTemplateExcel(String basePath, String sheetName) {
+    public String importTemplateExcel(String basePath, String sheetName) {
         this.init(null, sheetName, Excel.Type.IMPORT);
         return exportExcel(basePath);
     }
@@ -249,7 +248,7 @@ public class BaseExcelUtil<T> {
      * 
      * @return 结果
      */
-    public AjaxResult exportExcel(String basePath) {
+    public String exportExcel(String basePath) {
         OutputStream out = null;
         try {
             // 取出一共有多少个sheet.
@@ -272,7 +271,7 @@ public class BaseExcelUtil<T> {
             String filename = encodingFilename(sheetName);
             out = new FileOutputStream(getAbsoluteFile(basePath, filename));
             wb.write(out);
-            return AjaxResult.success(filename);
+            return filename;
         } catch (Exception e) {
             log.error("导出Excel异常{}", e.getMessage());
             throw new FileException(ResultCode.ERROR_SYSTEM_EXCEPTION, "导出Excel失败，请联系网站管理员！");

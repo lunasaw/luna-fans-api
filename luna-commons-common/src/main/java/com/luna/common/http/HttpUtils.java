@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.luna.common.dto.constant.ResultCode;
@@ -57,6 +58,9 @@ import java.util.*;
  * @author Tony
  */
 public class HttpUtils {
+
+    /** urlEncode编码 */
+    private static final String        ENCODE            = "utf-8";
 
     private static CloseableHttpClient httpClient;
 
@@ -468,6 +472,36 @@ public class HttpUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 检测响应体获取数据
+     *
+     * @param httpResponse
+     * @param statusList
+     * @return
+     */
+    public static String checkResponseAndGetResult(HttpResponse httpResponse, List<Integer> statusList) {
+        if (httpResponse == null) {
+            throw new RuntimeException();
+        }
+        if (httpResponse.getStatusLine() == null) {
+            throw new RuntimeException();
+        }
+        if (!statusList.contains(httpResponse.getStatusLine().getStatusCode())) {
+            throw new RuntimeException();
+        }
+
+        HttpEntity entity = httpResponse.getEntity();
+        try {
+            return EntityUtils.toString(entity, ENCODE);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String checkResponseAndGetResult(HttpResponse httpResponse) {
+        return checkResponseAndGetResult(httpResponse, ImmutableList.of(HttpStatus.SC_OK));
     }
 
     /**

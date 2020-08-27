@@ -1,9 +1,9 @@
-package com.luna.elasticsearch.dtp;
+package com.luna.common.entity;
 
 import java.util.List;
 import java.util.Map;
 
-public class EsPageDTO {
+public class Page {
 
     /**
      * 当前页
@@ -44,7 +44,7 @@ public class EsPageDTO {
      * @param recordCount
      * @param recordList
      */
-    public EsPageDTO(int currentPage, int pageSize, int recordCount, List<Map<String, Object>> recordList) {
+    public Page(int currentPage, int pageSize, int recordCount, List<Map<String, Object>> recordList) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.recordCount = recordCount;
@@ -77,7 +77,7 @@ public class EsPageDTO {
         }
     }
 
-    public EsPageDTO() {
+    public Page() {
     }
 
     public int getCurrentPage() {

@@ -8,7 +8,6 @@ import cn.hutool.poi.excel.ExcelWriter;
 import cn.hutool.poi.excel.sax.Excel03SaxReader;
 import cn.hutool.poi.excel.sax.Excel07SaxReader;
 import cn.hutool.poi.excel.sax.handler.RowHandler;
-import com.luna.common.entity.AjaxResult;
 import com.luna.file.excel.util.ExcelHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,7 +143,7 @@ public class ExcelUtils<T> {
      * @param basePath
      * @return
      */
-    public AjaxResult exportData(Class<T> c, List<T> list, String basePath) {
+    public String exportData(Class<T> c, List<T> list, String basePath) {
         BaseExcelUtil<T> excelUtils = new BaseExcelUtil<>(c);
         return excelUtils.exportExcel(basePath);
     }

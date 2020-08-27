@@ -1,5 +1,6 @@
 package com.luna.elasticsearch.util;
 
+import com.alibaba.fastjson.JSON;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.elasticsearch.exception.ElasticsearchException;
@@ -9,14 +10,13 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,18 +55,17 @@ public class SearchRestUtil {
         if (StringUtils.isEmpty(index)) {
             throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
-        SearchRequest searchRequest = new SearchRequest(index);
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
-        searchRequest.source(searchSourceBuilder);
-        SearchResponse searchResponse = null;
         try {
-            searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            SearchRequest searchRequest = new SearchRequest(index);
+            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+            searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+            searchRequest.source(searchSourceBuilder);
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             List<Map<String, Object>> objects = getMaps(searchResponse);
             return objects;
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
+                "searchByField failed " + e.getMessage());
         }
     }
 
@@ -76,8 +75,7 @@ public class SearchRestUtil {
      * @param searchResponse
      * @return
      */
-    @NotNull
-    private List<Map<String, Object>> getMaps(SearchResponse searchResponse) {
+    public static List<Map<String, Object>> getMaps(SearchResponse searchResponse) {
         SearchHit[] hits = searchResponse.getHits().getHits();
         List<Map<String, Object>> objects = new ArrayList<>();
         Arrays.stream(hits).forEach(hit -> {
@@ -94,7 +92,7 @@ public class SearchRestUtil {
      * @param searchResponse
      * @return
      */
-    private List<Map<String, Object>> getMapsByHighLight(String highlightField, SearchResponse searchResponse) {
+    public static List<Map<String, Object>> getMapsByHighLight(String highlightField, SearchResponse searchResponse) {
         SearchHit[] hits = searchResponse.getHits().getHits();
         List<Map<String, Object>> lists = new ArrayList<>();
         for (SearchHit hit : hits) {
@@ -124,23 +122,9 @@ public class SearchRestUtil {
      */
     public List<Map<String, Object>> searchByField(String index, String keyWord, Object keyValue, int pageNo,
         int pageSize) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder
-                .query(QueryBuilders.matchPhraseQuery(keyWord, keyValue))
-                .from(pageNo)
-                .size(pageSize);
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMaps(search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
+        return getMaps(searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+            null, null, null, null));
     }
 
     /**
@@ -156,24 +140,29 @@ public class SearchRestUtil {
      */
     public List<Map<String, Object>> searchByField(String index, String keyWord, Object keyValue, int pageNo,
         int pageSize, String highlightField) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder
-                .query(QueryBuilders.matchPhraseQuery(keyWord, keyValue))
-                .from(pageNo)
-                .size(pageSize)
-                .highlighter(getHighlightBuilder(highlightField));
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMapsByHighLight(highlightField, search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
+        HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, true);
+        return getMapsByHighLight(highlightField, searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+            null, null, null, highlightBuilder));
+    }
+
+    /**
+     * 为提供的字段名和文本创建一个带有“短语”类型的文本查询。
+     *
+     * @param index 索引
+     * @param keyWord 搜索字段
+     * @param keyValue 搜索字段值
+     * @param pageNo 起始编号
+     * @param pageSize 返回条目
+     * @param highlightField 高亮字段
+     * @return
+     */
+    public List<Map<String, Object>> searchPageByField(String index, String keyWord, Object keyValue, int pageNo,
+        int pageSize, String highlightField) {
+        MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
+        HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, true);
+        return getMapsByHighLight(highlightField, searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+            null, null, null, highlightBuilder));
     }
 
     /**
@@ -197,27 +186,11 @@ public class SearchRestUtil {
         int pageNo,
         int pageSize, String highlightField, boolean notOnlyFirst, String sortField, String sortType, String include,
         String exclude) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
-            searchSourceBuilder
-                .query(QueryBuilders.matchPhraseQuery(keyWord, keyValue))
-                .from(pageNo)
-                .size(pageSize)
-                .sort(sortField, SortOrder.fromString(sortType))
-                .fetchSource(getFetchSourceContext(include, exclude))
-                .highlighter(getHighlightBuilder(highlightField, notOnlyFirst));
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMapsByHighLight(highlightField, search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
+        HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, notOnlyFirst);
+        return getMapsByHighLight(highlightField, searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+            sortField, sortType, fetchSourceContext, highlightBuilder));
     }
 
     /**
@@ -238,30 +211,52 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, Object keyValue,
         int pageNo,
         int pageSize, String sortField, String sortType, String include, String exclude) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
-            searchSourceBuilder
-                .query(QueryBuilders.matchPhraseQuery(keyWord, keyValue))
-                .from(pageNo)
-                .size(pageSize)
-                .sort(sortField, SortOrder.fromString(sortType))
-                .fetchSource(getFetchSourceContext(include, exclude));
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMaps(search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
+        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+            sortField, sortType, fetchSourceContext, null));
     }
 
     /**
      * 查询数据
+     *
+     * @param index 索引
+     * @param timeOut 超时
+     * @param keyWord 关键字段
+     * @param keyValue 字段值
+     * @param pageNo 启始编号
+     * @param pageSize 返回条目
+     * @param sortField 排序字段
+     * @param sortType 排序方式 DESC 降序,ASC 升序
+     * @return
+     */
+    public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, Object keyValue,
+        int pageNo, int pageSize, String sortField, String sortType) {
+        TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
+        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+            sortField, sortType, null, null));
+    }
+
+    /**
+     * 查询数据
+     *
+     * @param index 索引
+     * @param timeOut 超时
+     * @param keyWord 关键字段
+     * @param pageSize 返回条目
+     * @param sortField 排序字段
+     * @param sortType 排序方式 DESC 降序,ASC 升序
+     * @return
+     */
+    public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, int pageNo,
+        int pageSize, String sortField, String sortType) {
+        QueryStringQueryBuilder queryStringQueryBuilder = GetBuildersUtil.getQueryStringQueryBuilder(keyWord);
+        return getMaps(searchByField(index, timeOut, queryStringQueryBuilder, pageNo, pageSize,
+            sortField, sortType, null, null));
+    }
+
+    /**
+     * 查询数据 TermQueryBuilder
      *
      * @param index 索引
      * @param timeOut 超时
@@ -277,30 +272,14 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, Object keyValue,
         int pageNo,
         int pageSize, String sortField, String include, String exclude) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
-            searchSourceBuilder
-                .query(QueryBuilders.matchPhraseQuery(keyWord, keyValue))
-                .from(pageNo)
-                .size(pageSize)
-                .sort(sortField, SortOrder.DESC)
-                .fetchSource(getFetchSourceContext(include, exclude));
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMaps(search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+            sortField, null, fetchSourceContext, null));
     }
 
     /**
-     * 查询数据
+     * 查询数据 MatchAllQueryBuilder
      *
      * @param index 索引
      * @param timeOut 超时
@@ -313,27 +292,12 @@ public class SearchRestUtil {
      * @return
      */
     public List<Map<String, Object>> searchByField(String index, Integer timeOut,
-        int pageNo,
-        int pageSize, String sortField, String sortType, String include, String exclude) {
-        if (StringUtils.isEmpty(index)) {
-            throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
-        }
-        try {
-            SearchRequest searchRequest = new SearchRequest(index);
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
-            searchSourceBuilder
-                .from(pageNo)
-                .size(pageSize)
-                .sort(sortField, SortOrder.fromString(sortType))
-                .fetchSource(getFetchSourceContext(include, exclude));
-            searchRequest.source(searchSourceBuilder);
-            SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMaps(search);
-        } catch (IOException e) {
-            throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
-        }
+        int pageNo, int pageSize, String sortField, String sortType, String include, String exclude) {
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
+        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, pageNo, pageSize,
+            sortField, sortType, fetchSourceContext, null));
+
     }
 
     /**
@@ -349,73 +313,118 @@ public class SearchRestUtil {
      */
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String sortField, String sortType,
         String include, String exclude) {
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
+        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
+            sortField, sortType, fetchSourceContext, null));
+    }
+
+    /**
+     * 查询数据
+     *
+     * @param index 索引
+     * @param timeOut 超时
+     * @param sortField 排序字段
+     * @param include 显示包含字段
+     * @param exclude 显示排除字段
+     * @return
+     */
+    public List<Map<String, Object>> searchByField(String index, Integer timeOut, String sortField, String include,
+        String exclude) {
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
+        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
+            sortField, null, fetchSourceContext, null));
+    }
+
+    /**
+     * 查询数据
+     *
+     * @param index 索引
+     * @param timeOut 超时
+     * @param include 显示包含字段
+     * @param exclude 显示排除字段
+     *
+     * @return
+     */
+    public List<Map<String, Object>> searchByField(String index, Integer timeOut, String include, String exclude) {
+        FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
+        MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
+        return getMaps(
+            searchByField(index, timeOut, matchAllQueryBuilder, 0, 0, null, null, fetchSourceContext, null));
+    }
+
+    /**
+     *
+     * 查询数据
+     *
+     * @param index 索引
+     * @param timeOut 超时
+     * @param queryBuilder 查询方式
+     * @param pageNo 启始编号
+     * @param pageSize 返回条目
+     * @param sortField 排序字段
+     * @param sortType 排序方式 DESC 降序,ASC 升序
+     * @param highlightBuilder 高亮字段 是否仅首个匹配字段高亮 true: 匹配字段均高亮 false: 仅首个匹配字段高亮
+     * @param fetchSourceContext 排除或包含那些字段显示
+     * @return
+     */
+    public SearchResponse searchByField(String index, Integer timeOut, QueryBuilder queryBuilder,
+        int pageNo, int pageSize, String sortField, String sortType,
+        FetchSourceContext fetchSourceContext, HighlightBuilder highlightBuilder) {
         if (StringUtils.isEmpty(index)) {
             throw new ElasticsearchException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         try {
             SearchRequest searchRequest = new SearchRequest(index);
             SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
-            searchSourceBuilder
-                .sort(sortField, SortOrder.fromString(sortType))
-                .fetchSource(getFetchSourceContext(include, exclude));
+            if (timeOut != null && timeOut > 0) {
+                searchSourceBuilder.timeout(new TimeValue(timeOut, TimeUnit.SECONDS));
+            } else {
+                searchSourceBuilder.timeout(new TimeValue(1, TimeUnit.SECONDS));
+            }
+
+            if (queryBuilder != null) {
+                searchSourceBuilder.query(queryBuilder);
+            }
+
+            if (pageNo < 0) {
+                pageNo = 0;
+                searchSourceBuilder.from(pageNo);
+            }
+
+            if (pageSize < 0) {
+                pageSize = 10;
+                searchSourceBuilder.size(pageSize);
+            }
+
+            if (StringUtils.isNotEmpty(sortField)) {
+                if (StringUtils.isNotEmpty(sortType)) {
+                    searchSourceBuilder.sort(sortField, SortOrder.fromString(sortType));
+                }
+                searchSourceBuilder.sort(sortField, SortOrder.DESC);
+            }
+
+            if (fetchSourceContext != null) {
+                searchSourceBuilder.fetchSource(fetchSourceContext);
+            }
+
+            if (highlightBuilder != null) {
+                searchSourceBuilder.highlighter(highlightBuilder);
+            }
+
             searchRequest.source(searchSourceBuilder);
             SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
-            return getMaps(search);
+
+            log.info(
+                "searchByField success  index={},  timeOut={},  queryBuilder,  pageNo={},  pageSize={}, sortField={},  sortType={},  highlightField={},  notOnlyFirst, "
+                    + " fetchSourceContext={}",
+                index, timeOut, JSON.toJSONString(queryBuilder), pageNo, pageSize, sortField, sortType,
+                JSON.toJSONString(fetchSourceContext));
+            return search;
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
-                "通获取数据 {" + index + "} 失败" + e.getMessage());
+                "searchByField failed " + e.getMessage());
         }
     }
-
-    /**
-     * 设置高亮字段
-     * 
-     * @param highlightField
-     * @return
-     */
-    public HighlightBuilder getHighlightBuilder(String highlightField, boolean notOnlyFirst) {
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        if (StringUtils.isNotEmpty(highlightField)) {
-            // 多相同字段高亮关闭, 只高亮第一个字段
-            highlightBuilder.field(highlightField);
-            highlightBuilder.requireFieldMatch(notOnlyFirst);
-            highlightBuilder.preTags("<span style='color:red'>");
-            highlightBuilder.postTags("</span>");
-        }
-        return highlightBuilder;
-    }
-
-    /**
-     * 设置高亮字段
-     *
-     * @param highlightField
-     * @return
-     */
-    public HighlightBuilder getHighlightBuilder(String highlightField) {
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        if (StringUtils.isNotEmpty(highlightField)) {
-            // 多相同字段高亮关闭, 只高亮第一个字段, 默认开启全部高亮
-            highlightBuilder.field(highlightField);
-            highlightBuilder.requireFieldMatch(true);
-            highlightBuilder.preTags("<span style='color:red'>");
-            highlightBuilder.postTags("</span>");
-        }
-        return highlightBuilder;
-    }
-
-    /**
-     * 返回显示字段
-     * 
-     * @param include 包含字段
-     * @param export 排除字段
-     * @return
-     */
-    public FetchSourceContext getFetchSourceContext(String include, String export) {
-        if (StringUtils.isEmpty(include) && StringUtils.isEmpty(export)) {
-            return new FetchSourceContext(false);
-        }
-        return new FetchSourceContext(true, include.split(","), export.split(","));
-    }
-
 }

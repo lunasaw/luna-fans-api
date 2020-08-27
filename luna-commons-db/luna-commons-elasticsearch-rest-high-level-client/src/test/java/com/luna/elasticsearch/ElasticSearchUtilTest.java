@@ -3,7 +3,7 @@ package com.luna.elasticsearch;
 import com.alibaba.fastjson.JSON;
 import com.luna.elasticsearch.contants.ElasticsearchConstant;
 import com.luna.elasticsearch.demo.pojo.Person;
-import com.luna.elasticsearch.dtp.EsPageDTO;
+import com.luna.elasticsearch.dto.PageDTO;
 import com.luna.elasticsearch.util.ElasticSearchDeleteUtil;
 import com.luna.elasticsearch.util.ElasticSearchGetUtil;
 import com.luna.elasticsearch.util.ElasticSearchInsertUtil;
@@ -133,10 +133,10 @@ public class ElasticSearchUtilTest {
      */
     @Test
     public void searchDataByPage() {
-        EsPageDTO esPageDTO =
+        PageDTO pageDTO =
             ElasticSearchGetUtil.searchDataPage(ElasticsearchConstant.INDEX_NAME, 1, 2, null, "age", "remark", "50%",
                 "age", null, null, null, "age");
-        System.out.println(JSON.toJSONString(esPageDTO));
+        System.out.println(JSON.toJSONString(pageDTO));
     }
 
 }

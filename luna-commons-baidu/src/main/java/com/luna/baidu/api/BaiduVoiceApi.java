@@ -124,7 +124,6 @@ public class BaiduVoiceApi {
             voiceSynthesisDTO.getSavePath() + "\\" + voiceSynthesisDTO.getCuid() + "." + voiceSynthesisDTO.getAue();
         LocalFileUtil.writeBytesToFileSystem(bytes, path);
         log.info("voiceSynthesis success path={}", path);
-
         return path;
     }
 }
