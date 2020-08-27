@@ -12,9 +12,9 @@
     <artifactId>luna-commons-db</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>luna-commons-elasticsearch-rest-high-level-client</module>
+        <module>luna-commons-elasticsearch-rest-template</module>
         <module>luna-commons-redis</module>
-        <module>luna-commons-elasticsearch-template</module>
+        <module>luna-commons-elasticsearch-highclient-rest</module>
     </modules>
     <repositories>
         <repository>

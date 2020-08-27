@@ -1,0 +1,32 @@
+spring:
+  # 数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://xxx:3307/luna-message?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: xxx
+
+  # elasticsearch
+  elasticsearch:
+    rest:
+      username: xxx
+      password: xxx
+      # 集群
+      uris: [http://localhost:9200]
+      connection-timeout: 5000
+      read-timeout: 30000
+
+luna:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: [localhost:9200]
+      connect-timeout: 5000
+      socket-timeout: 30000
+      connection-request-timeout: 5000
+      index:
+        number-of-replicas: 0
+        number-of-shards: 3
+      account:
+        username: xxx
+        password: xxx
