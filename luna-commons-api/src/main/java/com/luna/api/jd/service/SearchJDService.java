@@ -1,7 +1,7 @@
-package com.luna.elasticsearch.jd.service;
+package com.luna.api.jd.service;
 
 import com.luna.api.jsoup.JsoupUtil;
-import com.luna.api.jsoup.dto.SearchJDDTO;
+import com.luna.api.jd.dto.SearchJDDTO;
 import com.luna.elasticsearch.constants.ElastcSearchConstants;
 import com.luna.elasticsearch.util.BulkRestUtil;
 import com.luna.elasticsearch.util.DocRestUtil;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Package: com.luna.elasticsearch.jd.service
+ * @Package: com.luna.api.jd.service
  * @ClassName: SearchService
  * @Author: luna
  * @CreateTime: 2020/8/26 20:16
@@ -37,11 +37,12 @@ public class SearchJDService {
     /**
      * 讲获取到的数据放入elasticsearch
      * 
-     * @param keyword
+     * @param keyWord
      * @return
      */
-    public boolean parseJD(String keyword) {
-        List<SearchJDDTO> searchJDDTOS = JsoupUtil.parseJd(keyword);
+    public boolean parseJD(String keyWord) {
+        log.info("parseJD start keyWord={}", keyWord);
+        List<SearchJDDTO> searchJDDTOS = JsoupUtil.parseJd(keyWord);
         return bulkRestUtil.addList(ElastcSearchConstants.INDEX_NAME, searchJDDTOS, false);
     }
 

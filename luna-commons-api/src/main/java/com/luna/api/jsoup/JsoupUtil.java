@@ -2,7 +2,7 @@ package com.luna.api.jsoup;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.luna.api.jsoup.dto.SearchJDDTO;
+import com.luna.api.jd.dto.SearchJDDTO;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.text.CharsetKit;

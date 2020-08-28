@@ -1,8 +1,8 @@
-package com.luna.elasticsearch.jd.controller;
+package com.luna.api.jd.controller;
 
 import com.luna.common.dto.ResultDTO;
 import com.luna.common.dto.constant.ResultCode;
-import com.luna.elasticsearch.jd.service.SearchJDService;
+import com.luna.api.jd.service.SearchJDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Package: com.luna.elasticsearch.jd.controller
+ * @Package: com.luna.api.jd.controller
  * @ClassName: SearchJDController
  * @Author: luna
  * @CreateTime: 2020/8/26 20:28

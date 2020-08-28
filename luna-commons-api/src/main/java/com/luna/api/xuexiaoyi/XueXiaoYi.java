@@ -1,4 +1,4 @@
-package com.luna.api.xuexiaoyi.api;
+package com.luna.api.xuexiaoyi;
 
 import com.alibaba.fastjson.JSON;
 import com.luna.api.xuexiaoyi.constant.XueXiaoYiConstant;

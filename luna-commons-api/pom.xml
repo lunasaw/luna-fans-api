@@ -11,6 +11,13 @@
 
     <artifactId>luna-commons-api</artifactId>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <elasticsearch.version>7.6.2</elasticsearch.version>
+    </properties>
+
     <repositories>
         <repository>
             <id>luna-commons-mvn-repo-api</id>
@@ -32,6 +39,17 @@
         <dependency>
             <groupId>com.luna</groupId>
             <artifactId>luna-commons-file</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.luna</groupId>
+            <artifactId>luna-commons-elasticsearch-rest-highclient</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

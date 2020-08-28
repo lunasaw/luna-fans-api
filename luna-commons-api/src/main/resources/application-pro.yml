@@ -4,3 +4,14 @@ luna:
     authorizationCode: xxx
     password: xxx
     username: xxx
+
+spring:
+  # elasticsearch
+  elasticsearch:
+    rest:
+      username: luna
+      password: xxx
+      # 集群
+      uris: [http://localhost:9200]
+      connection-timeout: 5000
+      read-timeout: 30000

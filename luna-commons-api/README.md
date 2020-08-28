@@ -41,6 +41,9 @@ luna-commons-api
 增加Sm.ms图床Api
 
 增加学小易网课答案Api
+
+增加JD搜索模拟
+    jsoup爬取页面信息,放入elasticsearch,前后端分离模拟搜索页面
  
 ## 目录
 

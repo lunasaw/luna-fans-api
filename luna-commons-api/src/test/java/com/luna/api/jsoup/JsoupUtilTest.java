@@ -1,7 +1,7 @@
-package com.luna.elasticsearch.jsoup;
+package com.luna.api.jsoup;
 
-import com.luna.elasticsearch.ElasticsearchApplicationTests;
-import com.luna.elasticsearch.jd.service.SearchJDService;
+import com.luna.api.ApiApplicationTest;
+import com.luna.api.jd.service.SearchJDService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -19,7 +19,7 @@ import java.net.URL;
  * @CreateTime: 2020/8/26 19:50
  * @Description:
  */
-public class JsoupUtilTest extends ElasticsearchApplicationTests {
+public class JsoupUtilTest extends ApiApplicationTest {
 
     @Autowired
     private SearchJDService searchJDService;
@@ -49,7 +49,7 @@ public class JsoupUtilTest extends ElasticsearchApplicationTests {
 
     @Test
     public void parseJD() {
-        boolean java = searchJDService.parseJD("JAVA");
+        boolean java = searchJDService.parseJD("docker");
         System.out.println(java);
     }
 

@@ -417,9 +417,10 @@ public class SearchRestUtil {
             SearchResponse search = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
 
             log.info(
-                "searchByField success  index={},  timeOut={},  queryBuilder={},  pageNo={},  pageSize={}, sortField={},  sortType={},  highlightField={},  notOnlyFirst, "
+                "searchByField success  index={},  timeOut={},  queryBuilder={},  pageNo={},  pageSize={}, sortField={},  sortType={},  highlightField={},"
                     + " fetchSourceContext={}",
                 index, timeOut, JSON.toJSONString(queryBuilder), pageNo, pageSize, sortField, sortType,
+                JSON.toJSONString(highlightBuilder),
                 JSON.toJSONString(fetchSourceContext));
             return search;
         } catch (IOException e) {

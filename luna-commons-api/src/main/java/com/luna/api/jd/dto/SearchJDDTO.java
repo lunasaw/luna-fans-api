@@ -1,4 +1,4 @@
-package com.luna.api.jsoup.dto;
+package com.luna.api.jd.dto;
 
 /**
  * @Package: com.luna.api.xuexiaoyi.dto

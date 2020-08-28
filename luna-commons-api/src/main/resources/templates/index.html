@@ -133,7 +133,7 @@
                     var keyWord = this.keyWord;
                     console.log(keyWord);
                     // 对接后端接口
-                    axios.get('/es/jd/search/title/' + keyWord + "/0/20").then(response => {
+                    axios.get('jd/search/title/' + keyWord + "/0/20").then(response => {
                         console.log(response.data);
                         this.results = response.data.data;
                     })
