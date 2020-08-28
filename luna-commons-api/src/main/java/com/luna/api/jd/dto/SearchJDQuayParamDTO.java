@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
  * @CreateTime: 2020/8/28 21:42
  * @Description:
  */
-public class SearchJDKeyWordDTO {
+public class SearchJDQuayParamDTO {
 
     /**
      *

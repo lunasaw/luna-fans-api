@@ -44,6 +44,8 @@ luna-commons-api
 
 增加JD搜索模拟
     jsoup爬取页面信息,放入elasticsearch,前后端分离模拟搜索页面
+    
+增加Rest切面Aop日志处理
  
 ## 目录
 

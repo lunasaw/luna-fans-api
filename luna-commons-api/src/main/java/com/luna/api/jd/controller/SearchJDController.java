@@ -1,6 +1,6 @@
 package com.luna.api.jd.controller;
 
-import com.luna.api.jd.dto.SearchJDKeyWordDTO;
+import com.luna.api.jd.dto.SearchJDQuayParamDTO;
 import com.luna.api.jd.service.SearchJDService;
 import com.luna.common.anno.MyValid;
 import com.luna.common.dto.ResultDTO;
@@ -45,11 +45,11 @@ public class SearchJDController {
      * @return
      */
     @PostMapping("/search/{pageNo}/{pageSize}")
-    public ResultDTO<List<Map<String, Object>>> search(@RequestBody @MyValid SearchJDKeyWordDTO searchJDKeyWordDTO,
+    public ResultDTO<List<Map<String, Object>>> search(@RequestBody @MyValid SearchJDQuayParamDTO searchJDQuayParamDTO,
         @PathVariable(name = "pageNo") Integer pageNo,
         @PathVariable(name = "pageSize") Integer pageSize) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-            searchJDService.searchJDPage(searchJDKeyWordDTO.getKeyWord(), searchJDKeyWordDTO.getKeyValue(), pageNo,
+            searchJDService.searchJDPage(searchJDQuayParamDTO.getKeyWord(), searchJDQuayParamDTO.getKeyValue(), pageNo,
                 pageSize));
     }
 }
