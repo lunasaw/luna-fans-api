@@ -1,13 +1,12 @@
 package com.luna.api.jd.controller;
 
+import com.luna.api.jd.dto.SearchJDKeyWordDTO;
+import com.luna.api.jd.service.SearchJDService;
+import com.luna.common.anno.MyValid;
 import com.luna.common.dto.ResultDTO;
 import com.luna.common.dto.constant.ResultCode;
-import com.luna.api.jd.service.SearchJDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -40,18 +39,17 @@ public class SearchJDController {
 
     /**
      * 精确查找
-     * 
-     * @param keyWord
-     * @param keyValue
+     *
      * @param pageNo
      * @param pageSize
      * @return
      */
-    @GetMapping("/search/{keyWord}/{keyValue}/{pageNo}/{pageSize}")
-    public ResultDTO<List<Map<String, Object>>> search(@PathVariable(name = "keyWord") String keyWord,
-        @PathVariable(name = "keyValue") String keyValue, @PathVariable(name = "pageNo") Integer pageNo,
+    @PostMapping("/search/{pageNo}/{pageSize}")
+    public ResultDTO<List<Map<String, Object>>> search(@RequestBody @MyValid SearchJDKeyWordDTO searchJDKeyWordDTO,
+        @PathVariable(name = "pageNo") Integer pageNo,
         @PathVariable(name = "pageSize") Integer pageSize) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-            searchJDService.searchJDPage(keyWord, keyValue, pageNo, pageSize));
+            searchJDService.searchJDPage(searchJDKeyWordDTO.getKeyWord(), searchJDKeyWordDTO.getKeyValue(), pageNo,
+                pageSize));
     }
 }

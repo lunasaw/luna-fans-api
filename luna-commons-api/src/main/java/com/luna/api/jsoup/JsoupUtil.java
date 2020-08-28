@@ -2,7 +2,7 @@ package com.luna.api.jsoup;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
-import com.luna.api.jd.dto.SearchJDDTO;
+import com.luna.api.jd.dto.SearchJDResultDTO;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.text.CharsetKit;
@@ -60,14 +60,14 @@ public class JsoupUtil {
      * @param keyword
      * @return
      */
-    public static List<SearchJDDTO> parseJd(String keyword) {
+    public static List<SearchJDResultDTO> parseJd(String keyword) {
         try {
             String url = "https://search.jd.com/Search?keyword=" + URLEncoder.encode(keyword, CharsetKit.UTF_8);
             Document document = Jsoup.connect(url).timeout(5 * 1000).get();
             Element elementById = document.getElementById("J_goodsList");
             Elements elements = elementById.getElementsByTag("li");
 
-            ArrayList<SearchJDDTO> list = Lists.newArrayList();
+            ArrayList<SearchJDResultDTO> list = Lists.newArrayList();
             for (Element element : elements) {
                 String img = element.getElementsByTag("img").eq(0).attr("src");
                 if (img == null) {
@@ -75,8 +75,8 @@ public class JsoupUtil {
                 }
                 String price = element.getElementsByClass("p-price").eq(0).text();
                 String title = element.getElementsByClass("p-name").eq(0).text();
-                SearchJDDTO searchJDDTO = new SearchJDDTO(img, price, title);
-                list.add(searchJDDTO);
+                SearchJDResultDTO searchJDResultDTO = new SearchJDResultDTO(img, price, title);
+                list.add(searchJDResultDTO);
             }
             return list;
         } catch (IOException e) {
@@ -86,7 +86,7 @@ public class JsoupUtil {
     }
 
     public static void main(String[] args) {
-        List<SearchJDDTO> maps = parseJd("JAVA");
+        List<SearchJDResultDTO> maps = parseJd("JAVA");
         System.out.println(JSON.toJSONString(maps));
     }
 }

@@ -7,7 +7,7 @@ package com.luna.api.jd.dto;
  * @CreateTime: 2020/8/26 20:03
  * @Description:
  */
-public class SearchJDDTO {
+public class SearchJDResultDTO {
 
     /** 图片 */
     private String img;
@@ -16,9 +16,9 @@ public class SearchJDDTO {
     /** 标题 */
     private String title;
 
-    public SearchJDDTO() {}
+    public SearchJDResultDTO() {}
 
-    public SearchJDDTO(String img, String price, String title) {
+    public SearchJDResultDTO(String img, String price, String title) {
         this.img = img;
         this.price = price;
         this.title = title;

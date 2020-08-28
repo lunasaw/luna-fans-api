@@ -51,4 +51,7 @@ public class BaseException extends RuntimeException {
         return message;
     }
 
+    public static boolean isBaseException(Throwable t) {
+        return t instanceof BaseException;
+    }
 }

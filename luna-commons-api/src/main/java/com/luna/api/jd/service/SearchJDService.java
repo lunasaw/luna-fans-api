@@ -1,7 +1,7 @@
 package com.luna.api.jd.service;
 
 import com.luna.api.jsoup.JsoupUtil;
-import com.luna.api.jd.dto.SearchJDDTO;
+import com.luna.api.jd.dto.SearchJDResultDTO;
 import com.luna.elasticsearch.constants.ElastcSearchConstants;
 import com.luna.elasticsearch.util.BulkRestUtil;
 import com.luna.elasticsearch.util.DocRestUtil;
@@ -42,8 +42,8 @@ public class SearchJDService {
      */
     public boolean parseJD(String keyWord) {
         log.info("parseJD start keyWord={}", keyWord);
-        List<SearchJDDTO> searchJDDTOS = JsoupUtil.parseJd(keyWord);
-        return bulkRestUtil.addList(ElastcSearchConstants.INDEX_NAME, searchJDDTOS, false);
+        List<SearchJDResultDTO> searchJDResultDTOS = JsoupUtil.parseJd(keyWord);
+        return bulkRestUtil.addList(ElastcSearchConstants.INDEX_NAME, searchJDResultDTOS, false);
     }
 
     /**
