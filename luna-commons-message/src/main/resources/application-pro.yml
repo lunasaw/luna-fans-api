@@ -7,7 +7,6 @@ spring:
     username: root
     password: xxx
 
-
   mail:
     host: xxx
     name: xxx

@@ -3,138 +3,29 @@ package com.luna.redis.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @Package: com.luna.redis
  * @ClassName: RedisUtil
  * @Author: luna
  * @CreateTime: 2020/8/23 16:19
- * @Description:
+ * @Description: opsForXXX 获取到一个Opercation, 但是没有指定操作的key, 可以在一个连接(事务)内操作多个key以及对应的value;
+ * boundXXXOps会获取到一个指定了key的operation,在一个连接内只操作这个key对应的value.
  */
 @Component
-public class RedisUtil {
+public class RedisOpsUtil {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    // =============================common============================
-    /**
-     * 指定缓存失效时间
-     * 
-     * @param key 键
-     * @param time 时间(秒)
-     * @return
-     */
-    public boolean expire(String key, long time) {
-        try {
-            if (time > 0) {
-                redisTemplate.expire(key, time, TimeUnit.SECONDS);
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+    @Autowired
+    private RedisKeyUtil                  redisKeyUtil;
 
-    /**
-     * 根据key 获取过期时间
-     * 
-     * @param key 键 不能为null
-     * @return 时间(秒) 返回0代表为永久有效
-     */
-    public long getExpire(String key) {
-        return redisTemplate.getExpire(key, TimeUnit.SECONDS);
-    }
-
-    /**
-     * 判断key是否存在
-     * 
-     * @param key 键
-     * @return true 存在 false不存在
-     */
-    public boolean hasKey(String key) {
-        try {
-            return redisTemplate.hasKey(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * 将key设置为永久有效
-     *
-     * @param key
-     */
-    public void persistKey(String key) {
-        redisTemplate.persist(key);
-    }
-
-    /**
-     * 删除缓存
-     * 
-     * @param key 可以传一个值 或多个
-     */
-    @SuppressWarnings("unchecked")
-    public void del(String... key) {
-        if (key != null && key.length > 0) {
-            if (key.length == 1) {
-                redisTemplate.delete(key[0]);
-            } else {
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
-            }
-        }
-    }
-
-    /**
-     * newKey不存在时才重命名
-     *
-     * @param oldKey
-     * @param newKey
-     * @return 修改成功返回true
-     */
-    public boolean renameKeyNotExist(String oldKey, String newKey) {
-        return redisTemplate.renameIfAbsent(oldKey, newKey);
-    }
-
-    /**
-     * 删除key
-     *
-     * @param key
-     */
-    public void deleteKey(String key) {
-        redisTemplate.delete(key);
-    }
-
-    /**
-     * 删除多个key
-     *
-     * @param keys
-     */
-    public void deleteKey(String... keys) {
-        Set<String> kSet = Stream.of(keys).map(k -> k).collect(Collectors.toSet());
-        redisTemplate.delete(kSet);
-    }
-
-    /**
-     * 删除Key的集合
-     *
-     * @param keys
-     */
-    public void deleteKey(Collection<String> keys) {
-        Set<String> kSet = keys.stream().map(k -> k).collect(Collectors.toSet());
-        redisTemplate.delete(kSet);
-    }
 
     // ============================String=============================
     /**
@@ -265,7 +156,7 @@ public class RedisUtil {
         try {
             redisTemplate.opsForHash().putAll(key, map);
             if (time > 0) {
-                expire(key, time);
+                redisKeyUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -305,7 +196,7 @@ public class RedisUtil {
         try {
             redisTemplate.opsForHash().put(key, item, value);
             if (time > 0) {
-                expire(key, time);
+                redisKeyUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -420,7 +311,7 @@ public class RedisUtil {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
             if (time > 0) {
-                expire(key, time);
+                redisKeyUtil.expire(key, time);
             }
             return count;
         } catch (Exception e) {
@@ -539,7 +430,7 @@ public class RedisUtil {
         try {
             redisTemplate.opsForList().rightPush(key, value);
             if (time > 0) {
-                expire(key, time);
+                redisKeyUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -577,7 +468,7 @@ public class RedisUtil {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
             if (time > 0) {
-                expire(key, time);
+                redisKeyUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {

@@ -15,7 +15,8 @@ import com.luna.message.api.constant.TargetTypeConstant;
 import com.luna.message.api.entity.MessageDO;
 import com.luna.message.api.service.MessageEmailService;
 import com.luna.message.api.service.MessageMobileService;
-import com.luna.redis.util.RedisUtil;
+import com.luna.redis.util.RedisKeyUtil;
+import com.luna.redis.util.RedisOpsUtil;
 
 /**
  * @author Luna@win10
@@ -30,7 +31,10 @@ public class MessageSend {
     private MessageEmailService  messageEmailService;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisOpsUtil         redisOpsUtil;
+
+    @Autowired
+    private RedisKeyUtil         redisKeyUtil;
 
     /**
      * 重置密码
@@ -75,16 +79,16 @@ public class MessageSend {
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.EMAIL);
             messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
-            redisUtil.del(userMark);
-            redisUtil.set(userMark,validationCode,300);
+            redisKeyUtil.del(userMark);
+            redisOpsUtil.set(userMark, validationCode, 300);
             messageEmailService.asyncSendMessage(messageDO, userMark, null);
         } else if (MaskUtils.isMobilePhoneNumber(userMark)) {
             messageDO.setTargetMap(ImmutableMap.of(TargetTypeConstant.MOBILE, userMark));
             messageDO.setMessageType(MessageTypeConstant.AUTH_OCDE);
             messageDO.setTargetType(TargetTypeConstant.MOBILE);
             messageDO.setTemplateId(EmailContentsConstant.AUTH_CODE);
-            redisUtil.del(userMark);
-            redisUtil.set(userMark,validationCode,300);
+            redisKeyUtil.del(userMark);
+            redisOpsUtil.set(userMark, validationCode, 300);
             messageMobileService.asyncSendMessage(messageDO, null, userMark);
         } else {
             throw new BaseException(ResultCode.PARAMETER_INVALID, "不是一个合法的手机号或者邮箱地址");
