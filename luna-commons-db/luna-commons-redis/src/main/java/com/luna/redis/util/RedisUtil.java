@@ -5,10 +5,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Package: com.luna.redis
@@ -69,6 +72,15 @@ public class RedisUtil {
     }
 
     /**
+     * 将key设置为永久有效
+     *
+     * @param key
+     */
+    public void persistKey(String key) {
+        redisTemplate.persist(key);
+    }
+
+    /**
      * 删除缓存
      * 
      * @param key 可以传一个值 或多个
@@ -82,6 +94,46 @@ public class RedisUtil {
                 redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
+    }
+
+    /**
+     * newKey不存在时才重命名
+     *
+     * @param oldKey
+     * @param newKey
+     * @return 修改成功返回true
+     */
+    public boolean renameKeyNotExist(String oldKey, String newKey) {
+        return redisTemplate.renameIfAbsent(oldKey, newKey);
+    }
+
+    /**
+     * 删除key
+     *
+     * @param key
+     */
+    public void deleteKey(String key) {
+        redisTemplate.delete(key);
+    }
+
+    /**
+     * 删除多个key
+     *
+     * @param keys
+     */
+    public void deleteKey(String... keys) {
+        Set<String> kSet = Stream.of(keys).map(k -> k).collect(Collectors.toSet());
+        redisTemplate.delete(kSet);
+    }
+
+    /**
+     * 删除Key的集合
+     *
+     * @param keys
+     */
+    public void deleteKey(Collection<String> keys) {
+        Set<String> kSet = keys.stream().map(k -> k).collect(Collectors.toSet());
+        redisTemplate.delete(kSet);
     }
 
     // ============================String=============================
