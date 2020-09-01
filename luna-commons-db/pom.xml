@@ -18,7 +18,7 @@
     </modules>
     <repositories>
         <repository>
-            <id>luna-commons-mvn-repo-message</id>
+            <id>luna-commons-mvn-repo-db</id>
             <url>https://raw.github.com/czy1024/luna-commons/mvn-repo-luna-commons-db/</url>
             <snapshots>
                 <enabled>true</enabled>
