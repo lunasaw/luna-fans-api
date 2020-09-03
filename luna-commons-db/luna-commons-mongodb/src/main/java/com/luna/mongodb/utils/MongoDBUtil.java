@@ -1,6 +1,8 @@
 package com.luna.mongodb.utils;
 
+import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.entity.Page;
+import com.luna.common.exception.base.BaseException;
 import com.luna.common.utils.text.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -13,7 +15,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +89,10 @@ public class MongoDBUtil {
      * @param map
      */
     public void delete(Class<?> entiy, String collName, Map<String, Object> map) {
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+        }
         for (String key : map.keySet()) {
-            Assert.notNull(key, "删除条件不能为null");
             Query query = new Query(Criteria.where(key).is(map.get(key)));
             mongoTemplate.remove(query, entiy, collName);
         }
@@ -113,8 +117,10 @@ public class MongoDBUtil {
      * @param param
      */
     public void update(Class<?> entiy, String collName, Map<String, Object> map, Map<String, Object> param) {
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+        }
         for (String key : map.keySet()) {
-            Assert.notNull(key, "更新条件不能为null");
             Query query = new Query(Criteria.where(key).is(map.get(key)));
             mongoTemplate.upsert(query, Update.update(key, param.get(key)), collName);
         }
@@ -133,10 +139,10 @@ public class MongoDBUtil {
      */
     public Object findDesignField(List<String> fields, Map<String, Object> map, Class<?> clazz, String collName,
         boolean returnId) {
-        Criteria criteria = null;
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
+        Criteria criteria = null;
         for (String key : map.keySet()) {
             criteria = Criteria.where(key).is(map.get(key));
         }
@@ -184,8 +190,8 @@ public class MongoDBUtil {
      * @param map map.put("添加索引的字段",Direction.ASC/DESC)
      */
     public void createIndex(String collName, String indexName, Map<String, Sort.Direction> map) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "添加索引的字段不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Index index = new Index().named(indexName);
         for (String key : map.keySet()) {
@@ -246,8 +252,8 @@ public class MongoDBUtil {
      */
     public List<? extends Object> findSortByParam(Object obj, String collName, Map<String, Object> map,
         String sortField, Sort.Direction direction) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Criteria criteria = null;
         criteria = getCriteria(criteria, map);
@@ -277,8 +283,8 @@ public class MongoDBUtil {
      */
     public List<? extends Object> findRangeByParam(Object obj, String collName, Map<String, Object> map,
         String sortField, Sort.Direction direction, Criteria rangeCriteria) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Criteria criteria = null;
         criteria = getCriteria(criteria, map);
@@ -313,8 +319,8 @@ public class MongoDBUtil {
      */
     public Long countRangeCondition(Class<?> clazz, String collName, Criteria rangeCriteria, Map<String, Object> map) {
         Criteria criteria = null;
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         for (String key : map.keySet()) {
             criteria = Criteria.where(key).is(map.get(key));
@@ -337,8 +343,8 @@ public class MongoDBUtil {
      */
     public Object findSortFirst(Class<?> clazz, Map<String, Object> map, String collName, String field,
         Sort.Direction direction) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Criteria criteria = null;
         criteria = getCriteria(criteria, map);
@@ -357,8 +363,8 @@ public class MongoDBUtil {
      */
     public void updateMulti(String accordingKey, Object accordingValue, Map<String, Object> map,
         String collName, Integer type) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Criteria criteria = Criteria.where(accordingKey).is(accordingValue);
         Query query = Query.query(criteria);
@@ -386,8 +392,8 @@ public class MongoDBUtil {
      */
     public Object findSum(Class<?> clazz, Map<String, Object> map, String collName, String sumField,
         Criteria rangeCriteria) {
-        for (String key : map.keySet()) {
-            Assert.notNull(key, "查询条件key不能为null");
+        if (CollectionUtils.isEmpty(map)) {
+            throw new BaseException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
         }
         Criteria criteria = null;
         MatchOperation match = null;
@@ -415,9 +421,7 @@ public class MongoDBUtil {
      */
     public Page findSortPageCondition(Class<?> clazz, String collName, Map<String, Object> map,
         int pageNo, int pageSize, Sort.Direction direction, String sortField) {
-
         Criteria criteria = getCriteria(new Criteria(), map);
-
         long count;
 
         if (criteria == null) {

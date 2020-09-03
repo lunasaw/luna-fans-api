@@ -85,7 +85,8 @@ public class AmountUtil {
      * @return
      */
     public static String changeY2F(String amount) {
-        String currency = amount.replaceAll("\\$|\\￥|\\,", ""); // 处理包含, ￥ 或者$的金额
+        String currency = amount.replaceAll("\\$|\\￥|\\,", "");
+        // 处理包含, ￥ 或者$的金额
         int index = currency.indexOf(".");
         int length = currency.length();
         Long amLong = 0l;
@@ -99,28 +100,5 @@ public class AmountUtil {
             amLong = Long.valueOf((currency.substring(0, index + 1)).replace(".", "") + "00");
         }
         return amLong.toString();
-    }
-
-    public static void main(String[] args) {
-        // try {
-        // System.out.println("结果："+changeF2Y("-000a00"));
-        // } catch(Exception e){
-        // System.out.println("----------->>>"+e.getMessage());
-        //// return e.getErrorCode();
-        // }
-        // System.out.println("结果："+changeY2F("1.00000000001E10"));
-
-        System.out.println(AmountUtil.changeY2F("1.33"));
-        try {
-            System.out.println(AmountUtil.changeF2Y("1322"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // System.out.println(Long.parseLong(AmountUtils.changeY2F("1000000000000000")));
-        // System.out.println(Integer.parseInt(AmountUtils.changeY2F("10000000")));
-        // System.out.println(Integer.MIN_VALUE);
-        // long a = 0;
-        // System.out.println(a);
-
     }
 }
