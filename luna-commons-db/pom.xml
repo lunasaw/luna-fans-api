@@ -15,6 +15,7 @@
         <module>luna-commons-elasticsearch-rest-template</module>
         <module>luna-commons-redis</module>
         <module>luna-commons-elasticsearch-rest-highclient</module>
+        <module>luna-commons-mongodb</module>
     </modules>
     <repositories>
         <repository>

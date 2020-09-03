@@ -21,7 +21,7 @@ public class Page {
     /**
      * 本页的数据列表
      */
-    private List<Map<String, Object>> recordList;
+    private List<?> recordList;
 
     /**
      * 总页数
@@ -104,11 +104,11 @@ public class Page {
         this.recordCount = recordCount;
     }
 
-    public List<Map<String, Object>> getRecordList() {
+    public List<?> getRecordList() {
         return recordList;
     }
 
-    public void setRecordList(List<Map<String, Object>> recordList) {
+    public void setRecordList(List<?> recordList) {
         this.recordList = recordList;
     }
 
