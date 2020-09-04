@@ -19,7 +19,7 @@ import java.net.URL;
  * @CreateTime: 2020/8/26 19:50
  * @Description:
  */
-public class JsoupUtilTest extends ApiApplicationTest {
+public class JsoupJDUtilTest extends ApiApplicationTest {
 
     @Autowired
     private SearchJDService searchJDService;

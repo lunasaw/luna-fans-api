@@ -11,7 +11,7 @@ import java.util.UUID;
  * @CreateTime: 2020/8/16 13:43
  * @Description:
  */
-public class RandomStrUtil {
+public class RandomStr {
 
     private static final String SYMBOLS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

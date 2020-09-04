@@ -2,7 +2,7 @@ package com.luna.elasticsearch.util;
 
 import com.alibaba.fastjson.JSON;
 import com.luna.common.dto.constant.ResultCode;
-import com.luna.common.utils.text.RandomStrUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.elasticsearch.exception.ElasticsearchException;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -67,7 +67,7 @@ public class DocRestUtil<T> {
      * @return
      */
     public String addData(Object soucre, String index) {
-        return indexAddDoc(index, RandomStrUtil.getUUID(), soucre);
+        return indexAddDoc(index, RandomStr.getUUID(), soucre);
     }
 
     /**

@@ -8,7 +8,7 @@ import com.luna.common.exception.base.BaseException;
 import com.luna.common.http.HttpUtils;
 import com.luna.common.utils.md5.SignUtil;
 import com.luna.common.utils.text.ConvertUtil;
-import com.luna.common.utils.text.RandomStrUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.tencent.config.TencentPayConfigValue;
 import com.luna.tencent.pay.constant.TencentPayConstant;
@@ -49,7 +49,7 @@ public class TencentPayApi {
         // 2.设置参数值(根据文档来写)
         paramMap.put("appid", configValue.getAppid());
         paramMap.put("mch_id", configValue.getPartner());
-        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+        paramMap.put("nonce_str", RandomStr.generateNonceStr());
         paramMap.put("body", payEntity.getBody());
         paramMap.put("out_trade_no", payEntity.getOutTradeNo());
         paramMap.put("total_fee", payEntity.getTotalFee());
@@ -88,7 +88,7 @@ public class TencentPayApi {
         // 2.设置参数值(根据文档来写)
         paramMap.put("appid", configValue.getAppid());
         paramMap.put("mch_id", configValue.getPartner());
-        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+        paramMap.put("nonce_str", RandomStr.generateNonceStr());
         paramMap.put("out_trade_no", outTradeNo);
 
         QueryResultDTO queryResultDTO = null;
@@ -121,9 +121,9 @@ public class TencentPayApi {
         // 2.设置参数值(根据文档来写)
         paramMap.put("appid", configValue.getAppid());
         paramMap.put("mch_id", configValue.getPartner());
-        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+        paramMap.put("nonce_str", RandomStr.generateNonceStr());
         paramMap.put("out_trade_no", outTradeNo);
-        paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
+        paramMap.put("nonce_str", RandomStr.generateNonceStr());
 
         CloseOderResultDTO closeOderResultDTO = null;
         try {

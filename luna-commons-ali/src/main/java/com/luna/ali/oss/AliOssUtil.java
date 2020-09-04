@@ -5,7 +5,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
 import com.luna.ali.config.AliConfigValue;
-import com.luna.common.utils.text.RandomStrUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.common.utils.text.StringUtils;
 
 import java.io.File;
@@ -69,7 +69,7 @@ public class AliOssUtil {
         if (!imgFolder.endsWith("/")) {
             imgFolder = imgFolder + "/";
         }
-        fileName = System.currentTimeMillis() + "_" + RandomStrUtil.generateNonceStrWithUUID() + "_" + fileName;
+        fileName = System.currentTimeMillis() + "_" + RandomStr.generateNonceStrWithUUID() + "_" + fileName;
         PutObjectRequest putObjectRequest =
             new PutObjectRequest(bucketName, imgFolder + fileName, file);
 

@@ -5,7 +5,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
 import com.luna.ali.config.AliConfigValue;
-import com.luna.common.utils.text.RandomStrUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.common.utils.text.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class AliOssUploadApi {
         if (!imgFolder.endsWith("/")) {
             imgFolder = imgFolder + "/";
         }
-        fileName = System.currentTimeMillis() + "_" + RandomStrUtil.generateNonceStrWithUUID() + "_" + fileName;
+        fileName = System.currentTimeMillis() + "_" + RandomStr.generateNonceStrWithUUID() + "_" + fileName;
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, imgFolder + fileName, file);
         // 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。
         ObjectMetadata metadata = getObjectMetadata(access, type);
