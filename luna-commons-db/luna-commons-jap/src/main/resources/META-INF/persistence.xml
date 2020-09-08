@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <!--需要配置persistence-unit 节点
+        RESOURCE_LOCAL 本地事务管理
+        JTA 分布式事务管理
+
+    -->
+    <persistence-unit name="luna-jpa" transaction-type="RESOURCE_LOCAL">
+        <!--1. jpa 的实现方式
+            2. 数据库信息
+            3. 可选: 为了配置jpa实现方的配置
+        -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="czy1024"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://47.92.89.8:3306/luna-demo?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;serverTimezone=GMT%2B8"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!--
+                create 程序运行时创建数据表 如果有表 先删除再创建
+                update 程序运行时候创建表 如果有表 不会创建
+                none 不会创建表
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
