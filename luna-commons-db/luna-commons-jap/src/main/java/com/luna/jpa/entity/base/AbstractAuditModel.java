@@ -14,7 +14,7 @@ import java.util.Date;
  * 实体通用父类
  * </p>
  *
- * @package: com.xkcoding.orm.jpa.entity.base
+ * @package: com.luna.orm.jpa.entity.base
  * @description: 实体通用父类
  * @author: yangkai.shen
  * @date: Created in 2018/11/7 14:01

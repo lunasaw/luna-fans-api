@@ -30,6 +30,6 @@ spring:
     open-in-view: true
 logging:
   level:
-    com.xkcoding: debug
+    com.luna: debug
     org.hibernate.SQL: debug
     org.hibernate.type: trace

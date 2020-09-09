@@ -31,16 +31,6 @@ import java.util.Date;
 @Table(name = "orm_user")
 @ToString(callSuper = true)
 public class User extends AbstractAuditModel {
-
-    /**
-     * 配置主键生成策略
-     * GenerationType.IDENTITY 自增
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long                   id;
-
     /**
      * 用户名
      */

@@ -12,7 +12,7 @@ import com.luna.elasticsearch.demo.pojo.Person;
  * 测试 ElasticTemplate 的创建/删除
  * </p>
  *
- * @package: com.xkcoding.elasticsearch.template
+ * @package: com.luna.elasticsearch.template
  * @description: 测试 ElasticTemplate 的创建/删除
  * @author: yangkai.shen
  * @date: Created in 2018-12-20 17:46

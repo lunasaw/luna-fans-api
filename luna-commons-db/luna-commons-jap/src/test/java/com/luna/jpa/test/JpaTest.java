@@ -48,7 +48,7 @@ public class JpaTest<main> {
         testSave3.setSalt("czy");
         testSave3.setStatus(1);
         testSave3.setPhoneNumber("1999999999");
-        testSave3.setEmail("testSave3@xkcoding.com");
+        testSave3.setEmail("testSave3@luna.com");
         testSave3.setCreateTime(new Date());
         testSave3.setLastUpdateTime(new Date());
         entityManager.persist(testSave3);

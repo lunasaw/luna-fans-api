@@ -11,7 +11,7 @@ import java.util.List;
  * 用户持久层
  * </p>
  *
- * @package: com.xkcoding.elasticsearch.repository
+ * @package: com.luna.elasticsearch.repository
  * @description: 用户持久层
  * @author: yangkai.shen
  * @date: Created in 2018-12-20 19:00

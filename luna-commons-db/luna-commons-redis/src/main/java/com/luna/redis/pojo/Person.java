@@ -7,7 +7,7 @@ import java.util.Date;
  * 用户实体类
  * </p>
  *
- * @package: com.xkcoding.elasticsearch.model
+ * @package: com.luna.elasticsearch.model
  * @description: 用户实体类
  * @author: yangkai.shen
  * @date: Created in 2018-12-20 17:29

@@ -11,7 +11,7 @@ import java.util.List;
  * User Dao
  * </p>
  *
- * @package: com.xkcoding.orm.jpa.repository
+ * @package: com.luna.orm.jpa.repository
  * @description: Department Dao
  * @author: 76peter
  * @date: Created in 2019/10/1 18:07
