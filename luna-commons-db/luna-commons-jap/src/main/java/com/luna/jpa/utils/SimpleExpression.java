@@ -21,10 +21,6 @@ public class SimpleExpression implements Criterion {
      */
     private Operator operator;
 
-    // /**
-    // * 计算符
-    // */
-    // private String groupBy;
 
     protected SimpleExpression(String fieldName, Object value, Operator operator) {
         this.fieldName = fieldName;
@@ -32,21 +28,14 @@ public class SimpleExpression implements Criterion {
         this.operator = operator;
     }
 
-    // protected SimpleExpression(String fieldName, Object value, Operator operator,String groupBy) {
-    // this.fieldName = fieldName;
-    // this.value = value;
-    // this.operator = operator;
-    // this.groupBy = groupBy;
-    // }
 
+    // 此处是表关联数据，注意仅限一层关联，如user.address，
+    // 查询user的address集合中，address的name为某个值
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public Predicate toPredicate(Root<?> root, CriteriaQuery<?> query,
         CriteriaBuilder builder) {
         Path expression;
-
-        // 此处是表关联数据，注意仅限一层关联，如user.address，
-        // 查询user的address集合中，address的name为某个值
         if (fieldName.contains(".")) {
             String[] names = StringUtils.split(fieldName, ".");
             // 获取该属性的类型，Set？List？Map？
@@ -70,9 +59,6 @@ public class SimpleExpression implements Criterion {
             // 单表查询
             expression = root.get(fieldName);
         }
-        // if(groupBy !=null){
-        // query.groupBy(root.get(groupBy));
-        // }
 
         switch (operator) {
             case EQ:

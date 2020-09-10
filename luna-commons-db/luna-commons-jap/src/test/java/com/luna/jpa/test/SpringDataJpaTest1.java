@@ -3,6 +3,7 @@ package com.luna.jpa.test;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.luna.common.utils.md5.Md5Utils;
 import com.luna.jpa.JpaApplicationtTest;
 import com.luna.jpa.entity.User;
 import com.luna.jpa.repository.UserDao;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,9 +29,9 @@ import java.util.stream.Collectors;
  * @CreateTime: 2020/9/9 13:23
  * @Description:
  */
-public class SpringDataJpaTest extends JpaApplicationtTest {
+public class SpringDataJpaTest1 extends JpaApplicationtTest {
 
-    private static final Logger log = LoggerFactory.getLogger(SpringDataJpaTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SpringDataJpaTest1.class);
 
     @Autowired
     private UserDao             userDao;
@@ -40,8 +42,15 @@ public class SpringDataJpaTest extends JpaApplicationtTest {
     @Test
     public void testSave() {
         String salt = IdUtil.fastSimpleUUID();
-        User testSave3 = new User("testSave3", SecureUtil.md5("123456" + salt), salt, "testSave3@xkcoding.com",
-            "17300000003", 1, new DateTime(), null);
+        User testSave3 = new User();
+        testSave3.setName("张三");
+        testSave3.setPassword(Md5Utils.md5("czy1024"));
+        testSave3.setSalt("czy");
+        testSave3.setStatus(1);
+        testSave3.setPhoneNumber("1999999999");
+        testSave3.setEmail("testSave3@luna.com");
+        testSave3.setCreateTime(new Date());
+        testSave3.setLastUpdateTime(new Date());
         userDao.save(testSave3);
         Assert.assertNotNull(testSave3.getId());
         Optional<User> byId = userDao.findById(testSave3.getId());

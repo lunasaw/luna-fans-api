@@ -4,8 +4,7 @@ import com.luna.jpa.entity.base.AbstractAuditModel;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 /**
  * <p>
@@ -89,4 +88,7 @@ public class User extends AbstractAuditModel {
         inverseJoinColumns = @JoinColumn(name = "dept_id", referencedColumnName = "id"))
     private Collection<Department> departmentList;
 
+    @OneToMany(targetEntity = LinkMan.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "orm_user_id", referencedColumnName = "id")
+    private List<LinkMan>          linkMans = new ArrayList<>();
 }

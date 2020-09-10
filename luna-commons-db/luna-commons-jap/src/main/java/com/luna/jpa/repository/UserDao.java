@@ -25,9 +25,22 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
+    /**
+     * jpql查询
+     * 
+     * @param name
+     * @return
+     */
     @Query(value = " from User where name = ?1")
     User findByJpql(String name);
 
+    /**
+     * jpql查询多条件查询
+     *
+     * @param name
+     * @param id
+     * @return
+     */
     @Query(value = " from User where name = ?1 and id = ?2")
     User findByJpql2(String name, Long id);
 
@@ -52,10 +65,29 @@ public interface UserDao extends JpaRepository<User, Long>, JpaSpecificationExec
     @Query(value = "select * from orm_user", nativeQuery = true)
     List<Object[]> findByJpql4();
 
+    /**
+     * sql 查询规则
+     * 
+     * @param name
+     * @return
+     */
     @Query(value = "select * from orm_user where name like ?1%", nativeQuery = true)
     List<Object[]> findByJpql5(String name);
 
+    /**
+     * 方法名匹配规则
+     * 
+     * @param name
+     * @param id
+     * @return
+     */
     User findByNameAndAndId(String name, long id);
 
+    /**
+     * 方法名模糊查询
+     *
+     * @param name
+     * @return
+     */
     List<User> findByNameLike(String name);
 }

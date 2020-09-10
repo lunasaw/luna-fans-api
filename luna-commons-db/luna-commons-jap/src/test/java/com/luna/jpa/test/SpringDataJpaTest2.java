@@ -20,7 +20,7 @@ import java.util.Optional;
  * @CreateTime: 2020/9/9 13:41
  * @Description:
  */
-public class SpringDataJpaTest2 extends SpringDataJpaTest {
+public class SpringDataJpaTest2 extends SpringDataJpaTest1 {
 
     @Autowired
     UserDao userDAO;
