@@ -33,20 +33,23 @@ CREATE TABLE `orm_user_dept` (
   `last_update_time` DATETIME NOT NULL DEFAULT NOW() COMMENT '上次更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Spring Boot Demo Orm 系列示例表';
 
+
+DROP TABLE IF EXISTS `orm_contacts`;
 /*创建联系人表*/
-DROP TABLE IF EXISTS `orm_user_linkman`;
-CREATE TABLE orm_user_linkman (
-  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '主键',
-  lkm_name varchar(16) DEFAULT NULL COMMENT '联系人姓名',
-  lkm_gender char(1) DEFAULT NULL COMMENT '联系人性别',
-  lkm_phone varchar(16) DEFAULT NULL COMMENT '联系人办公电话',
-  lkm_mobile varchar(16) DEFAULT NULL COMMENT '联系人手机',
-  lkm_email varchar(64) DEFAULT NULL COMMENT '联系人邮箱',
-  lkm_position varchar(16) DEFAULT NULL COMMENT '联系人职位',
-  lkm_memo varchar(512) DEFAULT NULL COMMENT '联系人备注',
-  orm_user_id INT(11) NOT NULL COMMENT '客户id(外键)',
-  create_time DATETIME NOT NULL DEFAULT NOW() COMMENT '创建时间',
-  last_update_time DATETIME NOT NULL DEFAULT NOW() COMMENT '上次更新时间',
-  KEY `FK` (`orm_user_id`),
-  CONSTRAINT `FK` FOREIGN KEY (`orm_user_id`) REFERENCES `orm_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Spring Boot Demo Orm 系列示例表';
+CREATE TABLE orm_contacts (
+  id bigint(32) NOT NULL AUTO_INCREMENT COMMENT '联系人编号(主键)',
+  name varchar(16) DEFAULT NULL COMMENT '联系人姓名',
+  gender char(1) DEFAULT NULL COMMENT '联系人性别',
+  phone varchar(16) DEFAULT NULL COMMENT '联系人办公电话',
+  mobile varchar(16) DEFAULT NULL COMMENT '联系人手机',
+  email varchar(64) DEFAULT NULL COMMENT '联系人邮箱',
+  position varchar(16) DEFAULT NULL COMMENT '联系人职位',
+  memo varchar(512) DEFAULT NULL COMMENT '联系人备注',
+  user_id INT(11) DEFAULT NULL COMMENT '客户id(外键)',
+   `create_time` DATETIME NOT NULL DEFAULT NOW() COMMENT '创建时间',
+  `last_update_time` DATETIME NOT NULL DEFAULT NOW() COMMENT '上次更新时间',
+  PRIMARY KEY (`id`),
+  KEY `FK_cst_linkman_cust_id` (`user_id`),
+  CONSTRAINT `FK_cst_linkman_cust_id` FOREIGN KEY (`user_id`) REFERENCES `orm_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+

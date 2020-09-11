@@ -1,10 +1,12 @@
 package com.luna.jpa.test;
 
 import com.luna.common.utils.md5.Md5Utils;
+import com.luna.common.utils.text.RandomNameUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.jpa.JpaApplicationtTest;
-import com.luna.jpa.entity.LinkMan;
+import com.luna.jpa.entity.Contacts;
 import com.luna.jpa.entity.User;
-import com.luna.jpa.repository.LinkManDao;
+import com.luna.jpa.repository.ContactsDao;
 import com.luna.jpa.repository.UserDao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Package: com.luna.jpa.test
@@ -23,11 +24,13 @@ import java.util.List;
  */
 public class SpringDataJpaTest4 extends JpaApplicationtTest {
 
-    @Autowired
-    private UserDao    userDao;
+    private static final String SALT = "luna";
 
     @Autowired
-    private LinkManDao linkManDao;
+    private UserDao             customerDao;
+
+    @Autowired
+    private ContactsDao         contactsDao;
 
     /**
      * 保存一个客户，保存一个联系人
@@ -40,49 +43,55 @@ public class SpringDataJpaTest4 extends JpaApplicationtTest {
     @Transactional // 配置事务
     @Rollback(false) // 不自动回滚
     public void testAdd() {
-        // 创建一个客户，创建一个联系人
-        User testSave3 = new User();
-        testSave3.setName("小明");
-        testSave3.setPassword(Md5Utils.md5("czy1024"));
-        testSave3.setSalt("czy");
-        testSave3.setStatus(1);
-        testSave3.setPhoneNumber("1999999997");
-        testSave3.setEmail("testSave001@luna.com");
-        testSave3.setCreateTime(new Date());
-        testSave3.setLastUpdateTime(new Date());
+        User user = new User();
+        user.setName(RandomNameUtil.getChineseName());
+        String salt = RandomStr.generateNonceStr();
+        user.setSalt(salt);
+        user.setPassword(Md5Utils.md5(SALT + salt));
+        user.setStatus(1);
+        user.setPhoneNumber(RandomNameUtil.getTelephone());
+        user.setEmail(RandomNameUtil.getEmail());
+        user.setCreateTime(new Date());
+        user.setLastUpdateTime(new Date());
 
-        LinkMan linkMan = new LinkMan();
-        linkMan.setLkmName("小李");
+        Contacts contacts = new Contacts();
+        contacts.setName(RandomNameUtil.getChineseName());
+        contacts.setEmail(RandomNameUtil.getEmail());
+        contacts.setPhone(RandomNameUtil.getTelephone());
+        contacts.setMobile(RandomNameUtil.getLandline());
+
         /**
          * 配置了客户到联系人的关系
          * 从客户的角度上：发送两条insert语句，发送一条更新语句更新数据库（更新外键）
          * 由于我们配置了客户到联系人的关系：客户可以对外键进行维护
          */
-        List<LinkMan> linkMans = testSave3.getLinkMans();
-        linkMans.add(linkMan);
-        testSave3.setLinkMans(linkMans);
+        user.getContacts().add(contacts);
 
-        linkManDao.save(linkMan);
-        userDao.save(testSave3);
+        customerDao.save(user);
+        contactsDao.save(contacts);
     }
 
     @Test
     @Transactional // 配置事务
     @Rollback(false) // 不自动回滚
     public void testAdd1() {
-        // 创建一个客户，创建一个联系人
-        User testSave3 = new User();
-        testSave3.setName("小明");
-        testSave3.setPassword(Md5Utils.md5("czy1024"));
-        testSave3.setSalt("czy");
-        testSave3.setStatus(1);
-        testSave3.setPhoneNumber("1999999997");
-        testSave3.setEmail("testSave001@luna.com");
-        testSave3.setCreateTime(new Date());
-        testSave3.setLastUpdateTime(new Date());
+        User user = new User();
+        user.setName(RandomNameUtil.getChineseName());
+        String salt = RandomStr.generateNonceStr();
+        user.setSalt(salt);
+        user.setPassword(Md5Utils.md5(SALT + salt));
+        user.setStatus(1);
+        user.setPhoneNumber(RandomNameUtil.getTelephone());
+        user.setEmail(RandomNameUtil.getEmail());
+        user.setCreateTime(new Date());
+        user.setLastUpdateTime(new Date());
 
-        LinkMan linkMan = new LinkMan();
-        linkMan.setLkmName("小李");
+        Contacts contacts = new Contacts();
+        contacts.setGender(RandomNameUtil.getGender());
+        contacts.setName(RandomNameUtil.getChineseName());
+        contacts.setEmail(RandomNameUtil.getEmail());
+        contacts.setPhone(RandomNameUtil.getTelephone());
+        contacts.setMobile(RandomNameUtil.getLandline());
 
         /**
          * 配置联系人到客户的关系（多对一）
@@ -91,9 +100,54 @@ public class SpringDataJpaTest4 extends JpaApplicationtTest {
          *
          *
          */
-        linkMan.setUser(testSave3);
+        contacts.setUser(user);
 
-        userDao.save(testSave3);
-        linkManDao.save(linkMan);
+        customerDao.save(user);
+        contactsDao.save(contacts);
+    }
+
+    /**
+     * 级联添加：保存一个客户的同时，保存客户的所有联系人
+     * 需要在操作主体的实体类上，配置casacde属性
+     */
+    @Test
+    @Transactional // 配置事务
+    @Rollback(false) // 不自动回滚
+    public void testCascadeAdd() {
+        User user = new User();
+        user.setName(RandomNameUtil.getChineseName());
+        String salt = RandomStr.generateNonceStr();
+        user.setSalt(salt);
+        user.setPassword(Md5Utils.md5(SALT + salt));
+        user.setStatus(1);
+        user.setPhoneNumber(RandomNameUtil.getTelephone());
+        user.setEmail(RandomNameUtil.getEmail());
+        user.setCreateTime(new Date());
+        user.setLastUpdateTime(new Date());
+
+        Contacts contacts = new Contacts();
+        contacts.setName(RandomNameUtil.getChineseName());
+        contacts.setEmail(RandomNameUtil.getEmail());
+        contacts.setPhone(RandomNameUtil.getTelephone());
+        contacts.setMobile(RandomNameUtil.getLandline());
+
+        user.getContacts().add(contacts);
+        contacts.setUser(user);
+
+        customerDao.save(user);
+    }
+
+    /**
+     * 级联删除：
+     * 删除1号客户的同时，删除1号客户的所有联系人
+     */
+    @Test
+    @Transactional // 配置事务
+    @Rollback(false) // 不自动回滚
+    public void testCascadeRemove() {
+        // 1.查询1号客户
+        User customer = customerDao.findById(9l).get();
+        // 2.删除1号客户
+        customerDao.delete(customer);
     }
 }

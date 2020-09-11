@@ -1,10 +1,12 @@
 package com.luna.jpa.entity;
 
 import com.luna.jpa.entity.base.AbstractAuditModel;
-import lombok.*;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -19,16 +21,10 @@ import java.util.*;
  * @version: V1.0
  * @modified: 76peter
  */
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Builder
 // 声明此类是一个实体类
 @Entity
 // 实体类和表的映射关系
 @Table(name = "orm_user")
-@ToString(callSuper = true)
 public class User extends AbstractAuditModel {
     /**
      * 用户名
@@ -88,7 +84,110 @@ public class User extends AbstractAuditModel {
         inverseJoinColumns = @JoinColumn(name = "dept_id", referencedColumnName = "id"))
     private Collection<Department> departmentList;
 
-    @OneToMany(targetEntity = LinkMan.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "orm_user_id", referencedColumnName = "id")
-    private List<LinkMan>          linkMans = new ArrayList<>();
+    // 配置客户和联系人之间的关系（一对多关系）
+    /**
+     * 使用注解的形式配置多表关系
+     * 1.声明关系
+     * 
+     * @OneToMany : 配置一对多关系
+     * targetEntity ：对方对象的字节码对象
+     * 2.配置外键（中间表）
+     * @JoinColumn : 配置外键
+     * name：外键字段名称
+     * referencedColumnName：参照的主表的主键字段名称
+     *
+     * * 在客户实体类上（一的一方）添加了外键了配置，所以对于客户而言，也具备了维护外键的作用
+     *
+     */
+
+    /**
+     * 放弃外键维护权
+     * mappedBy：对方配置关系的属性名称\
+     * cascade : 配置级联（可以配置到设置多表的映射关系的注解上）
+     * CascadeType.all : 所有
+     * MERGE ：更新
+     * PERSIST ：保存
+     * REMOVE ：删除
+     *
+     * fetch : 配置关联对象的加载方式
+     * EAGER ：立即加载
+     * LAZY ：延迟加载
+     * 
+     */
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    // @OneToMany(targetEntity = LinkMan.class)
+    // @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Set<Contacts>          contacts = new HashSet<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Collection<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(Collection<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
+
+    public Set<Contacts> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contacts> contacts) {
+        this.contacts = contacts;
+    }
 }

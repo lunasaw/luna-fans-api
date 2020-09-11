@@ -1,6 +1,5 @@
 package com.luna.jpa.entity.base;
 
-import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,7 +23,6 @@ import java.util.Date;
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@Data
 public abstract class AbstractAuditModel implements Serializable {
     /**
      * 主键
@@ -48,4 +46,28 @@ public abstract class AbstractAuditModel implements Serializable {
     @Column(name = "last_update_time", nullable = false)
     @LastModifiedDate
     private Date lastUpdateTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
 }

@@ -1,9 +1,9 @@
 package com.luna.jpa.test;
 
-import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.luna.common.utils.md5.Md5Utils;
+import com.luna.common.utils.text.RandomNameUtil;
+import com.luna.common.utils.text.RandomStr;
 import com.luna.jpa.JpaApplicationtTest;
 import com.luna.jpa.entity.User;
 import com.luna.jpa.repository.UserDao;
@@ -41,19 +41,19 @@ public class SpringDataJpaTest1 extends JpaApplicationtTest {
      */
     @Test
     public void testSave() {
-        String salt = IdUtil.fastSimpleUUID();
-        User testSave3 = new User();
-        testSave3.setName("张三");
-        testSave3.setPassword(Md5Utils.md5("czy1024"));
-        testSave3.setSalt("czy");
-        testSave3.setStatus(1);
-        testSave3.setPhoneNumber("1999999999");
-        testSave3.setEmail("testSave3@luna.com");
-        testSave3.setCreateTime(new Date());
-        testSave3.setLastUpdateTime(new Date());
-        userDao.save(testSave3);
-        Assert.assertNotNull(testSave3.getId());
-        Optional<User> byId = userDao.findById(testSave3.getId());
+        User user = new User();
+        user.setName(RandomNameUtil.getChineseName());
+        String salt = RandomStr.generateNonceStr();
+        user.setSalt(salt);
+        user.setPassword(Md5Utils.md5("luna" + salt));
+        user.setStatus(1);
+        user.setPhoneNumber(RandomNameUtil.getTelephone());
+        user.setEmail(RandomNameUtil.getEmail());
+        user.setCreateTime(new Date());
+        user.setLastUpdateTime(new Date());
+        userDao.save(user);
+        Assert.assertNotNull(user.getId());
+        Optional<User> byId = userDao.findById(user.getId());
         Assert.assertTrue(byId.isPresent());
         log.debug("【byId】= {}", byId.get());
     }
@@ -127,10 +127,15 @@ public class SpringDataJpaTest1 extends JpaApplicationtTest {
         List<User> userList = Lists.newArrayList();
         for (int i = 1; i <= 10; i++) {
             String salt = IdUtil.fastSimpleUUID();
-            int index = 3 + i;
-            User user = User.builder().name("testSave" + index).password(SecureUtil.md5("123456" + salt)).salt(salt)
-                .email("testSave" + index + "@xkcoding.com").phoneNumber("1730000000" + index).status(1)
-                .lastLoginTime(new DateTime()).build();
+            User user = new User();
+            user.setName(RandomNameUtil.getChineseName());
+            user.setSalt(salt);
+            user.setPassword(Md5Utils.md5("luna" + salt));
+            user.setStatus(1);
+            user.setPhoneNumber(RandomNameUtil.getTelephone());
+            user.setEmail(RandomNameUtil.getEmail());
+            user.setCreateTime(new Date());
+            user.setLastUpdateTime(new Date());
             userList.add(user);
         }
         userDao.saveAll(userList);

@@ -1,7 +1,6 @@
 package com.luna.jpa.entity;
 
 import com.luna.jpa.entity.base.AbstractAuditModel;
-import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,14 +18,8 @@ import java.util.Collection;
  * @version: V1.0
  * @modified: 76peter
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "orm_department")
-@ToString(callSuper = true)
 public class Department extends AbstractAuditModel {
 
     /**
@@ -63,4 +56,51 @@ public class Department extends AbstractAuditModel {
     @ManyToMany(mappedBy = "departmentList")
     private Collection<User>       userList;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Department getSuperior() {
+        return superior;
+    }
+
+    public void setSuperior(Department superior) {
+        this.superior = superior;
+    }
+
+    public Integer getLevels() {
+        return levels;
+    }
+
+    public void setLevels(Integer levels) {
+        this.levels = levels;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public Collection<Department> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Collection<Department> children) {
+        this.children = children;
+    }
+
+    public Collection<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(Collection<User> userList) {
+        this.userList = userList;
+    }
 }
