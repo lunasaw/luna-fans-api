@@ -90,4 +90,12 @@ public interface UserDao extends JpaRepository<User, Long>, JpaSpecificationExec
      * @return
      */
     List<User> findByNameLike(String name);
+
+    /**
+     * 状态值
+     * 
+     * @param status
+     * @return
+     */
+    List<User> findByStatus(Integer status);
 }

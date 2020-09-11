@@ -4,6 +4,7 @@ import com.luna.jpa.entity.base.AbstractAuditModel;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * <p>
@@ -48,13 +49,13 @@ public class Department extends AbstractAuditModel {
      * 子部门集合
      */
     @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "superior")
-    private Collection<Department> children;
+    private Collection<Department> children = new HashSet<>();
 
     /**
      * 部门下用户集合
      */
     @ManyToMany(mappedBy = "departmentList")
-    private Collection<User>       userList;
+    private Collection<User>       userList = new HashSet<>();
 
     public String getName() {
         return name;
@@ -103,4 +104,7 @@ public class Department extends AbstractAuditModel {
     public void setUserList(Collection<User> userList) {
         this.userList = userList;
     }
+
+    public Department() {}
+
 }
