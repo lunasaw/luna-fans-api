@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.luna.jpa.JpaApplicationtTest;
 import com.luna.jpa.entity.User;
 import com.luna.jpa.repository.UserDao;
+import com.luna.jpa.utils.CriteriaUtils;
+import com.luna.jpa.utils.Restrictions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.List;
@@ -108,5 +111,24 @@ public class SpringDataJpaTest3 extends JpaApplicationtTest {
         System.out.println(all.getContent());
         System.out.println(all.getTotalElements());
         System.out.println(JSON.toJSONString(all));
+    }
+
+    @Test
+    @Transactional
+    public void selectUtilTest() {
+        CriteriaUtils<User> c = new CriteriaUtils<User>();
+        c.add(Restrictions.eq("name", "谢艳枫", true));
+        c.add(Restrictions.eq("email", "lfnw6hs5wnn3s@ask.com", true));
+        Specification<User> specification = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                return c.toPredicate(root, query, criteriaBuilder);
+            }
+        };
+
+        List<User> all = userDao.findAll(specification);
+        all.forEach(user -> {
+            System.out.println(user.getName());
+        });
     }
 }

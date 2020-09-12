@@ -12,7 +12,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.EQ);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.EQ);
     }
 
     /**
@@ -22,7 +22,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.IS_MEMBER);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.IS_MEMBER);
     }
 
     /**
@@ -32,7 +32,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.NE);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.NE);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.LIKE);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.LIKE);
     }
 
     /**
@@ -62,7 +62,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.GT);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.GT);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.LT);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.LT);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.LTE);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.LTE);
     }
 
     /**
@@ -92,6 +92,6 @@ public class Restrictions {
         if (ignoreNull && StringUtils.isEmpty(value)) {
             return null;
         }
-        return new SimpleExpression(fieldName, value, Criterion.Operator.GTE);
+        return new SimpleExpression(fieldName, value, CriterionConstant.Operator.GTE);
     }
 }

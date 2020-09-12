@@ -1,5 +1,6 @@
 package com.luna.jpa.test;
 
+import com.alibaba.fastjson.JSON;
 import com.luna.common.utils.md5.Md5Utils;
 import com.luna.common.utils.text.RandomNameUtil;
 import com.luna.common.utils.text.RandomStr;
@@ -14,6 +15,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @Package: com.luna.jpa.test
@@ -149,5 +151,30 @@ public class SpringDataJpaTest4 extends JpaApplicationtTest {
         User customer = customerDao.findById(9l).get();
         // 2.删除1号客户
         customerDao.delete(customer);
+    }
+
+    /**
+     * 默认采用延迟加载 在使用的时候才查询
+     * 若不需要延迟 修改配置
+     *
+     */
+    @Test
+    @Transactional // 配置事务
+    public void testSelectOneToMany() {
+        User customer = customerDao.findById(3l).get();
+        Set<Contacts> contacts = customer.getContacts();
+        System.out.println(JSON.toJSONString(contacts));
+    }
+
+    /**
+     * 默认使用立即加载
+     * 可在查询主体中设置
+     */
+    @Test
+    @Transactional // 配置事务
+    public void testSelectManyToOne() {
+        Contacts contact = contactsDao.findById(4L).get();
+        System.out.println(contact.getUser());
+        System.out.println(JSON.toJSONString(contact));
     }
 }

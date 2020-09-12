@@ -5,7 +5,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public interface Criterion {
+public interface CriterionConstant {
     enum Operator {
         EQ,
         NE,
@@ -19,6 +19,7 @@ public interface Criterion {
         IS_MEMBER,
         IS_NOT_MEMBER
     }
+
 
     Predicate toPredicate(Root<?> root, CriteriaQuery<?> query,
         CriteriaBuilder builder);

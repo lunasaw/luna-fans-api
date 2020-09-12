@@ -41,7 +41,7 @@ public class Contacts extends AbstractAuditModel {
      * * 配置外键的过程，配置到了多的一方，就会在多的一方维护外键
      *
      */
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User   user;
 

@@ -9,15 +9,16 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Criteria<T> implements Specification<T> {
-    private List<Criterion> criterions = new ArrayList<>();
+public class CriteriaUtils<T> implements Specification<T> {
+
+    private List<CriterionConstant> criterionConstants = new ArrayList<>();
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
         CriteriaBuilder builder) {
-        if (!criterions.isEmpty()) {
+        if (!criterionConstants.isEmpty()) {
             List<Predicate> predicates = new ArrayList<>();
-            for (Criterion c : criterions) {
+            for (CriterionConstant c : criterionConstants) {
                 predicates.add(c.toPredicate(root, query, builder));
             }
             // 将所有条件用 and 联合起来
@@ -33,10 +34,11 @@ public class Criteria<T> implements Specification<T> {
      *
      * @Methods Name add
      * @Create In 2012-2-8 By lee
+     * @param criterionConstant
      */
-    public void add(Criterion criterion) {
-        if (criterion != null) {
-            criterions.add(criterion);
+    public void add(CriterionConstant criterionConstant) {
+        if (criterionConstant != null) {
+            criterionConstants.add(criterionConstant);
         }
     }
 }

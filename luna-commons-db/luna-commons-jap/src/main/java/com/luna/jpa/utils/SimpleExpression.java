@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SimpleExpression implements Criterion {
+public class SimpleExpression implements CriterionConstant {
     /**
      * 属性名
      */
