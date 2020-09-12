@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.luna</groupId>
-            <artifactId>luna-commons-db</artifactId>
+            <artifactId>luna-commons-mybatis</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--模板工具类-->
@@ -24,6 +24,12 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.28</version>
+        </dependency>
+        <!--通用mapper起步依赖-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
         </dependency>
     </dependencies>
 </project>

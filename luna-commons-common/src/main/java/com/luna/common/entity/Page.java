@@ -3,7 +3,7 @@ package com.luna.common.entity;
 import java.util.List;
 import java.util.Map;
 
-public class Page {
+public class Page<T> {
 
     /**
      * 当前页
