@@ -1,9 +1,11 @@
-package com.luna.mybatis.service;
+package com.luna.mybatis.service.service;
 
 import com.luna.mybatis.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
 
     User getById(Integer id);

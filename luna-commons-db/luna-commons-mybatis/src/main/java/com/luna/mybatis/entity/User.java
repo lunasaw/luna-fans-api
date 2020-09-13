@@ -1,27 +1,66 @@
 package com.luna.mybatis.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Integer id;
+/**
+ * Spring Boot Demo Orm 系列示例表(User)实体类
+ *
+ * @author luna
+ * @since 2020-09-13 15:20:53
+ */
+public class User implements Serializable {
+    private static final long serialVersionUID = 669452707931093526L;
+    /**
+     * 主键
+     */
 
-    private String  name;
+    private Integer           id;
+    /**
+     * 用户名
+     */
 
-    private String  password;
+    private String            name;
+    /**
+     * 加密后的密码
+     */
 
-    private String  salt;
+    private String            password;
+    /**
+     * 加密使用的盐
+     */
 
-    private String  email;
+    private String            salt;
+    /**
+     * 邮箱
+     */
 
-    private String  phoneNumber;
+    private String            email;
+    /**
+     * 手机号码
+     */
 
-    private Integer status;
+    private String            phoneNumber;
+    /**
+     * 状态，-1：逻辑删除，0：禁用，1：启用
+     */
 
-    private Date    createTime;
+    private Integer           status;
+    /**
+     * 创建时间
+     */
 
-    private Date    lastLoginTime;
+    private Date              createTime;
+    /**
+     * 上次登录时间
+     */
 
-    private Date    lastUpdateTime;
+    private Date              lastLoginTime;
+    /**
+     * 上次更新时间
+     */
+
+    private Date              lastUpdateTime;
 
     public Integer getId() {
         return id;
@@ -36,7 +75,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPassword() {
@@ -44,7 +83,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getSalt() {
@@ -52,7 +91,7 @@ public class User {
     }
 
     public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+        this.salt = salt;
     }
 
     public String getEmail() {
@@ -60,7 +99,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getPhoneNumber() {
@@ -68,7 +107,7 @@ public class User {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getStatus() {
@@ -102,4 +141,5 @@ public class User {
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
+
 }
