@@ -10,6 +10,10 @@ import org.apache.ibatis.annotations.Param;
 
 import com.luna.mybatis.entity.Contacts;
 
+/**
+ * @Author: luna
+ * @CreateTime: 2020-09-13 23:36:41
+ */
 @Mapper
 public interface ContactsMapper {
 
@@ -22,20 +26,20 @@ public interface ContactsMapper {
     Contacts getById(@NotNull Long id);
 
     /**
-     * 通过实体不为空的属性作为筛选条件查询列表
-     *
-     * @param contacts 条件
-     * @return 对象列表
-     */
-    List<Contacts> listByEntity(Contacts contacts);
-
-    /**
      * 通过实体不为空的属性作为筛选条件查询单个
      *
      * @param contacts 条件
      * @return 对象
      */
     Contacts getByEntity(Contacts contacts);
+
+    /**
+     * 通过实体不为空的属性作为筛选条件查询列表
+     *
+     * @param contacts 条件
+     * @return 对象列表
+     */
+    List<Contacts> listByEntity(Contacts contacts);
 
     /**
      * 通过Id列表作为筛选条件查询列表，列表长度不为0

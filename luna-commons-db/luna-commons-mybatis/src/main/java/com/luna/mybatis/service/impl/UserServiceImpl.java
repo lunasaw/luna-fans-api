@@ -1,5 +1,7 @@
 package com.luna.mybatis.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.luna.mybatis.entity.User;
 import com.luna.mybatis.mapper.UserMapper;
 import com.luna.mybatis.service.UserService;
@@ -9,6 +11,10 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @Author: luna
+ * @CreateTime: 2020-09-13 23:35:53
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -28,6 +34,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> listByEntity(User user) {
         return userMapper.listByEntity(user);
+    }
+
+    @Override
+    public PageInfo listPageByEntity(int page, int pageSize, User user) {
+        PageHelper.startPage(page, pageSize);
+        List<User> list = userMapper.listByEntity(user);
+        return new PageInfo(list);
+    }
+
+    @Override
+    public PageInfo listPage(int page, int pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<User> list = userMapper.listByEntity(new User());
+        return new PageInfo(list);
     }
 
     @Override

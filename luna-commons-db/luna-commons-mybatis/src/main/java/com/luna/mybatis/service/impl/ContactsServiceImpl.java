@@ -1,5 +1,7 @@
 package com.luna.mybatis.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.luna.mybatis.entity.Contacts;
 import com.luna.mybatis.mapper.ContactsMapper;
 import com.luna.mybatis.service.ContactsService;
@@ -9,6 +11,10 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @Author: luna
+ * @CreateTime: 2020-09-13 23:36:41
+ */
 @Service
 public class ContactsServiceImpl implements ContactsService {
 
@@ -28,6 +34,20 @@ public class ContactsServiceImpl implements ContactsService {
     @Override
     public List<Contacts> listByEntity(Contacts contacts) {
         return contactsMapper.listByEntity(contacts);
+    }
+
+    @Override
+    public PageInfo listPageByEntity(int page, int pageSize, Contacts contacts) {
+        PageHelper.startPage(page, pageSize);
+        List<Contacts> list = contactsMapper.listByEntity(contacts);
+        return new PageInfo(list);
+    }
+
+    @Override
+    public PageInfo listPage(int page, int pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Contacts> list = contactsMapper.listByEntity(new Contacts());
+        return new PageInfo(list);
     }
 
     @Override

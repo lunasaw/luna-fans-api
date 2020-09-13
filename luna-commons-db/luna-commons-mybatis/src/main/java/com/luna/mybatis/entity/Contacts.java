@@ -7,10 +7,10 @@ import java.util.Date;
  * (Contacts)实体类
  *
  * @author luna
- * @since 2020-09-13 15:36:19
+ * @since 2020-09-13 23:36:41
  */
 public class Contacts implements Serializable {
-    private static final long serialVersionUID = 930297136106697739L;
+    private static final long serialVersionUID = -99004786640771698L;
     /**
      * 联系人编号(主键)
      */

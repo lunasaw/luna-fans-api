@@ -18,6 +18,7 @@
         <module>luna-commons-mongodb</module>
         <module>luna-commons-jap</module>
         <module>luna-commons-mybatis</module>
+        <module>luna-commons-cache</module>
     </modules>
     <repositories>
         <repository>

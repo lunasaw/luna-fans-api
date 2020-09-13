@@ -1,12 +1,18 @@
 package com.luna.mybatis.mapper;
 
 import com.luna.mybatis.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * @Author: luna
+ * @CreateTime: 2020-09-13 23:35:52
+ */
+@Mapper
 public interface UserMapper {
 
     /**
@@ -18,20 +24,20 @@ public interface UserMapper {
     User getById(@NotNull Integer id);
 
     /**
-     * 通过实体不为空的属性作为筛选条件查询列表
-     *
-     * @param user 条件
-     * @return 对象列表
-     */
-    List<User> listByEntity(User user);
-
-    /**
      * 通过实体不为空的属性作为筛选条件查询单个
      *
      * @param user 条件
      * @return 对象
      */
     User getByEntity(User user);
+
+    /**
+     * 通过实体不为空的属性作为筛选条件查询列表
+     *
+     * @param user 条件
+     * @return 对象列表
+     */
+    List<User> listByEntity(User user);
 
     /**
      * 通过Id列表作为筛选条件查询列表，列表长度不为0
