@@ -12,6 +12,12 @@
     <artifactId>luna-commons-cache</artifactId>
 
     <dependencies>
+        <!--mybatis分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
         <!--缓存 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -19,9 +25,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.luna</groupId>
-            <artifactId>luna-commons-mybatis</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 </project>

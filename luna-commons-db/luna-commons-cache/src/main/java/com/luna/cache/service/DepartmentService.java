@@ -1,15 +1,15 @@
-package com.luna.mybatis.service;
+package com.luna.cache.service;
+
+import com.github.pagehelper.PageInfo;
+import com.luna.cache.entity.Department;
 
 import java.util.List;
 
-import com.github.pagehelper.PageInfo;
-import com.luna.mybatis.entity.Contacts;
-
 /**
  * @Author: luna
- * @CreateTime: 2020-09-14 10:35:32
+ * @CreateTime: 2020-09-14 13:19:31
  */
-public interface ContactsService {
+public interface DepartmentService {
 
     /**
      * 通过主键查询数据
@@ -17,33 +17,33 @@ public interface ContactsService {
      * @param id 主键
      * @return 对象
      */
-    Contacts getById(Long id);
+    Department getById(Integer id);
 
     /**
      * 通过实体不为空的属性作为筛选条件查询单个
      *
-     * @param contacts 条件
+     * @param department 条件
      * @return 对象
      */
-    Contacts getByEntity(Contacts contacts);
+    Department getByEntity(Department department);
 
     /**
      * 通过实体不为空的属性作为筛选条件查询列表
      *
-     * @param contacts 条件
+     * @param department 条件
      * @return 对象列表
      */
-    List<Contacts> listByEntity(Contacts contacts);
+    List<Department> listByEntity(Department department);
 
     /**
      * 条件分页查询
      *
-     * @param contacts 查询条件
+     * @param department 查询条件
      * @param page 起始标号
      * @param pageSize 查询条目
      * @return 对象列表
      */
-    PageInfo listPageByEntity(int page, int pageSize, Contacts contacts);
+    PageInfo listPageByEntity(int page, int pageSize, Department department);
 
     /**
      * 条件分页查询
@@ -60,15 +60,15 @@ public interface ContactsService {
      * @param ids Id列表
      * @return 对象列表
      */
-    List<Contacts> listByIds(List<Long> ids);
+    List<Department> listByIds(List<Integer> ids);
 
     /**
      * 插入
      *
-     * @param contacts 对象
+     * @param department 对象
      * @return 影响行数
      */
-    int insert(Contacts contacts);
+    int insert(Department department);
 
     /**
      * 列表插入
@@ -76,15 +76,15 @@ public interface ContactsService {
      * @param list 列表对象
      * @return 影响行数
      */
-    int insertBatch(List<Contacts> list);
+    int insertBatch(List<Department> list);
 
     /**
      * 更新
      *
-     * @param contacts 对象
+     * @param department 对象
      * @return 影响行数
      */
-    int update(Contacts contacts);
+    int update(Department department);
 
     /**
      * 列表更新
@@ -92,7 +92,7 @@ public interface ContactsService {
      * @param list 列表对象
      * @return 影响行数
      */
-    int updateBatch(List<Contacts> list);
+    int updateBatch(List<Department> list);
 
     /**
      * 删除
@@ -100,15 +100,15 @@ public interface ContactsService {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Long id);
+    int deleteById(Integer id);
 
     /**
      * 条件删除
      *
-     * @param contacts 对象
+     * @param department 对象
      * @return 影响行数
      */
-    int deleteByEntity(Contacts contacts);
+    int deleteByEntity(Department department);
 
     /**
      * 主键列表删除
@@ -116,7 +116,7 @@ public interface ContactsService {
      * @param list 主键列表
      * @return 影响行数
      */
-    int deleteByIds(List<Long> list);
+    int deleteByIds(List<Integer> list);
 
     /**
      * 数据条目
@@ -128,8 +128,8 @@ public interface ContactsService {
     /**
      * 条件查询数目
      *
-     * @param contacts 对象
+     * @param department 对象
      * @return 影响行数
      */
-    int countByEntity(Contacts contacts);
+    int countByEntity(Department department);
 }

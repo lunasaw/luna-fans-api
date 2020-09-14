@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @Author: luna
- * @CreateTime: 2020-09-13 23:36:41
+ * @CreateTime: 2020-09-14 10:35:32
  */
 @RestController
 @RequestMapping("/contacts")
@@ -24,8 +24,7 @@ public class ContactsController {
     @GetMapping("/get/{id}")
     public ResultDTO<Contacts> getById(@PathVariable Long id) {
         Contacts contacts = contactsService.getById(id);
-        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-            contacts != null ? contacts : new Contacts());
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, contacts);
     }
 
     @GetMapping("/get")
@@ -60,9 +59,9 @@ public class ContactsController {
     }
 
     @PostMapping("/insertBatch")
-    public ResultDTO<List<Contacts>> insert(@RequestBody List<Contacts> contacts) {
-        contactsService.insertBatch(contacts);
-        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, contacts);
+    public ResultDTO<List<Contacts>> insert(@RequestBody List<Contacts> list) {
+        contactsService.insertBatch(list);
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, list);
     }
 
     @PutMapping("/update")
@@ -71,9 +70,9 @@ public class ContactsController {
     }
 
     @PutMapping("/updateBatch")
-    public ResultDTO<Boolean> update(@RequestBody List<Contacts> contacts) {
+    public ResultDTO<Boolean> update(@RequestBody List<Contacts> list) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-            contactsService.updateBatch(contacts) == contacts.size());
+            contactsService.updateBatch(list) == list.size());
     }
 
     @DeleteMapping("/delete/{id}")
@@ -81,7 +80,7 @@ public class ContactsController {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, contactsService.deleteById(id) == 1);
     }
 
-    @DeleteMapping("/deleteByEntity/{id}")
+    @DeleteMapping("/deleteByEntity")
     public ResultDTO<Boolean> deleteOne(@RequestBody Contacts contacts) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
             contactsService.deleteByEntity(contacts) == 1);
@@ -96,4 +95,14 @@ public class ContactsController {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, result);
     }
 
+    @GetMapping("/account")
+    public ResultDTO<Integer> getAccount() {
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, contactsService.countAll());
+    }
+
+    @GetMapping("/accountByEntity")
+    public ResultDTO<Integer> getAccountByEntity(Contacts contacts) {
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+            contactsService.countByEntity(contacts));
+    }
 }

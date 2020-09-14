@@ -7,10 +7,10 @@ import java.util.Date;
  * Spring Boot Demo Orm 系列示例表(User)实体类
  *
  * @author luna
- * @since 2020-09-13 23:35:52
+ * @since 2020-09-14 10:35:05
  */
 public class User implements Serializable {
-    private static final long serialVersionUID = -11172053693353844L;
+    private static final long serialVersionUID = -52488757907919822L;
     /**
      * 主键
      */

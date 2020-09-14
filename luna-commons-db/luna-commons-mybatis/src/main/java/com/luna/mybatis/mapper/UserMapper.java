@@ -1,16 +1,18 @@
 package com.luna.mybatis.mapper;
 
-import com.luna.mybatis.entity.User;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.luna.mybatis.entity.User;
 
 /**
  * @Author: luna
- * @CreateTime: 2020-09-13 23:35:52
+ * @CreateTime: 2020-09-14 10:35:05
  */
 @Mapper
 public interface UserMapper {

@@ -7,7 +7,7 @@ import com.luna.mybatis.entity.User;
 
 /**
  * @Author: luna
- * @CreateTime: 2020-09-13 23:35:53
+ * @CreateTime: 2020-09-14 10:35:05
  */
 public interface UserService {
 
@@ -38,7 +38,7 @@ public interface UserService {
     /**
      * 条件分页查询
      *
-     * @param User user 查询条件
+     * @param user 查询条件
      * @param page 起始标号
      * @param pageSize 查询条目
      * @return 对象列表

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @Author: luna
- * @CreateTime: 2020-09-13 23:35:53
+ * @CreateTime: 2020-09-14 10:35:06
  */
 @RestController
 @RequestMapping("/user")
@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/get/{id}")
     public ResultDTO<User> getById(@PathVariable Integer id) {
         User user = userService.getById(id);
-        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, user != null ? user : new User());
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, user);
     }
 
     @GetMapping("/get")
@@ -59,9 +59,9 @@ public class UserController {
     }
 
     @PostMapping("/insertBatch")
-    public ResultDTO<List<User>> insert(@RequestBody List<User> users) {
-        userService.insertBatch(users);
-        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, users);
+    public ResultDTO<List<User>> insert(@RequestBody List<User> list) {
+        userService.insertBatch(list);
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, list);
     }
 
     @PutMapping("/update")
@@ -70,9 +70,9 @@ public class UserController {
     }
 
     @PutMapping("/updateBatch")
-    public ResultDTO<Boolean> update(@RequestBody List<User> users) {
+    public ResultDTO<Boolean> update(@RequestBody List<User> list) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
-            userService.updateBatch(users) == users.size());
+            userService.updateBatch(list) == list.size());
     }
 
     @DeleteMapping("/delete/{id}")
@@ -80,7 +80,7 @@ public class UserController {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userService.deleteById(id) == 1);
     }
 
-    @DeleteMapping("/deleteByEntity/{id}")
+    @DeleteMapping("/deleteByEntity")
     public ResultDTO<Boolean> deleteOne(@RequestBody User user) {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userService.deleteByEntity(user) == 1);
     }
@@ -94,4 +94,14 @@ public class UserController {
         return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, result);
     }
 
+    @GetMapping("/account")
+    public ResultDTO<Integer> getAccount() {
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS, userService.countAll());
+    }
+
+    @GetMapping("/accountByEntity")
+    public ResultDTO<Integer> getAccountByEntity(User user) {
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS,
+            userService.countByEntity(user));
+    }
 }
