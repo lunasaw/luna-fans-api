@@ -4,16 +4,26 @@ import com.google.common.hash.Hashing;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.time.Duration;
 
 /**
  * @author luna
@@ -28,6 +38,27 @@ public class CacheConfig extends CachingConfigurerSupport {
     // custom cache key
     public static final int     NO_PARAM_KEY   = 0;
     public static final int     NULL_PARAM_KEY = 53;
+
+    @Autowired
+    private LettuceConnectionFactory redisConnectionFactory;
+
+    @Override
+    public CacheManager cacheManager() {
+        // 重新配置缓存
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
+
+        // 设置缓存的默认超时时间：30分钟
+        redisCacheConfiguration = redisCacheConfiguration.entryTtl(Duration.ofMinutes(30L))
+            .disableCachingNullValues()
+            .disableKeyPrefix()
+            .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+            .serializeValuesWith(
+                RedisSerializationContext.SerializationPair.fromSerializer((new GenericJackson2JsonRedisSerializer())));
+
+        return RedisCacheManager.builder(RedisCacheWriter
+            .nonLockingRedisCacheWriter(redisConnectionFactory))
+            .cacheDefaults(redisCacheConfiguration).build();
+    }
 
     @Override
     @Bean

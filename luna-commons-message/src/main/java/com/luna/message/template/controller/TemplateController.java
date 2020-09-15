@@ -34,8 +34,8 @@ public class TemplateController {
      */
     @ApiOperation(value = "Template条件分页查询", notes = "分页条件查询Template方法详情", tags = {"TemplateController"})
     @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Integer"),
-        @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Integer")
+        @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Long"),
+        @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Long")
     })
     @PostMapping(value = "/search/{page}/{size}")
     public ResultDTO<PageInfo> findPage(@RequestBody(required = false) @ApiParam(name = "Template对象",
@@ -53,8 +53,8 @@ public class TemplateController {
      */
     @ApiOperation(value = "Template分页查询", notes = "分页查询Template方法详情", tags = {"TemplateController"})
     @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Integer"),
-        @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Integer")
+        @ApiImplicitParam(paramType = "path", name = "page", value = "当前页", required = true, dataType = "Long"),
+        @ApiImplicitParam(paramType = "path", name = "size", value = "每页显示条数", required = true, dataType = "Long")
     })
     @GetMapping(value = "/search/{page}/{size}")
     public ResultDTO<PageInfo> findPage(@PathVariable int page, @PathVariable int size) {

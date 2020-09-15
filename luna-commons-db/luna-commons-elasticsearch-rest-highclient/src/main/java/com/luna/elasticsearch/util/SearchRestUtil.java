@@ -2,20 +2,18 @@ package com.luna.elasticsearch.util;
 
 import com.alibaba.fastjson.JSON;
 import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.entity.Page;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.elasticsearch.exception.ElasticsearchException;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.*;
-import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -61,55 +57,12 @@ public class SearchRestUtil {
             searchSourceBuilder.query(QueryBuilders.matchAllQuery());
             searchRequest.source(searchSourceBuilder);
             SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-            List<Map<String, Object>> objects = getMaps(searchResponse);
+            List<Map<String, Object>> objects = SearchResultUtil.getMaps(searchResponse);
             return objects;
         } catch (IOException e) {
             throw new ElasticsearchException(ResultCode.ERROR_SYSTEM_EXCEPTION,
                 "searchByField failed " + e.getMessage());
         }
-    }
-
-    /**
-     * 解析普通字段
-     * 
-     * @param searchResponse
-     * @return
-     */
-    public static List<Map<String, Object>> getMaps(SearchResponse searchResponse) {
-        SearchHit[] hits = searchResponse.getHits().getHits();
-        List<Map<String, Object>> objects = new ArrayList<>();
-        Arrays.stream(hits).forEach(hit -> {
-            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
-            objects.add(sourceAsMap);
-        });
-        return objects;
-    }
-
-    /**
-     * 解析高亮字段
-     * 
-     * @param highlightField
-     * @param searchResponse
-     * @return
-     */
-    public static List<Map<String, Object>> getMapsByHighLight(String highlightField, SearchResponse searchResponse) {
-        SearchHit[] hits = searchResponse.getHits().getHits();
-        List<Map<String, Object>> lists = new ArrayList<>();
-        for (SearchHit hit : hits) {
-            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
-            HighlightField field = highlightFields.get(highlightField);
-            Map<String, Object> hitSourceAsMap = hit.getSourceAsMap();
-            if (field != null) {
-                StringBuilder newField = new StringBuilder(StringUtils.EMPTY);
-                Text[] fragments = field.fragments();
-                for (Text fragment : fragments) {
-                    newField.append(fragment.toString());
-                }
-                hitSourceAsMap.put(highlightField, newField.toString());
-            }
-            lists.add(hitSourceAsMap);
-        }
-        return lists;
     }
 
     /**
@@ -123,7 +76,7 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, String keyWord, Object keyValue, int pageNo,
         int pageSize) {
         MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
-        return getMaps(searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
             null, null, null, null));
     }
 
@@ -142,8 +95,29 @@ public class SearchRestUtil {
         int pageSize, String highlightField) {
         MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
         HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, true);
-        return getMapsByHighLight(highlightField, searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
-            null, null, null, highlightBuilder));
+        return SearchResultUtil.getMapsByHighLight(highlightField,
+            searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+                null, null, null, highlightBuilder));
+    }
+
+    /**
+     * 为提供的字段名和文本创建一个带有“短语”类型的文本查询。
+     *
+     * @param index 索引
+     * @param keyWord 搜索字段
+     * @param keyValue 搜索字段值
+     * @param pageNo 起始编号
+     * @param pageSize 返回条目
+     * @param highlightField 高亮字段
+     * @return
+     */
+    public Page searchByField2Page(String index, String keyWord, Object keyValue, int pageNo,
+        int pageSize, String highlightField) {
+        MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
+        HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, true);
+        SearchResponse searchResponse = searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+            null, null, null, highlightBuilder);
+        return SearchResultUtil.getMapsPageByHighLight(pageNo, pageSize, highlightField, searchResponse);
     }
 
     /**
@@ -161,8 +135,9 @@ public class SearchRestUtil {
         int pageSize, String highlightField) {
         MatchPhraseQueryBuilder matchPhraseQueryBuilder = GetBuildersUtil.getMatchPhraseQueryBuilder(keyWord, keyValue);
         HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, true);
-        return getMapsByHighLight(highlightField, searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
-            null, null, null, highlightBuilder));
+        return SearchResultUtil.getMapsByHighLight(highlightField,
+            searchByField(index, null, matchPhraseQueryBuilder, pageNo, pageSize,
+                null, null, null, highlightBuilder));
     }
 
     /**
@@ -189,8 +164,9 @@ public class SearchRestUtil {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
         HighlightBuilder highlightBuilder = GetBuildersUtil.getHighlightBuilder(highlightField, notOnlyFirst);
-        return getMapsByHighLight(highlightField, searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
-            sortField, sortType, fetchSourceContext, highlightBuilder));
+        return SearchResultUtil.getMapsByHighLight(highlightField,
+            searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+                sortField, sortType, fetchSourceContext, highlightBuilder));
     }
 
     /**
@@ -213,7 +189,7 @@ public class SearchRestUtil {
         int pageSize, String sortField, String sortType, String include, String exclude) {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
-        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
             sortField, sortType, fetchSourceContext, null));
     }
 
@@ -233,7 +209,7 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, Object keyValue,
         int pageNo, int pageSize, String sortField, String sortType) {
         TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
-        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
             sortField, sortType, null, null));
     }
 
@@ -251,7 +227,7 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String keyWord, int pageNo,
         int pageSize, String sortField, String sortType) {
         QueryStringQueryBuilder queryStringQueryBuilder = GetBuildersUtil.getQueryStringQueryBuilder(keyWord);
-        return getMaps(searchByField(index, timeOut, queryStringQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, queryStringQueryBuilder, pageNo, pageSize,
             sortField, sortType, null, null));
     }
 
@@ -274,7 +250,7 @@ public class SearchRestUtil {
         int pageSize, String sortField, String include, String exclude) {
         TermQueryBuilder termQueryBuilder = GetBuildersUtil.getTermQueryBuilder(keyWord, keyValue);
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
-        return getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, termQueryBuilder, pageNo, pageSize,
             sortField, null, fetchSourceContext, null));
     }
 
@@ -295,7 +271,7 @@ public class SearchRestUtil {
         int pageNo, int pageSize, String sortField, String sortType, String include, String exclude) {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
-        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, pageNo, pageSize,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, matchAllQueryBuilder, pageNo, pageSize,
             sortField, sortType, fetchSourceContext, null));
 
     }
@@ -315,7 +291,7 @@ public class SearchRestUtil {
         String include, String exclude) {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
-        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
             sortField, sortType, fetchSourceContext, null));
     }
 
@@ -333,7 +309,7 @@ public class SearchRestUtil {
         String exclude) {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
-        return getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
+        return SearchResultUtil.getMaps(searchByField(index, timeOut, matchAllQueryBuilder, 0, 0,
             sortField, null, fetchSourceContext, null));
     }
 
@@ -350,7 +326,7 @@ public class SearchRestUtil {
     public List<Map<String, Object>> searchByField(String index, Integer timeOut, String include, String exclude) {
         FetchSourceContext fetchSourceContext = GetBuildersUtil.getFetchSourceContext(include, exclude);
         MatchAllQueryBuilder matchAllQueryBuilder = GetBuildersUtil.getMatchAllQueryBuilder();
-        return getMaps(
+        return SearchResultUtil.getMaps(
             searchByField(index, timeOut, matchAllQueryBuilder, 0, 0, null, null, fetchSourceContext, null));
     }
 
@@ -391,10 +367,14 @@ public class SearchRestUtil {
             if (pageNo < 0) {
                 pageNo = 0;
                 searchSourceBuilder.from(pageNo);
+            } else {
+                searchSourceBuilder.from(pageNo);
             }
 
-            if (pageSize < 0) {
+            if (pageSize <= 0) {
                 pageSize = 10;
+                searchSourceBuilder.size(pageSize);
+            } else {
                 searchSourceBuilder.size(pageSize);
             }
 

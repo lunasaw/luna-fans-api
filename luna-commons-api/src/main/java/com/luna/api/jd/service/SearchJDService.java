@@ -1,7 +1,8 @@
 package com.luna.api.jd.service;
 
-import com.luna.api.jsoup.JsoupJDUtil;
 import com.luna.api.jd.dto.SearchJDResultDTO;
+import com.luna.api.jsoup.JsoupJDUtil;
+import com.luna.common.entity.Page;
 import com.luna.elasticsearch.constants.ElastcSearchConstants;
 import com.luna.elasticsearch.util.BulkRestUtil;
 import com.luna.elasticsearch.util.DocRestUtil;
@@ -55,7 +56,7 @@ public class SearchJDService {
      * @param pageSize
      * @return
      */
-    public List<Map<String, Object>> searchJDPage(String keyWord, String keyValue, int pageNo, int pageSize) {
+    public List<Map<String, Object>> searchJDField(String keyWord, String keyValue, int pageNo, int pageSize) {
         log.info("searchJDPage start keyWord={},  keyValue={},  pageNo={},  pageSize={}", keyWord, keyValue, pageNo,
             pageSize);
         if (pageNo <= 1) {
@@ -66,4 +67,23 @@ public class SearchJDService {
             keyWord);
     }
 
+    /**
+     * 精准条件分页搜索
+     *
+     * @param keyWord
+     * @param keyValue
+     * @param pageNo
+     * @param pageSize
+     * @return 分页字段
+     */
+    public Page searchJDPage(String keyWord, String keyValue, int pageNo, int pageSize) {
+        log.info("searchJDPage start keyWord={},  keyValue={},  pageNo={},  pageSize={}", keyWord, keyValue, pageNo,
+            pageSize);
+        if (pageNo <= 1) {
+            pageNo = 1;
+        }
+        // 条件搜索
+        return searchRestUtil.searchByField2Page(ElastcSearchConstants.INDEX_NAME, keyWord, keyValue, pageNo, pageSize,
+            keyWord);
+    }
 }
