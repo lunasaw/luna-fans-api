@@ -30,7 +30,6 @@ import java.time.Duration;
  */
 @EnableCaching
 @Configuration
-// @ComponentScan(value = "com.luna.redis.config")
 public class CacheConfig extends CachingConfigurerSupport {
 
     private static final Logger log            = LoggerFactory.getLogger(CacheConfig.class);

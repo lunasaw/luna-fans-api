@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>luna-commons-jap</artifactId>
+    <artifactId>luna-commons-jpa</artifactId>
 
     <dependencies>
         <dependency>
