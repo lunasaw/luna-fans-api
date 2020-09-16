@@ -68,12 +68,12 @@ public class RedisTest extends RedisApplicationTest {
 
     @Test
     public void etest() {
-        redisKeyUtil.del("luna", "luna:test:陈章月", "content_2");
+        redisKeyUtil.del("luna-person-4:*", "luna:test:陈章月", "content_2");
     }
 
     @Test
     public void ftest() {
-        redisKeyUtil.deleteKey("luna", "luna:test:陈章月:", "content_2");
+        redisKeyUtil.deleteKey("luna-cache:DepartmentServiceImpl:getById:33-", "luna-person-1", "content_2");
     }
 
     @Test

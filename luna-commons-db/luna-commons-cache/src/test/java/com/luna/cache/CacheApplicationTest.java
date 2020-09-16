@@ -1,12 +1,11 @@
 package com.luna.cache;
 
+import com.luna.cache.task.RedisTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.luna.cache.service.DepartmentService;
 
 /**
  * @Package: com.luna.cache
@@ -20,10 +19,11 @@ import com.luna.cache.service.DepartmentService;
 public class CacheApplicationTest {
 
     @Autowired
-    private DepartmentService departmentService;
+    private RedisTask redisTask;
 
     @Test
-    public void atest() {
-        System.out.println(departmentService.listByEntity(null));
+    public void cleanRedis() {
+        redisTask.cleanRedis();
     }
+
 }

@@ -5,7 +5,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -38,6 +40,17 @@ public class RedisKeyUtil {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 返回模糊匹配的key
+     * 
+     * @param key
+     * @return
+     */
+    public List<String> getKeys(String key) {
+        Set<String> keys = redisTemplate.keys(key);
+        return new ArrayList<>(keys);
     }
 
     /**

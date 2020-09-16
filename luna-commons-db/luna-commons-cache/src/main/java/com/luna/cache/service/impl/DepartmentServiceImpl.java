@@ -25,7 +25,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentMapper departmentMapper;
 
     @Override
-    @Cacheable(value = "getById", keyGenerator = "keyGenerator")
+    @Cacheable(value = "getById")
     public Department getById(Integer id) {
         return departmentMapper.getById(id);
     }
