@@ -23,6 +23,12 @@
     </repositories>
 
     <dependencies>
+        <!--Shiro核心框架 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.6.0</version>
+        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -110,18 +116,7 @@
             <artifactId>junit</artifactId>
             <version>4.13</version>
         </dependency>
-        <!--swagger文档 可选的-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <!--   http://localhost:9011/swagger-ui.html    -->
+
     </dependencies>
 
     <build>

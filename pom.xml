@@ -13,8 +13,8 @@
         <module>luna-commons-message</module>
         <module>luna-commons-api</module>
         <module>luna-commons-media</module>
-        <module>luna-commons-template</module>
         <module>luna-commons-db</module>
+        <module>luna-commons-generator</module>
     </modules>
 
     <parent>
@@ -53,6 +53,18 @@
                 <version>4.13</version>
                 <scope>test</scope>
             </dependency>
+            <!--swagger文档 可选的-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.9.2</version>
+            </dependency>
+            <!--   http://localhost:9011/swagger-ui.html    -->
         </dependencies>
     </dependencyManagement>
 
@@ -76,6 +88,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+
+        <!--swagger文档 可选的-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+        <!--   http://localhost:9011/swagger-ui.html    -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
