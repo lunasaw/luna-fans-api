@@ -1,8 +1,8 @@
 luna:
   face:
-    faceModel: static/static/flandmark_model.dat
+    faceModel: static/faceData/flandmark_model.dat
     # openCv\u4EBA\u8138\u6A21\u578B
-    frontalFace: static/static/haarcascade_frontalface_alt.xml
+    frontalFace: static/faceData/haarcascade_frontalface_alt.xml
     baseImage: D:\user-improve\conf\net\luna1.jpg
   ffmpeg:
     # ffmpeg \u5B89\u88C5\u8DEF\u5F84
