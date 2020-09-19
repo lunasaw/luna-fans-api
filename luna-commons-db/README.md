@@ -58,8 +58,7 @@ luna-commons-db
 | Module 名称                                                  | Module 介绍                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [luna-commons-cache](./luna-commons-cache) |  spingCache 整合redis 封装KeyGenerator生成策略                     |
-| [luna-commons-elasticsearch-rest-highclient](./luna-commons-elasticsearch-rest-highclient) | elasticsearch 使用rest客户端操作,并封装Utils工具类                       |
-| [luna-commons-elasticsearch-rest-template](./luna-commons-elasticsearch-rest-template) |           elasticsearch 使用spring  template操作             |
+| [luna-commons-elasticsearch](./luna-commons-elasticsearch) |           elasticsearch 使用rest客户端操作,并封装Utils工具类 使用spring  template操作             |
 | [luna-commons-jpa](./luna-commons-jpa) |    jpa封装查询,一对多,多对多测试用例,提供Utils封装查询条件                       |
 | [luna-commons-mongodb](./luna-commons-mongodb)     | 整合mongodb,封装操作Utils |
 | [luna-commons-mybatis](./luna-commons-mybatis) | mybatis整合,配置druid数据源,多数据源配置,附generator代码生成,maven生成插件,[见pom文件](https://github.com/czy1024/luna-commons/blob/master/luna-commons-db/luna-commons-mybatis/pom.xml) ,附easyCode 代码生成模板 55dc0d237256b99d487fdd9de41ce017 7*24 过期请联系[issue](https://github.com/czy1024/luna-commons/issues) 或者 [见地址](https://hexo.iszychen.club/2020/09/13/easycode/)            |
