@@ -4,20 +4,27 @@ import com.luna.common.dto.constant.ResultCode;
 
 /**
  * 返回值
- * 
- * @author 15272
  *
  * @param <T>
+ * @author 15272
  */
 public class ResultDTO<T> {
 
-    /** 是否调用以及过参数校验 */
+    /**
+     * 是否调用以及过参数校验
+     */
     private boolean success = false;
-    /** 业务code，见{@link ResultCode} */
+    /**
+     * 业务code，见{@link ResultCode}
+     */
     private int     code;
-    /** 业务消息，见{@link ResultCode} */
+    /**
+     * 业务消息，见{@link ResultCode}
+     */
     private String  message;
-    /** 返回值 */
+    /**
+     * 返回值
+     */
     private T       data;
 
     public ResultDTO() {}
@@ -33,6 +40,14 @@ public class ResultDTO<T> {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+
+    public static ResultDTO<Void> failure() {
+        return new ResultDTO<>(true, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+    }
+
+    public static ResultDTO<Void> success() {
+        return new ResultDTO<>(true, ResultCode.SUCCESS, ResultCode.MSG_SUCCESS);
     }
 
     public boolean isSuccess() {

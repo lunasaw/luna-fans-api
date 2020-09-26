@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Package: com.luna.baidu.api
@@ -125,5 +126,16 @@ public class BaiduVoiceApi {
         LocalFileUtil.writeBytesToFileSystem(bytes, path);
         log.info("voiceSynthesis success path={}", path);
         return path;
+    }
+
+    public static void main(String[] args) throws IOException {
+        VoiceSynthesisDTO voiceSynthesisDTO = new VoiceSynthesisDTO();
+        voiceSynthesisDTO.setPer("103");
+        voiceSynthesisDTO.setTex("罗杰傻逼");
+        voiceSynthesisDTO.setCuid(UUID.randomUUID().toString());
+        voiceSynthesisDTO.setAue("mp3");
+        voiceSynthesisDTO.setSavePath("D:\\luna");
+        BaiduVoiceApi.voiceSynthesis("24.5e9128fd8e38f83745c1f75e3909e828.2592000.1603186294.282335-19618961",
+            voiceSynthesisDTO);
     }
 }

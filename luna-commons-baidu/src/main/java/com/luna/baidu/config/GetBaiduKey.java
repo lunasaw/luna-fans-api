@@ -2,6 +2,8 @@ package com.luna.baidu.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.exception.base.BaseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class GetBaiduKey {
      * "25.2634aa914e737196878361a42128d998.315360000.1910247307.282335-19618961"
      */
     @Scheduled(cron = "0 0 0 1,15 * ? ")
-    public void getAuth() {
+    public String getAuth() {
         log.info("执行定时任务获取百度Key");
         String ak = configValue.getAppKey();
         String sk = configValue.getSecretKey();
@@ -64,9 +66,10 @@ public class GetBaiduKey {
             JSONObject jsonObject = JSON.parseObject(result);
             configValue.setBaiduKey(jsonObject.get("access_token").toString());
             log.info("get token success！", jsonObject.toString());
+            return jsonObject.get("access_token").toString();
         } catch (Exception e) {
             log.info("get token failed！");
-            e.printStackTrace(System.err);
+            throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }
     }
 
