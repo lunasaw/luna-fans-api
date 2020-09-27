@@ -39,8 +39,8 @@
     <script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
     <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script th:src="@{/ajax/libs/layui/layui.js}"></script>
-    <script th:src="@{/luna/js/common.js?v=4.1.0}"></script>
-    <script th:src="@{/luna/js/luna.js?v=4.1.0}"></script>
+    <script th:src="@{/luna/js/common.js?v=4.4.0}"></script>
+    <script th:src="@{/luna/js/luna.js?v=4.4.0}"></script>
     <script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 </div>
 
@@ -74,7 +74,7 @@
     <link th:href="@{/ajax/libs/datapicker/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
 </div>
 <div th:fragment="datetimepicker-js">
-    <script th:src="@{/ajax/libs//datapicker/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/ajax/libs/datapicker/bootstrap-datetimepicker.min.js}"></script>
 </div>
 
 <!-- ui布局插件 -->
@@ -95,12 +95,12 @@
     <script th:src="@{/ajax/libs/summernote/summernote-zh-CN.js}"></script>
 </div>
 
-<!-- cropbox图像裁剪插件 -->
-<div th:fragment="cropbox-css">
-    <link th:href="@{/ajax/libs/cropbox/cropbox.css}" rel="stylesheet"/>
+<!-- cropper图像裁剪插件 -->
+<div th:fragment="cropper-css">
+    <link th:href="@{/ajax/libs/cropper/cropper.min.css}" rel="stylesheet"/>
 </div>
-<div th:fragment="cropbox-js">
-    <script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
+<div th:fragment="cropper-js">
+    <script th:src="@{/ajax/libs/cropper/cropper.min.js}"></script>
 </div>
 
 <!-- jasny功能扩展插件 -->
@@ -137,6 +137,11 @@
     <script th:src="@{/ajax/libs/typeahead/bootstrap3-typeahead.min.js}"></script>
 </div>
 
+<!-- 多级联动下拉 -->
+<div th:fragment="jquery-cxselect-js">
+    <script th:src="@{/ajax/libs/cxselect/jquery.cxselect.min.js}"></script>
+</div>
+
 <!-- jsonview格式化和语法高亮JSON格式数据查看插件 -->
 <div th:fragment="jsonview-css">
     <link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
@@ -145,12 +150,12 @@
     <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js}"></script>
 </div>
 
-<!-- jquery.steps表单向导插件 -->
-<div th:fragment="jquery-steps-css">
-    <link th:href="@{/ajax/libs/staps/jquery.steps.css}" rel="stylesheet"/>
+<!-- jquery.smartwizard表单向导插件 -->
+<div th:fragment="jquery-smartwizard-css">
+    <link th:href="@{/ajax/libs/smartwizard/smart_wizard_all.min.css}" rel="stylesheet"/>
 </div>
-<div th:fragment="jquery-steps-js">
-    <script th:src="@{/ajax/libs/staps/jquery.steps.min.js}"></script>
+<div th:fragment="jquery-smartwizard-js">
+    <script th:src="@{/ajax/libs/smartwizard/jquery.smartWizard.min.js}"></script>
 </div>
 
 <!-- ECharts百度统计图表插件 -->
@@ -174,11 +179,38 @@
     <script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder/jquery.tablednd.js}"></script>
 </div>
 
+<!-- 表格列宽拖动插件 -->
+<div th:fragment="bootstrap-table-resizable-js">
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/jquery.resizableColumns.min.js}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js}"></script>
+</div>
+
 <!-- 表格行内编辑插件 -->
 <div th:fragment="bootstrap-editable-css">
     <link th:href="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.css}" rel="stylesheet"/>
 </div>
 <div th:fragment="bootstrap-table-editable-js">
     <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.min.js}"></script>
-    <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js?v=20200727}"></script>
+</div>
+
+<!-- 表格导出插件 -->
+<div th:fragment="bootstrap-table-export-js">
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
+</div>
+
+<!-- 表格冻结列插件 -->
+<div th:fragment="bootstrap-table-fixed-columns-js">
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.min.js?v=20200727}"></script>
+</div>
+
+<!-- 表格自动刷新插件 -->
+<div th:fragment="bootstrap-table-auto-refresh-js">
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.min.js?v=20200729}"></script>
+</div>
+
+<!-- 表格打印插件 -->
+<div th:fragment="bootstrap-table-print-js">
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/print/bootstrap-table-print.min.js?v=20200729}"></script>
 </div>

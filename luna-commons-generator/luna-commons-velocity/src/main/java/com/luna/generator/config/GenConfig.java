@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * 读取代码生成相关配置
  * 
- * @author luna
+ * @author ruoyi
  */
 @Component
 @ConfigurationProperties(prefix = "gen")
@@ -25,6 +25,20 @@ public class GenConfig {
 
     /** 表前缀(类名不会包含表前缀) */
     public static String  tablePrefix;
+
+    public static String  version;
+
+    public static boolean isAutoRemovePre() {
+        return autoRemovePre;
+    }
+
+    public static String getVersion() {
+        return version;
+    }
+
+    public static void setVersion(String version) {
+        GenConfig.version = version;
+    }
 
     public static String getAuthor() {
         return author;

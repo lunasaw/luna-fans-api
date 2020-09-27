@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 业务 服务层
  * 
- * @author luna
+ * @author ruoyi
  */
 public interface IGenTableService {
     /**
@@ -34,6 +34,13 @@ public interface IGenTableService {
      * @return 数据库表集合
      */
     public List<GenTable> selectDbTableListByNames(String[] tableNames);
+
+    /**
+     * 查询所有表信息
+     * 
+     * @return 表信息集合
+     */
+    public List<GenTable> selectGenTableAll();
 
     /**
      * 查询业务信息
@@ -76,20 +83,34 @@ public interface IGenTableService {
     public Map<String, String> previewCode(Long tableId);
 
     /**
-     * 生成代码
+     * 生成代码（下载方式）
      * 
      * @param tableName 表名称
      * @return 数据
      */
-    public byte[] generatorCode(String tableName);
+    public byte[] downloadCode(String tableName);
 
     /**
-     * 批量生成代码
+     * 生成代码（自定义路径）
+     * 
+     * @param tableName 表名称
+     */
+    public void generatorCode(String tableName);
+
+    /**
+     * 同步数据库
+     * 
+     * @param tableName 表名称
+     */
+    public void synchDb(String tableName);
+
+    /**
+     * 批量生成代码（下载方式）
      * 
      * @param tableNames 表数组
      * @return 数据
      */
-    public byte[] generatorCode(String[] tableNames);
+    public byte[] downloadCode(String[] tableNames);
 
     /**
      * 修改保存参数校验

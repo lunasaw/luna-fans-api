@@ -17,7 +17,7 @@
     } else {
         throw new Error('Not found jQuery.');
     }
-})(function ($) {
+})(function($) {
     var VERSION = 'VERSION_PLACEHOLDER';
     var $window = $(window);
     var isIe = 'ActiveXObject' in window; // 用于对 IE 的兼容判断
@@ -38,7 +38,7 @@
     var FALSE = false;
 
     function isUndefined(val) {
-        return val === void (0);
+        return val === void(0);
     }
 
     /**
@@ -53,28 +53,24 @@
             console.trace(e2);
         }
     }
-
     /**
      * 获取当前 tr 列的关键字数据
      */
     function getPointKeyword($list) {
         return $list.data();
     }
-
     /**
      * 设置或获取输入框的 alt 值
      */
     function setOrGetAlt($input, val) {
         return isUndefined(val) ? $input.attr('alt') : $input.attr('alt', val);
     }
-
     /**
      * 设置或获取输入框的 data-id 值
      */
     function setOrGetDataId($input, val) {
         return val !== (void 0) ? $input.attr('data-id', val) : $input.attr('data-id');
     }
-
     /**
      * 设置选中的值
      */
@@ -110,7 +106,6 @@
         $input.data('pre-val', $input.val())
             .trigger('onSetSelectValue', [keywords, (options.data.value || options._lastData.value)[keywords.index]]);
     }
-
     /**
      * 调整选择菜单位置
      * @param {Object} $input
@@ -127,7 +122,7 @@
         var parentWidth = $parent.width();
 
         if (options.autoDropup) {
-            setTimeout(function () {
+            setTimeout(function() {
                 var offsetTop = $input.offset().top;
                 var winScrollTop = $window.scrollTop();
                 var menuHeight = $dropdownMenu.height();
@@ -180,7 +175,6 @@
 
         return $input;
     }
-
     /**
      * 设置输入框背景色
      * 当设置了 indexId，而输入框的 data-id 为空时，输入框加载警告色
@@ -217,7 +211,6 @@
 
         return $input;
     }
-
     /**
      * 调整滑动条
      */
@@ -239,14 +232,12 @@
             $dropdownMenu.scrollTop(pos);
         }
     }
-
     /**
      * 解除所有列表 hover 样式
      */
     function unHoverAll($dropdownMenu, options) {
         $dropdownMenu.find('tr.' + options.listHoverCSS).removeClass(options.listHoverCSS);
     }
-
     /**
      * 验证 $input 对象是否符合条件
      *   1. 必须为 bootstrap 下拉式菜单
@@ -266,7 +257,6 @@
 
         return TRUE;
     }
-
     /**
      * 数据格式检测
      * 检测 ajax 返回成功数据或 data 参数数据是否有效
@@ -292,7 +282,6 @@
 
         return data;
     }
-
     /**
      * 判断字段名是否在 options.effectiveFields 配置项中
      * @param  {String} field   要判断的字段名
@@ -306,14 +295,12 @@
             effectiveFields.length &&
             !~$.inArray(field, effectiveFields));
     }
-
     /**
      * 判断字段名是否在 options.searchFields 搜索字段配置中
      */
     function inSearchFields(field, options) {
         return ~$.inArray(field, options.searchFields);
     }
-
     /**
      * 通过下拉菜单显示提示文案
      */
@@ -321,7 +308,6 @@
         $dropdownMenu.html('<div style="padding:10px 5px 5px">' + tip + '</div>').show();
         adjustDropMenuPos($input, $dropdownMenu, options);
     }
-
     /**
      * 显示下拉列表
      */
@@ -333,7 +319,6 @@
             $input.trigger('onShowDropdown', [options ? options.data.value : []]);
         }
     }
-
     /**
      * 隐藏下拉列表
      */
@@ -345,7 +330,6 @@
             $input.trigger('onHideDropdown', [options ? options.data.value : []]);
         }
     }
-
     /**
      * 下拉列表刷新
      * 作为 fnGetData 的 callback 函数调用
@@ -388,7 +372,7 @@
                 }
 
                 html.push('<th>', (options.effectiveFieldsAlias[field] || field),
-                    index === 0 ? ('(' + len + ')') : '', // 表头第一列记录总数
+                    index === 0 ? ('(' + len + ')') : '' , // 表头第一列记录总数
                     '</th>');
 
                 index++;
@@ -436,7 +420,7 @@
         //.show();
 
         // scrollbar 存在时，延时到动画结束时调整 padding
-        setTimeout(function () {
+        setTimeout(function() {
             if (notNeedCalcPadding) {
                 return;
             }
@@ -461,7 +445,6 @@
 
         return $input;
     }
-
     /**
      * ajax 获取数据
      * @param  {Object} options
@@ -504,7 +487,7 @@
         }
 
         // url 调整
-        ajaxParam.url = function () {
+        ajaxParam.url = function() {
             if (!keyword || ajaxParam.data) {
                 return ajaxParam.url || options.url;
             }
@@ -519,15 +502,14 @@
             return options.url + type + encodeURIComponent(keyword);
         }();
 
-        return options._preAjax = $.ajax(ajaxParam).done(function (result) {
+        return options._preAjax = $.ajax(ajaxParam).done(function(result) {
             options.data = options.fnProcessData(result);
-        }).fail(function (err) {
+        }).fail(function(err) {
             if (options.fnAjaxFail) {
                 options.fnAjaxFail(err, options);
             }
         });
     }
-
     /**
      * 检测 keyword 与 value 是否存在互相包含
      * @param  {String}  keyword 用户输入的关键字
@@ -551,7 +533,6 @@
                 options.twoWayMatch && ~keyword.indexOf(value) // 关键字包含匹配值
             );
     }
-
     /**
      * 通过 ajax 或 json 参数获取数据
      */
@@ -573,18 +554,18 @@
         if (options.url) {
             var timer;
             if (options.searchingTip) {
-                timer = setTimeout(function () {
+                timer = setTimeout(function() {
                     showTip(options.searchingTip, $input, $input.parent().find('ul'), options);
                 }, 600);
             }
 
-            ajax(options, keyword).done(function (result) {
+            ajax(options, keyword).done(function(result) {
                 callback($input, options.data, options); // 为 refreshDropMenu
                 $input.trigger(onDataRequestSuccess, result);
                 if (options.getDataMethod === 'firstByUrl') {
                     options.url = null;
                 }
-            }).always(function () {
+            }).always(function() {
                 timer && clearTimeout(timer);
             });
         } else {
@@ -616,7 +597,6 @@
             callback($input, filterData, options);
         } // else
     }
-
     /**
      * 数据处理
      * url 获取数据时，对数据的处理，作为 fnGetData 之后的回调处理
@@ -624,7 +604,6 @@
     function processData(data) {
         return checkData(data);
     }
-
     /**
      * 取得 clearable 清除按钮
      */
@@ -633,8 +612,8 @@
 
         // 是否可清除已输入的内容(添加清除按钮)
         if (options.clearable && !$iClear.length) {
-            $iClear = $('<i class="clearable glyphicon glyphicon-remove fa fa-plus"></i>')
-                .prependTo($input.parent());
+                $iClear = $('<i class="clearable glyphicon glyphicon-remove fa fa-plus"></i>')
+                    .prependTo($input.parent());
         }
 
         return $iClear.css({
@@ -650,7 +629,6 @@
             fontSize: 12
         }).hide();
     }
-
     /**
      * 默认的配置选项
      * @type {Object}
@@ -724,7 +702,7 @@
     };
 
     var methods = {
-        init: function (options) {
+        init: function(options) {
             // 参数设置
             var self = this;
             options = options || {};
@@ -746,7 +724,7 @@
             }
 
             if (options.getDataMethod === 'firstByUrl' && options.url && !options.delayUntilKeyup) {
-                ajax(options).done(function (result) {
+                ajax(options).done(function(result) {
                     options.url = null;
                     self.trigger(onDataRequestSuccess, result);
                 });
@@ -757,7 +735,7 @@
                 $('head:eq(0)').append('<style id="' + BSSUGGEST + '">.' + options.listHoverCSS + '{' + options.listHoverStyle + '}</style>');
             }
 
-            return self.each(function () {
+            return self.each(function() {
                 var $input = $(this),
                     $parent = $input.parent(),
                     $iClear = getIClear($input, options),
@@ -792,7 +770,7 @@
                 }
 
                 // 开始事件处理
-                $input.on('keydown', function (event) {
+                $input.on('keydown', function(event) {
                     var currentList, tipsKeyword; // 提示列表上被选中的关键字
 
                     // 当提示层显示时才对键盘事件处理
@@ -853,15 +831,15 @@
                     // 设置值 tipsKeyword
                     // console.log(tipsKeyword);
                     setValue($input, tipsKeyword, options);
-                }).on('compositionstart', function (event) {
+                }).on('compositionstart', function(event) {
                     // 中文输入开始，锁定
                     // console.log('compositionstart');
                     inputLock = TRUE;
-                }).on('compositionend', function (event) {
+                }).on('compositionend', function(event) {
                     // 中文输入结束，解除锁定
                     // console.log('compositionend');
                     inputLock = FALSE;
-                }).on('keyup input paste', function (event) {
+                }).on('keyup input paste', function(event) {
                     var word;
 
                     if (event.keyCode) {
@@ -875,7 +853,7 @@
                     }
 
                     clearTimeout(keyupTimer);
-                    keyupTimer = setTimeout(function () {
+                    keyupTimer = setTimeout(function() {
                         // console.log('input keyup', event);
 
                         // 锁定状态，返回
@@ -904,14 +882,14 @@
 
                         options.fnGetData($.trim(word), $input, refreshDropMenu, options);
                     }, options.delay || 300);
-                }).on('focus', function () {
+                }).on('focus', function() {
                     // console.log('input focus');
                     adjustDropMenuPos($input, $dropdownMenu, options);
-                }).on('blur', function () {
+                }).on('blur', function() {
                     if (!isMouseenterMenu) { // 不是进入下拉列表状态，则隐藏列表
                         hideDropMenu($input, options);
                     }
-                }).on('click', function () {
+                }).on('click', function() {
                     // console.log('input click');
                     var word = $input.val();
 
@@ -941,7 +919,7 @@
                 });
 
                 // 下拉按钮点击时
-                $parent.find('.btn:eq(0)').attr('data-toggle', '').click(function () {
+                $parent.find('.btn:eq(0)').attr('data-toggle', '').click(function() {
                     if (!$dropdownMenu.is(':visible')) {
                         if (options.url) {
                             $input.click().focus();
@@ -961,22 +939,22 @@
                 });
 
                 // 列表中滑动时，输入框失去焦点
-                $dropdownMenu.mouseenter(function () {
-                    // console.log('mouseenter')
-                    isMouseenterMenu = 1;
-                    $input.blur();
-                }).mouseleave(function () {
-                    // console.log('mouseleave')
-                    isMouseenterMenu = 0;
-                    $input.focus();
-                }).on('mouseenter', 'tbody tr', function () {
-                    // 行上的移动事件
-                    unHoverAll($dropdownMenu, options);
-                    $(this).addClass(options.listHoverCSS);
+                $dropdownMenu.mouseenter(function() {
+                        // console.log('mouseenter')
+                        isMouseenterMenu = 1;
+                        $input.blur();
+                    }).mouseleave(function() {
+                        // console.log('mouseleave')
+                        isMouseenterMenu = 0;
+                        $input.focus();
+                    }).on('mouseenter', 'tbody tr', function() {
+                        // 行上的移动事件
+                        unHoverAll($dropdownMenu, options);
+                        $(this).addClass(options.listHoverCSS);
 
-                    return FALSE; // 阻止冒泡
-                })
-                    .on('mousedown', 'tbody tr', function () {
+                        return FALSE; // 阻止冒泡
+                    })
+                    .on('mousedown', 'tbody tr', function() {
                         var keywords = getPointKeyword($(this));
                         setValue($input, keywords, options);
                         setOrGetAlt($input, keywords.key);
@@ -994,57 +972,57 @@
                         setBackground($input, options);
                     });
 
-                    $parent.mouseenter(function () {
+                    $parent.mouseenter(function() {
                         if (!$input.prop(DISABLED)) {
                             $iClear.css('right', options.showBtn ? Math.max($input.next().width(), 33) + 2 : 12)
                                 .show();
                         }
-                    }).mouseleave(function () {
+                    }).mouseleave(function() {
                         $iClear.hide();
                     });
                 }
 
             });
         },
-        show: function () {
-            return this.each(function () {
+        show: function() {
+            return this.each(function() {
                 $(this).click();
             });
         },
-        hide: function () {
-            return this.each(function () {
+        hide: function() {
+            return this.each(function() {
                 hideDropMenu($(this));
             });
         },
-        disable: function () {
-            return this.each(function () {
+        disable: function() {
+            return this.each(function() {
                 $(this).attr(DISABLED, TRUE)
                     .parent().find('.btn:eq(0)').prop(DISABLED, TRUE);
             });
         },
-        enable: function () {
-            return this.each(function () {
+        enable: function() {
+            return this.each(function() {
                 $(this).attr(DISABLED, FALSE)
                     .parent().find('.btn:eq(0)').prop(DISABLED, FALSE);
             });
         },
-        destroy: function () {
-            return this.each(function () {
+        destroy: function() {
+            return this.each(function() {
                 $(this).off().removeData(BSSUGGEST).removeAttr('style')
                     .parent().find('.btn:eq(0)').off().show().attr('data-toggle', 'dropdown').prop(DISABLED, FALSE) // .addClass(DISABLED);
                     .next().css('display', '').off();
             });
         },
-        version: function () {
+        version: function() {
             return VERSION;
         }
     };
 
-    $.fn[BSSUGGEST] = function (options) {
+    $.fn[BSSUGGEST] = function(options) {
         // 方法判断
         if (typeof options === 'string' && methods[options]) {
             var inited = TRUE;
-            this.each(function () {
+            this.each(function() {
                 if (!$(this).data(BSSUGGEST)) {
                     return inited = FALSE;
                 }

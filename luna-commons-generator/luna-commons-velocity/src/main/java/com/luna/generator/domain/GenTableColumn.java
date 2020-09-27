@@ -5,10 +5,11 @@ import com.luna.common.utils.text.StringUtils;
 
 import javax.validation.constraints.NotBlank;
 
+
 /**
  * 代码生成业务字段表 gen_table_column
  * 
- * @author luna
+ * @author ruoyi
  */
 public class GenTableColumn extends BaseEntity {
     private static final long serialVersionUID = 1L;
@@ -59,7 +60,7 @@ public class GenTableColumn extends BaseEntity {
     /** 查询方式（EQ等于、NE不等于、GT大于、LT小于、LIKE模糊、BETWEEN范围） */
     private String            queryType;
 
-    /** 显示类型（input文本框、textarea文本域、select下拉框、checkbox复选框、radio单选框、datetime日期控件） */
+    /** 显示类型（input文本框、textarea文本域、select下拉框、checkbox复选框、radio单选框、datetime日期控件、upload上传控件、summernote富文本控件） */
     private String            htmlType;
 
     /** 字典类型 */
@@ -122,6 +123,10 @@ public class GenTableColumn extends BaseEntity {
 
     public String getJavaField() {
         return javaField;
+    }
+
+    public String getCapJavaField() {
+        return StringUtils.capitalize(javaField);
     }
 
     public void setIsPk(String isPk) {
@@ -286,7 +291,7 @@ public class GenTableColumn extends BaseEntity {
 
     public static boolean isUsableColumn(String javaField) {
         // isSuperColumn()中的名单用于避免生成多余Domain属性，若某些属性在生成页面时需要用到不能忽略，则放在此处白名单
-        return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum");
+        return StringUtils.equalsAnyIgnoreCase(javaField, "parentId", "orderNum", "remark");
     }
 
     public String readConverterExp() {

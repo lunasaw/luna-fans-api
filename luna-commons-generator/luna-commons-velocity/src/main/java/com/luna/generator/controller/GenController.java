@@ -1,11 +1,12 @@
 package com.luna.generator.controller;
 
 import cn.hutool.core.convert.Convert;
-import com.luna.base.BusinessType;
-import com.luna.base.anno.Log;
+import com.alibaba.fastjson.JSON;
 import com.luna.base.core.controller.BaseController;
 import com.luna.base.core.domain.AjaxResult;
+import com.luna.base.core.domain.CxSelect;
 import com.luna.base.core.page.TableDataInfo;
+import com.luna.common.utils.text.StringUtils;
 import com.luna.generator.domain.GenTable;
 import com.luna.generator.domain.GenTableColumn;
 import com.luna.generator.service.IGenTableColumnService;
@@ -19,13 +20,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * 代码生成 操作处理
  * 
- * @author luna
+ * @author ruoyi
  */
 @Controller
 @RequestMapping("/tool/gen")
@@ -89,14 +92,14 @@ public class GenController extends BaseController {
     /**
      * 导入表结构（保存）
      */
-    @Log(title = "代码生成", businessType = BusinessType.IMPORT)
     @PostMapping("/importTable")
     @ResponseBody
     public AjaxResult importTableSave(String tables) {
         String[] tableNames = Convert.toStrArray(tables);
         // 查询表信息
         List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames);
-        genTableService.importGenTable(tableList, "luna");
+        String operName = "luna";
+        genTableService.importGenTable(tableList, operName);
         return AjaxResult.success();
     }
 
@@ -106,14 +109,29 @@ public class GenController extends BaseController {
     @GetMapping("/edit/{tableId}")
     public String edit(@PathVariable("tableId") Long tableId, ModelMap mmap) {
         GenTable table = genTableService.selectGenTableById(tableId);
+        List<GenTable> genTables = genTableService.selectGenTableAll();
+        List<CxSelect> cxSelect = new ArrayList<CxSelect>();
+        for (GenTable genTable : genTables) {
+            if (!StringUtils.equals(table.getTableName(), genTable.getTableName())) {
+                CxSelect cxTable =
+                    new CxSelect(genTable.getTableName(), genTable.getTableName() + '：' + genTable.getTableComment());
+                List<CxSelect> cxColumns = new ArrayList<CxSelect>();
+                for (GenTableColumn tableColumn : genTable.getColumns()) {
+                    cxColumns.add(new CxSelect(tableColumn.getColumnName(),
+                        tableColumn.getColumnName() + '：' + tableColumn.getColumnComment()));
+                }
+                cxTable.setS(cxColumns);
+                cxSelect.add(cxTable);
+            }
+        }
         mmap.put("table", table);
+        mmap.put("data", JSON.toJSON(cxSelect));
         return prefix + "/edit";
     }
 
     /**
      * 修改保存代码生成业务
      */
-    @Log(title = "代码生成", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(@Validated GenTable genTable) {
@@ -122,7 +140,6 @@ public class GenController extends BaseController {
         return AjaxResult.success();
     }
 
-    @Log(title = "代码生成", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
@@ -141,24 +158,42 @@ public class GenController extends BaseController {
     }
 
     /**
-     * 生成代码
+     * 生成代码（下载方式）
      */
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
-    @GetMapping("/genCode/{tableName}")
-    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
-        byte[] data = genTableService.generatorCode(tableName);
+    @GetMapping("/download/{tableName}")
+    public void download(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
+        byte[] data = genTableService.downloadCode(tableName);
         genCode(response, data);
+    }
+
+    /**
+     * 生成代码（自定义路径）
+     */
+    @GetMapping("/genCode/{tableName}")
+    @ResponseBody
+    public AjaxResult genCode(@PathVariable("tableName") String tableName) {
+        genTableService.generatorCode(tableName);
+        return AjaxResult.success();
+    }
+
+    /**
+     * 同步数据库
+     */
+    @GetMapping("/synchDb/{tableName}")
+    @ResponseBody
+    public AjaxResult synchDb(@PathVariable("tableName") String tableName) {
+        genTableService.synchDb(tableName);
+        return AjaxResult.success();
     }
 
     /**
      * 批量生成代码
      */
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     @ResponseBody
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);
-        byte[] data = genTableService.generatorCode(tableNames);
+        byte[] data = genTableService.downloadCode(tableNames);
         genCode(response, data);
     }
 
@@ -167,7 +202,7 @@ public class GenController extends BaseController {
      */
     private void genCode(HttpServletResponse response, byte[] data) throws IOException {
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"luna.zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());

@@ -9,10 +9,11 @@ import org.apache.commons.lang3.RegExUtils;
 
 import java.util.Arrays;
 
+
 /**
  * 代码生成器 工具类
  * 
- * @author luna
+ * @author ruoyi
  */
 public class GenUtils {
     /**
@@ -54,7 +55,7 @@ public class GenUtils {
             // 如果是浮点型
             String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
             if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0) {
-                column.setJavaType(GenConstants.TYPE_DOUBLE);
+                column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
             }
             // 如果是整形
             else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10) {
@@ -94,6 +95,14 @@ public class GenUtils {
         else if (StringUtils.endsWithIgnoreCase(columnName, "type")
             || StringUtils.endsWithIgnoreCase(columnName, "sex")) {
             column.setHtmlType(GenConstants.HTML_SELECT);
+        }
+        // 文件字段设置上传控件
+        else if (StringUtils.endsWithIgnoreCase(columnName, "file")) {
+            column.setHtmlType(GenConstants.HTML_UPLOAD);
+        }
+        // 内容字段设置富文本控件
+        else if (StringUtils.endsWithIgnoreCase(columnName, "content")) {
+            column.setHtmlType(GenConstants.HTML_SUMMERNOTE);
         }
     }
 

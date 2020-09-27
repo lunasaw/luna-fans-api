@@ -1,10 +1,9 @@
-package ${basePackage}.web.controller.${moduleName};
+package ${packageName}.controller;
 
 import java.util.List;
-
-import com.luna.base.core.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,10 @@ import ${packageName}.service.I${ClassName}Service;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-#if($table.crud)
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+#if($table.crud || $table.sub)
 import com.ruoyi.common.core.page.TableDataInfo;
 #elseif($table.tree)
 import com.ruoyi.common.utils.StringUtils;
@@ -27,13 +29,15 @@ import com.ruoyi.common.core.domain.Ztree;
 
 /**
  * ${functionName}Controller
- *
+ * 
  * @author ${author}
  * @date ${datetime}
  */
 @Controller
+@Api("${functionName}Controller")
 @RequestMapping("/${moduleName}/${businessName}")
-public class ${ClassName}Controller extends BaseController {
+public class ${ClassName}Controller extends BaseController
+{
     private String prefix = "${moduleName}/${businessName}";
 
     @Autowired
@@ -41,86 +45,103 @@ public class ${ClassName}Controller extends BaseController {
 
     @RequiresPermissions("${permissionPrefix}:view")
     @GetMapping()
-    public String ${businessName}() {
+    public String ${businessName}()
+    {
         return prefix + "/${businessName}";
     }
 
-    #if($table.crud)
-        /**
-         * 查询${functionName}列表
-         */
-        @RequiresPermissions("${permissionPrefix}:list")
-        @PostMapping("/list")
-        @ResponseBody
-        public TableDataInfo list(${ClassName} ${className}) {
-            startPage();
-            List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
-            return getDataTable(list);
-        }
-    #elseif($table.tree)
-        /**
-         * 查询${functionName}树列表
-         */
-        @RequiresPermissions("${permissionPrefix}:list")
-        @PostMapping("/list")
-        @ResponseBody
-        public List<${ClassName}> list(${ClassName} ${className}) {
-            List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
-            return list;
-        }
-    #end
+#if($table.crud || $table.sub)
+    /**
+     * 查询${functionName}列表
+     */
+    @ApiOperation(value = "查询${functionName}列表", notes = "查询${functionName}列表详情", tags = {"${functionName}Controller"})
+    @RequiresPermissions("${permissionPrefix}:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(${ClassName} ${className})
+    {
+        startPage();
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return getDataTable(list);
+    }
+#elseif($table.tree)
+    /**
+     * 查询${functionName}树列表
+     */
+    @ApiOperation(value = "查询${functionName}树列表", notes = "查询${functionName}树列表详情", tags = {"${functionName}Controller"})
+    @RequiresPermissions("${permissionPrefix}:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public List<${ClassName}> list(${ClassName} ${className})
+    {
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return list;
+    }
+#end
 
     /**
      * 导出${functionName}列表
      */
+    @ApiOperation(value = "导出${functionName}列表", notes = "导出${functionName}列表详情", tags = {"${functionName}Controller"})
     @RequiresPermissions("${permissionPrefix}:export")
     @Log(title = "${functionName}", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(${ClassName} ${className}) {
+    public AjaxResult export(${ClassName} ${className})
+    {
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
-        ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}. class);
+        ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}.class);
         return util.exportExcel(list, "${businessName}");
     }
 
-    #if($table.crud)
-        /**
-         * 新增${functionName}
-         */
-        @GetMapping("/add")
-        public String add() {
-            return prefix + "/add";
+#if($table.crud || $table.sub)
+    /**
+     * 新增${functionName}
+     */
+    @GetMapping("/add")
+    public String add()
+    {
+        return prefix + "/add";
+    }
+#elseif($table.tree)
+    /**
+     * 新增${functionName}
+     */
+    @ApiOperation(value = "新增${functionName}", notes = "新增${functionName}详情", tags = {"${functionName}Controller"})
+    @ApiImplicitParam(name = "${pkColumn.javaField}", value = "主键ID", paramType = "path",  required = true)
+    @GetMapping(value = { "/add/{${pkColumn.javaField}}", "/add/" })
+    public String add(@PathVariable(value = "${pkColumn.javaField}", required = false) Long ${pkColumn.javaField}, ModelMap mmap)
+    {
+        if (StringUtils.isNotNull(${pkColumn.javaField}))
+        {
+            mmap.put("${className}", ${className}Service.select${ClassName}ById(${pkColumn.javaField}));
         }
-    #elseif($table.tree)
-        /**
-         * 新增${functionName}
-         */
-        @GetMapping(value = {"/add/{${pkColumn.javaField}}", "/add/"})
-        public String add(@PathVariable(value = "${pkColumn.javaField}", required = false)Long ${pkColumn.javaField}, ModelMap mmap) {
-            if (StringUtils.isNotNull(${pkColumn.javaField})) {
-                mmap.put("${className}", ${className}Service.select${ClassName}ById(${pkColumn.javaField}));
-            }
-            return prefix + "/add";
-        }
-    #end
+        return prefix + "/add";
+    }
+#end
 
     /**
      * 新增保存${functionName}
      */
+    @ApiOperation(value = "新增保存${functionName}", notes = "新增保存${functionName}详情", tags = {"${functionName}Controller"})
     @RequiresPermissions("${permissionPrefix}:add")
     @Log(title = "${functionName}", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(${ClassName} ${className}) {
+    public AjaxResult addSave(${ClassName} ${className})
+    {
         return toAjax(${className}Service.insert${ClassName}(${className}));
     }
 
     /**
      * 修改${functionName}
      */
+    @ApiOperation(value = "修改${functionName}", notes = "修改${functionName}详情", tags = {"${functionName}Controller"})
+    @ApiImplicitParam(name = "${pkColumn.javaField}", value = "主键ID", dataType = "${pkColumn.javaType}", paramType = "path")
     @GetMapping("/edit/{${pkColumn.javaField}}")
-    public String edit(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}, ModelMap mmap) {
-        ${ClassName} ${className} =${className}Service.select${ClassName}ById(${pkColumn.javaField});
+    public String edit(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}, ModelMap mmap)
+    {
+        ${ClassName} ${className} = ${className}Service.select${ClassName}ById(${pkColumn.javaField});
         mmap.put("${className}", ${className});
         return prefix + "/edit";
     }
@@ -128,59 +149,71 @@ public class ${ClassName}Controller extends BaseController {
     /**
      * 修改保存${functionName}
      */
+    @ApiOperation(value = "修改保存${functionName}", notes = "修改保存${functionName}详情", tags = {"${functionName}Controller"})
     @RequiresPermissions("${permissionPrefix}:edit")
     @Log(title = "${functionName}", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(${ClassName} ${className}) {
+    public AjaxResult editSave(${ClassName} ${className})
+    {
         return toAjax(${className}Service.update${ClassName}(${className}));
     }
 
-    #if($table.crud)
-        /**
-         * 删除${functionName}
-         */
-        @RequiresPermissions("${permissionPrefix}:remove")
-        @Log(title = "${functionName}", businessType = BusinessType.DELETE)
-        @PostMapping("/remove")
-        @ResponseBody
-        public AjaxResult remove(String ids) {
-            return toAjax(${className}Service.delete${ClassName}ByIds(ids));
-        }
-    #elseif($table.tree)
-        /**
-         * 删除
-         */
-        @RequiresPermissions("${permissionPrefix}:remove")
-        @Log(title = "${functionName}", businessType = BusinessType.DELETE)
-        @GetMapping("/remove/{${pkColumn.javaField}}")
-        @ResponseBody
-        public AjaxResult remove(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}) {
-            return toAjax(${className}Service.delete${ClassName}ById(${pkColumn.javaField}));
-        }
-    #end
-    #if($table.tree)
+#if($table.crud || $table.sub)
+    /**
+     * 删除${functionName}
+     @ApiOperation("删除${functionName}")
+     */
+    @ApiOperation(value = "删除${functionName}", notes = "删除${functionName}详情", tags = {"${functionName}Controller"})
+    @RequiresPermissions("${permissionPrefix}:remove")
+    @Log(title = "${functionName}", businessType = BusinessType.DELETE)
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids)
+    {
+        return toAjax(${className}Service.delete${ClassName}ByIds(ids));
+    }
+#elseif($table.tree)
+    /**
+     * 删除
+     */
+    @ApiOperation(value = "删除", notes = "删除详情", tags = {"${functionName}Controller"})
+    @RequiresPermissions("${permissionPrefix}:remove")
+    @Log(title = "${functionName}", businessType = BusinessType.DELETE)
+    @GetMapping("/remove/{${pkColumn.javaField}}")
+    @ResponseBody
+    public AjaxResult remove(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField})
+    {
+        return toAjax(${className}Service.delete${ClassName}ById(${pkColumn.javaField}));
+    }
+#end
+#if($table.tree)
 
-        /**
-         * 选择${functionName}树
-         */
-            #set($BusinessName=$businessName.substring(0,1).toUpperCase() + ${businessName.substring(1)})
-        @GetMapping(value = {"/select${BusinessName}Tree/{${pkColumn.javaField}}", "/select${BusinessName}Tree/"})
-        public String select${BusinessName}Tree(@PathVariable(value = "${pkColumn.javaField}", required = false)Long ${pkColumn.javaField}, ModelMap mmap) {
-            if (StringUtils.isNotNull(${pkColumn.javaField})) {
-                mmap.put("${className}", ${className}Service.select${ClassName}ById(${pkColumn.javaField}));
-            }
-            return prefix + "/tree";
+    /**
+     * 选择${functionName}树
+     */
+    @ApiOperation(value = "选择${functionName}树", notes = "选择${functionName}树详情", tags = {"${functionName}Controller"})
+        #set($BusinessName=$businessName.substring(0,1).toUpperCase() + ${businessName.substring(1)})
+    @GetMapping(value = { "/select${BusinessName}Tree/{${pkColumn.javaField}}", "/select${BusinessName}Tree/" })
+    public String select${BusinessName}Tree(@PathVariable(value = "${pkColumn.javaField}", required = false) Long ${pkColumn.javaField}, ModelMap mmap)
+    {
+        if (StringUtils.isNotNull(${pkColumn.javaField}))
+        {
+            mmap.put("${className}", ${className}Service.select${ClassName}ById(${pkColumn.javaField}));
         }
+        return prefix + "/tree";
+    }
 
-        /**
-         * 加载${functionName}树列表
-         */
-        @GetMapping("/treeData")
-        @ResponseBody
-        public List<Ztree> treeData() {
-            List<Ztree> ztrees = ${className}Service.select${ClassName}Tree();
-            return ztrees;
-        }
-    #end
+    /**
+     * 加载${functionName}树列表
+     */
+    @ApiOperation(value = "加载${functionName}树列表", notes = "加载${functionName}树列表详情", tags = {"${functionName}Controller"})
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData()
+    {
+        List<Ztree> ztrees = ${className}Service.select${ClassName}Tree();
+        return ztrees;
+    }
+#end
 }

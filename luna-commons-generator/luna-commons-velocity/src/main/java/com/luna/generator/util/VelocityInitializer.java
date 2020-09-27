@@ -1,9 +1,10 @@
 package com.luna.generator.util;
 
-import com.luna.base.constant.Constants;
+import java.util.Properties;
+
 import org.apache.velocity.app.Velocity;
 
-import java.util.Properties;
+import com.luna.base.constant.Constants;
 
 /**
  * VelocityEngine工厂

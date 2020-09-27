@@ -5,10 +5,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+
 /**
  * 业务字段 数据层
  * 
- * @author luna
+ * @author ruoyi
  */
 @Mapper
 public interface GenTableColumnMapper {
@@ -43,6 +44,14 @@ public interface GenTableColumnMapper {
      * @return 结果
      */
     public int updateGenTableColumn(GenTableColumn genTableColumn);
+
+    /**
+     * 删除业务字段
+     * 
+     * @param genTableColumns 列数据
+     * @return 结果
+     */
+    public int deleteGenTableColumns(List<GenTableColumn> genTableColumns);
 
     /**
      * 批量删除业务字段

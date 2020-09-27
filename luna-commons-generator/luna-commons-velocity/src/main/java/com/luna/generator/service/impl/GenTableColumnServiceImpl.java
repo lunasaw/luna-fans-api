@@ -1,6 +1,6 @@
 package com.luna.generator.service.impl;
 
-import com.luna.common.utils.text.ConvertUtil;
+import cn.hutool.core.convert.Convert;
 import com.luna.generator.domain.GenTableColumn;
 import com.luna.generator.mapper.GenTableColumnMapper;
 import com.luna.generator.service.IGenTableColumnService;
@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 /**
  * 业务字段 服务层实现
  * 
- * @author luna
+ * @author ruoyi
  */
 @Service
 public class GenTableColumnServiceImpl implements IGenTableColumnService {
@@ -60,6 +61,6 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService {
      */
     @Override
     public int deleteGenTableColumnByIds(String ids) {
-        return genTableColumnMapper.deleteGenTableColumnByIds(ConvertUtil.toLongArray(ids));
+        return genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
     }
 }

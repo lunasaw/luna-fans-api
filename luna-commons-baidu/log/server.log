@@ -1,0 +1,56 @@
+2020-09-20 17:26:49,982  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-09-20 17:26:49,996  INFO [main] (StartupInfoLogger.java:55) - Starting VoiceTest on luna with PID 6648 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-09-20 17:26:49,997  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-09-20 17:26:51,475  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-09-20 17:26:52,308  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-09-20 17:26:52,364  INFO [main] (StartupInfoLogger.java:61) - Started VoiceTest in 4.237 seconds (JVM running for 5.816) 
+2020-09-20 17:26:52,727  INFO [main] (BaiduVoiceApi.java:107) - voiceSynthesis start token=24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961,voiceSynthesisDTO={"aue":"mp3","ctp":"1","cuid":"f8558944-067c-464b-9d7f-832ce53f6868","lan":"Zh","per":"103","savePath":"D:\\luna","tex":"罗杰傻逼"} 
+2020-09-20 17:26:53,622  INFO [main] (BaiduVoiceApi.java:126) - voiceSynthesis success path=D:\luna\f8558944-067c-464b-9d7f-832ce53f6868.mp3 
+2020-09-20 17:26:53,643  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-09-20 17:26:53,645  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-09-20 17:27:53,258  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-09-20 17:27:53,274  INFO [main] (StartupInfoLogger.java:55) - Starting VoiceTest on luna with PID 20192 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-09-20 17:27:53,274  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-09-20 17:27:54,775  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-09-20 17:27:55,594  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-09-20 17:27:55,654  INFO [main] (StartupInfoLogger.java:61) - Started VoiceTest in 4.317 seconds (JVM running for 5.571) 
+2020-09-20 17:27:56,017  INFO [main] (BaiduVoiceApi.java:107) - voiceSynthesis start token=24.f4b0da25ae8e4925fc157a757d3035ff.2592000.1598949848.282335-19618961,voiceSynthesisDTO={"aue":"mp3","ctp":"1","cuid":"d1ff8ec1-6bd1-4df4-b373-564549eb27be","lan":"Zh","per":"103","savePath":"D:\\luna","tex":"罗杰傻逼"} 
+2020-09-20 17:27:56,798  INFO [main] (BaiduVoiceApi.java:126) - voiceSynthesis success path=D:\luna\d1ff8ec1-6bd1-4df4-b373-564549eb27be.mp3 
+2020-09-20 17:27:56,828  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-09-20 17:27:56,832  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-09-20 17:31:38,497  WARN [main] (DuplicateJsonObjectContextCustomizerFactory.java:78) - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/D:/maven/repository/org/json/json/20160810/json-20160810.jar!/org/json/JSONObject.class
+	jar:file:/D:/maven/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-09-20 17:31:38,512  INFO [main] (StartupInfoLogger.java:55) - Starting VoiceTest on luna with PID 20444 (started by improve in D:\myproject\luna-commons-loc\luna-commons-baidu) 
+2020-09-20 17:31:38,512  INFO [main] (SpringApplication.java:655) - The following profiles are active: dev 
+2020-09-20 17:31:40,462  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-09-20 17:31:41,284  INFO [main] (ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler' 
+2020-09-20 17:31:41,340  INFO [main] (StartupInfoLogger.java:61) - Started VoiceTest in 4.662 seconds (JVM running for 5.796) 
+2020-09-20 17:31:41,546  INFO [main] (GetBaiduKey.java:41) - 执行定时任务获取百度Key 
+2020-09-20 17:31:42,298  INFO [main] (GetBaiduKey.java:68) - get token success！ 
+2020-09-20 17:31:42,312  INFO [main] (BaiduVoiceApi.java:107) - voiceSynthesis start token=24.5e9128fd8e38f83745c1f75e3909e828.2592000.1603186294.282335-19618961,voiceSynthesisDTO={"aue":"mp3","ctp":"1","cuid":"5d00e156-f9d1-4da9-9f18-59d20671ac80","lan":"Zh","per":"103","savePath":"D:\\luna","tex":"罗杰傻逼"} 
+2020-09-20 17:31:42,715  INFO [main] (BaiduVoiceApi.java:126) - voiceSynthesis success path=D:\luna\5d00e156-f9d1-4da9-9f18-59d20671ac80.mp3 
+2020-09-20 17:31:42,733  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'taskScheduler' 
+2020-09-20 17:31:42,737  INFO [SpringContextShutdownHook] (ExecutorConfigurationSupport.java:208) - Shutting down ExecutorService 'applicationTaskExecutor' 

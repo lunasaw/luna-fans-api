@@ -3,7 +3,7 @@ package com.luna.base;
 /**
  * 操作人类别
  * 
- * @author luna
+ * @author ruoyi
  */
 public enum OperatorType {
     /**

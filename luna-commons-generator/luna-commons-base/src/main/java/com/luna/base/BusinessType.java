@@ -3,7 +3,7 @@ package com.luna.base;
 /**
  * 业务操作类型
  * 
- * @author luna
+ * @author ruoyi
  */
 public enum BusinessType {
     /**

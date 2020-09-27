@@ -2,8 +2,8 @@ package com.luna.base.constant;
 
 /**
  * 代码生成通用常量
- * 
- * @author luna
+ *
+ * @author ruoyi
  */
 public class GenConstants {
     /** 单表（增删改查） */
@@ -11,6 +11,9 @@ public class GenConstants {
 
     /** 树表（增删改查） */
     public static final String   TPL_TREE             = "tree";
+
+    /** 主子表（增删改查） */
+    public static final String   TPL_SUB              = "sub";
 
     /** 树编码字段 */
     public static final String   TREE_CODE            = "treeCode";
@@ -21,8 +24,14 @@ public class GenConstants {
     /** 树名称字段 */
     public static final String   TREE_NAME            = "treeName";
 
+    /** 上级菜单ID字段 */
+    public static final String   PARENT_MENU_ID       = "parentMenuId";
+
+    /** 上级菜单名称字段 */
+    public static final String   PARENT_MENU_NAME     = "parentMenuName";
+
     /** 数据库字符串类型 */
-    public static final String[] COLUMNTYPE_STR       = {"char", "varchar", "narchar", "varchar2", "tinytext", "text",
+    public static final String[] COLUMNTYPE_STR       = {"char", "varchar", "nvarchar", "varchar2", "tinytext", "text",
         "mediumtext", "longtext"};
 
     /** 数据库时间类型 */
@@ -66,6 +75,12 @@ public class GenConstants {
 
     /** 日期控件 */
     public static final String   HTML_DATETIME        = "datetime";
+
+    /** 上传控件 */
+    public static final String   HTML_UPLOAD          = "upload";
+
+    /** 富文本控件 */
+    public static final String   HTML_SUMMERNOTE      = "summernote";
 
     /** 字符串类型 */
     public static final String   TYPE_STRING          = "String";

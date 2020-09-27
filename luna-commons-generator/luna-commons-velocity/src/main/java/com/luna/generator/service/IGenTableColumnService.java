@@ -1,13 +1,13 @@
 package com.luna.generator.service;
 
-import java.util.List;
-
 import com.luna.generator.domain.GenTableColumn;
+
+import java.util.List;
 
 /**
  * 业务字段 服务层
  * 
- * @author luna
+ * @author ruoyi
  */
 public interface IGenTableColumnService {
     /**

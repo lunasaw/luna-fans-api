@@ -7,9 +7,9 @@
  */
 !function ($, window, document, undefined) {
 
-    var startEvent = 'touchstart mousedown',
-        moveEvent = 'touchmove mousemove',
-        endEvent = 'touchend mouseup';
+var startEvent = 'touchstart mousedown',
+    moveEvent = 'touchmove mousemove',
+    endEvent = 'touchend mouseup';
 
     $(document).ready(function () {
         function parseStyle(css) {

@@ -188,7 +188,7 @@
             var newLeft = right ? 'auto' : pos.left;
             // it seems like setting the css is a bad idea (just let Bootstrap do it), but I'll keep the old
             // logic in place except for the dropup/right-align cases.
-            element.css({top: newTop, left: newLeft}).show();
+            element.css({ top: newTop, left: newLeft }).show();
 
             if (this.options.fitToElement === true) {
                 element.css('width', this.$element.outerWidth() + 'px');
@@ -205,7 +205,7 @@
         },
 
         lookup: function (query) {
-            if (typeof (query) != 'undefined' && query !== null) {
+            if (typeof(query) != 'undefined' && query !== null) {
                 this.query = query;
             } else {
                 this.query = this.$element.val();
@@ -356,30 +356,30 @@
             });
 
             items = $(data).map(function (i, item) {
-                if ((item.__type || false) == 'category') {
-                    return $(that.options.headerHtml || that.theme.headerHtml).text(item.name)[0];
-                }
+                    if ((item.__type || false) == 'category'){
+                        return $(that.options.headerHtml || that.theme.headerHtml).text(item.name)[0];
+                    }
 
-                if ((item.__type || false) == 'divider') {
-                    return $(that.options.headerDivider || that.theme.headerDivider)[0];
-                }
+                    if ((item.__type || false) == 'divider'){
+                        return $(that.options.headerDivider || that.theme.headerDivider)[0];
+                    }
 
-                var text = self.displayText(item);
-                i = $(that.options.item || that.theme.item).data('value', item);
-                i.find(that.options.itemContentSelector || that.theme.itemContentSelector)
-                    .addBack(that.options.itemContentSelector || that.theme.itemContentSelector)
-                    .html(that.highlighter(text, item));
-                if (that.options.followLinkOnSelect) {
-                    i.find('a').attr('href', self.itemLink(item));
-                }
-                i.find('a').attr('title', self.itemTitle(item));
-                if (text == self.$element.val()) {
-                    i.addClass('active');
-                    self.$element.data('active', item);
-                    activeFound = true;
-                }
-                return i[0];
-            });
+                    var text = self.displayText(item);
+                    i = $(that.options.item || that.theme.item).data('value', item);
+                    i.find(that.options.itemContentSelector || that.theme.itemContentSelector)
+                        .addBack(that.options.itemContentSelector || that.theme.itemContentSelector)
+                        .html(that.highlighter(text, item));
+                    if(that.options.followLinkOnSelect) {
+                        i.find('a').attr('href', self.itemLink(item));
+                    }
+                    i.find('a').attr('title', self.itemTitle(item));
+                    if (text == self.$element.val()) {
+                        i.addClass('active');
+                        self.$element.data('active', item);
+                        activeFound = true;
+                    }
+                    return i[0];
+                });
 
             if (this.autoSelect && !activeFound) {
                 items.filter(':not(.dropdown-header)').first().addClass('active');
@@ -455,18 +455,18 @@
 
             var itemTagName = $(this.options.item || this.theme.item).prop('tagName');
             if ('ontouchstart' in document.documentElement && 'onmousemove' in document.documentElement) {
-                this.$menu
-                    .on('touchstart', itemTagName, $.proxy(this.touchstart, this))
-                    .on('touchend', itemTagName, $.proxy(this.click, this))
-                    .on('click', $.proxy(this.click, this))
-                    .on('mouseenter', itemTagName, $.proxy(this.mouseenter, this))
-                    .on('mouseleave', itemTagName, $.proxy(this.mouseleave, this))
-                    .on('mousedown', $.proxy(this.mousedown, this));
-            } else if ('ontouchstart' in document.documentElement) {
-                this.$menu
-                    .on('touchstart', itemTagName, $.proxy(this.touchstart, this))
-                    .on('touchend', itemTagName, $.proxy(this.click, this));
-            } else {
+		        this.$menu
+		            .on('touchstart', itemTagName, $.proxy(this.touchstart, this))
+		            .on('touchend', itemTagName, $.proxy(this.click, this))
+		            .on('click', $.proxy(this.click, this))
+		            .on('mouseenter', itemTagName, $.proxy(this.mouseenter, this))
+		            .on('mouseleave', itemTagName, $.proxy(this.mouseleave, this))
+		            .on('mousedown', $.proxy(this.mousedown,this));
+	        } else if ('ontouchstart' in document.documentElement) {
+		        this.$menu
+		            .on('touchstart', itemTagName, $.proxy(this.touchstart, this))
+		            .on('touchend', itemTagName, $.proxy(this.click, this));
+	        } else {
                 this.$menu
                     .on('click', $.proxy(this.click, this))
                     .on('mouseenter', itemTagName, $.proxy(this.mouseenter, this))
@@ -732,22 +732,22 @@
         showCategoryHeader: true,
         theme: "bootstrap3",
         themes: {
-            bootstrap3: {
-                menu: '<ul class="typeahead dropdown-menu" role="listbox"></ul>',
-                item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
-                itemContentSelector: "a",
-                headerHtml: '<li class="dropdown-header"></li>',
-                headerDivider: '<li class="divider" role="separator"></li>'
-            },
-            bootstrap4: {
-                menu: '<div class="typeahead dropdown-menu" role="listbox"></div>',
-                item: '<button class="dropdown-item" role="option"></button>',
-                itemContentSelector: '.dropdown-item',
-                headerHtml: '<h6 class="dropdown-header"></h6>',
-                headerDivider: '<div class="dropdown-divider"></div>'
-            }
+        bootstrap3: {
+            menu: '<ul class="typeahead dropdown-menu" role="listbox"></ul>',
+            item: '<li><a class="dropdown-item" href="#" role="option"></a></li>',
+            itemContentSelector: "a",
+            headerHtml: '<li class="dropdown-header"></li>',
+            headerDivider: '<li class="divider" role="separator"></li>'
+        },
+        bootstrap4: {
+            menu: '<div class="typeahead dropdown-menu" role="listbox"></div>',
+            item: '<button class="dropdown-item" role="option"></button>',
+            itemContentSelector: '.dropdown-item',
+            headerHtml: '<h6 class="dropdown-header"></h6>',
+            headerDivider: '<div class="dropdown-divider"></div>'
         }
-    };
+    }
+};
 
     $.fn.typeahead.Constructor = Typeahead;
 

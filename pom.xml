@@ -15,6 +15,7 @@
         <module>luna-commons-media</module>
         <module>luna-commons-db</module>
         <module>luna-commons-generator</module>
+        <module>luna-commons-security</module>
     </modules>
 
     <parent>
