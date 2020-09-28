@@ -52,17 +52,6 @@ public class XiaoMaApi {
         HttpResponse httpResponse = HttpUtils.doPost(XiaoMaConstant.HOST, "/v1/link/create",
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
-        System.out.println(s);
         return JSON.parseObject(JSON.parseObject(s).getString("data"), CreateResultDTO.class);
-    }
-
-    /**
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        // shortLink(XiaoMaConstant.KEY);
-        CreateResultDTO link = createLink(XiaoMaConstant.KEY, "http://luna_nov.gitee.io/blog/", "", "");
-        System.out.println(JSON.toJSONString(link));
     }
 }

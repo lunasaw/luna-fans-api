@@ -14,7 +14,8 @@
 
     <modules>
         <module>luna-commons-shiro</module>
-        <module>luna-common-spring-securtiy</module>
+        <module>luna-commons-spring-securtiy</module>
+        <module>luna-commons-jwt</module>
     </modules>
 
     <dependencies>
