@@ -27,4 +27,5 @@ public class DemoController {
     public ResultDTO<Void> postDemo() {
         return ResultDTO.success();
     }
+
 }

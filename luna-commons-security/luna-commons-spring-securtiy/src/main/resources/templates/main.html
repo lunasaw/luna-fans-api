@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     登录成功！！！
-    <a href="/logout">退出</a>
+    <a href="/security/logout" th:href="@{/logout}">退出</a>
     <a href="/security/toMain1" th:href="@{/toMain1}">跳转</a>
 </body>
 </html>

@@ -35,6 +35,7 @@ public class UserService implements UserDetailsService {
         String password = passwordEncoder.encode("admin123");
 
         return new User(username, password,
-            AuthorityUtils.commaSeparatedStringToAuthorityList("demo,ROLE_user,ROLE_admin"));
+            AuthorityUtils
+                .commaSeparatedStringToAuthorityList("demo,ROLE_user,ROLE_admin,/insert,/update,/delete,/select"));
     }
 }

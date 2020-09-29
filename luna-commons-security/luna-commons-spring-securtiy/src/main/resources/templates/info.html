@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,10 +24,10 @@
     <button sec:authorize="hasAuthority('/select')">查看</button>
     <br/>
     通过角色判断：
-    <button sec:authorize="hasRole('abc')">新增</button>
-    <button sec:authorize="hasRole('abc')">删除</button>
-    <button sec:authorize="hasRole('abc')">修改</button>
-    <button sec:authorize="hasRole('abc')">查看</button>
+    <button sec:authorize="hasRole('admin')">新增</button>
+    <button sec:authorize="hasRole('admin')">删除</button>
+    <button sec:authorize="hasRole('admin')">修改</button>
+    <button sec:authorize="hasRole('admin')">查看</button>
 
 
 </body>

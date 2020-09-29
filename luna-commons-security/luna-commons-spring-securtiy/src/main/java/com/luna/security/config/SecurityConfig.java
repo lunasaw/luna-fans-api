@@ -2,6 +2,8 @@ package com.luna.security.config;
 
 import com.luna.security.hander.MyAccessDenieHander;
 import com.luna.security.hander.MyAuthenticationFailureHandler;
+import com.luna.security.hander.MyAuthenticationSuccessHandler;
+import com.luna.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @Package: com.luna.security.config
@@ -21,7 +27,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MyAccessDenieHander accessDenieHander;
+    private MyAccessDenieHander       accessDenieHander;
+
+    @Autowired
+    private DataSource                dataSource;
+
+    @Autowired
+    private UserService               userService;
+
+    @Autowired
+    private PersistentTokenRepository persistentTokenRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,9 +47,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // 表单提交的地址
             .loginProcessingUrl("/login")
             // 成功后跳转请求 必须为post请求
-            .successForwardUrl("/toMain")
+            // .successForwardUrl("/toMain")
             // 自定义登录成功处理器
-            // .successHandler(new MyAuthenticationSuccessHandler("redirectToMain"))
+            .successHandler(new MyAuthenticationSuccessHandler("redirectToMain"))
             // 失败后跳转请求
             // .failureForwardUrl("/toError");
             // 自定义登录失败处理器
@@ -74,6 +89,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 异常处理
         http.exceptionHandling().accessDeniedHandler(accessDenieHander);
 
+        // 记住我设置数据源
+        http.rememberMe()
+            .tokenRepository(persistentTokenRepository)
+            // .rememberMeParameter()
+            // 过期时间
+            .tokenValiditySeconds(60)
+            // 自定义登录逻辑
+            .userDetailsService(userService);
+
+        http.logout()
+            // 自定义退出请求地址
+            // .logoutUrl("/user/logout")
+            // 退出成功的跳转页面
+            .logoutSuccessUrl("/index");
+
         http.csrf().disable();
     }
 
@@ -82,4 +112,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        // 自动建表
+        // jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
+    }
 }

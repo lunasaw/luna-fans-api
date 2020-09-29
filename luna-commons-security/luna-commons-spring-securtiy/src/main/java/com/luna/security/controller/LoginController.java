@@ -40,7 +40,7 @@ public class LoginController {
     @GetMapping("redirectToError")
     public String redirectToError() {
         System.out.println("自定义失败处理器重定向到toError");
-        return "toError";
+        return "toerror";
     }
 
     @GetMapping("index")
@@ -52,7 +52,7 @@ public class LoginController {
     @PostMapping("toError")
     public String toError() {
         System.out.println("转发到error");
-        return "toError";
+        return "toerror";
     }
 
     /**
@@ -65,6 +65,16 @@ public class LoginController {
     public String main1() {
         System.out.println("转发到main1");
         return "main1";
+    }
+
+    /**
+     * 返回security 解析的信息
+     * 
+     * @return
+     */
+    @GetMapping("info")
+    public String getInfo() {
+        return "info";
     }
 
 }

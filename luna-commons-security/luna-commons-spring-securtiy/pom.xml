@@ -12,6 +12,12 @@
     <artifactId>luna-commons-spring-securtiy</artifactId>
 
     <dependencies>
+        <!--thymeleaf springsecurity5 依赖-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
