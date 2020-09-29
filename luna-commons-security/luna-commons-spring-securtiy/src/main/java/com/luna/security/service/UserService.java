@@ -26,13 +26,15 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (!"admin".equals(username)) {
+        System.out.println(username);
+        if ("admin".equals(username) == false) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, ResultCode.MSG_ERROR_SYSTEM_EXCEPTION);
         }
 
         // 比较密码 注册时已经加密过
         String password = passwordEncoder.encode("admin123");
 
-        return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
+        return new User(username, password,
+            AuthorityUtils.commaSeparatedStringToAuthorityList("demo,ROLE_user,ROLE_admin"));
     }
 }

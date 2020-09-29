@@ -43,7 +43,7 @@ public class ResultDTO<T> {
     }
 
     public static ResultDTO<Void> failure() {
-        return new ResultDTO<>(true, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
+        return new ResultDTO<>(false, ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID);
     }
 
     public static ResultDTO<Void> success() {
