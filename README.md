@@ -121,6 +121,11 @@ luna-commons-loc
 │  │  ├── /config/
 │  │  └── /api/
 │  └──── /resource/
+├── luna-commons-security
+│  ├── pom.xml
+│  │  ├── /config/
+│  │  └── /api/
+│  └──── /resource/
 ├── luna-commons-tencent
 │  ├── pom.xml
 │  │  ├── /config/
@@ -135,13 +140,14 @@ luna-commons-loc
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [luna-commons-ali](./luna-commons-ali) | 关于阿里oss和alpay支付宝的使用                               |
 | [luna-commons-common](./luna-commons-common) | 基础工具包,加密字符等操作,http网络操作                            |
-| [luna-commons-db](./luna-commons-db) | 数据操作包，通用Mapper与PageHelper分页 ,[redis](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-redis), [elasticsearch](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-elasticsearch-rest-high-level-client) 操作                           |
+| [luna-commons-db](./luna-commons-db) | 数据操作包，通用Mapper与PageHelper分页 ,[redis](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-redis), [elasticsearch](https://github.com/czy1024/luna-commons/tree/master/luna-commons-db/luna-commons-elasticsearch) 操作                           |
 | [luna-commons-api](./luna-commons-api) | api集合模块,现阶段为学小易查题目接口,[sm.ms 图床api](https://github.com/czy1024/luna-commons/wiki/sm.ms-api-todo)                           |
 | [luna-commons-baidu](./luna-commons-baidu)     | 百度Api集合,包含人脸识别,人证审核百度地图等api封装 |
 | [luna-commons-file](./luna-commons-file) | 文件处理工具集合,包括ftp,httpd,fastdfs等文件操作 |
 | [luna-commons-media](./luna-commons-media) | 媒体流处理工具,包含ffmpeg工具封装,JavaCv图像处理 |
 | [luna-commons-message](./luna-commons-message)       |  消息发送,短信邮件消息发送,有html模板附赠 [HTML邮件模板](https://github.com/czy1024/luna-commons/blob/master/luna-commons-message/src/main/resources/static/luna-message.html)
 | [luna-commons-generator](./luna-commons-generator) | 代码生成模板，包含swaggerApi生成，dao，service，controller,界面操作 |
+| [luna-commons-security](./luna-commons-security) | 权限加密模块封装 |
 | [luna-commons-tencent](./luna-commons-tencent) | 腾讯Api集合,包含人脸识别,人证审核腾讯地图等api封装 |
 
 
