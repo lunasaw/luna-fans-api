@@ -9,11 +9,16 @@ package com.luna.jwt.constant;
  */
 public interface JwtConstants {
 
-    // 有效期为
-    Long JWT_TTL = 3600000L;
-    // 60 * 60 *1000 一个小时
+    /** Jwt 有效期 60 * 60 *1000 一个小时 */
+    Long   JWT_TTL     = 3600000L;
 
-    // Jwt令牌信息
-    String JWT_KEY = "luna";
+    /** Jwt 密钥 */
+    String JWT_KEY     = "luna";
+
+    /** 发送者 */
+    String JWT_ADMIN   = "luna";
+
+    /** 主题 */
+    String JWT_SUBJECT = "subject";
 
 }

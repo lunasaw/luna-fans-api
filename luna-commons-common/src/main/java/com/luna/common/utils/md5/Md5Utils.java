@@ -2,6 +2,8 @@ package com.luna.common.utils.md5;
 
 import com.google.common.hash.HashCode;
 import com.google.common.hash.Hashing;
+import com.luna.common.dto.constant.ResultCode;
+import com.luna.common.exception.FileException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,6 @@ public class Md5Utils {
     /** 首先初始化一个字符数组，用来存放每个16进制字符 */
     private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
         'e', 'f'};
-
 
     /**
      * 获得一个字符串的MD5值
@@ -80,28 +81,15 @@ public class Md5Utils {
      * @param file
      * @return
      */
-    public static String md5(File file) {
-        try {
-            if (!file.isFile()) {
-                System.err.println("文件" + file.getAbsolutePath() + "不存在或者不是文件");
-                return null;
-            }
-
-            FileInputStream in = new FileInputStream(file);
-
-            String result = md5(in);
-
-            in.close();
-
-            return result;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static String md5(File file) throws IOException {
+        if (!file.isFile()) {
+            log.info("文件" + file.getAbsolutePath() + "不存在或者不是文件");
+            throw new FileException(ResultCode.PARAMETER_INVALID, "文件" + file.getAbsolutePath() + "不存在或者不是文件");
         }
-
-        return null;
+        FileInputStream in = new FileInputStream(file);
+        String result = md5(in);
+        in.close();
+        return result;
     }
 
     /**
