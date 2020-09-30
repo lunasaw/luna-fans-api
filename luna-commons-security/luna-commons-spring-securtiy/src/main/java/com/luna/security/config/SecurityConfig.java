@@ -100,11 +100,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout()
             // 自定义退出请求地址
-            // .logoutUrl("/user/logout")
-            // 退出成功的跳转页面
+            // .logoutUrl("/logout")
+            // 退出成功的跳转请求
             .logoutSuccessUrl("/index");
 
-        http.csrf().disable();
+        // http.csrf().disable();
     }
 
     @Bean

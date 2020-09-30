@@ -47,7 +47,7 @@ public class JavaMail {
             JSON.toJSONString(javaMailConfigValue));
         Properties props = new Properties();
         props.put("mail.smtp.host", javaMailConfigValue.getHost());
-        props.put("mail.smtp.auth", javaMailConfigValue.getAuth());
+        props.put("mail.smtp.oauth", javaMailConfigValue.getAuth());
         props.put("mail.transport.protocol", javaMailConfigValue.getProtocol());
         props.put("mail.smtp.port", javaMailConfigValue.getPort());
         props.put("mail.debug", javaMailConfigValue.getMailDebug());

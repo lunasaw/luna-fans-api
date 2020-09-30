@@ -6,7 +6,11 @@
 </head>
 <body>
     登录成功！！！
-    <a href="/security/logout" th:href="@{/logout}">退出</a>
+    <form action="/security/logout" method="post">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" th:if="${_csrf}">
+        <button type="submit">form post退出</button>
+    </form>
+    <a href="/security/logout" th:href="@{/logout}">链接get退出</a>
     <a href="/security/toMain1" th:href="@{/toMain1}">跳转</a>
 </body>
 </html>

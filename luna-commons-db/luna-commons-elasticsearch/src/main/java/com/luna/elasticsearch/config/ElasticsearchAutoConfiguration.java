@@ -72,7 +72,7 @@ public class ElasticsearchAutoConfiguration {
         });
 
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        // Callback used the basic credential auth
+        // Callback used the basic credential oauth
         ElasticsearchProperties.Account account = elasticsearchProperties.getAccount();
         if (!StringUtils.isEmpty(account.getUsername()) && !StringUtils.isEmpty(account.getUsername())) {
             credentialsProvider.setCredentials(AuthScope.ANY,
