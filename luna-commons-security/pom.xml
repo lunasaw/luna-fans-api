@@ -17,6 +17,7 @@
         <module>luna-commons-spring-securtiy</module>
         <module>luna-commons-jwt</module>
         <module>luna-commons-oauth2</module>
+        <module>luna-commons-client-one</module>
     </modules>
 
     <!--springcloud的版本控制-->

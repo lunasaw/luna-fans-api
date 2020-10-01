@@ -38,6 +38,6 @@ public class UserService implements UserDetailsService {
 
         return new User(username, password,
             AuthorityUtils
-                .commaSeparatedStringToAuthorityList("demo"));
+                .commaSeparatedStringToAuthorityList("admin"));
     }
 }
