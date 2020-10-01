@@ -22,8 +22,8 @@ public class RedisConfiguration {
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-    @Bean
-    public TokenStore tokenStore() {
+    @Bean("redisTokenStore")
+    public TokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 }

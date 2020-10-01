@@ -1,6 +1,7 @@
 package com.luna.jwt.util;
 
 import com.google.common.collect.Maps;
+import com.luna.common.utils.text.CharsetKit;
 import com.luna.common.utils.text.RandomStr;
 import com.luna.common.utils.text.StringUtils;
 import com.luna.jwt.constant.JwtConstants;
@@ -116,9 +117,11 @@ public class JjwtUtil {
      */
     public static SecretKey generalKey(String key) {
         if (key == null) {
-            key = JwtConstants.JWT_KEY;
+            return generalKey();
+        } else {
+            byte[] encodedKey = Base64.getEncoder().encode(key.getBytes(CharsetKit.CHARSET_UTF_8));
+            return new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
         }
-        return generalKey(key);
     }
 
     /**
@@ -127,7 +130,7 @@ public class JjwtUtil {
      * @return
      */
     public static SecretKey generalKey() {
-        byte[] encodedKey = Base64.getEncoder().encode(JwtConstants.JWT_KEY.getBytes());
+        byte[] encodedKey = Base64.getEncoder().encode(JwtConstants.JWT_KEY.getBytes(CharsetKit.CHARSET_UTF_8));
         return new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
     }
 
@@ -155,6 +158,21 @@ public class JjwtUtil {
     public static Claims parseJwt(String key, String jwt) {
         Claims body = Jwts.parser()
             .setSigningKey(generalKey(key))
+            .parseClaimsJws(jwt)
+            .getBody();
+        return body;
+    }
+
+    public static Claims parseBaseJwt(String jwt) {
+        return Jwts.parser()
+            .setSigningKey(JwtConstants.JWT_KEY.getBytes(CharsetKit.CHARSET_UTF_8))
+            .parseClaimsJws(jwt)
+            .getBody();
+    }
+
+    public static Claims parseBaseJwt(String key, String jwt) {
+        Claims body = Jwts.parser()
+            .setSigningKey(key.getBytes(CharsetKit.CHARSET_UTF_8))
             .parseClaimsJws(jwt)
             .getBody();
         return body;

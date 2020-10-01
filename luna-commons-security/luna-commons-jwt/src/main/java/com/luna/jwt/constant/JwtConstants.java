@@ -13,7 +13,7 @@ public interface JwtConstants {
     Long   JWT_TTL     = 3600000L;
 
     /** Jwt 密钥 */
-    String JWT_KEY     = "luna";
+    String JWT_KEY     = "luna_key";
 
     /** 发送者 */
     String JWT_ADMIN   = "luna";

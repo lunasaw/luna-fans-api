@@ -1,7 +1,9 @@
 package com.luna.oauth.config;
 
+import com.google.common.collect.Lists;
 import com.luna.oauth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +11,12 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import java.util.ArrayList;
 
 /**
  * @Package: com.luna.oauth.config
@@ -25,30 +32,52 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
-    private PasswordEncoder       passwordEncoder;
+    private PasswordEncoder         passwordEncoder;
 
     /**
      * 身份验证管理器
      */
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManager   authenticationManager;
 
     /**
      * 自定义登录处理
      */
     @Autowired
-    private UserService           userService;
+    private UserService             userService;
+
+    /**
+     * 存储在redis
+     */
+    @Autowired
+    @Qualifier("redisTokenStore")
+    private TokenStore              redisTokenStore;
 
     @Autowired
-    private TokenStore            tokenStore;
+    @Qualifier("jwtTokenStore")
+    private TokenStore              jwtTokenStore;
+
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    @Autowired
+    private JwtTokenEnhancer        jwtTokenEnhancer;
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        // 设置jwt增强内容
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        ArrayList<TokenEnhancer> delegates = Lists.newArrayList();
+        delegates.add(jwtTokenEnhancer);
+        delegates.add(jwtAccessTokenConverter);
+        tokenEnhancerChain.setTokenEnhancers(delegates);
         endpoints
-
             .authenticationManager(authenticationManager)
             .userDetailsService(userService)
-            .tokenStore(tokenStore);
+            // .tokenStore(tokenStore)
+            .tokenStore(jwtTokenStore)
+            .accessTokenConverter(jwtAccessTokenConverter)
+            .tokenEnhancer(tokenEnhancerChain);
     }
 
     @Override
@@ -57,8 +86,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .inMemory()
             // 客户端ID
             .withClient("client")
+            // 验证权限
+            .authorities("admin")
             // 密钥
             .secret(passwordEncoder.encode("luna"))
+            // 授权时间
+            .accessTokenValiditySeconds(60)
+            // 刷新令牌过期时间
+            .refreshTokenValiditySeconds(300)
             // 重定向地址
             .redirectUris("https://luna_nov.gitee.io/blog/")
             // 范围
@@ -68,7 +103,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
              * 支持多种类型
              * authorization_code 授权码模式
              * password 密码模式
+             * refresh_token 刷新令牌
              */
-            .authorizedGrantTypes("authorization_code", "password");
+            .authorizedGrantTypes("authorization_code", "password", "refresh_token");
     }
 }
