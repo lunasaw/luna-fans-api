@@ -28,3 +28,7 @@ luna:
       copyrightYear: 2020
       profile: luna
       addressEnabled: true
+
+    http:
+      username: luna
+      password: czy1024

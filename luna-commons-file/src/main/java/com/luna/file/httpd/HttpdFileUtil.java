@@ -2,8 +2,10 @@ package com.luna.file.httpd;
 
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.FileException;
+import com.luna.file.img.ImageUtils;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,12 +91,11 @@ public class HttpdFileUtil {
      * @return
      * @throws Exception
      */
-    public static void uploadFile(byte[] file, String filePath) {
+    public static void uploadFile(Client client, byte[] file, String filePath) {
         File targetFile = new File(filePath);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
         }
-        Client client = new Client();
         WebResource resource = client.resource(filePath);
         resource.put(String.class, file);
     }
@@ -109,5 +110,12 @@ public class HttpdFileUtil {
         Client client = new Client();
         WebResource resource = client.resource(filePath);
         resource.delete();
+    }
+
+    public static void main(String[] args) {
+        Client client = Client.create();
+        client.addFilter(new HTTPBasicAuthFilter("luna", "czy1024"));
+        uploadFile(client, ImageUtils.getBytes("C:\\Users\\improve\\Pictures\\Saved Pictures\\girl.png"),
+            "http://localhost:8087/luna/apache/a.png");
     }
 }
