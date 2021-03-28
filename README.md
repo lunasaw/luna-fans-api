@@ -39,8 +39,14 @@ fans-spring-boot-starter-fans
 
 ## 日志
 
- 增加Smms图床
- 
+增加Smms图床
+
+增加百度Api开放平台
+
+增加腾讯Api开放平台
+
+增加阿里Api开放平台
+
 ## 目录
 
 - [安装步骤](#安装步骤)
@@ -48,7 +54,6 @@ fans-spring-boot-starter-fans
 - [部署](#部署)
 
 ###### **安装步骤**
-
 
 引入项目依赖
 
@@ -63,20 +68,14 @@ fans-spring-boot-starter-fans
 在配置文件application.properties加入可选配置
 
 ```text
-       # ApiAPI
-luna:
-  smms:
-    enable: true
-    authorizationCode: xxx
-    password: xxx
-    username: xxx
+       
 ```
 
 引用示例
 
 ```java
 
-若采用SpringBoot构建项目可通过将第三方包中的BaiduProperties,BaiduKeyGenerate通过Spring配置文件注入Spring管理
+若采用SpringBoot构建项目可通过将第三方包中的 通过Spring配置文件注入Spring管理
 
 
 
@@ -90,76 +89,10 @@ luna:
 eg:
 
 ```
-│── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── luna
-│   │   │           └── fans
-│   │   │               ├── api
-│   │   │               │   ├── BaiduAddress.java
-│   │   │               │   ├── BaiduApiConstant.java
-│   │   │               │   ├── BaiduBodyApi.java
-│   │   │               │   ├── BaiduCreationApi.java
-│   │   │               │   ├── BaiduFaceApi.java
-│   │   │               │   ├── BaiduGoodsIdentifyApi.java
-│   │   │               │   ├── BaiduOcrApi.java
-│   │   │               │   ├── BaiduTextApi.java
-│   │   │               │   ├── BaiduVoiceApi.java
-│   │   │               │   └── VoiceSDK.java
-│   │   │               ├── config
-│   │   │               │   ├── BaiduAutoConfiguration.java
-│   │   │               │   ├── BaiduKeyGenerate.java
-│   │   │               │   └── BaiduProperties.java
-│   │   │               └── dto
-│   │   │                   ├── body
-│   │   │                   │   ├── BodyAttributesDTO.java
-│   │   │                   │   ├── BodyCheckDTO.java
-│   │   │                   │   └── BodyScoreNameDTO.java
-│   │   │                   ├── face
-│   │   │                   │   ├── FaceCheckResultDTO.java
-│   │   │                   │   ├── FaceLiveResultDTO.java
-│   │   │                   │   ├── FaceMatchResultDTO.java
-│   │   │                   │   ├── IdCardAllinfoDTO.java
-│   │   │                   │   ├── IdCardCheckResultDTO.java
-│   │   │                   │   └── IdCardInfoDTO.java
-│   │   │                   ├── goods
-│   │   │                   │   ├── BaiKeInfoDTO.java
-│   │   │                   │   └── GoodsInfoDTO.java
-│   │   │                   ├── location
-│   │   │                   │   └── LocationDO.java
-│   │   │                   ├── text
-│   │   │                   │   ├── TextSimilarDTO.java
-│   │   │                   │   ├── TextSimilarResultDTO.java
-│   │   │                   │   ├── TextSimilarityDTO.java
-│   │   │                   │   └── TextSimnetResultDTO.java
-│   │   │                   ├── voice
-│   │   │                   │   ├── VoiceCheckDTO.java
-│   │   │                   │   └── VoiceSynthesisDTO.java
-│   │   │                   ├── word
-│   │   │                   │   ├── BodyDTO.java
-│   │   │                   │   ├── FaceDTO.java
-│   │   │                   │   └── WordDTO.java
-│   │   │                   └── write
-│   │   │                       ├── CompositionDTO.java
-│   │   │                       ├── EventContextDTO.java
-│   │   │                       ├── EventKeyDTO.java
-│   │   │                       ├── HotEventContentDTO.java
-│   │   │                       ├── HotEventDTO.java
-│   │   │                       ├── VeinDTO.java
-│   │   │                       └── WriterResultCheckDTO.java
-│   │   └── resources
-│   │       ├── META-INF
-│   │       │   └── spring.factories
-│   │       ├── application-pro.yml
-│   │       ├── application.properties
-│   │       └── log
-│   │           └── logback.xml
-│   └── test
-│       └── java
-
 
 ```
+
+
 
 ### 部署
 

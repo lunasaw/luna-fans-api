@@ -1,0 +1,24 @@
+luna:
+  ten:
+    enable: true
+    # 腾讯地图api
+    mapKey: xxx
+    # 腾讯api
+    secretId: xxx
+    secretKey: xxx
+    # 腾讯市场api
+    skyEyeSecretid: xxx
+    skyEyeSecretkey: xxx
+
+  #微信支付信息配置
+  weixin:
+    appid: xxx
+    partner: xxx
+    partnerkey: xxx
+    notifyurl: xxx
+
+mq:
+  pay:
+    exchange: exchange.order
+    queue: queue.order
+    routing: queue.order

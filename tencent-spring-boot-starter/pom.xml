@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>fans-spring-boot-starter</artifactId>
+        <groupId>com.github.czy1024</groupId>
+        <version>1.0.0-RELEASE</version>
+    </parent>
+    <artifactId>tencent-spring-boot-starter</artifactId>
+    <version>1.0.5-RELEASE</version>
+    <name>tencent-spring-boot-starter</name>
+    <description>Tencent API Toolkit</description>
+    <url>https://czy1024.github.io/fans-spring-boot-starter/tencent-spring-boot-starter</url>
+
+    <scm>
+        <url>https://github.com/czy1024/fans-spring-boot-starter/tencent-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/czy1024/fans-spring-boot-starter/tencent-spring-boot-starter.git
+        </connection>
+        <developerConnection>scm:git:https://github.com/czy1024/fans-spring-boot-starter/tencent-spring-boot-starter
+        </developerConnection>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--   腾讯Api-->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.46</version>
+        </dependency>
+
+        <!--微信支付-->
+        <dependency>
+            <groupId>com.github.wxpay</groupId>
+            <artifactId>wxpay-sdk</artifactId>
+            <version>0.0.3</version>
+        </dependency>
+
+    </dependencies>
+</project>
