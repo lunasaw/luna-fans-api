@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>fans-spring-boot-starter</artifactId>
+        <groupId>com.github.czy1024</groupId>
+        <version>1.0.0-RELEASE</version>
+    </parent>
+    <artifactId>ali-spring-boot-starter</artifactId>
+    <version>1.0.1-RELEASE</version>
+    <name>baidu-spring-boot-starter</name>
+    <description>Ali API Toolkit Contain Oss And AliPay...</description>
+    <url>https://czy1024.github.io/fans-spring-boot-starter/ali-spring-boot-starter</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--      阿里云OSS服务器-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- alipay -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.10.90.ALL</version>
+        </dependency>
+    </dependencies>
+
+    <scm>
+        <url>https://github.com/czy1024/fans-spring-boot-starter/ali-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/czy1024/fans-spring-boot-starter/ali-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:https://github.com/czy1024/fans-spring-boot-starter/ali-spring-boot-starter
+        </developerConnection>
+    </scm>
+</project>

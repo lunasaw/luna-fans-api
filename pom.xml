@@ -15,6 +15,7 @@
         <module>api-spring-boot-starter</module>
         <module>baidu-spring-boot-starter</module>
         <module>tencent-spring-boot-starter</module>
+        <module>ali-spring-boot-starter</module>
     </modules>
 
     <properties>
