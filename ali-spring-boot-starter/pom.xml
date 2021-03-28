@@ -7,11 +7,11 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>com.github.czy1024</groupId>
-        <version>1.0.0-RELEASE</version>
+        <version>1.0.1-RELEASE</version>
     </parent>
     <artifactId>ali-spring-boot-starter</artifactId>
-    <version>1.0.1-RELEASE</version>
-    <name>baidu-spring-boot-starter</name>
+    <version>1.0.2-RELEASE</version>
+    <name>ali-spring-boot-starter</name>
     <description>Ali API Toolkit Contain Oss And AliPay...</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter/ali-spring-boot-starter</url>
 
