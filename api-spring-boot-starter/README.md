@@ -1,6 +1,6 @@
-# fans-spring-boot-starter
+# api-spring-boot-starter
 
-fans-spring-boot-starter-fans
+api-spring-boot-starter
 
 <!-- PROJECT SHIELDS -->
 
@@ -39,12 +39,6 @@ fans-spring-boot-starter-fans
 
 增加Smms图床
 
-增加百度Api开放平台
-
-增加腾讯Api开放平台
-
-增加阿里Api开放平台
-
 ## 目录
 
 - [安装步骤](#安装步骤)
@@ -59,27 +53,73 @@ fans-spring-boot-starter-fans
 
 <dependency>
     <groupId>com.github.czy1024</groupId>
-    <artifactId>fans-spring-boot-starter-fans</artifactId>
+    <artifactId>api-spring-boot-starter-fans</artifactId>
     <version>1.0.1-RELEASE</version>
 </dependency>
 ```
 
 在配置文件application.properties加入可选配置
 
-| items          | items-src                        | items Guide                                        |
-| -------------- | -------------------------------- | -------------------------------------------------- |
-| ali            | [ali](./ali-spring-boot-starter) | ali-spring-boot-starter                                  |
-| api            | [api](./api-spring-boot-starter) | api-spring-boot-starter                      |
-| badiu          | [baidu](./baidu-spring-boot-starter) |baidu-spring-boot-starter                           |
-| tencent        | [tencent](./tencent-spring-boot-starter) | tencent-spring-boot-starter
+```text
+       
+```
 
 引用示例
 
 ```java
+
 若采用SpringBoot构建项目可通过将第三方包中的 通过Spring配置文件注入Spring管理
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class AliApiTest {
+    @Autowired
+    private SmMsConfigValue smMsConfigValue;
+
+    @Test
+    public void atest() throws Exception {
+        List<UploadResultDTO> allHistory = ImageApiFromString.getAllHistory(smMsConfigValue.getAuthorizationCode());
+        System.out.println(JSON.toJSONString(allHistory));
+    }
+}
+
+
 ```
 
 [结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
+
+### 文件目录说明
+
+eg:
+
+```
+./
+├── java
+│   └── com
+│       └── luna
+│           └── api
+│               ├── config
+│               │   └── ApiAutoConfiguration.java
+│               └── smms
+│                   ├── api
+│                   │   ├── ImageApiFromString.java
+│                   │   ├── UserApiFromFile.java
+│                   │   └── UserApiFromString.java
+│                   ├── config
+│                   │   └── SmMsConfigValue.java
+│                   ├── constant
+│                   │   └── SmMsConstant.java
+│                   └── dto
+│                       ├── UploadResultDTO.java
+│                       └── UserProfileDTO.java
+└── resources
+    ├── META-INF
+    │   └── spring.factories
+    ├── conf.json
+    └── log
+        └── logback.xml
+
+```
 
 ### 部署
 
