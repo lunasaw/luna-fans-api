@@ -23,10 +23,20 @@ public class BaiduProperties {
 
     private String          projectId;
 
+    private String          mapKey;
+
     /** 语音识别 */
     private AipSpeech       aipSpeech;
     /** 人体识别 */
     private AipBodyAnalysis client;
+
+    public String getMapKey() {
+        return mapKey;
+    }
+
+    public void setMapKey(String mapKey) {
+        this.mapKey = mapKey;
+    }
 
     public String getBaiduKey() {
         return baiduKey;
