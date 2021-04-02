@@ -73,11 +73,4 @@ public class BaiduAddressApi {
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         return JSON.parseObject(JSON.parseObject(s).getString("result"), WeatherResultDTO.class);
     }
-
-    public static void main(String[] args) {
-        WeatherResultDTO weatherResultDTO =
-            district2Weather("p9wm2RpLOCgGsYuOFNT9zFAFX5LB2uxj", "500100", "", "all", "wgs84");
-        System.out.println(JSON.toJSONString(weatherResultDTO));
-    }
-
 }
