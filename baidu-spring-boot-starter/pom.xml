@@ -7,11 +7,11 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>com.github.czy1024</groupId>
-        <version>1.0.1-RELEASE</version>
+        <version>1.0.2-RELEASE</version>
     </parent>
     <artifactId>baidu-spring-boot-starter</artifactId>
     <name>baidu-spring-boot-starter</name>
-    <version>1.0.9-RELEASE</version>
+    <version>1.0.10-RELEASE</version>
     <description>Baidu API Toolkit</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter/baidu-spring-boot-starter</url>
 

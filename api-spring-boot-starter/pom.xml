@@ -5,10 +5,10 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>com.github.czy1024</groupId>
-        <version>1.0.1-RELEASE</version>
+        <version>1.0.2-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.2-RELEASE</version>
     <artifactId>api-spring-boot-starter</artifactId>
     <name>api-spring-boot-starter</name>
     <description>fans API Toolkit</description>
