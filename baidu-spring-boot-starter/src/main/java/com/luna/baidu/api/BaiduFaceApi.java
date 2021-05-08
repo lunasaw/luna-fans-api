@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-import com.luna.common.file.FileUtils;
-import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +15,10 @@ import com.luna.baidu.dto.face.FaceCheckResultDTO;
 import com.luna.baidu.dto.face.FaceLiveResultDTO;
 import com.luna.baidu.dto.face.FaceMatchResultDTO;
 import com.luna.baidu.dto.face.IdCardCheckResultDTO;
+import com.luna.common.file.FileUtils;
+import com.luna.common.net.HttpUtils;
+import com.luna.common.net.HttpUtilsConstant;
+import com.luna.common.text.Base64Util;
 
 /**
  * @author Luna@win10
@@ -46,6 +46,62 @@ public class BaiduFaceApi {
             JSON.parseObject(JSON.parseObject(s).getString("result"), FaceCheckResultDTO.class);
         log.info("faceDetect success faceCheckResultDTO={}", faceCheckResultDTO);
         return faceCheckResultDTO;
+    }
+
+    /**
+     *
+     * @param key
+     * 图片类型
+     * BASE64:图片的base64值，base64编码后的图片数据，编码后的图片大小不超过2M；
+     * URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；
+     * FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个。
+     * @param live1
+     * 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断。 两张图片通过json格式上传，格式参考表格下方示例
+     * @param imageType1
+     * 人脸的类型
+     * LIVE：表示生活照：通常为手机、相机拍摄的人像图片、或从网络获取的人像图片等，
+     * IDCARD：表示身份证芯片照：二代身份证内置芯片中的人像照片，
+     * WATERMARK：表示带水印证件照：一般为带水印的小图，如公安网小图
+     * CERT：表示证件照片：如拍摄的身份证、工卡、护照、学生证等证件图片
+     * INFRARED 表示红外照片：使用红外相机拍摄的照片
+     * 默认LIVE
+     * @param live2
+     * @param imageType2
+     * @return
+     */
+    public static FaceMatchResultDTO faceMathch(String key, String live1, String imageType1, String live2,
+        String imageType2) {
+        log.info("faceMathch start");
+        HashMap<String, String> liveParam = new HashMap<>();
+        liveParam.put("image", live1);
+        if (Base64Util.isBase64(live1)) {
+            liveParam.put("image_type", "BASE64");
+        } else if (HttpUtils.isNetUrl(live1)) {
+            liveParam.put("image_type", "URL");
+        } else {
+            liveParam.put("image_type", "FACE_TOKEN");
+        }
+        liveParam.put("face_type", imageType1);
+
+        HashMap<String, String> cardParam = new HashMap<>();
+        if (Base64Util.isBase64(live2)) {
+            cardParam.put("image_type", "BASE64");
+        } else if (HttpUtils.isNetUrl(live2)) {
+            cardParam.put("image_type", "URL");
+        } else {
+            cardParam.put("image_type", "FACE_TOKEN");
+        }
+        cardParam.put("image", live2);
+        cardParam.put("face_type", imageType2);
+
+        String str = "[" + JSON.toJSONString(liveParam) + "," + JSON.toJSONString(cardParam) + "]";
+        HttpResponse httpResponse =
+            HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.MATCH + "?access_token=" + key,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, str);
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        FaceMatchResultDTO result = JSON.parseObject(JSON.parseObject(s).getString("result"), FaceMatchResultDTO.class);
+        log.info("faceMathch success result={}", JSON.toJSONString(result));
+        return result;
     }
 
     /**
@@ -88,6 +144,10 @@ public class BaiduFaceApi {
         FaceMatchResultDTO result = JSON.parseObject(JSON.parseObject(s).getString("result"), FaceMatchResultDTO.class);
         log.info("faceMathch success result={}", JSON.toJSONString(result));
         return result;
+    }
+
+    public static void faceSearch() {
+
     }
 
     /**
