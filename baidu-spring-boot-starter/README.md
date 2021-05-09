@@ -36,6 +36,7 @@ baidu-spring-boot-starter-baidu
 </p>
 
 ## 日志
+增加人脸库相关操作，人脸搜索，比对等
 
 增加百度人脸识别,卡证审核等Api请求封装
 
@@ -57,13 +58,12 @@ baidu-spring-boot-starter-baidu
 
 ```xml
 
-    <dependency>
-        <groupId>com.github.czy1024</groupId>
-        <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-        <version>1.0.4-RELEASE</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.czy1024</groupId>
+    <artifactId>baidu-spring-boot-starter-baidu</artifactId>
+    <version>2.0.9-RELEASE</version>
+</dependency>
 ```
-
 在配置文件application.properties加入可选配置
 
 ```text
@@ -105,11 +105,10 @@ public class BaiduApiTest {
 [结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
 
 ### 文件目录说明
-
 eg:
 
 ```
-│── src
+├── src
 │   ├── main
 │   │   ├── java
 │   │   │   └── com
@@ -124,6 +123,7 @@ eg:
 │   │   │               │   ├── BaiduGoodsIdentifyApi.java
 │   │   │               │   ├── BaiduOcrApi.java
 │   │   │               │   ├── BaiduTextApi.java
+│   │   │               │   ├── BaiduUserFaceApi.java
 │   │   │               │   ├── BaiduVoiceApi.java
 │   │   │               │   └── VoiceSDK.java
 │   │   │               ├── config
@@ -141,7 +141,11 @@ eg:
 │   │   │                   │   ├── FaceMatchResultDTO.java
 │   │   │                   │   ├── IdCardAllinfoDTO.java
 │   │   │                   │   ├── IdCardCheckResultDTO.java
-│   │   │                   │   └── IdCardInfoDTO.java
+│   │   │                   │   ├── IdCardInfoDTO.java
+│   │   │                   │   ├── UserFaceListResultDTO.java
+│   │   │                   │   ├── UserFaceResultDTO.java
+│   │   │                   │   ├── UserInfoListDTO.java
+│   │   │                   │   └── UserInfoResultDTO.java
 │   │   │                   ├── goods
 │   │   │                   │   ├── BaiKeInfoDTO.java
 │   │   │                   │   └── GoodsInfoDTO.java
@@ -171,11 +175,8 @@ eg:
 │   │       ├── META-INF
 │   │       │   └── spring.factories
 │   │       ├── application-pro.yml
-│   │       ├── application.properties
 │   │       └── log
 │   │           └── logback.xml
-│   └── test
-│       └── java
 
 
 ```
@@ -186,31 +187,18 @@ eg:
 
 
 <!-- links -->
-
 [your-project-path]:czy1024/baidu-spring-boot-starter
-
 [contributors-shield]: https://img.shields.io/github/contributors/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-
 [contributors-url]: https://github.com/czy1024/baidu-spring-boot-starter/graphs/contributors
-
 [forks-shield]: https://img.shields.io/github/forks/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-
 [forks-url]: https://github.com/czy1024/baidu-spring-boot-starter/network/members
-
 [stars-shield]: https://img.shields.io/github/stars/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-
 [stars-url]: https://github.com/czy1024/baidu-spring-boot-starter/stargazers
-
 [issues-shield]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-
 [issues-url]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg
-
 [license-shield]: https://img.shields.io/github/license/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-
 [license-url]: https://github.com/czy1024/baidu-spring-boot-starter/blob/master/LICENSE.txt
-
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-
 [linkedin-url]: https://linkedin.com/in/baidu-spring-boot-starter
 
 
