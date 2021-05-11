@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.luna.common.file.FileUtils;
+import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.text.Base64Util;
 import org.apache.commons.collections4.CollectionUtils;
@@ -48,7 +48,7 @@ public class TencentGroupPersonApi {
         } else if (Base64Util.isBase64(image)) {
             map.put("Image", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         if (maxFaceNum != null) {
             map.put("MaxFaceNum", maxFaceNum);
@@ -204,7 +204,7 @@ public class TencentGroupPersonApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         map.put("GroupId", groupId);
         map.put("Gender", gender);
@@ -330,7 +330,7 @@ public class TencentGroupPersonApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         map.put("GroupIds", groupIds);
         String body = JSONArray.toJSONString(map);
@@ -366,7 +366,7 @@ public class TencentGroupPersonApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         map.put("PersonId", personId);
         String body = JSONArray.toJSONString(map);
@@ -400,7 +400,7 @@ public class TencentGroupPersonApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         map.put("PersonId", personId);
         String body = JSONArray.toJSONString(map);

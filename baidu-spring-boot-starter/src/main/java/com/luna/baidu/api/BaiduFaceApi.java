@@ -6,8 +6,8 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.luna.baidu.dto.face.*;
-import com.luna.baidu.req.FaceLiveReq;
-import com.luna.common.file.FileUtils;
+import com.luna.baidu.req.face.FaceLiveReq;
+import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
@@ -85,7 +85,7 @@ public class BaiduFaceApi {
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key), json);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         FaceMatchResultDTO result = JSON.parseObject(JSON.parseObject(s).getString("result"), FaceMatchResultDTO.class);
-        log.info("faceMathch success result={}", JSON.toJSONString(result));
+        log.info("faceMatch success result={}", JSON.toJSONString(result));
         return result;
     }
 
@@ -178,9 +178,9 @@ public class BaiduFaceApi {
      * 4: 身份证证号和性别信息不一致
      * @throws UnsupportedEncodingException
      */
-    public static IdCardCheckResultDTO checIdCard(String key, String image, String idCardSide)
+    public static IdCardCheckResultDTO checkIdCard(String key, String image, String idCardSide)
         throws UnsupportedEncodingException {
-        log.info("checIdCard start");
+        log.info("checkIdCard start");
         HashMap<String, Object> param = Maps.newHashMap();
         param.put("id_card_side", idCardSide);
         param.put("detect_risk", true);
@@ -190,7 +190,7 @@ public class BaiduFaceApi {
         } else if (HttpUtils.isNetUrl(image)) {
             param.put("url", image);
         } else {
-            image = Base64Util.encodeBase64(FileUtils.readFileToBytes(image));
+            image = Base64Util.encodeBase64(FileTools.read(image));
             param.put("image", image);
         }
         HttpResponse httpResponse =
@@ -200,21 +200,21 @@ public class BaiduFaceApi {
                 HttpUtils.urlencode(param));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         IdCardCheckResultDTO idCardCheckResultDTO = JSON.parseObject(s, IdCardCheckResultDTO.class);
-        log.info("checIdCard success idCardCheckResultDTO={}", JSON.toJSONString(idCardCheckResultDTO));
+        log.info("checkIdCard success idCardCheckResultDTO={}", JSON.toJSONString(idCardCheckResultDTO));
         return idCardCheckResultDTO;
     }
 
-    public static IdCardCheckResultDTO checIdCardFront(String key, String image) {
+    public static IdCardCheckResultDTO checkIdCardFront(String key, String image) {
         try {
-            return checIdCard(key, image, "front");
+            return checkIdCard(key, image, "front");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static IdCardCheckResultDTO checIdCardBack(String key, String image) {
+    public static IdCardCheckResultDTO checkIdCardBack(String key, String image) {
         try {
-            return checIdCard(key, image, "back");
+            return checkIdCard(key, image, "back");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }

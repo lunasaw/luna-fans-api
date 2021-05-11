@@ -36,6 +36,9 @@ baidu-spring-boot-starter-baidu
 </p>
 
 ## 日志
+
+增加语音识别和成相关接口
+
 增加人脸库相关操作，人脸搜索，比对等
 
 增加百度人脸识别,卡证审核等Api请求封装
@@ -61,7 +64,7 @@ baidu-spring-boot-starter-baidu
 <dependency>
     <groupId>com.github.czy1024</groupId>
     <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-    <version>1.0.10-RELEASE</version>
+    <version>1.0.12-RELEASE</version>
 </dependency>
 ```
 在配置文件application.properties加入可选配置

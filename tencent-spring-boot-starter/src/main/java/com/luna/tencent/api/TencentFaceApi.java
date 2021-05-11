@@ -2,7 +2,7 @@ package com.luna.tencent.api;
 
 import java.util.Map;
 
-import com.luna.common.file.FileUtils;
+import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.text.Base64Util;
 import org.apache.http.HttpResponse;
@@ -44,14 +44,14 @@ public class TencentFaceApi {
         } else if (HttpUtils.isNetUrl(imageA)) {
             map.put("UrlA", imageA);
         } else {
-            map.put("ImageA", Base64Util.encodeBase64(FileUtils.readFileToBytes(imageA)));
+            map.put("ImageA", Base64Util.encodeBase64(FileTools.read(imageA)));
         }
         if (Base64Util.isBase64(imageB)) {
             map.put("ImageB", imageB);
         } else if (HttpUtils.isNetUrl(imageB)) {
             map.put("UrlB", imageB);
         } else {
-            map.put("ImageB", Base64Util.encodeBase64(FileUtils.readFileToBytes(imageB)));
+            map.put("ImageB", Base64Util.encodeBase64(FileTools.read(imageB)));
         }
         String body = JSONArray.toJSONString(map);
         Map postHeader =
@@ -83,7 +83,7 @@ public class TencentFaceApi {
         } else if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
         } else {
-            map.put("Image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
         }
         String body = JSON.toJSONString(map);
         Map postHeader =

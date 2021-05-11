@@ -1,4 +1,4 @@
-package com.luna.baidu.req;
+package com.luna.baidu.req.face;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

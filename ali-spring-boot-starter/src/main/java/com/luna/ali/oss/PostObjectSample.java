@@ -13,7 +13,7 @@ import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.internal.OSSUtils;
 import com.aliyun.oss.model.Callback;
 import com.luna.ali.config.AliConfigValue;
-import com.luna.common.encrypt.Md5Utils;
+import com.luna.common.encrypt.HashUtils;
 import com.luna.common.text.Base64Util;
 
 public class PostObjectSample {
@@ -75,7 +75,7 @@ public class PostObjectSample {
             conn.setRequestProperty("User-Agent",
                 "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
             // 设置MD5值。MD5值由整个body计算得出。
-            conn.setRequestProperty("Content-MD5", Md5Utils.md5(new File(localFile)));
+            conn.setRequestProperty("Content-MD5", HashUtils.md5WithFile(localFile));
             conn.setRequestProperty("Content-Type",
                 "multipart/form-data; boundary=" + boundary);
             OutputStream out = new DataOutputStream(conn.getOutputStream());

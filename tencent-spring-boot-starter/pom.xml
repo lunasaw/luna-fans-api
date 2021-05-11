@@ -9,7 +9,7 @@
         <version>1.0.2-RELEASE</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
-    <version>1.0.7-RELEASE</version>
+    <version>1.0.8-RELEASE</version>
     <name>tencent-spring-boot-starter</name>
     <description>Tencent API Toolkit</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter/tencent-spring-boot-starter</url>

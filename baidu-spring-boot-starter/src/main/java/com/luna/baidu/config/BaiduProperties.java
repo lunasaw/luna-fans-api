@@ -1,7 +1,5 @@
 package com.luna.baidu.config;
 
-import com.baidu.aip.bodyanalysis.AipBodyAnalysis;
-import com.baidu.aip.speech.AipSpeech;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -25,10 +23,6 @@ public class BaiduProperties {
 
     private String          mapKey;
 
-    /** 语音识别 */
-    private AipSpeech       aipSpeech;
-    /** 人体识别 */
-    private AipBodyAnalysis client;
 
     public String getMapKey() {
         return mapKey;
@@ -58,20 +52,6 @@ public class BaiduProperties {
         return appId;
     }
 
-    public AipSpeech getAipSpeech() {
-        if (aipSpeech == null) {
-            this.aipSpeech = new AipSpeech(this.appId, this.appKey, this.secretKey);
-        }
-        return aipSpeech;
-    }
-
-    public AipBodyAnalysis getClient() {
-        if (client == null) {
-            this.client = new AipBodyAnalysis(this.appId, this.appKey, this.secretKey);
-        }
-        return client;
-    }
-
     public void setAppKey(String appKey) {
         this.appKey = appKey;
     }
@@ -90,14 +70,6 @@ public class BaiduProperties {
 
     public void setAppId(String appId) {
         this.appId = appId;
-    }
-
-    public void setAipSpeech(AipSpeech aipSpeech) {
-        this.aipSpeech = aipSpeech;
-    }
-
-    public void setClient(AipBodyAnalysis client) {
-        this.client = client;
     }
 
 }

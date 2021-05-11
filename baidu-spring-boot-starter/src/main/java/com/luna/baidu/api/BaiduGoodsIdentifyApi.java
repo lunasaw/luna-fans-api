@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
-import com.luna.common.file.FileUtils;
+import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
@@ -41,7 +41,7 @@ public class BaiduGoodsIdentifyApi {
         if (Base64Util.isBase64(image)) {
             params.put("image", image);
         } else {
-            params.put("image", Base64Util.encodeBase64(FileUtils.readFileToBytes(image)));
+            params.put("image", Base64Util.encodeBase64(FileTools.read(image)));
         }
 
         if (baikeNum != null) {

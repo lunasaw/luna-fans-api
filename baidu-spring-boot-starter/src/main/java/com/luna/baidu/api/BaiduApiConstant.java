@@ -89,6 +89,12 @@ public class BaiduApiConstant {
     /** 语音合成 */
     public static final String VOICE_SYNTHESIS_PATH   = "/text2audio";
 
+    /** 音频文件转写 */
+    public static final String VOICE_TO_WRITE         = "/rpc/2.0/aasr/v1/create";
+
+    /** 音频文件转写结果查询 */
+    public static final String VOICE_TO_QUERY         = "/rpc/2.0/aasr/v1/query";
+
     /** 文本纠错 */
     public static final String LANGUAGE_PROCESSING    = "/rpc/2.0/nlp/v1/ecnet";
 

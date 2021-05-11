@@ -1,22 +1,24 @@
-package com.luna.baidu.dto.voice;
+package com.luna.baidu.req;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * @Package: com.luna.baidu.dto
- * @ClassName: VoiceCheckDTO
+ * @ClassName: VoiceCheckReq
  * @Author: luna
  * @CreateTime: 2020/8/10 20:16
  * @Description:
  */
-public class VoiceCheckDTO {
+public class VoiceCheckReq {
 
     /** 语音文件的格式，pcm/wav/amr/m4a。不区分大小写。推荐pcm文件 */
-    private String  format;
+    private String  format  = "pcm";
 
     /** 采样率，16000、8000，固定值 */
-    private Integer rate;
+    private Integer rate    = 16000;
 
     /** 声道数，仅支持单声道，请填写固定值 1 */
-    private Integer channel;
+    private Integer channel = 1;
 
     /** 用户唯一标识，用来区分用户，计算UV值。建议填写能区分用户的机器 MAC 地址或 IMEI 码，长度为60字符以内。 */
     private String  cuid;
@@ -30,16 +32,20 @@ public class VoiceCheckDTO {
      * 1936 普通话远场 远场模型 有标点 不支持
      *
      */
-    private Integer dev_pid;
+    @JSONField(name = "dev_pid")
+    private Integer devPid  = 1537;
 
     /** 自训练平台模型id，填dev_pid = 8001 或 8002生效 */
-    private Integer lm_id;
+    @JSONField(name = "lm_id")
+    private Integer lmId;
 
     /** 本地语音文件的的二进制语音数据 ，需要进行base64 编码。与len参数连一起使用。 */
     private String  speech;
 
     /** 本地语音文件的的字节数，单位字节 */
     private Integer len;
+
+    private String  token;
 
     public String getFormat() {
         return format;
@@ -73,20 +79,20 @@ public class VoiceCheckDTO {
         this.cuid = cuid;
     }
 
-    public Integer getDev_pid() {
-        return dev_pid;
+    public Integer getDevPid() {
+        return devPid;
     }
 
-    public void setDev_pid(Integer dev_pid) {
-        this.dev_pid = dev_pid;
+    public void setDevPid(Integer devPid) {
+        this.devPid = devPid;
     }
 
-    public Integer getLm_id() {
-        return lm_id;
+    public Integer getLmId() {
+        return lmId;
     }
 
-    public void setLm_id(Integer lm_id) {
-        this.lm_id = lm_id;
+    public void setLmId(Integer lmId) {
+        this.lmId = lmId;
     }
 
     public String getSpeech() {
@@ -104,4 +110,29 @@ public class VoiceCheckDTO {
     public void setLen(Integer len) {
         this.len = len;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public VoiceCheckReq(String token, String cuid, Integer lmId, String speech, Integer len) {
+        this.cuid = cuid;
+        this.lmId = lmId;
+        this.speech = speech;
+        this.len = len;
+        this.token = token;
+    }
+
+    public VoiceCheckReq(String cuid, Integer lmId, String speech, Integer len) {
+        this.cuid = cuid;
+        this.lmId = lmId;
+        this.speech = speech;
+        this.len = len;
+    }
+
+    public VoiceCheckReq() {}
 }

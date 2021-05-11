@@ -10,7 +10,7 @@
         <version>1.0.2-RELEASE</version>
     </parent>
     <artifactId>ali-spring-boot-starter</artifactId>
-    <version>1.0.3-RELEASE</version>
+    <version>1.0.4-RELEASE</version>
     <name>ali-spring-boot-starter</name>
     <description>Ali API Toolkit Contain Oss And AliPay...</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter/ali-spring-boot-starter</url>
