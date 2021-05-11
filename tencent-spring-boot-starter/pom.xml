@@ -6,7 +6,7 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>com.github.czy1024</groupId>
-        <version>1.0.2-RELEASE</version>
+        <version>1.0.3-RELEASE</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
     <version>1.0.8-RELEASE</version>

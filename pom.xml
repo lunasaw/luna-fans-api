@@ -7,7 +7,7 @@
     <groupId>com.github.czy1024</groupId>
     <artifactId>fans-spring-boot-starter</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-RELEASE</version>
+    <version>1.0.3-RELEASE</version>
     <name>fans-spring-boot-starter</name>
     <description>fans API Toolkit</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter</url>

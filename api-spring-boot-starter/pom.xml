@@ -5,7 +5,7 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>com.github.czy1024</groupId>
-        <version>1.0.2-RELEASE</version>
+        <version>1.0.3-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.2-RELEASE</version>
