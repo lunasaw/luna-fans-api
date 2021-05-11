@@ -61,7 +61,7 @@ baidu-spring-boot-starter-baidu
 <dependency>
     <groupId>com.github.czy1024</groupId>
     <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-    <version>2.0.9-RELEASE</version>
+    <version>1.0.10-RELEASE</version>
 </dependency>
 ```
 在配置文件application.properties加入可选配置

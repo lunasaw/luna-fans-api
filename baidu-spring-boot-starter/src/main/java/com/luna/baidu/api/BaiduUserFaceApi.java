@@ -175,15 +175,9 @@ public class BaiduUserFaceApi {
      */
     public static Boolean faceUserDelete(String key, String groupId, String userId, String faceToken) {
         log.info("faceUserDelete start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("face_token", faceToken);
-        map.put("group_id", groupId);
-        map.put("user_id", userId);
-
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("face_token", faceToken, "group_id", groupId, "user_id", userId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("faceUserDelete success error_code={}", errorCode);
@@ -199,18 +193,12 @@ public class BaiduUserFaceApi {
      */
     public static UserInfoListDTO getUserInfo(String key, String userId, String groupId) {
         log.info("getUserInfo start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("user_id", userId);
-        if (StringUtils.isNotEmpty(groupId)) {
-            map.put("group_id", groupId);
-        } else {
-            map.put("group_id", "@ALL");
+        if (StringUtils.isEmpty(groupId)) {
+            groupId = "@ALL";
         }
-
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_INFO,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("user_id", userId, "groupId", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userInfoListDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
@@ -227,14 +215,9 @@ public class BaiduUserFaceApi {
      */
     public static UserFaceListResultDTO userFaceList(String key, String userId, String groupId) {
         log.info("userFaceList start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("user_id", userId);
-        map.put("group_id", groupId);
-
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceListResultDTO userFaceListResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceListResultDTO.class);
@@ -251,14 +234,9 @@ public class BaiduUserFaceApi {
      */
     public static Boolean deleteUser(String key, String userId, String groupId) {
         log.info("deleteUser start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("user_id", userId);
-        map.put("group_id", groupId);
-
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         System.out.println(s);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
@@ -423,7 +401,7 @@ public class BaiduUserFaceApi {
         System.out.println(s);
         UserInfoListDTO userFaceResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("userFaceSearch success userFaceResultDTO={}", userFaceResultDTO);
+        log.info("userFaceSearch success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
         return userFaceResultDTO;
     }
 

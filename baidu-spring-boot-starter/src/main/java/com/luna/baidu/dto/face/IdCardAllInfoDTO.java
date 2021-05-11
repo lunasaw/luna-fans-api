@@ -1,15 +1,16 @@
 package com.luna.baidu.dto.face;
 
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * @Package: com.luna.baidu.dto.face
- * @ClassName: IdCardAllinfoDTO
+ * @ClassName: IdCardAllInfoDTO
  * @Author: luna
  * @CreateTime: 2020/8/14 13:15
  * @Description:
  */
-public class IdCardAllinfoDTO {
+public class IdCardAllInfoDTO {
 
     /**
      * 姓名

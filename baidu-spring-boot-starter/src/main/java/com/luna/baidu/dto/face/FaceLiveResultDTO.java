@@ -21,7 +21,7 @@ public class FaceLiveResultDTO {
     /**
      * 脸部信息
      */
-    private List<FaceDTO> faceList;
+    private List<FaceResultDTO> faceList;
 
     public Float getFaceLiveness() {
         return faceLiveness;
@@ -31,12 +31,11 @@ public class FaceLiveResultDTO {
         this.faceLiveness = faceLiveness;
     }
 
-    public List<FaceDTO> getFaceList() {
+    public List<FaceResultDTO> getFaceList() {
         return faceList;
     }
 
-    public void setFaceList(List<FaceDTO> faceList) {
+    public void setFaceList(List<FaceResultDTO> faceList) {
         this.faceList = faceList;
     }
-
 }
