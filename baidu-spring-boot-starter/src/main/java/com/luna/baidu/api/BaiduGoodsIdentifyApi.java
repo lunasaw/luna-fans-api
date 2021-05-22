@@ -50,7 +50,7 @@ public class BaiduGoodsIdentifyApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.GOODS_IDENTIFY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
             ImmutableMap.of("access_token", key),
-            HttpUtils.urlencode(params));
+            HttpUtils.urlEncode(params));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         List<GoodsInfoDTO> goodsInfoDTOS = JSON.parseArray(JSON.parseObject(s).getString("result"), GoodsInfoDTO.class);
         log.info("goodsIdentify success goodsInfoDTOS={}", goodsInfoDTOS);

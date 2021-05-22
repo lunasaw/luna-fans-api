@@ -7,7 +7,7 @@
     <groupId>com.github.czy1024</groupId>
     <artifactId>fans-spring-boot-starter</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.3-RELEASE</version>
+    <version>2.0.3-RELEASE</version>
     <name>fans-spring-boot-starter</name>
     <description>fans API Toolkit</description>
     <url>https://czy1024.github.io/fans-spring-boot-starter</url>
@@ -26,7 +26,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
-        <luna-common.veriosn>1.1.1</luna-common.veriosn>
+        <luna-common.veriosn>1.1.8</luna-common.veriosn>
+        <json-fastJson.veriosn>1.0.2-RELEASE</json-fastJson.veriosn>
     </properties>
 
     <developers>
@@ -55,6 +56,11 @@
                 <version>${luna-common.veriosn}</version>
             </dependency>
             <dependency>
+                <groupId>com.github.czy1024</groupId>
+                <artifactId>json-fastJson</artifactId>
+                <version>${json-fastJson.veriosn}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
@@ -77,6 +83,10 @@
         <dependency>
             <groupId>com.github.czy1024</groupId>
             <artifactId>luna-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.czy1024</groupId>
+            <artifactId>json-fastJson</artifactId>
         </dependency>
     </dependencies>
 

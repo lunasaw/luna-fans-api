@@ -4,8 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.luna.api.smms.config.SmMsConfigValue;
 import com.luna.api.smms.dto.UploadResultDTO;
 import com.luna.api.smms.dto.UserProfileDTO;
-import com.luna.common.parsejson.JsonFileUtil;
+import com.luna.common.file.FileTools;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -34,7 +38,7 @@ public class UserApiFromFile {
         SmMsConfigValue configValue = checkFile(file);
         String authToken = UserApiFromString.getAuthToken(configValue.getUsername(), configValue.getPassword());
         smMsConfigValue.setAuthorizationCode(authToken);
-        JsonFileUtil.writeSetting(file, JSON.toJSONString(smMsConfigValue));
+        FileTools.write(JSON.toJSONString(smMsConfigValue), file);
         return authToken;
     }
 
@@ -96,10 +100,15 @@ public class UserApiFromFile {
     }
 
     private static SmMsConfigValue checkFile(String file) {
-        if (getInstance().getAuthorizationCode() == null) {
-            smMsConfigValue = JsonFileUtil.readFileToObject(SmMsConfigValue.class, file);
+        try {
+            if (getInstance().getAuthorizationCode() == null) {
+                String s = FileUtils.readFileToString(new File(file), Charset.defaultCharset());
+                smMsConfigValue = JSON.parseObject(s, SmMsConfigValue.class);
+            }
+            return smMsConfigValue;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return smMsConfigValue;
     }
 
 }

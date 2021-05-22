@@ -6,7 +6,9 @@ import com.luna.common.date.DateUtil;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.BaseException;
 import com.luna.common.net.HttpUtils;
+import com.luna.common.net.base.HttpBaseUtils;
 import com.luna.tencent.config.TencentPayMqConfigValue;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
@@ -67,9 +69,7 @@ public class TencentPayNotifyController {
      */
     public static String getRequest(HttpServletRequest httpRequest) {
         try {
-            BufferedReader reader =
-                new BufferedReader(new InputStreamReader(httpRequest.getInputStream(), "UTF-8"));
-            return HttpUtils.readAll(reader);
+            return HttpBaseUtils.readWithString(httpRequest.getInputStream(), "UTF-8");
         } catch (IOException e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }

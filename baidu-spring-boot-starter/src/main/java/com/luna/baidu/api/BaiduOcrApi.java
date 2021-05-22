@@ -63,7 +63,7 @@ public class BaiduOcrApi {
         map.put("language_type", languageType);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key), HttpUtils.urlencode(map));
+            ImmutableMap.of("access_token", key), HttpUtils.urlEncode(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
     }

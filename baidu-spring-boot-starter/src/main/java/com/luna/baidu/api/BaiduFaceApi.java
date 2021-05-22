@@ -197,7 +197,7 @@ public class BaiduFaceApi {
             HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.ID_OCR,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
                 ImmutableMap.of("access_token", key),
-                HttpUtils.urlencode(param));
+                HttpUtils.urlEncode(param));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         IdCardCheckResultDTO idCardCheckResultDTO = JSON.parseObject(s, IdCardCheckResultDTO.class);
         log.info("checkIdCard success idCardCheckResultDTO={}", JSON.toJSONString(idCardCheckResultDTO));

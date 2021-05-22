@@ -12,7 +12,7 @@ import com.aliyun.oss.model.DownloadFileResult;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
 import com.luna.ali.config.AliConfigValue;
-import com.luna.common.net.HttpUtils;
+import com.luna.common.net.base.HttpBaseUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -42,7 +42,7 @@ public class AliOssDownloadApi {
 
         // 读取文件内容。
         BufferedReader reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent()));
-        String s = HttpUtils.readAll(reader);
+        String s = HttpBaseUtils.readWithReader(reader);
         // 数据读取完成后，获取的流必须关闭，否则会造成连接泄漏，导致请求无连接可用，程序无法正常工作。
         try {
             reader.close();

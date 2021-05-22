@@ -36,7 +36,7 @@ public class VoiceSynthesisReq {
     /** 1 */
     private String ctp = "1";
 
-    /** 合成文字 urlencode,utf-8 编码 */
+    /** 合成文字 urlEncode,utf-8 编码 */
     private String tex;
 
     private String tok;

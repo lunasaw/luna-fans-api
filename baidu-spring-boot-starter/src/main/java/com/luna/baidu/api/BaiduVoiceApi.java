@@ -123,7 +123,7 @@ public class BaiduVoiceApi {
         map.put("ctp", voiceSynthesisReq.getCtp());
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
-                ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlencode(map));
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlEncode(map));
         return HttpUtils.checkResponseStreamAndGetResult(httpResponse);
     }
 
@@ -148,7 +148,8 @@ public class BaiduVoiceApi {
     }
 
     /**
-     *
+     * 检查任务完成情况
+     * 
      * @param token
      * @param taskIds task_ids为空，返回空任务结果列表；单次查询任务数不超过200个
      */

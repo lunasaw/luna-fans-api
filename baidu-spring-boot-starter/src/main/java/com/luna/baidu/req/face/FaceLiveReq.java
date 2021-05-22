@@ -18,7 +18,7 @@ public class FaceLiveReq {
     private String image;
     /**
      * 图片类型
-     * BASE64:图片的base64值，base64编码后的图片数据，需urlencode，编码后的图片大小不超过2M；
+     * BASE64:图片的base64值，base64编码后的图片数据，需urlEncode，编码后的图片大小不超过2M；
      * URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；
      * FACE_TOKEN: 人脸图片的唯一标识，调用人脸检测接口时，会为每个人脸图片赋予一个唯一的FACE_TOKEN，同一张图片多次检测得到的FACE_TOKEN是同一个。
      */
