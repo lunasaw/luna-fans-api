@@ -8,7 +8,7 @@ import com.aliyun.oss.model.AppendObjectRequest;
 import com.aliyun.oss.model.AppendObjectResult;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.UploadFileRequest;
-import com.luna.ali.config.AliConfigValue;
+import com.luna.ali.config.AliOssConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -26,12 +26,12 @@ public class AliOssUploadGoOnApi {
      * @param bucketName
      * @param contents
      * @param objectName
-     * @param aliConfigValue
+     * @param aliOssConfigProperties
      */
     public static void uploadGoOn(String bucketName, List<String> contents, String objectName,
-        AliConfigValue aliConfigValue) {
+        AliOssConfigProperties aliOssConfigProperties) {
         // 创建OSSClient实例。
-        OSS ossClient = aliConfigValue.getOssClient(false);
+        OSS ossClient = aliOssConfigProperties.getOssClient(false);
 
         ObjectMetadata meta = new ObjectMetadata();
         // 指定上传的内容类型。
@@ -77,14 +77,14 @@ public class AliOssUploadGoOnApi {
      * @param localFile
      * @param checkpointFile
      * @param objectName
-     * @param aliConfigValue
+     * @param aliOssConfigProperties
      * @throws Throwable
      */
     public void uploadBreakPoint(String bucketName, String localFile, String checkpointFile, Integer taskNum,
         String objectName,
-        AliConfigValue aliConfigValue) throws Throwable {
+        AliOssConfigProperties aliOssConfigProperties) throws Throwable {
         // 创建OSSClient实例。
-        OSS ossClient = aliConfigValue.getOssClient(false);
+        OSS ossClient = aliOssConfigProperties.getOssClient(false);
 
         ObjectMetadata meta = new ObjectMetadata();
         // 指定上传的内容类型。
@@ -116,7 +116,7 @@ public class AliOssUploadGoOnApi {
         // 文件的元数据。
         uploadFileRequest.setObjectMetadata(meta);
         // 设置上传成功回调，参数为Callback类型。
-        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliConfigValue.getServerUrl()));
+        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliOssConfigProperties.getServerUrl()));
 
         // 断点续传上传。
         ossClient.uploadFile(uploadFileRequest);

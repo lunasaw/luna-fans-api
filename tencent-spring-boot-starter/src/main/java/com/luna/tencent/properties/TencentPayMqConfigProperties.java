@@ -1,4 +1,4 @@
-package com.luna.tencent.config;
+package com.luna.tencent.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "mq.pay")
-public class TencentPayMqConfigValue {
+public class TencentPayMqConfigProperties {
 
     private String exchange;
 

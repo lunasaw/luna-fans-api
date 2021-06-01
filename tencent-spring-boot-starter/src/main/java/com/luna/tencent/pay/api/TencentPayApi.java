@@ -18,7 +18,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.luna.common.dto.constant.ResultCode;
 
-import com.luna.tencent.config.TencentPayConfigValue;
+import com.luna.tencent.properties.TencentPayConfigProperties;
 import com.luna.tencent.pay.constant.TencentPayConstant;
 import com.luna.tencent.pay.dto.CloseOderResultDTO;
 import com.luna.tencent.pay.dto.QueryResultDTO;
@@ -43,25 +43,25 @@ public class TencentPayApi {
      * @return 支付二维码
      * @throws Exception
      */
-    public static String createNative(TencentPayConfigValue configValue, TencentPayEntity payEntity) {
+    public static String createNative(TencentPayConfigProperties configValue, TencentPayEntity payEntity) {
         log.info("createNative start configValue={},payEntity={}", JSON.toJSONString(configValue),
             JSON.toJSONString(payEntity));
         HashMap<String, String> paramMap = Maps.newHashMap();
 
         // 2.设置参数值(根据文档来写)
-        paramMap.put("appid", configValue.getAppid());
+        paramMap.put("appid", configValue.getAppId());
         paramMap.put("mch_id", configValue.getPartner());
         paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
         paramMap.put("body", payEntity.getBody());
         paramMap.put("out_trade_no", payEntity.getOutTradeNo());
         paramMap.put("total_fee", payEntity.getTotalFee());
         paramMap.put("spbill_create_ip", payEntity.getSpbillCreateIp());
-        paramMap.put("notify_url", configValue.getNotifyurl());
+        paramMap.put("notify_url", configValue.getNotifyUrl());
         paramMap.put("trade_type", payEntity.getTradeType());
 
         String codeUrl = null;
         try {
-            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
+            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerKey());
             HttpResponse httpResponse =
                 HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.CREATE_ORDER, ImmutableMap.of(), null,
                     body);
@@ -83,19 +83,19 @@ public class TencentPayApi {
      * @return
      * @throws Exception
      */
-    public static QueryResultDTO queryStatus(TencentPayConfigValue configValue, String outTradeNo) {
+    public static QueryResultDTO queryStatus(TencentPayConfigProperties configValue, String outTradeNo) {
         log.info("queryStatus start outTradeNo={}", outTradeNo);
         Map<String, String> paramMap = new HashMap<>();
 
         // 2.设置参数值(根据文档来写)
-        paramMap.put("appid", configValue.getAppid());
+        paramMap.put("appid", configValue.getAppId());
         paramMap.put("mch_id", configValue.getPartner());
         paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
         paramMap.put("out_trade_no", outTradeNo);
 
         QueryResultDTO queryResultDTO = null;
         try {
-            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
+            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerKey());
             HttpResponse httpResponse =
                 HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.QUERY_ORDER, ImmutableMap.of(), null,
                     body);
@@ -117,11 +117,11 @@ public class TencentPayApi {
      * @return
      * @throws Exception
      */
-    public static CloseOderResultDTO closeOrder(TencentPayConfigValue configValue, String outTradeNo) {
+    public static CloseOderResultDTO closeOrder(TencentPayConfigProperties configValue, String outTradeNo) {
         log.info("closeOrder start outTradeNo={}", outTradeNo);
         Map<String, String> paramMap = new HashMap<>();
         // 2.设置参数值(根据文档来写)
-        paramMap.put("appid", configValue.getAppid());
+        paramMap.put("appid", configValue.getAppId());
         paramMap.put("mch_id", configValue.getPartner());
         paramMap.put("nonce_str", RandomStrUtil.generateNonceStr());
         paramMap.put("out_trade_no", outTradeNo);
@@ -129,7 +129,7 @@ public class TencentPayApi {
 
         CloseOderResultDTO closeOderResultDTO = null;
         try {
-            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerkey());
+            String body = SignUtil.generateSignedXml(paramMap, configValue.getPartnerKey());
             HttpResponse httpResponse =
                 HttpUtils.doPost(TencentPayConstant.HOST, TencentPayConstant.CLOSE_ORDER, ImmutableMap.of(), null,
                     body);

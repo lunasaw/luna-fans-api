@@ -13,7 +13,7 @@ import com.aliyun.oss.OSSClientBuilder;
  */
 @Component
 @ConfigurationProperties(prefix = "luna.ali")
-public class AliConfigValue {
+public class AliOssConfigProperties {
 
     private String ossId;
 

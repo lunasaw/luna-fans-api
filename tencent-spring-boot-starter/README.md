@@ -88,22 +88,15 @@ luna:
     skyEyeSecretkey: xxx
 
   #微信支付信息配置
-  weixin:
-    appid: xxx
+  wechat:
+    # 应用ID
+    appId: xxx
+    # 公钥
     partner: xxx
-    partnerkey: xxx
-    notifyurl: xxx
-spring:
-  redis:
-    host: xxx
-    port: 6379
-    password: xxx
-  rabbitmq:
-    host: xxx
-    port: 5672
-    username: admin
-    password: xxx
-
+    # 私钥
+    partnerKey: xxx
+    # 异步通知URL
+    notifyUrl: xxx
 
 mq:
   pay:

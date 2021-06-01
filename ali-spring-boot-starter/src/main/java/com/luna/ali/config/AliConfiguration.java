@@ -12,15 +12,16 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "luna.ali", name = "enable", havingValue = "true")
-@EnableConfigurationProperties({AliConfigValue.class, AlipayConfigValue.class})
+@EnableConfigurationProperties({AliOssConfigProperties.class, AlipayConfigProperties.class})
 public class AliConfiguration {
 
-    private final AliConfigValue    aliConfigValue;
+    private final AliOssConfigProperties aliOssConfigProperties;
 
-    private final AlipayConfigValue alipayConfigValue;
+    private final AlipayConfigProperties alipayConfigProperties;
 
-    public AliConfiguration(AliConfigValue aliConfigValue, AlipayConfigValue alipayConfigValue) {
-        this.aliConfigValue = aliConfigValue;
-        this.alipayConfigValue = alipayConfigValue;
+    public AliConfiguration(AliOssConfigProperties aliOssConfigProperties,
+        AlipayConfigProperties alipayConfigProperties) {
+        this.aliOssConfigProperties = aliOssConfigProperties;
+        this.alipayConfigProperties = alipayConfigProperties;
     }
 }

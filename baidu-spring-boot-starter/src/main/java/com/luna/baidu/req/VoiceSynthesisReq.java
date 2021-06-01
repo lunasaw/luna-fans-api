@@ -41,6 +41,8 @@ public class VoiceSynthesisReq {
 
     private String tok;
 
+    public VoiceSynthesisReq() {}
+
     public VoiceSynthesisReq(String cuid, String tex, String tok) {
         this.cuid = cuid;
         this.tex = tex;

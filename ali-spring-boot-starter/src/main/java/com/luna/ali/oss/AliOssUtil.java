@@ -8,7 +8,7 @@ import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliConfigValue;
+import com.luna.ali.config.AliOssConfigProperties;
 import com.luna.common.text.RandomStrUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,7 +62,7 @@ public class AliOssUtil {
      * @param configVale
      */
     public static String ossUpload(String imagePath, String bucketName, String imgFolder,
-        AliConfigValue configVale) {
+        AliOssConfigProperties configVale) {
         // 创建PutObjectRequest对象。
         File file = new File(imagePath);
         String fileName = file.getName();
@@ -92,7 +92,7 @@ public class AliOssUtil {
      * @param configVale
      * @return
      */
-    public static OSS createOssWithCname(AliConfigValue configVale) {
+    public static OSS createOssWithCname(AliOssConfigProperties configVale) {
         return configVale.getOssClient(true);
     }
 

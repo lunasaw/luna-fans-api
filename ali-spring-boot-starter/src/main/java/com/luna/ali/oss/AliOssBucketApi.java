@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliConfigValue;
+import com.luna.ali.config.AliOssConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -26,11 +26,12 @@ public class AliOssBucketApi {
      * 只能包括小写字母、数字和短划线（-）。
      * 必须以小写字母或者数字开头和结尾。
      * 长度必须在3~63字节之间。
-     * @param aliConfigValue
+     * @param aliOssConfigProperties
      */
-    public void createBucket(String bucketName, String accress, String type, AliConfigValue aliConfigValue) {
+    public void createBucket(String bucketName, String accress, String type,
+        AliOssConfigProperties aliOssConfigProperties) {
         // 创建OSSClient实例。
-        OSS ossClient = aliConfigValue.getOssClient(false);
+        OSS ossClient = aliOssConfigProperties.getOssClient(false);
 
         // 创建CreateBucketRequest对象。
         CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
@@ -54,12 +55,13 @@ public class AliOssBucketApi {
     /**
      * 列举所有的存储空间
      * 
-     * @param aliConfigValue
+     * @param aliOssConfigProperties
      * @return
      */
-    public List<Bucket> listBuckets(String prefix, Integer maxKeys, String marker, AliConfigValue aliConfigValue) {
+    public List<Bucket> listBuckets(String prefix, Integer maxKeys, String marker,
+        AliOssConfigProperties aliOssConfigProperties) {
         // 创建OSSClient实例。
-        OSS ossClient = aliConfigValue.getOssClient(false);
+        OSS ossClient = aliOssConfigProperties.getOssClient(false);
 
         // 列举存储空间。
         ListBucketsRequest listBucketsRequest = new ListBucketsRequest();
@@ -90,7 +92,7 @@ public class AliOssBucketApi {
      * @param configValue
      * @return
      */
-    public boolean isBucket(String bucketName, AliConfigValue configValue) {
+    public boolean isBucket(String bucketName, AliOssConfigProperties configValue) {
 
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
@@ -109,7 +111,7 @@ public class AliOssBucketApi {
      * @param configValue
      * @return
      */
-    public String getBucketRegion(String bucketName, AliConfigValue configValue) {
+    public String getBucketRegion(String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
         String location = ossClient.getBucketLocation(bucketName);
@@ -126,7 +128,7 @@ public class AliOssBucketApi {
      * @param configValue
      * @return
      */
-    public BucketInfo getBucketInfo(String bucketName, AliConfigValue configValue) {
+    public BucketInfo getBucketInfo(String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
 
@@ -156,7 +158,7 @@ public class AliOssBucketApi {
      * 公共读 存储空间的拥有者和授权用户有该存储空间内的文件的读写权限，其他用户只有该存储空间内的文件的读权限。请谨慎使用该权限。 CannedAccessControlList.PublicRead
      * 公共读写 所有用户都有该存储空间内的文件的读写权限。请谨慎使用该权限。 CannedAccessControlList.PublicReadWrite
      */
-    public void setBucketAccess(String bucketName, String access, AliConfigValue configValue) {
+    public void setBucketAccess(String bucketName, String access, AliOssConfigProperties configValue) {
 
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
@@ -175,7 +177,7 @@ public class AliOssBucketApi {
      * @param configValue
      * @return
      */
-    public String getBucketAccess(String bucketName, AliConfigValue configValue) {
+    public String getBucketAccess(String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
         // 获取存储空间的访问权限。
@@ -192,7 +194,7 @@ public class AliOssBucketApi {
      * @param bucketName
      * @param configValue
      */
-    public void deleteBucket(String bucketName, AliConfigValue configValue) {
+    public void deleteBucket(String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
 
@@ -210,7 +212,7 @@ public class AliOssBucketApi {
      * @param bucketName
      * @param configValue
      */
-    public void setBucketTag(Map<String, String> tags, String bucketName, AliConfigValue configValue) {
+    public void setBucketTag(Map<String, String> tags, String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
 
@@ -235,7 +237,7 @@ public class AliOssBucketApi {
      * @param configValue
      * @return
      */
-    public Map<String, String> getBucketTags(String bucketName, AliConfigValue configValue) {
+    public Map<String, String> getBucketTags(String bucketName, AliOssConfigProperties configValue) {
         // 创建OSSClient实例。
         OSS ossClient = configValue.getOssClient(false);
 

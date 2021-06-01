@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.luna.tencent.config.TencentPayConfigValue;
+import com.luna.tencent.properties.TencentPayConfigProperties;
 import com.luna.tencent.pay.api.TencentPayApi;
 
 /**
@@ -20,7 +20,7 @@ import com.luna.tencent.pay.api.TencentPayApi;
 public class DelayMessageListener {
 
     @Autowired
-    private TencentPayConfigValue configValue;
+    private TencentPayConfigProperties configValue;
 
     /**
      * 延时队列监听

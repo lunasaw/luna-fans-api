@@ -12,7 +12,7 @@ import javax.activation.MimetypesFileTypeMap;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.internal.OSSUtils;
 import com.aliyun.oss.model.Callback;
-import com.luna.ali.config.AliConfigValue;
+import com.luna.ali.config.AliOssConfigProperties;
 import com.luna.common.encrypt.HashUtils;
 import com.luna.common.text.Base64Util;
 
@@ -23,13 +23,13 @@ public class PostObjectSample {
      * @param localFilePath 上传文件
      * @param bucketName
      * @param objectName 设置文件名称
-     * @param aliConfigValue
+     * @param aliOssConfigProperties
      * @throws Exception
      */
     private void postObjectByForm(String localFilePath, String bucketName, String objectName,
-        AliConfigValue aliConfigValue) throws Exception {
+        AliOssConfigProperties aliOssConfigProperties) throws Exception {
         // 在URL中添加存储空间名称，添加后URL如下：http://yourBucketName.oss-cn-hangzhou.aliyuncs.com。
-        String host = aliConfigValue.getHost().replace("http://", "http://" + bucketName + ".");
+        String host = aliOssConfigProperties.getHost().replace("http://", "http://" + bucketName + ".");
         // 设置表单Map。
         Map<String, String> formFields = new LinkedHashMap<String, String>();
         // 设置文件名称。
@@ -38,11 +38,11 @@ public class PostObjectSample {
         formFields.put("Content-Disposition", "attachment;filename="
             + localFilePath);
         // 设置回调参数。
-        Callback callback = AliOssUtil.getCallback(aliConfigValue.getServerUrl());
+        Callback callback = AliOssUtil.getCallback(aliOssConfigProperties.getServerUrl());
         // 在表单Map中设置回调参数。
         setCallBack(formFields, callback);
         // 设置OSSAccessKeyId。
-        formFields.put("OSSAccessKeyId", aliConfigValue.getOssId());
+        formFields.put("OSSAccessKeyId", aliOssConfigProperties.getOssId());
         String policy =
             "{\"expiration\": \"2120-01-01T12:00:00.000Z\",\"conditions\": [[\"content-length-range\", 0, 104857600]]}";
         String encodePolicy = Base64Util.encodeBase64(policy.getBytes());
@@ -50,7 +50,7 @@ public class PostObjectSample {
         formFields.put("policy", encodePolicy);
         // 生成签名。
         String signaturecom =
-            com.aliyun.oss.common.auth.ServiceSignature.create().computeSignature(aliConfigValue.getOssKey(),
+            com.aliyun.oss.common.auth.ServiceSignature.create().computeSignature(aliOssConfigProperties.getOssKey(),
                 encodePolicy);
         // 设置签名。
         formFields.put("Signature", signaturecom);

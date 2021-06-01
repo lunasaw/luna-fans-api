@@ -1,6 +1,5 @@
 luna:
   ten:
-    enable: true
     # 腾讯地图api
     mapKey: xxx
     # 腾讯api
@@ -11,11 +10,15 @@ luna:
     skyEyeSecretkey: xxx
 
   #微信支付信息配置
-  weixin:
-    appid: xxx
+  wechat:
+    # 应用ID
+    appId: xxx
+    # 公钥
     partner: xxx
-    partnerkey: xxx
-    notifyurl: xxx
+    # 私钥
+    partnerKey: xxx
+    # 异步通知URL
+    notifyUrl: xxx
 
 mq:
   pay:

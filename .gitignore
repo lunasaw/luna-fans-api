@@ -23,6 +23,6 @@
 /nbdist/
 /.nb-gradle/
 /build/
-
+*/target/
 # Project exclude paths
 /api-spring-boot-starter/target/

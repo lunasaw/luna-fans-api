@@ -103,6 +103,20 @@ public class BaiduVoiceApi {
 
     /**
      * 语音合成
+     *
+     * @param voiceSynthesisReq 合成配置
+     * @param savePath 保存目录
+     */
+    public static void voiceSynthesis(VoiceSynthesisReq voiceSynthesisReq, String savePath) {
+        try {
+            FileTools.write(voiceSynthesis(voiceSynthesisReq), savePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 语音合成
      * 
      * @param voiceSynthesisReq
      * @return

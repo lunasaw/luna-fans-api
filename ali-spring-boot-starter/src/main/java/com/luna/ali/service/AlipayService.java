@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.luna.ali.alipay.factory.PayCheckFactory;
 import com.luna.ali.api.AlipayApi;
-import com.luna.ali.config.AlipayConfigValue;
+import com.luna.ali.config.AlipayConfigProperties;
 import com.luna.ali.dto.*;
 import com.luna.common.dto.constant.ResultCode;
 
@@ -28,7 +28,7 @@ public class AlipayService {
     private static final Logger log = LoggerFactory.getLogger(AlipayService.class);
 
     @Autowired
-    private AlipayConfigValue   alipayConfigValue;
+    private AlipayConfigProperties alipayConfigProperties;
 
     /**
      * 支付接口 网页端自动跳转
@@ -40,7 +40,7 @@ public class AlipayService {
     public String createOrder(AlipayOrderDTO alipayOrderDTO) {
         log.info("createOrder start alipayOrderDTO={}", JSON.toJSONString(alipayOrderDTO));
         try {
-            return AlipayApi.pagePay(alipayConfigValue, alipayOrderDTO);
+            return AlipayApi.pagePay(alipayConfigProperties, alipayOrderDTO);
         } catch (AlipayApiException e) {
             throw new BaseException(ResultCode.ERROR_SYSTEM_EXCEPTION, e.getMessage());
         }
@@ -56,7 +56,7 @@ public class AlipayService {
     public QueryOrderResultDTO queryOrder(QueryOrderDTO queryOrderDTO) {
         log.info("queryOrder start queryOrderDTO={}", JSON.toJSONString(queryOrderDTO));
         try {
-            String response = JSON.parseObject(AlipayApi.payQuery(alipayConfigValue, queryOrderDTO))
+            String response = JSON.parseObject(AlipayApi.payQuery(alipayConfigProperties, queryOrderDTO))
                 .getString("alipay_trade_query_response");
             log.info("queryOrder success response={}", response);
             return JSON.parseObject(response, QueryOrderResultDTO.class);
@@ -88,7 +88,7 @@ public class AlipayService {
     public String closeOrder(CloseOrderDTO closeOrderDTO) {
         log.info("closeOrder start closeOrderDTO={}", JSON.toJSONString(closeOrderDTO));
         try {
-            String s = AlipayApi.payClose(alipayConfigValue, closeOrderDTO);
+            String s = AlipayApi.payClose(alipayConfigProperties, closeOrderDTO);
             log.info("closeOrder success s={}", JSON.toJSONString(s));
             return s;
         } catch (AlipayApiException e) {
@@ -105,7 +105,7 @@ public class AlipayService {
     public String refundAmount(RefundAmountDTO refundAmountDTO) {
         log.info("refundAmount start refundAmountDTO={}", JSON.toJSONString(refundAmountDTO));
         try {
-            String s = AlipayApi.payRefund(alipayConfigValue, refundAmountDTO);
+            String s = AlipayApi.payRefund(alipayConfigProperties, refundAmountDTO);
             log.info("closeOrder refundAmount s={}", JSON.toJSONString(s));
             return s;
         } catch (AlipayApiException e) {
@@ -122,7 +122,7 @@ public class AlipayService {
     public String refundQuery(RefundQueryDTO refundQueryDTO) {
         log.info("refundQuery start refundQueryDTO={}", JSON.toJSONString(refundQueryDTO));
         try {
-            String s = AlipayApi.payRefundQuery(alipayConfigValue, refundQueryDTO);
+            String s = AlipayApi.payRefundQuery(alipayConfigProperties, refundQueryDTO);
             log.info("refundQuery result s={}", JSON.toJSONString(s));
             return s;
         } catch (AlipayApiException e) {

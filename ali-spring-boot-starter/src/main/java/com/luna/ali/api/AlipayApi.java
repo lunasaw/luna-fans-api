@@ -9,7 +9,7 @@ import com.alipay.api.domain.AlipayTradeCloseModel;
 import com.alipay.api.domain.AlipayTradeQueryModel;
 import com.luna.ali.alipay.factory.PayCheckFactory;
 import com.luna.ali.alipay.factory.PayRootChainFactory;
-import com.luna.ali.config.AlipayConfigValue;
+import com.luna.ali.config.AlipayConfigProperties;
 import com.luna.ali.dto.*;
 
 /**
@@ -23,38 +23,38 @@ public class AlipayApi {
     /**
      * 网页支付
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param alipayOrderDTO
      * @return
      * @throws AlipayApiException
      */
-    public static String pagePay(AlipayConfigValue alipayConfigValue, AlipayOrderDTO alipayOrderDTO)
+    public static String pagePay(AlipayConfigProperties alipayConfigProperties, AlipayOrderDTO alipayOrderDTO)
         throws AlipayApiException {
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .pagePay(alipayOrderDTO.getSubject(), alipayOrderDTO.getOutTradeNo(), alipayOrderDTO.getTotalAmount())
             .builder()
-            .pay(alipayConfigValue.getReturnUrl(), alipayConfigValue.getNotifyUrl());
+            .pay(alipayConfigProperties.getReturnUrl(), alipayConfigProperties.getNotifyUrl());
     }
 
     /**
      * 交易查询
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param queryOrderDTO
      * @return
      * @throws AlipayApiException
      */
-    public static String payQuery(AlipayConfigValue alipayConfigValue, QueryOrderDTO queryOrderDTO)
+    public static String payQuery(AlipayConfigProperties alipayConfigProperties, QueryOrderDTO queryOrderDTO)
         throws AlipayApiException {
         AlipayTradeQueryModel queryModel = new AlipayTradeQueryModel();
         queryModel.setOutTradeNo(queryOrderDTO.getOutTradeNo());
         queryModel.setTradeNo(queryOrderDTO.getTradeNo());
         queryModel.setQueryOptions(queryOrderDTO.getQueryOptions());
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .queryPay(queryModel)
             .builder()
             .query();
@@ -63,20 +63,20 @@ public class AlipayApi {
     /**
      * 关闭交易
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param closeOrderDTO
      * @return
      * @throws AlipayApiException
      */
-    public static String payClose(AlipayConfigValue alipayConfigValue, CloseOrderDTO closeOrderDTO)
+    public static String payClose(AlipayConfigProperties alipayConfigProperties, CloseOrderDTO closeOrderDTO)
         throws AlipayApiException {
         AlipayTradeCloseModel closeModel = new AlipayTradeCloseModel();
         closeModel.setOutTradeNo(closeOrderDTO.getOutTradeNo());
         closeModel.setTradeNo(closeOrderDTO.getTradeNo());
         closeModel.setOperatorId(closeOrderDTO.getTradeNo());
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .closePay(closeModel)
             .builder()
             .close();
@@ -85,16 +85,16 @@ public class AlipayApi {
     /**
      * 交易退款
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param refundAmountDTO
      * @return
      * @throws AlipayApiException
      */
-    public static String payRefund(AlipayConfigValue alipayConfigValue, RefundAmountDTO refundAmountDTO)
+    public static String payRefund(AlipayConfigProperties alipayConfigProperties, RefundAmountDTO refundAmountDTO)
         throws AlipayApiException {
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .refundPay(refundAmountDTO.getOutTradeNo(), refundAmountDTO.getTradeNo(), refundAmountDTO.getRefundAmount(),
                 refundAmountDTO.getRefundReason(), refundAmountDTO.getOutRequestNo())
             .builder()
@@ -104,16 +104,16 @@ public class AlipayApi {
     /**
      * 退款查询
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param refundQueryDTO
      * @return
      * @throws AlipayApiException
      */
-    public static String payRefundQuery(AlipayConfigValue alipayConfigValue, RefundQueryDTO refundQueryDTO)
+    public static String payRefundQuery(AlipayConfigProperties alipayConfigProperties, RefundQueryDTO refundQueryDTO)
         throws AlipayApiException {
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .refundQueryPay(refundQueryDTO.getOutTradeNo(), refundQueryDTO.getTradeNo(),
                 refundQueryDTO.getOutRequestNo())
             .builder()
@@ -126,11 +126,11 @@ public class AlipayApi {
      * @return
      * @throws AlipayApiException
      */
-    public static String payDownloadQuery(AlipayConfigValue alipayConfigValue, QueryBillDTO queryBillDTO)
+    public static String payDownloadQuery(AlipayConfigProperties alipayConfigProperties, QueryBillDTO queryBillDTO)
         throws AlipayApiException {
         return PayRootChainFactory
-            .createdDevPayChain(alipayConfigValue.getAppId(), alipayConfigValue.getPrivateKey(),
-                alipayConfigValue.getPublicKey())
+            .createdDevPayChain(alipayConfigProperties.getAppId(), alipayConfigProperties.getPrivateKey(),
+                alipayConfigProperties.getPublicKey())
             .downloadQueryPay(queryBillDTO.getBillType(), queryBillDTO.getBillDate())
             .builder()
             .downloadQuery();
@@ -139,15 +139,15 @@ public class AlipayApi {
     /**
      * 支付验证
      * 
-     * @param alipayConfigValue
+     * @param alipayConfigProperties
      * @param request
      * @return
      * @throws AlipayApiException
      */
-    public static boolean payCheck(AlipayConfigValue alipayConfigValue, HttpServletRequest request)
+    public static boolean payCheck(AlipayConfigProperties alipayConfigProperties, HttpServletRequest request)
         throws AlipayApiException {
         Map<String, String[]> parameterMap = request.getParameterMap();
         Map<String, String> reload = PayCheckFactory.reload(parameterMap);
-        return PayCheckFactory.check(reload, alipayConfigValue.getPublicKey());
+        return PayCheckFactory.check(reload, alipayConfigProperties.getPublicKey());
     }
 }

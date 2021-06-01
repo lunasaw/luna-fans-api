@@ -4,15 +4,12 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 /**
- * @Package: com.luna.tencent.config
- * @ClassName: TencentPayQueenConfig
- * @Author: luna
- * @CreateTime: 2020/8/17 16:22
- * @Description:
+ * @author luna
  */
 @Configuration
-public class TencentPayQueueConfig {
+public class TencentPayQueueConfiguration {
 
     /** 创建Queue1 延时队列 会过期,过期后数据发送给Queue2 */
     @Bean

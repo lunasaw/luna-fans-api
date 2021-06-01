@@ -2,13 +2,10 @@ package com.luna.tencent.pay.nortify;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.luna.common.date.DateUtil;
 import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.BaseException;
-import com.luna.common.net.HttpUtils;
 import com.luna.common.net.base.HttpBaseUtils;
-import com.luna.tencent.config.TencentPayMqConfigValue;
-import org.apache.commons.io.FileUtils;
+import com.luna.tencent.properties.TencentPayMqConfigProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
@@ -16,15 +13,12 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
-import com.luna.tencent.config.TencentPayConfigValue;
+import com.luna.tencent.properties.TencentPayConfigProperties;
 import com.luna.tencent.pay.api.TencentPayApi;
 import com.luna.tencent.pay.entity.TencentPayEntity;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * @Package: com.luna.tencent.pay.nortify
@@ -40,10 +34,10 @@ public class TencentPayNotifyController {
     private RabbitTemplate          rabbitTemplate;
 
     @Autowired
-    private TencentPayMqConfigValue tencentPayMqConfigValue;
+    private TencentPayMqConfigProperties tencentPayMqConfigProperties;
 
     @Autowired
-    private TencentPayConfigValue   configValue;
+    private TencentPayConfigProperties   configValue;
 
     private static final Logger     log = LoggerFactory.getLogger(TencentPayNotifyController.class);
 
@@ -56,7 +50,8 @@ public class TencentPayNotifyController {
     public String notify(HttpServletRequest request) {
         String data = getRequest(request);
         // Mq监听处理
-        rabbitTemplate.convertAndSend(tencentPayMqConfigValue.getExchange(), tencentPayMqConfigValue.getRouting(),
+        rabbitTemplate.convertAndSend(tencentPayMqConfigProperties.getExchange(),
+            tencentPayMqConfigProperties.getRouting(),
             data);
         return TencentPayApi.retrunOrder("SUCCESS", "OK");
     }

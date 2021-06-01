@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliConfigValue;
+import com.luna.ali.config.AliOssConfigProperties;
 
 /**
  * @Package: com.luna.ali.oss
@@ -34,7 +34,7 @@ public class AliOssUploadApi {
      * @param configVale
      */
     public static String uploadByFilePath(String filePath, String bucketName, String imgFolder, String access,
-        String type, AliConfigValue configVale) {
+        String type, AliOssConfigProperties configVale) {
         log.info("uploadByFilePath start filePath={},bucketName={},imgFolder={},access={},type={}", filePath,
             bucketName, imgFolder, access, type);
         // 创建PutObjectRequest对象。
@@ -72,7 +72,7 @@ public class AliOssUploadApi {
      * @param configVale
      */
     public static void uploadByString(String content, String objectName, String imgFolder, String bucketName,
-        String access, String type, AliConfigValue configVale) {
+        String access, String type, AliOssConfigProperties configVale) {
         OSS ossClient = configVale.getOssClient(false);
 
         if (!imgFolder.endsWith("/")) {
@@ -105,7 +105,7 @@ public class AliOssUploadApi {
      */
     public static void uploadByByteArray(byte[] content, String objectName, String imgFolder, String bucketName,
         String access,
-        String type, AliConfigValue configVale) {
+        String type, AliOssConfigProperties configVale) {
         OSS ossClient = configVale.getOssClient(false);
 
         if (!imgFolder.endsWith("/")) {
@@ -138,7 +138,7 @@ public class AliOssUploadApi {
      */
     public static void uploadByURLStream(URL url, String objectName, String imgFolder, String bucketName,
         String access,
-        String type, AliConfigValue configVale) throws IOException {
+        String type, AliOssConfigProperties configVale) throws IOException {
         OSS ossClient = configVale.getOssClient(false);
 
         if (!imgFolder.endsWith("/")) {
@@ -172,7 +172,7 @@ public class AliOssUploadApi {
      */
     public static void uploadByFileStream(FileInputStream fileInputStream, String objectName, String imgFolder,
         String bucketName, String access,
-        String type, AliConfigValue configVale) {
+        String type, AliOssConfigProperties configVale) {
         OSS ossClient = configVale.getOssClient(false);
 
         if (!imgFolder.endsWith("/")) {

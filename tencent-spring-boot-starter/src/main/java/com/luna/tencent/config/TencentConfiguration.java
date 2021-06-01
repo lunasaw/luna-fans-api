@@ -1,5 +1,8 @@
 package com.luna.tencent.config;
 
+import com.luna.tencent.properties.TencentApiConfigProperties;
+import com.luna.tencent.properties.TencentPayConfigProperties;
+import com.luna.tencent.properties.TencentPayMqConfigProperties;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -19,29 +22,31 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "luna.ten", name = "enable", havingValue = "true")
-@EnableConfigurationProperties({TencentConfigValue.class, TencentPayConfigValue.class, TencentPayMqConfigValue.class})
+@EnableConfigurationProperties({TencentApiConfigProperties.class, TencentPayConfigProperties.class,
+    TencentPayMqConfigProperties.class})
 public class TencentConfiguration {
 
     @Autowired
-    private TencentConfigValue      tencentConfigValue;
+    private TencentApiConfigProperties   tencentApiConfigProperties;
 
     @Autowired
-    private TencentPayConfigValue   tencentPayConfigValue;
+    private TencentPayConfigProperties   tencentPayConfigProperties;
 
     @Autowired
-    private TencentPayMqConfigValue tencentPayMqConfigValue;
+    private TencentPayMqConfigProperties tencentPayMqConfigProperties;
 
-    public TencentConfiguration(TencentConfigValue tencentConfigValue, TencentPayConfigValue tencentPayConfigValue,
-        TencentPayMqConfigValue tencentPayMqConfigValue) {
-        this.tencentConfigValue = tencentConfigValue;
-        this.tencentPayConfigValue = tencentPayConfigValue;
-        this.tencentPayMqConfigValue = tencentPayMqConfigValue;
+    public TencentConfiguration(TencentApiConfigProperties tencentApiConfigProperties,
+        TencentPayConfigProperties tencentPayConfigProperties,
+        TencentPayMqConfigProperties tencentPayMqConfigProperties) {
+        this.tencentApiConfigProperties = tencentApiConfigProperties;
+        this.tencentPayConfigProperties = tencentPayConfigProperties;
+        this.tencentPayMqConfigProperties = tencentPayMqConfigProperties;
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public TencentPayQueueConfig tencentPayQueueConfig() {
-        return new TencentPayQueueConfig();
+    public TencentPayQueueConfiguration tencentPayQueueConfig() {
+        return new TencentPayQueueConfiguration();
     }
 
     /***
@@ -51,7 +56,7 @@ public class TencentConfiguration {
      */
     @Bean
     public DirectExchange basicExchange() {
-        return new DirectExchange(tencentPayMqConfigValue.getExchange(), true, false);
+        return new DirectExchange(tencentPayMqConfigProperties.getExchange(), true, false);
     }
 
     /***
@@ -61,7 +66,7 @@ public class TencentConfiguration {
      */
     @Bean(name = "queueOrder")
     public Queue queueOrder() {
-        return new Queue(tencentPayMqConfigValue.getQueue(), true);
+        return new Queue(tencentPayMqConfigProperties.getQueue(), true);
     }
 
     /****
@@ -71,7 +76,7 @@ public class TencentConfiguration {
      */
     @Bean
     public Binding basicBinding() {
-        return BindingBuilder.bind(queueOrder()).to(basicExchange()).with(tencentPayMqConfigValue.getRouting());
+        return BindingBuilder.bind(queueOrder()).to(basicExchange()).with(tencentPayMqConfigProperties.getRouting());
     }
 
 }

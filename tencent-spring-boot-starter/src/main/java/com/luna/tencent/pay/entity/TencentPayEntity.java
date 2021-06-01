@@ -1,11 +1,8 @@
 package com.luna.tencent.pay.entity;
 
+
 /**
- * @Package: com.luna.tencent.pay.entity
- * @ClassName: PayEntity
- * @Author: luna
- * @CreateTime: 2020/8/16 14:23
- * @Description:
+ * @author luna
  */
 public class TencentPayEntity {
     /** 商品描述 */

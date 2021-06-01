@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "luna.alipay")
-public class AlipayConfigValue {
+public class AlipayConfigProperties {
 
     private String appId;
 
