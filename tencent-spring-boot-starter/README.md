@@ -15,7 +15,7 @@ tencent-spring-boot-starter-tencent
 <br />
 
 <p align="center">
-  <a href="https://github.com/czy1024/tencent-spring-boot-starter/">
+  <a href="https://github.com/lunasaw/tencent-spring-boot-starter/">
     <img src="https://www.isczy.tk/luna-image-bed/img/20210119001858.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -23,14 +23,14 @@ tencent-spring-boot-starter-tencent
   <p align="center">
     腾讯开放平台工具 springboot starter
     <br />
-    <a href="https://github.com/czy1024/tencent-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/lunasaw/tencent-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="">查看Demo</a>
     ·
     <a href="">报告Bug</a>
     ·
-    <a href="https://github.com/czy1024/tencent-spring-boot-starter/issues">提出新特性</a>
+    <a href="https://github.com/lunasaw/tencent-spring-boot-starter/issues">提出新特性</a>
   </p>
 
 </p>
@@ -59,7 +59,7 @@ tencent-spring-boot-starter-tencent
 3. Clone the repo
 
 ```sh
-git clone https://github.com/czy1024/tencent-spring-boot-starter.git
+git clone https://github.com/lunasaw/tencent-spring-boot-starter.git
 ```
 
 引入项目依赖
@@ -67,7 +67,7 @@ git clone https://github.com/czy1024/tencent-spring-boot-starter.git
 ```xml
 
 <dependency>
-    <groupId>com.github.czy1024</groupId>
+    <groupId>io.github.lunasaw</groupId>
     <artifactId>tencent-spring-boot-starter-tencent</artifactId>
     <version>1.0.4-RELEASE</version>
 </dependency>
@@ -237,7 +237,7 @@ email Keyluna@126.com &ensp; qq:1173288254
 
 ### 版权说明
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/czy1024/luna-commons/blob/master/LICENSE)
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/lunasaw/luna-commons/blob/master/LICENSE)
 
 ### 鸣谢[]()
 
@@ -246,27 +246,27 @@ email Keyluna@126.com &ensp; qq:1173288254
 
 <!-- links -->
 
-[your-project-path]:czy1024/tencent-spring-boot-starter
+[your-project-path]:lunasaw/tencent-spring-boot-starter
 
-[contributors-shield]: https://img.shields.io/github/contributors/czy1024/tencent-spring-boot-starter.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/tencent-spring-boot-starter.svg?style=flat-square
 
-[contributors-url]: https://github.com/czy1024/tencent-spring-boot-starter/graphs/contributors
+[contributors-url]: https://github.com/lunasaw/tencent-spring-boot-starter/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/czy1024/tencent-spring-boot-starter.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/lunasaw/tencent-spring-boot-starter.svg?style=flat-square
 
-[forks-url]: https://github.com/czy1024/tencent-spring-boot-starter/network/members
+[forks-url]: https://github.com/lunasaw/tencent-spring-boot-starter/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/czy1024/tencent-spring-boot-starter.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/lunasaw/tencent-spring-boot-starter.svg?style=flat-square
 
-[stars-url]: https://github.com/czy1024/tencent-spring-boot-starter/stargazers
+[stars-url]: https://github.com/lunasaw/tencent-spring-boot-starter/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/czy1024/tencent-spring-boot-starter.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/lunasaw/tencent-spring-boot-starter.svg?style=flat-square
 
-[issues-url]: https://img.shields.io/github/issues/czy1024/tencent-spring-boot-starter.svg
+[issues-url]: https://img.shields.io/github/issues/lunasaw/tencent-spring-boot-starter.svg
 
-[license-shield]: https://img.shields.io/github/license/czy1024/tencent-spring-boot-starter.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/lunasaw/tencent-spring-boot-starter.svg?style=flat-square
 
-[license-url]: https://github.com/czy1024/tencent-spring-boot-starter/blob/master/LICENSE.txt
+[license-url]: https://github.com/lunasaw/tencent-spring-boot-starter/blob/master/LICENSE.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 

@@ -1,7 +1,7 @@
 package com.luna.api.smms.api;
 
 import com.alibaba.fastjson.JSON;
-import com.luna.api.smms.config.SmMsConfigValue;
+import com.luna.api.smms.config.SmMsProperties;
 import com.luna.api.smms.dto.UploadResultDTO;
 import com.luna.api.smms.dto.UserProfileDTO;
 import com.luna.common.file.FileTools;
@@ -20,13 +20,13 @@ import java.util.List;
  */
 public class UserApiFromFile {
 
-    private static SmMsConfigValue smMsConfigValue;
+    private static SmMsProperties smMsProperties;
 
-    public static SmMsConfigValue getInstance() {
-        if (smMsConfigValue == null) {
-            smMsConfigValue = new SmMsConfigValue();
+    public static SmMsProperties getInstance() {
+        if (smMsProperties == null) {
+            smMsProperties = new SmMsProperties();
         }
-        return smMsConfigValue;
+        return smMsProperties;
     }
 
     /**
@@ -35,10 +35,10 @@ public class UserApiFromFile {
      * @param file
      */
     public static String getAuthToken(String file) {
-        SmMsConfigValue configValue = checkFile(file);
+        SmMsProperties configValue = checkFile(file);
         String authToken = UserApiFromString.getAuthToken(configValue.getUsername(), configValue.getPassword());
-        smMsConfigValue.setAuthorizationCode(authToken);
-        FileTools.write(JSON.toJSONString(smMsConfigValue), file);
+        smMsProperties.setAuthorizationCode(authToken);
+        FileTools.write(JSON.toJSONString(smMsProperties), file);
         return authToken;
     }
 
@@ -49,7 +49,7 @@ public class UserApiFromFile {
      * @return
      */
     public static UserProfileDTO getUserProfile(String file) {
-        SmMsConfigValue smMsConfig = checkFile(file);
+        SmMsProperties smMsConfig = checkFile(file);
         return UserApiFromString.getUserProfile(smMsConfig.getAuthorizationCode());
     }
 
@@ -61,8 +61,8 @@ public class UserApiFromFile {
      * @return
      */
     public static UploadResultDTO upload(String tokenFile, String path) {
-        SmMsConfigValue smMsConfigValue = checkFile(tokenFile);
-        return ImageApiFromString.upload(smMsConfigValue.getAuthorizationCode(), path);
+        SmMsProperties smMsProperties = checkFile(tokenFile);
+        return ImageApiFromString.upload(smMsProperties.getAuthorizationCode(), path);
     }
 
     /**
@@ -72,8 +72,8 @@ public class UserApiFromFile {
      * @return
      */
     public static List<UploadResultDTO> getHistory(String tokenFile) {
-        SmMsConfigValue smMsConfigValue = checkFile(tokenFile);
-        return ImageApiFromString.getHistory(smMsConfigValue.getAuthorizationCode());
+        SmMsProperties smMsProperties = checkFile(tokenFile);
+        return ImageApiFromString.getHistory(smMsProperties.getAuthorizationCode());
     }
 
     /**
@@ -84,8 +84,8 @@ public class UserApiFromFile {
      * @return
      */
     public static boolean deleteFile(String tokenFile, String hash) {
-        SmMsConfigValue smMsConfigValue = checkFile(tokenFile);
-        return ImageApiFromString.deleteFile(smMsConfigValue.getAuthorizationCode(), hash);
+        SmMsProperties smMsProperties = checkFile(tokenFile);
+        return ImageApiFromString.deleteFile(smMsProperties.getAuthorizationCode(), hash);
     }
 
     /**
@@ -95,17 +95,17 @@ public class UserApiFromFile {
      * @return
      */
     public static List<UploadResultDTO> getAllHistory(String tokenFile) {
-        SmMsConfigValue smMsConfigValue = checkFile(tokenFile);
-        return ImageApiFromString.getAllHistory(smMsConfigValue.getAuthorizationCode());
+        SmMsProperties smMsProperties = checkFile(tokenFile);
+        return ImageApiFromString.getAllHistory(smMsProperties.getAuthorizationCode());
     }
 
-    private static SmMsConfigValue checkFile(String file) {
+    private static SmMsProperties checkFile(String file) {
         try {
             if (getInstance().getAuthorizationCode() == null) {
                 String s = FileUtils.readFileToString(new File(file), Charset.defaultCharset());
-                smMsConfigValue = JSON.parseObject(s, SmMsConfigValue.class);
+                smMsProperties = JSON.parseObject(s, SmMsProperties.class);
             }
-            return smMsConfigValue;
+            return smMsProperties;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
