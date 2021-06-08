@@ -1,11 +1,8 @@
 package com.luna.baidu.req;
 
+
 /**
- * @Package: com.luna.baidu.dto
- * @ClassName: VoiceSynthesisReq
- * @Author: luna
- * @CreateTime: 2020/8/10 21:54
- * @Description:
+ * @author luna
  */
 public class VoiceSynthesisReq {
 

@@ -15,7 +15,7 @@ baidu-spring-boot-starter-baidu
 <br />
 
 <p align="center">
-  <a href="https://github.com/czy1024/baidu-spring-boot-starter/">
+  <a href="https://github.com/lunasaw/baidu-spring-boot-starter/">
     <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -23,14 +23,14 @@ baidu-spring-boot-starter-baidu
   <p align="center">
     百度开放平台工具
     <br />
-    <a href="https://github.com/czy1024/baidu-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/lunasaw/baidu-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="">查看Demo</a>
     ·
     <a href="">报告Bug</a>
     ·
-    <a href="https://github.com/czy1024/baidu-spring-boot-starter/issues">提出新特性</a>
+    <a href="https://github.com/lunasaw/baidu-spring-boot-starter/issues">提出新特性</a>
   </p>
 
 </p>
@@ -62,7 +62,7 @@ baidu-spring-boot-starter-baidu
 ```xml
 
 <dependency>
-    <groupId>com.github.czy1024</groupId>
+    <groupId>io.github.lunasaw</groupId>
     <artifactId>baidu-spring-boot-starter-baidu</artifactId>
     <version>1.0.12-RELEASE</version>
 </dependency>
@@ -190,17 +190,17 @@ eg:
 
 
 <!-- links -->
-[your-project-path]:czy1024/baidu-spring-boot-starter
-[contributors-shield]: https://img.shields.io/github/contributors/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-[contributors-url]: https://github.com/czy1024/baidu-spring-boot-starter/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-[forks-url]: https://github.com/czy1024/baidu-spring-boot-starter/network/members
-[stars-shield]: https://img.shields.io/github/stars/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-[stars-url]: https://github.com/czy1024/baidu-spring-boot-starter/stargazers
-[issues-shield]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg
-[license-shield]: https://img.shields.io/github/license/czy1024/baidu-spring-boot-starter.svg?style=flat-square
-[license-url]: https://github.com/czy1024/baidu-spring-boot-starter/blob/master/LICENSE.txt
+[your-project-path]:lunasaw/baidu-spring-boot-starter
+[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
+[contributors-url]: https://github.com/lunasaw/baidu-spring-boot-starter/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
+[forks-url]: https://github.com/lunasaw/baidu-spring-boot-starter/network/members
+[stars-shield]: https://img.shields.io/github/stars/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
+[stars-url]: https://github.com/lunasaw/baidu-spring-boot-starter/stargazers
+[issues-shield]: https://img.shields.io/github/issues/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/lunasaw/baidu-spring-boot-starter.svg
+[license-shield]: https://img.shields.io/github/license/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
+[license-url]: https://github.com/lunasaw/baidu-spring-boot-starter/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/baidu-spring-boot-starter
 

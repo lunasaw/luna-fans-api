@@ -3,11 +3,7 @@ package com.luna.baidu.req;
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
- * @Package: com.luna.baidu.dto
- * @ClassName: VoiceCheckReq
- * @Author: luna
- * @CreateTime: 2020/8/10 20:16
- * @Description:
+ * @author luna
  */
 public class VoiceCheckReq {
 

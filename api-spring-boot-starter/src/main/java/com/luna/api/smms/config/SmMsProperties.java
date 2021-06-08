@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "luna.apis.smms")
-public class SmMsConfigValue {
+public class SmMsProperties {
 
     /** 用户名 */
     private String username;

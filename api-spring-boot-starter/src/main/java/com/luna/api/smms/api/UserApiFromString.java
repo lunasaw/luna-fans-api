@@ -1,10 +1,7 @@
 package com.luna.api.smms.api;
 
-import java.util.HashMap;
-
 import com.luna.api.smms.dto.UserProfileDTO;
 import com.luna.common.net.HttpUtils;
-import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.net.UserAgentConstant;
 import org.apache.http.HttpResponse;
 
