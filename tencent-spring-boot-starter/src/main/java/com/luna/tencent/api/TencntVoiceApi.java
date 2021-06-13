@@ -268,16 +268,6 @@ public class TencntVoiceApi {
     }
 
     public static void main(String[] args) {
-        // byte[] read =
-        // FileTools.read("/Users/luna/Document/project/post/2021/05/31/36911f9480a344ba8e85900fbcff3897.mp3");
-        // voiceIdentifyWithFile16kZh("AKIDV1h7G7trkM5ctwbIZeuue8KhpgEVxFsN", "NVM2RYP6WtzsVt1tUosyrBFeokQKCsOy",
-        // Base64Util.encodeBase64(read), read.length);
-
-        // getVoiceResult("AKIDV1h7G7trkM5ctwbIZeuue8KhpgEVxFsN", "NVM2RYP6WtzsVt1tUosyrBFeokQKCsOy", 1279503318);
-
-        voiceFastIdentifyWith16kZh("1300707296", "AKIDQiohOwHROE1pZAYheOzShrtspiVDpLoD",
-            "Rn5JUentyzxvnTwDHAqIZgdPzRioiV7Y",
-            "/Users/luna/Document/project/post/2021/05/31/36911f9480a344ba8e85900fbcff3897.mp3");
 
     }
 }
