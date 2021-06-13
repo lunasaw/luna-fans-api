@@ -14,6 +14,8 @@ public class TencentConstant {
 
     public static final String FACE_CHECK                     = "iai.tencentcloudapi.com";
 
+    public static final String VOICE_IDENTIFY                 = "asr.tencentcloudapi.com";
+
     public static final String HOST_SMS                       = "sms.tencentcloudapi.com";
 
     public static final String TENCENT_MARK_AUTHENTICATION    =
@@ -30,5 +32,4 @@ public class TencentConstant {
 
     /** 坐标转换 */
     public static final String TRANSLATE                      = "/ws/coord/v1/translate";
-
 }

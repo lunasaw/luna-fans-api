@@ -17,7 +17,7 @@ import com.luna.tencent.dto.group.CompareFaceResultDTO;
 
 /**
  * @Package: com.luna.tencent.api
- * @ClassName: TecentPersonGroupApi
+ * @ClassName: TencentPersonGroupApi
  * @Author: luna
  * @CreateTime: 2020/8/14 23:31
  * @Description:
@@ -96,5 +96,4 @@ public class TencentFaceApi {
         JSONObject response = JSON.parseObject(s);
         return JSON.parseObject(response.getString("Response")).getBoolean("IsLiveness");
     }
-
 }

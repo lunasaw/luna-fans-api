@@ -41,8 +41,6 @@ public class TencentMarketApi {
         String datetime = sdf.format(cd.getTime());
         // 签名
         String auth = TencentCloudAPITC3.calcAuthorization(source, secretId, secretKey, datetime);
-        // 请求方法
-        String method = "GET";
 
         // 请求头
         Map<String, String> headers = new HashMap<String, String>();

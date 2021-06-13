@@ -33,18 +33,18 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--   腾讯Api-->
+        <!--腾讯Api-->
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.46</version>
+            <version>3.1.288</version>
         </dependency>
 
-        <!--微信支付-->
+        <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-speech-sdk-java -->
         <dependency>
-            <groupId>com.github.wxpay</groupId>
-            <artifactId>wxpay-sdk</artifactId>
-            <version>0.0.3</version>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-speech-sdk-java</artifactId>
+            <version>1.0.15</version>
         </dependency>
 
     </dependencies>
