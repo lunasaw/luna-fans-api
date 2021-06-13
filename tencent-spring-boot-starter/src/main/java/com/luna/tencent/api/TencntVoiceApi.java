@@ -221,6 +221,28 @@ public class TencntVoiceApi {
             1, 0, 1, fileName);
     }
 
+    /**
+     * 本接口支持使用者通过 HTTPS POST 方式上传一段音频并在极短时间内同步返回识别结果，可满足音视频字幕、准实时质检等场景下对语音文件识别时效性的要求。
+     * 
+     * @param appId 用户在腾讯云注册账号的 AppId，可以进入 API 密钥管理页面 获取。
+     * @param secretid 用户在腾讯云注册账号 AppId 对应的 SecretId，可以进入 API 密钥管理页面 获取。 https://console.cloud.tencent.com/cam/capi
+     * @param key
+     * @param engineType 引擎模型类型。
+     * 8k_zh：8k 中文普通话通用；
+     * 16k_zh：16k 中文普通话通用；
+     * 16k_zh_video：16k 音视频领域。
+     * @param voiceFormat 音频格式。支持 wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac。
+     * @param timestamp 当前 UNIX 时间戳，如果与当前时间相差超过3分钟，会报签名失败错误。
+     * @param speakerDiarization 是否开启说话人分离（目前支持中文普通话引擎），默认为0，0：不开启，1：开启。
+     * @param filterDirty 是否过滤脏词（目前支持中文普通话引擎），默认为0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 *。
+     * @param filterModal 是否过滤语气词（目前支持中文普通话引擎），默认为0。0：不过滤语气词；1：部分过滤；2：严格过滤。
+     * @param filterPunc 是否过滤标点符号（目前支持中文普通话引擎），默认为0。0：不过滤，1：过滤句末标点，2：过滤所有标点。
+     * @param convertNumMode 是否进行阿拉伯数字智能转换，默认为1。0：全部转为中文数字；1：根据场景智能转换为阿拉伯数字。
+     * @param wordInfo 是否显示词级别时间戳，默认为0。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。
+     * @param firstChannelOnly 是否只识别首个声道，默认为1。0：识别所有声道；1：识别首个声道。
+     * @param fileName
+     * @return
+     */
     public static FlashRecognitionResponse voiceFastIdentify(String appId, String secretid, String key,
         String engineType,
         String voiceFormat,
@@ -243,13 +265,7 @@ public class TencntVoiceApi {
         String url = HttpUtils.buildUrlObject("https://asr.cloud.tencent.com", "/asr/flash/v1/" + appId, map);
         String post = url.replace("https://", "POST");
         try {
-
-            // POSTasr.cloud.tencent.com/asr/flash/v1/1300707296?convert_num_mode=1&engine_type=16k_zh&filter_dirty=0&filter_modal=0&filter_punc=0&first_channel_only=1&secretid=AKIDQiohOwHROE1pZAYheOzShrtspiVDpLoD&speaker_diarization=0&timestamp=1623598188&voice_format=mp3&word_info=1
-            // POSTasr.cloud.tencent.com/asr/flash/v1/1300707296?convert_num_mode=1&engine_type=16k_zh&filter_dirty=0&filter_modal=0&filter_punc=0&first_channel_only=1&secretid=AKIDQiohOwHROE1pZAYheOzShrtspiVDpLoD&speaker_diarization=0&timestamp=1623598215&voice_format=mp3&word_info=0
-            // Base64Encode(HmacSha1("POSTasr.cloud.tencent.com/asr/flash/v1/1259228442?convert_num_mode=1&engine_type=16k_zh&filter_dirty=0&filter_modal=0&filter_punc=0&first_channel_only=1&hotword_id=&secretid=AKIDoQq1zhZMN8dv0psmvud6OUKuGPO7pu0r&speaker_diarization=0&timestamp=1609560089&voice_format=wav&word_info=0",
-            // "kFpwoX5RYQ2SkqpeHgqmSzHK7h3A2fni"))
             String authorization = Base64Util.encodeBase64(TencentCloudAPITC3.hmac1(post, key));
-            System.out.println(authorization);
             HttpResponse httpResponse =
                 HttpUtils.doPost(url, "",
                     ImmutableMap.of("Host", "asr.cloud.tencent.com", "Content-Type", HttpUtilsConstant.MEDIA,
