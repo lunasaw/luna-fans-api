@@ -69,7 +69,7 @@ git clone https://github.com/lunasaw/tencent-spring-boot-starter.git
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>tencent-spring-boot-starter-tencent</artifactId>
-    <version>1.0.4-RELEASE</version>
+    <version>2.2.1-RELEASE</version>
 </dependency>
 ```
 

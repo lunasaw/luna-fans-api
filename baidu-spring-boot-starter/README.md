@@ -64,7 +64,7 @@ baidu-spring-boot-starter-baidu
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-    <version>1.0.12-RELEASE</version>
+    <version>2.2.1-RELEASE</version>
 </dependency>
 ```
 在配置文件application.properties加入可选配置
