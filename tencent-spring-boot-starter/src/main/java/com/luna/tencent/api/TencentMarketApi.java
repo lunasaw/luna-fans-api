@@ -40,12 +40,7 @@ public class TencentMarketApi {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         String datetime = sdf.format(cd.getTime());
         // 签名
-        String auth = null;
-        try {
-            auth = TencentCloudAPITC3.calcAuthorization(source, secretId, secretKey, datetime);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String auth = TencentCloudAPITC3.calcAuthorization(source, secretId, secretKey, datetime);
 
         // 请求头
         Map<String, String> headers = new HashMap<String, String>();

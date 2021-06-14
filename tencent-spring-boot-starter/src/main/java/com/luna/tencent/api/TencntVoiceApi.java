@@ -9,15 +9,13 @@ import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
 import com.luna.common.text.MapUtils;
-import com.luna.common.text.RandomStrUtil;
+import com.luna.tencent.dto.voice.FlashRecognitionResponse;
+import com.luna.tencent.dto.voice.VoiceIdentifyResultDTO;
 import com.luna.tencent.dto.voice.VoiceOneMinutesResultDTO;
-import com.tencent.asr.model.FlashRecognitionResponse;
-import com.tencentcloudapi.asr.v20190614.models.DescribeAsyncRecognitionTasksResponse;
 import com.tencentcloudapi.asr.v20190614.models.TaskStatus;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
 /**
@@ -74,7 +72,7 @@ public class TencntVoiceApi {
      * @param convertNumMode 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字，3: 打开数学相关数字转换。默认值为 1。
      * @param filterPunc 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
      */
-    public static DescribeAsyncRecognitionTasksResponse voiceIdentify(String id, String key, String engineModelType,
+    public static VoiceIdentifyResultDTO voiceIdentify(String id, String key, String engineModelType,
         Integer channelNum,
         Integer resTextFormat, Integer sourceType, Integer speakerDiarization, Integer speakerNumber,
         String callbackUrl,
@@ -109,52 +107,58 @@ public class TencntVoiceApi {
             HttpUtils.doPost("https://" + TencentConstant.VOICE_IDENTIFY, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         String response = JSON.parseObject(s).getString("Response");
-        DescribeAsyncRecognitionTasksResponse describeAsyncRecognitionTasksResponse =
-            JSON.parseObject(response, DescribeAsyncRecognitionTasksResponse.class);
-        log.info("idNameCheck start id={}, key={}, resultDTO={}", id, key,
-            JSON.toJSONString(describeAsyncRecognitionTasksResponse));
-        return describeAsyncRecognitionTasksResponse;
+        System.out.println(s);
+        VoiceIdentifyResultDTO voiceIdentifyResultDTO =
+            JSON.parseObject(response, VoiceIdentifyResultDTO.class);
+        log.info("voiceIdentify start id={}, key={}, voiceIdentifyResultDTO={}", id, key,
+            JSON.toJSONString(voiceIdentifyResultDTO));
+        return voiceIdentifyResultDTO;
     }
 
-    public static void voiceIdentifyWithFile(String id, String key, String engineModelType, Integer channelNum,
+    public static VoiceIdentifyResultDTO voiceIdentifyWithFile(String id, String key,
+        String engineModelType, Integer channelNum,
         Integer resTextFormat, Integer speakerDiarization, Integer speakerNumber, String callbackUrl,
         String data,
         Integer dataLen, Integer hotwordId, Integer filterDirty, Integer filterModal, Integer convertNumMode,
         Integer filterPunc) {
-        voiceIdentify(id, key, engineModelType, channelNum,
+        return voiceIdentify(id, key, engineModelType, channelNum,
             resTextFormat, 1, speakerDiarization, speakerNumber, callbackUrl,
             null, data, dataLen, hotwordId, filterDirty, filterModal, convertNumMode, filterPunc);
     }
 
-    public static void voiceIdentifyWithFile(String id, String key, String engineModelType, String data,
+    public static VoiceIdentifyResultDTO voiceIdentifyWithFile(String id, String key,
+        String engineModelType, String data,
         Integer dataLen) {
-        voiceIdentifyWithFile(id, key, engineModelType, 1,
+        return voiceIdentifyWithFile(id, key, engineModelType, 1,
             0, 0, 0, null,
             data, dataLen, null, 0, 0, 1, 0);
     }
 
-    public static void voiceIdentifyWithFile16kZh(String id, String key, String data,
+    public static VoiceIdentifyResultDTO voiceIdentifyWithFile16kZh(String id, String key, String data,
         Integer dataLen) {
-        voiceIdentifyWithFile(id, key, "16k_zh", data, dataLen);
+        return voiceIdentifyWithFile(id, key, "16k_zh", data, dataLen);
     }
 
-    public static void voiceIdentifyWithFile16kZh(String id, String key, String fileName) {
+    public static VoiceIdentifyResultDTO voiceIdentifyWithFile16kZh(String id, String key,
+        String fileName) {
         byte[] read = FileTools.read(fileName);
-        voiceIdentifyWithFile(id, key, "16k_zh", Base64Util.encodeBase64(read), read.length);
+        return voiceIdentifyWithFile16kZh(id, key, Base64Util.encodeBase64(read), read.length);
     }
 
-    public static void voiceIdentifyWithUrl(String id, String key, String engineModelType, Integer channelNum,
+    public static VoiceIdentifyResultDTO voiceIdentifyWithUrl(String id, String key,
+        String engineModelType, Integer channelNum,
         Integer resTextFormat, Integer speakerDiarization, Integer speakerNumber, String callbackUrl,
         String url,
         Integer dataLen, Integer hotwordId, Integer filterDirty, Integer filterModal, Integer convertNumMode,
         Integer filterPunc) {
-        voiceIdentify(id, key, engineModelType, channelNum,
+        return voiceIdentify(id, key, engineModelType, channelNum,
             resTextFormat, 0, speakerDiarization, speakerNumber, callbackUrl,
             url, null, dataLen, hotwordId, filterDirty, filterModal, convertNumMode, filterPunc);
     }
 
-    public static void voiceIdentifyWithUrl(String id, String key, String engineModelType, String url) {
-        voiceIdentifyWithFile(id, key, engineModelType, 1,
+    public static VoiceIdentifyResultDTO voiceIdentifyWithUrl(String id, String key,
+        String engineModelType, String url) {
+        return voiceIdentifyWithUrl(id, key, engineModelType, 1,
             0, 0, 0, null,
             url, null, null, 0, 0, 1, 0);
     }
@@ -184,7 +188,7 @@ public class TencntVoiceApi {
         String response = JSON.parseObject(JSON.parseObject(s).getString("Response")).getString("Data");
         TaskStatus taskStatus =
             JSON.parseObject(response, TaskStatus.class);
-        log.info("idNameCheck start id={}, key={}, taskStatus={}", id, key, JSON.toJSONString(taskStatus));
+        log.info("getVoiceResult start id={}, key={}, taskStatus={}", id, key, JSON.toJSONString(taskStatus));
         return taskStatus;
     }
 
@@ -261,7 +265,7 @@ public class TencntVoiceApi {
             String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
             FlashRecognitionResponse flashRecognitionResponse =
                 JSON.parseObject(response, FlashRecognitionResponse.class);
-            log.info("idNameCheck start secretid={}, key={}, taskStatus={}", secretid, key,
+            log.info("voiceFastIdentify start secretid={}, key={}, flashRecognitionResponse={}", secretid, key,
                 JSON.toJSONString(flashRecognitionResponse));
             return flashRecognitionResponse;
         } catch (Exception e) {

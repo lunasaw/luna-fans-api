@@ -5,42 +5,46 @@
 
 package com.luna.tencent.dto.voice;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
+/**
+ * @author luna
+ */
 public class FlashRecognitionResponse {
-    @JsonProperty("request_id")
+    @JSONField(name = "request_id")
     private String                                                requestId;
-    @JsonProperty("code")
+    @JSONField(name = "code")
     private Integer                                               code;
-    @JsonProperty("message")
+    @JSONField(name = "message")
     private String                                                message;
-    @JsonProperty("audio_duration")
+    @JSONField(name = "audio_duration")
     private Long                                                  audioDuration;
-    @JsonProperty("flash_result")
+    @JSONField(name = "flash_result")
     private List<FlashRecognitionResponse.FlashRecognitionResult> flashResult;
 
-    @JsonProperty("request_id")
+    @JSONField(name = "request_id")
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
 
-    @JsonProperty("code")
+    @JSONField(name = "code")
     public void setCode(Integer code) {
         this.code = code;
     }
 
-    @JsonProperty("message")
+    @JSONField(name = "message")
     public void setMessage(String message) {
         this.message = message;
     }
 
-    @JsonProperty("audio_duration")
+    @JSONField(name = "audio_duration")
     public void setAudioDuration(Long audioDuration) {
         this.audioDuration = audioDuration;
     }
 
-    @JsonProperty("flash_result")
+    @JSONField(name = "flash_result")
     public void setFlashResult(List<FlashRecognitionResponse.FlashRecognitionResult> flashResult) {
         this.flashResult = flashResult;
     }
@@ -68,31 +72,31 @@ public class FlashRecognitionResponse {
     public FlashRecognitionResponse() {}
 
     public static class FlashWordData {
-        @JsonProperty("word")
+        @JSONField(name = "word")
         private String  word;
-        @JsonProperty("start_time")
+        @JSONField(name = "start_time")
         private Long    startTime;
-        @JsonProperty("end_time")
+        @JSONField(name = "end_time")
         private Long    endTime;
-        @JsonProperty("stable_flag")
+        @JSONField(name = "stable_flag")
         private Integer stableFlag;
 
-        @JsonProperty("word")
+        @JSONField(name = "word")
         public void setWord(String word) {
             this.word = word;
         }
 
-        @JsonProperty("start_time")
+        @JSONField(name = "start_time")
         public void setStartTime(Long startTime) {
             this.startTime = startTime;
         }
 
-        @JsonProperty("end_time")
+        @JSONField(name = "end_time")
         public void setEndTime(Long endTime) {
             this.endTime = endTime;
         }
 
-        @JsonProperty("stable_flag")
+        @JSONField(name = "stable_flag")
         public void setStableFlag(Integer stableFlag) {
             this.stableFlag = stableFlag;
         }
@@ -117,38 +121,38 @@ public class FlashRecognitionResponse {
     }
 
     public static class FlashRecognitionSentence {
-        @JsonProperty("text")
+        @JSONField(name = "text")
         private String                                       text;
-        @JsonProperty("start_time")
+        @JSONField(name = "start_time")
         private Long                                         startTime;
-        @JsonProperty("end_time")
+        @JSONField(name = "end_time")
         private Long                                         endTime;
-        @JsonProperty("speaker_id")
+        @JSONField(name = "speaker_id")
         private Integer                                      speakerId;
-        @JsonProperty("word_list")
+        @JSONField(name = "word_list")
         private List<FlashRecognitionResponse.FlashWordData> wordList;
 
-        @JsonProperty("text")
+        @JSONField(name = "text")
         public void setText(String text) {
             this.text = text;
         }
 
-        @JsonProperty("start_time")
+        @JSONField(name = "start_time")
         public void setStartTime(Long startTime) {
             this.startTime = startTime;
         }
 
-        @JsonProperty("end_time")
+        @JSONField(name = "end_time")
         public void setEndTime(Long endTime) {
             this.endTime = endTime;
         }
 
-        @JsonProperty("speaker_id")
+        @JSONField(name = "speaker_id")
         public void setSpeakerId(Integer speakerId) {
             this.speakerId = speakerId;
         }
 
-        @JsonProperty("word_list")
+        @JSONField(name = "word_list")
         public void setWordList(List<FlashRecognitionResponse.FlashWordData> wordList) {
             this.wordList = wordList;
         }
@@ -177,24 +181,24 @@ public class FlashRecognitionResponse {
     }
 
     public static class FlashRecognitionResult {
-        @JsonProperty("text")
+        @JSONField(name = "text")
         private String                                                  text;
-        @JsonProperty("channel_id")
+        @JSONField(name = "channel_id")
         private Integer                                                 channelId;
-        @JsonProperty("sentence_list")
+        @JSONField(name = "sentence_list")
         private List<FlashRecognitionResponse.FlashRecognitionSentence> sentenceList;
 
-        @JsonProperty("text")
+        @JSONField(name = "text")
         public void setText(String text) {
             this.text = text;
         }
 
-        @JsonProperty("channel_id")
+        @JSONField(name = "channel_id")
         public void setChannelId(Integer channelId) {
             this.channelId = channelId;
         }
 
-        @JsonProperty("sentence_list")
+        @JSONField(name = "sentence_list")
         public void setSentenceList(List<FlashRecognitionResponse.FlashRecognitionSentence> sentenceList) {
             this.sentenceList = sentenceList;
         }

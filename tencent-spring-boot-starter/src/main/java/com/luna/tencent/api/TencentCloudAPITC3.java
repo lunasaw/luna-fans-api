@@ -33,32 +33,45 @@ public class TencentCloudAPITC3 {
      * @throws UnsupportedEncodingException
      * @throws InvalidKeyException
      */
-    public static String calcAuthorization(String source, String secretId, String secretKey, String datetime)
-        throws NoSuchAlgorithmException, InvalidKeyException {
-        String signStr = "x-date: " + datetime + "\n" + "x-source: " + source;
-        Mac mac = Mac.getInstance("HmacSHA1");
-        Key sKey = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), mac.getAlgorithm());
-        mac.init(sKey);
-        byte[] hash = mac.doFinal(signStr.getBytes(StandardCharsets.UTF_8));
-        String sig = Base64Util.encodeBase64(hash);
+    public static String calcAuthorization(String source, String secretId, String secretKey, String datetime) {
+        try {
+            String signStr = "x-date: " + datetime + "\n" + "x-source: " + source;
+            Mac mac = Mac.getInstance("HmacSHA1");
+            Key sKey = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), mac.getAlgorithm());
+            mac.init(sKey);
+            byte[] hash = mac.doFinal(signStr.getBytes(StandardCharsets.UTF_8));
+            String sig = Base64Util.encodeBase64(hash);
 
-        String auth = "hmac id=\"" + secretId + "\", algorithm=\"hmac-sha1\", headers=\"x-date x-source\", signature=\""
-            + sig + "\"";
-        return auth;
+            String auth =
+                "hmac id=\"" + secretId + "\", algorithm=\"hmac-sha1\", headers=\"x-date x-source\", signature=\""
+                    + sig + "\"";
+            return auth;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static byte[] hmac256(byte[] key, String msg) throws Exception {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key, mac.getAlgorithm());
-        mac.init(secretKeySpec);
-        return mac.doFinal(msg.getBytes(StandardCharsets.UTF_8));
+    public static byte[] hmac256(byte[] key, String msg) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA256");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key, mac.getAlgorithm());
+            mac.init(secretKeySpec);
+            return mac.doFinal(msg.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static byte[] hmac1(String originalText, String secretKey) throws Exception {
-        Mac mac = Mac.getInstance("HmacSHA1");
-        SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), mac.getAlgorithm());
-        mac.init(secretKeySpec);
-        return mac.doFinal(originalText.getBytes(StandardCharsets.UTF_8));
+    public static byte[] hmac1(String originalText, String secretKey) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA1");
+            SecretKeySpec secretKeySpec =
+                new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), mac.getAlgorithm());
+            mac.init(secretKeySpec);
+            return mac.doFinal(originalText.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String sha256Hex(String s) throws Exception {
