@@ -16,6 +16,8 @@ public class TencentConstant {
 
     public static final String VOICE_IDENTIFY                 = "asr.tencentcloudapi.com";
 
+    public static final String VOICE_FAST_IDENTIFY            = "asr.cloud.tencent.com";
+
     public static final String HOST_SMS                       = "sms.tencentcloudapi.com";
 
     public static final String TENCENT_MARK_AUTHENTICATION    =

@@ -32,7 +32,7 @@ public class TencentMarketApi {
      * @throws UnsupportedEncodingException
      * @throws InvalidKeyException
      */
-    public static JSONObject checkIdByLuna(String secretId, String secretKey, String name, String id) throws Exception {
+    public static JSONObject checkIdByLuna(String secretId, String secretKey, String name, String id) {
         log.info("checkIdByLuna start secretId={}, secretKey={}, name={}, id={}", secretId, secretKey, name, id);
         String source = "market";
         Calendar cd = Calendar.getInstance();
@@ -40,7 +40,12 @@ public class TencentMarketApi {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         String datetime = sdf.format(cd.getTime());
         // 签名
-        String auth = TencentCloudAPITC3.calcAuthorization(source, secretId, secretKey, datetime);
+        String auth = null;
+        try {
+            auth = TencentCloudAPITC3.calcAuthorization(source, secretId, secretKey, datetime);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // 请求头
         Map<String, String> headers = new HashMap<String, String>();

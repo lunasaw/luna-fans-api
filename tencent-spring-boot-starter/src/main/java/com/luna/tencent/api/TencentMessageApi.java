@@ -34,7 +34,7 @@ public class TencentMessageApi {
      * @throws Exception
      */
     public static String sendMsgReq(String id, String key, List<String> phones, String appid, String sign,
-        String templateId, List<String> message) throws Exception {
+        String templateId, List<String> message) {
         log.info("sendMsgReq start id={}, key={}, phones={}, appid={}, sign={}, templateId={}, message={}", id, key,
             phones, appid, sign, templateId, message);
         Map<String, Object> map = Maps.newHashMap();

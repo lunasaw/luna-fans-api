@@ -37,7 +37,7 @@ public class TencentFaceApi {
      * @throws Exception
      */
     public static CompareFaceResultDTO faceComparison(String id, String key, String imageA, String imageB)
-        throws Exception {
+    {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(imageA)) {
             map.put("ImageA", imageA);
@@ -76,7 +76,7 @@ public class TencentFaceApi {
      * @throws Exception
      */
     public static boolean faceLiveCheck(String id, String key, String image)
-        throws Exception {
+    {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);

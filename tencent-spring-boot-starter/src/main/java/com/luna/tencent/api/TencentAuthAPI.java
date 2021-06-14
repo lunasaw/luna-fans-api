@@ -55,7 +55,7 @@ public class TencentAuthAPI {
      * @throws Exception
      */
     public static IdCardOcrDTO idOcrCheck(String id, String key, String image, String cardSide,
-        HashMap<String, Boolean> config) throws Exception {
+        HashMap<String, Boolean> config) {
         HashMap<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("ImageBase64", image);
@@ -90,7 +90,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static MobileCheckInfoDTO mobileCheck(String id, String key, String mobile) throws Exception {
+    public static MobileCheckInfoDTO mobileCheck(String id, String key, String mobile) {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("Mobile", mobile);
         String body = JSON.toJSONString(map);
@@ -116,7 +116,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static IdCardCheckInfoDTO idNameCheck(String id, String key, String idCard, String name) throws Exception {
+    public static IdCardCheckInfoDTO idNameCheck(String id, String key, String idCard, String name) {
         HashMap<String, String> map = Maps.newHashMap();
         map.put("IdCard", idCard);
         map.put("Name", name);
@@ -146,7 +146,7 @@ public class TencentAuthAPI {
      */
     public static IdCardAndBankCardCheckInfoDTO bankCardIdNameCheck(String id, String key, String idCard, String name,
         String bankCard)
-        throws Exception {
+    {
         HashMap<String, String> map = Maps.newHashMap();
         map.put("IdCard", idCard);
         map.put("Name", name);
@@ -173,7 +173,7 @@ public class TencentAuthAPI {
      */
     public static IdCardPictureCheckInfoDTO idAndFaceCheck(String id, String key, String base64Str, String name,
         String idCard)
-        throws Exception {
+    {
         HashMap<String, String> map = Maps.newHashMap();
         map.put("IdCard", idCard);
         map.put("Name", name);

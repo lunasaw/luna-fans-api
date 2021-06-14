@@ -126,7 +126,7 @@ public class TencentApiTest {
     private TencentConfigValue tencentConfigValue;
 
     @Test
-    public void atest() throws Exception {
+    public void atest() {
         System.out.println(tencentPayMqConfigValue.getExchange());
         System.out.println(tencentConfigValue.getSecretid());
         JSONObject jsonObject = TencentMarketApi.checkIdByLuna(tencentConfigValue.getSkyEyeSecretid(), tencentConfigValue.getSkyEyeSecretkey(), "陈章月", "500384199911072412");

@@ -41,7 +41,7 @@ public class TencentGroupPersonApi {
      */
     public static List<FaceInfosDTO> detectFace(String id, String key, String image, Integer maxFaceNum,
         Integer needFaceAttributes)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         if (HttpUtils.isNetUrl(image)) {
             map.put("Url", image);
@@ -89,7 +89,7 @@ public class TencentGroupPersonApi {
      */
     public static ErrorDTO createFaceDatabase(String id, String key, String groupId, String groupName, String tag,
         List<String> groupExDescriptions)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         if (CollectionUtils.isNotEmpty(groupExDescriptions)) {
             map.put("GroupExDescriptions", groupExDescriptions);
@@ -128,7 +128,7 @@ public class TencentGroupPersonApi {
      */
     public static ErrorDTO modifyFaceDatabase(String id, String key, String groupId, String groupName, String tag,
         List<GroupExDescriptionInfoDTO> groupExDescriptioninfo)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         if (!groupExDescriptioninfo.isEmpty()) {
             map.put("GroupExDescriptionInfos", groupExDescriptioninfo);
@@ -158,7 +158,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static ErrorDTO deleteFaceDatabase(String id, String key, String groupId)
-        throws Exception {
+    {
         String body = "{" + "\"GroupId\":\"" + groupId + "\"" + "}";
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(id, key, "iai",
@@ -197,7 +197,7 @@ public class TencentGroupPersonApi {
     public static AddFaceResultDTO addFace(String id, String key, String groupId, String personId, String personName,
         Integer gender, String image, Integer uniquePersonControl,
         List<PersonExDescriptionInfoDTO> personExDescriptionInfoDTOS)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
@@ -242,7 +242,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static ErrorDTO deleteFace2Group(String id, String key, String personId, String groupId)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("GroupId", groupId);
         map.put("PersonId", personId);
@@ -269,7 +269,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static ErrorDTO deleteFace(String id, String key, String personId)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("PersonId", personId);
         String body = JSON.toJSONString(map);
@@ -294,7 +294,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static PersonBaseInfoResultDTO getFace(String id, String key, String personId)
-        throws Exception {
+    {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("PersonId", personId);
         String body = JSON.toJSONString(map);
@@ -323,7 +323,7 @@ public class TencentGroupPersonApi {
      */
     public static CheckPersonInGroupResultDTO searchFaceByGroup(String id, String key, String image,
         List<String> groupIds)
-        throws Exception {
+    {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
@@ -359,7 +359,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static boolean getVerifyFaceByPersonId(String id, String key, String personId, String image)
-        throws Exception {
+    {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
@@ -393,7 +393,7 @@ public class TencentGroupPersonApi {
      * @throws Exception
      */
     public static boolean getVerifyPersonByPersonId(String id, String key, String personId, String image)
-        throws Exception {
+    {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
