@@ -1,13 +1,10 @@
-package com.luna.tencent.dto.card;
+package com.luna.tencent.response.card;
 
 /**
- * @Package: com.luna.common.dto
- * @ClassName: MobileCheckInfoDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 14:02
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class IdCardAndBankCardCheckInfoDTO {
+public class IdCardAndBankCardCheckInfoResponse {
 
     /**
      * 认证结果码

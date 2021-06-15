@@ -1,11 +1,8 @@
 package com.luna.tencent.dto.group;
 
 /**
- * @Package: com.luna.dto.dto
- * @ClassName: GroupExDescriptionInfoDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 15:06
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
 public class GroupExDescriptionInfoDTO {
 

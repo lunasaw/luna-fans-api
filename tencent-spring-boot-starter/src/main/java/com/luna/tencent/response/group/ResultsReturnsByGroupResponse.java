@@ -13,28 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
 import com.luna.tencent.dto.face.FaceInfosDTO;
-import com.tencentcloudapi.iai.v20180301.models.GroupCandidate;
 
-public class ResultsReturnsByGroupDTO {
+/**
+ * @author luna
+ * 2021/6/14
+ */
+public class ResultsReturnsByGroupResponse {
 
     /**
      * 检测出的人脸框位置。
      */
-    private FaceInfosDTO     FaceRect;
+    private FaceInfosDTO             FaceRect;
 
     /**
      * 识别结果。
      */
-    private GroupCandidate[] GroupCandidates;
+    private GroupCandidateResponse[] GroupCandidates;
 
     /**
      * 检测出的人脸图片状态返回码。0 表示正常。
      * -1601代表不符合图片质量控制要求，此时Candidate内容为空。
      */
-    private Long             RetCode;
+    private Long                     RetCode;
 
     /**
      * Get 检测出的人脸框位置。
@@ -59,7 +62,7 @@ public class ResultsReturnsByGroupDTO {
      * 
      * @return GroupCandidates 识别结果。
      */
-    public GroupCandidate[] getGroupCandidates() {
+    public GroupCandidateResponse[] getGroupCandidates() {
         return this.GroupCandidates;
     }
 
@@ -68,7 +71,7 @@ public class ResultsReturnsByGroupDTO {
      * 
      * @param GroupCandidates 识别结果。
      */
-    public void setGroupCandidates(GroupCandidate[] GroupCandidates) {
+    public void setGroupCandidates(GroupCandidateResponse[] GroupCandidates) {
         this.GroupCandidates = GroupCandidates;
     }
 

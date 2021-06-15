@@ -6,6 +6,7 @@ import java.util.Map;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.text.Base64Util;
+import com.luna.tencent.response.card.IdCardPictureCheckInfoResponse;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -14,11 +15,10 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
-import com.luna.tencent.dto.card.IdCardAndBankCardCheckInfoDTO;
-import com.luna.tencent.dto.card.IdCardCheckInfoDTO;
-import com.luna.tencent.dto.card.IdCardOcrDTO;
-import com.luna.tencent.dto.card.IdCardPictureCheckInfoDTO;
-import com.luna.tencent.dto.message.MobileCheckInfoDTO;
+import com.luna.tencent.response.card.IdCardAndBankCardCheckInfoResponse;
+import com.luna.tencent.response.card.IdCardCheckInfoResponse;
+import com.luna.tencent.response.card.IdCardOcrResponse;
+import com.luna.tencent.response.message.MobileCheckInfoResponse;
 
 public class TencentAuthAPI {
 
@@ -54,7 +54,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static IdCardOcrDTO idOcrCheck(String id, String key, String image, String cardSide,
+    public static IdCardOcrResponse idOcrCheck(String id, String key, String image, String cardSide,
         HashMap<String, Boolean> config) {
         HashMap<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
@@ -77,7 +77,7 @@ public class TencentAuthAPI {
             HttpUtils.doPost("https://" + TencentConstant.HOST_OCR, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         log.info("idOcrCheck start id={}, key={}, response={}", id, key, s);
-        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardOcrDTO.class);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardOcrResponse.class);
     }
 
     /**
@@ -90,7 +90,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static MobileCheckInfoDTO mobileCheck(String id, String key, String mobile) {
+    public static MobileCheckInfoResponse mobileCheck(String id, String key, String mobile) {
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("Mobile", mobile);
         String body = JSON.toJSONString(map);
@@ -101,7 +101,7 @@ public class TencentAuthAPI {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         log.info("mobileCheck start id={}, key={}, response={}", id, key, s);
-        return JSON.parseObject(JSON.parseObject(s).getString("Response"), MobileCheckInfoDTO.class);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), MobileCheckInfoResponse.class);
     }
 
     /**
@@ -116,7 +116,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static IdCardCheckInfoDTO idNameCheck(String id, String key, String idCard, String name) {
+    public static IdCardCheckInfoResponse idNameCheck(String id, String key, String idCard, String name) {
         HashMap<String, String> map = Maps.newHashMap();
         map.put("IdCard", idCard);
         map.put("Name", name);
@@ -129,7 +129,7 @@ public class TencentAuthAPI {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         log.info("idNameCheck start id={}, key={}, response={}", id, key, s);
-        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardCheckInfoDTO.class);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardCheckInfoResponse.class);
     }
 
     /**
@@ -144,7 +144,8 @@ public class TencentAuthAPI {
      * @return 在网时长区间 格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
      * @throws Exception
      */
-    public static IdCardAndBankCardCheckInfoDTO bankCardIdNameCheck(String id, String key, String idCard, String name,
+    public static IdCardAndBankCardCheckInfoResponse bankCardIdNameCheck(String id, String key, String idCard,
+        String name,
         String bankCard)
     {
         HashMap<String, String> map = Maps.newHashMap();
@@ -159,7 +160,7 @@ public class TencentAuthAPI {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         log.info("bankCardIdNameCheck start id={}, key={}, response={}", id, key, s);
-        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardAndBankCardCheckInfoDTO.class);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardAndBankCardCheckInfoResponse.class);
     }
 
     /**
@@ -171,7 +172,7 @@ public class TencentAuthAPI {
      * @return
      * @throws Exception
      */
-    public static IdCardPictureCheckInfoDTO idAndFaceCheck(String id, String key, String base64Str, String name,
+    public static IdCardPictureCheckInfoResponse idAndFaceCheck(String id, String key, String base64Str, String name,
         String idCard)
     {
         HashMap<String, String> map = Maps.newHashMap();
@@ -186,7 +187,7 @@ public class TencentAuthAPI {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CARD, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
         log.info("idAndFaceCheck start id={}, key={}, response={}", id, key, s);
-        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardPictureCheckInfoDTO.class);
+        return JSON.parseObject(JSON.parseObject(s).getString("Response"), IdCardPictureCheckInfoResponse.class);
     }
 
 }

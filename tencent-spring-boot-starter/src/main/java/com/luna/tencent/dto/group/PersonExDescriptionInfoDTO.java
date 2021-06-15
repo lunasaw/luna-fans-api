@@ -15,6 +15,10 @@
  */
 package com.luna.tencent.dto.group;
 
+/**
+ * @author luna
+ * 2021/6/14
+ */
 public class PersonExDescriptionInfoDTO {
 
     /**

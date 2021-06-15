@@ -1,13 +1,10 @@
-package com.luna.tencent.dto.message;
+package com.luna.tencent.response.message;
 
 /**
- * @Package: com.luna.common.dto
- * @ClassName: MobileCheckInfoDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 14:02
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class MobileCheckInfoDTO {
+public class MobileCheckInfoResponse {
 
     /**
      * 收费结果码：

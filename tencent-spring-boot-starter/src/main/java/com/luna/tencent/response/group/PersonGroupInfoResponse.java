@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
-public class PersonGroupInfoDTO {
+public class PersonGroupInfoResponse {
 
     /**
      * 包含此人员的人员库ID

@@ -1,11 +1,8 @@
-package com.luna.tencent.dto.message;
+package com.luna.tencent.response.message;
 
 /**
- * @Package: com.luna.tencent.dto
- * @ClassName: SendStatusDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 19:57
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
 public class SendStatusDTO {
 

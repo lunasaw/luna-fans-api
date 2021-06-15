@@ -1,15 +1,12 @@
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
 import com.luna.tencent.dto.error.ErrorDTO;
 
 /**
- * @Package: com.luna.tencent.dto.personGroup
- * @ClassName: CompareFaceResultDTO
- * @Author: luna
- * @CreateTime: 2020/8/14 23:28
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class CompareFaceResultDTO {
+public class CompareFaceResponse {
 
     private Float    score;
 

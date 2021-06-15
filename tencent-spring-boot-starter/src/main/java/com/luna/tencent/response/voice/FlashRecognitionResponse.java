@@ -3,10 +3,10 @@
 // (powered by FernFlower decompiler)
 //
 
-package com.luna.tencent.dto.voice;
+package com.luna.tencent.response.voice;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 /**

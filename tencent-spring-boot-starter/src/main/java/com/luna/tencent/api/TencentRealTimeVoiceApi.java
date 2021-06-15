@@ -11,21 +11,15 @@ import com.luna.common.text.Base64Util;
 import com.luna.common.text.ByteUtils;
 import com.luna.common.text.MapUtils;
 import com.luna.common.text.RandomStrUtil;
-import com.luna.tencent.dto.voice.SpeechRecognitionResponse;
-import com.tencent.asr.constant.AsrConstant;
-import com.tencent.asr.model.SpeechRecognitionSysConfig;
+import com.luna.tencent.response.voice.SpeechRecognitionResponse;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  * @author luna
@@ -161,7 +155,8 @@ public class TencentRealTimeVoiceApi {
         }
     }
 
-    public static List<SpeechRecognitionResponse> realTimeSpeechRecognition(String appId, String secretid, String key,
+    public static List<SpeechRecognitionResponse> realTimeSpeechRecognitionWithFile(String appId, String secretid,
+        String key,
         Integer projectId, Integer subServiceType,
         String engineModelType, String hotwordId, String customizationId,
         Integer resultTextFormat, Integer resType, Integer voiceFormat, Integer needvad, Integer vadSilenceTime,
@@ -182,7 +177,8 @@ public class TencentRealTimeVoiceApi {
             wordInfo, FileTools.read(fileName));
     }
 
-    public static List<SpeechRecognitionResponse> realTimeSpeechRecognition(String appId, String secretid, String key,
+    public static List<SpeechRecognitionResponse> realTimeSpeechRecognitionWithFile(String appId, String secretid,
+        String key,
         String engineModelType, String hotwordId, String customizationId,
         Integer voiceFormat, Integer needvad, Integer vadSilenceTime,
         Integer seq,
@@ -190,7 +186,7 @@ public class TencentRealTimeVoiceApi {
         Long expired, Long nonce, Integer filterDirty, Integer filterModal, Integer filterPunc,
         Integer convertNumMode,
         Integer wordInfo, String fileName) {
-        return realTimeSpeechRecognition(appId, secretid, key,
+        return realTimeSpeechRecognitionWithFile(appId, secretid, key,
             0, 1,
             engineModelType, hotwordId, customizationId,
             0, 0, voiceFormat, needvad, vadSilenceTime,
@@ -200,14 +196,43 @@ public class TencentRealTimeVoiceApi {
             wordInfo, fileName);
     }
 
-    public static List<SpeechRecognitionResponse> realTimeSpeechRecognition16kZh(String appId, String secretid,
+    public static List<SpeechRecognitionResponse> realTimeSpeechRecognition(String appId, String secretid, String key,
+        String engineModelType, String hotwordId, String customizationId,
+        Integer voiceFormat, Integer needvad, Integer vadSilenceTime,
+        Integer seq,
+        Integer end, String voiceId, Long timestamp,
+        Long expired, Long nonce, Integer filterDirty, Integer filterModal, Integer filterPunc,
+        Integer convertNumMode,
+        Integer wordInfo, byte[] bytes) {
+        return realTimeSpeechRecognition(appId, secretid, key,
+            0, 1,
+            engineModelType, hotwordId, customizationId,
+            0, 0, voiceFormat, needvad, vadSilenceTime,
+            seq, end, 0, voiceId, timestamp,
+            expired, nonce, filterDirty, filterModal, filterPunc,
+            convertNumMode,
+            wordInfo, bytes);
+    }
+
+    public static List<SpeechRecognitionResponse> realTimeSpeechRecognitionWithFile16kZh(String appId, String secretid,
         String key,
         Integer voiceFormat, String fileName) {
-        return realTimeSpeechRecognition(appId, secretid, key,
+        return realTimeSpeechRecognitionWithFile(appId, secretid, key,
             "16k_zh", null, null, voiceFormat, null, null,
             0, 0, RandomStrUtil.generateNonceStr(), System.currentTimeMillis() / 1000L,
             System.currentTimeMillis() / 1000L + 86400L, System.currentTimeMillis() / 1000L, null, null, null,
             null,
             null, fileName);
+    }
+
+    public static List<SpeechRecognitionResponse> realTimeSpeechRecognition16kZh(String appId, String secretid,
+        String key,
+        Integer voiceFormat, byte[] bytes) {
+        return realTimeSpeechRecognition(appId, secretid, key,
+            "16k_zh", null, null, voiceFormat, null, null,
+            0, 0, RandomStrUtil.generateNonceStr(), System.currentTimeMillis() / 1000L,
+            System.currentTimeMillis() / 1000L + 86400L, System.currentTimeMillis() / 1000L, null, null, null,
+            null,
+            null, bytes);
     }
 }

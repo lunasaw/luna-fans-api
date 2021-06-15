@@ -1,11 +1,8 @@
 package com.luna.tencent.dto.map;
 
 /**
- * @Package: com.luna.tencent.dto.map
- * @ClassName: AddressComponentDTO
- * @Author: luna
- * @CreateTime: 2020/8/15 10:48
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
 public class AddressComponentDTO {
 

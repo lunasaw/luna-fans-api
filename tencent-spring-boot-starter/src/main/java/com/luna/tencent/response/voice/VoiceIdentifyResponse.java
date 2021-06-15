@@ -1,4 +1,4 @@
-package com.luna.tencent.dto.voice;
+package com.luna.tencent.response.voice;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -6,7 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @author luna
  * 2021/6/14
  */
-public class VoiceIdentifyResultDTO {
+public class VoiceIdentifyResponse {
 
     @JSONField(name = "RequestId")
     private String requestId;

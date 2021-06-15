@@ -13,14 +13,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.luna.tencent.dto.group.CompareFaceResultDTO;
+import com.luna.tencent.response.group.CompareFaceResponse;
 
 /**
- * @Package: com.luna.tencent.api
- * @ClassName: TencentPersonGroupApi
- * @Author: luna
- * @CreateTime: 2020/8/14 23:31
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
 public class TencentFaceApi {
 
@@ -36,8 +33,7 @@ public class TencentFaceApi {
      * @return
      * @throws Exception
      */
-    public static CompareFaceResultDTO faceComparison(String id, String key, String imageA, String imageB)
-    {
+    public static CompareFaceResponse faceComparison(String id, String key, String imageA, String imageB) {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(imageA)) {
             map.put("ImageA", imageA);
@@ -61,7 +57,7 @@ public class TencentFaceApi {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CHECK, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         String response = JSON.parseObject(s).getString("Response");
-        CompareFaceResultDTO resultDTO = JSON.parseObject(response, CompareFaceResultDTO.class);
+        CompareFaceResponse resultDTO = JSON.parseObject(response, CompareFaceResponse.class);
         log.info("idNameCheck start id={}, key={}, resultDTO={}", id, key, JSON.toJSONString(resultDTO));
         return resultDTO;
     }
@@ -75,8 +71,7 @@ public class TencentFaceApi {
      * @return
      * @throws Exception
      */
-    public static boolean faceLiveCheck(String id, String key, String image)
-    {
+    public static boolean faceLiveCheck(String id, String key, String image) {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);

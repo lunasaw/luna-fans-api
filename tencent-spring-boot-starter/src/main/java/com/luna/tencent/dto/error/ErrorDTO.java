@@ -1,11 +1,8 @@
 package com.luna.tencent.dto.error;
 
 /**
- * @Package: com.luna.dto.dto
- * @ClassName: ErrorDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 15:23
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
 public class ErrorDTO {
 

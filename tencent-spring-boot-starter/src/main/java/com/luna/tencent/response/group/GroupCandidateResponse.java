@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
-public class GroupCandidateDTO {
+public class GroupCandidateResponse {
 
     /**
      * 人员库ID 。
@@ -25,7 +25,7 @@ public class GroupCandidateDTO {
     /**
      * 识别出的最相似候选人。
      */
-    private CandidateDTO[] Candidates;
+    private CandidateResponse[] Candidates;
 
     /**
      * Get 人员库ID 。
@@ -50,16 +50,16 @@ public class GroupCandidateDTO {
      * 
      * @return Candidates 识别出的最相似候选人。
      */
-    public CandidateDTO[] getCandidates() {
+    public CandidateResponse[] getCandidates() {
         return Candidates;
     }
 
     /**
      * Set 识别出的最相似候选人。
      * 
-     * @param Candidates 识别出的最相似候选人。
+     * @param candidates 识别出的最相似候选人。
      */
-    public void setCandidates(CandidateDTO[] candidates) {
+    public void setCandidates(CandidateResponse[] candidates) {
         Candidates = candidates;
     }
 }

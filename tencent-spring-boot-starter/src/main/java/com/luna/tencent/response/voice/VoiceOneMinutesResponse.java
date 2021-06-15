@@ -1,4 +1,4 @@
-package com.luna.tencent.dto.voice;
+package com.luna.tencent.response.voice;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.tencentcloudapi.asr.v20190614.models.SentenceWord;
@@ -9,7 +9,7 @@ import java.util.List;
  * @author luna
  * 2021/6/14
  */
-public class VoiceOneMinutesResultDTO {
+public class VoiceOneMinutesResponse {
 
     @JSONField(name = "WordList")
     private List<SentenceWord> wordList;

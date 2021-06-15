@@ -9,6 +9,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * @author luna
+ * 2021/6/14
  */
 public class HotWordDTO {
 

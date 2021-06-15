@@ -3,11 +3,14 @@
 // (powered by FernFlower decompiler)
 //
 
-package com.luna.tencent.dto.voice;
+package com.luna.tencent.response.voice;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import java.util.List;
 
+/**
+ * @author luna
+ */
 public class SpeechRecognitionResponseResult {
     @JSONField(name = "slice_type")
     private Integer                                    sliceType;

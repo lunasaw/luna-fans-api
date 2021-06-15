@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
-public class CandidateDTO {
+/**
+ * @author luna
+ * 2021/6/14
+ */
+public class CandidateResponse {
 
     /**
      * 人员ID
@@ -54,7 +58,7 @@ public class CandidateDTO {
      * 包含此人员的人员库及描述字段内容列表
      * 注意：此字段可能返回 null，表示取不到有效值。
      */
-    private PersonGroupInfoDTO[] PersonGroupInfos;
+    private PersonGroupInfoResponse[] PersonGroupInfos;
 
     /**
      * Get 人员ID
@@ -185,7 +189,7 @@ public class CandidateDTO {
      * @return PersonGroupInfos 包含此人员的人员库及描述字段内容列表
      * 注意：此字段可能返回 null，表示取不到有效值。
      */
-    public PersonGroupInfoDTO[] getPersonGroupInfos() {
+    public PersonGroupInfoResponse[] getPersonGroupInfos() {
         return PersonGroupInfos;
     }
 
@@ -196,7 +200,7 @@ public class CandidateDTO {
      * @param personGroupInfos 包含此人员的人员库及描述字段内容列表
      * 注意：此字段可能返回 null，表示取不到有效值。
      */
-    public void setPersonGroupInfos(PersonGroupInfoDTO[] personGroupInfos) {
+    public void setPersonGroupInfos(PersonGroupInfoResponse[] personGroupInfos) {
         PersonGroupInfos = personGroupInfos;
     }
 }

@@ -9,9 +9,11 @@ import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
 import com.luna.common.text.MapUtils;
-import com.luna.tencent.dto.voice.FlashRecognitionResponse;
-import com.luna.tencent.dto.voice.VoiceIdentifyResultDTO;
-import com.luna.tencent.dto.voice.VoiceOneMinutesResultDTO;
+import com.luna.tencent.dto.voice.VoiceFastIdentifyDTO;
+import com.luna.tencent.dto.voice.VoiceOneMinutesDTO;
+import com.luna.tencent.response.voice.FlashRecognitionResponse;
+import com.luna.tencent.response.voice.VoiceIdentifyResponse;
+import com.luna.tencent.response.voice.VoiceOneMinutesResponse;
 import com.tencentcloudapi.asr.v20190614.models.TaskStatus;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -72,7 +74,7 @@ public class TencntVoiceApi {
      * @param convertNumMode 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字，3: 打开数学相关数字转换。默认值为 1。
      * @param filterPunc 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
      */
-    public static VoiceIdentifyResultDTO voiceIdentify(String id, String key, String engineModelType,
+    public static VoiceIdentifyResponse voiceIdentify(String id, String key, String engineModelType,
         Integer channelNum,
         Integer resTextFormat, Integer sourceType, Integer speakerDiarization, Integer speakerNumber,
         String callbackUrl,
@@ -108,14 +110,14 @@ public class TencntVoiceApi {
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         String response = JSON.parseObject(s).getString("Response");
         System.out.println(s);
-        VoiceIdentifyResultDTO voiceIdentifyResultDTO =
-            JSON.parseObject(response, VoiceIdentifyResultDTO.class);
+        VoiceIdentifyResponse voiceIdentifyResultDTO =
+            JSON.parseObject(response, VoiceIdentifyResponse.class);
         log.info("voiceIdentify start id={}, key={}, voiceIdentifyResultDTO={}", id, key,
             JSON.toJSONString(voiceIdentifyResultDTO));
         return voiceIdentifyResultDTO;
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithFile(String id, String key,
+    public static VoiceIdentifyResponse voiceIdentifyWithFile(String id, String key,
         String engineModelType, Integer channelNum,
         Integer resTextFormat, Integer speakerDiarization, Integer speakerNumber, String callbackUrl,
         String data,
@@ -126,7 +128,7 @@ public class TencntVoiceApi {
             null, data, dataLen, hotwordId, filterDirty, filterModal, convertNumMode, filterPunc);
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithFile(String id, String key,
+    public static VoiceIdentifyResponse voiceIdentifyWithFile(String id, String key,
         String engineModelType, String data,
         Integer dataLen) {
         return voiceIdentifyWithFile(id, key, engineModelType, 1,
@@ -134,18 +136,18 @@ public class TencntVoiceApi {
             data, dataLen, null, 0, 0, 1, 0);
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithFile16kZh(String id, String key, String data,
+    public static VoiceIdentifyResponse voiceIdentifyWithFile16kZh(String id, String key, String data,
         Integer dataLen) {
         return voiceIdentifyWithFile(id, key, "16k_zh", data, dataLen);
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithFile16kZh(String id, String key,
+    public static VoiceIdentifyResponse voiceIdentifyWithFile16kZh(String id, String key,
         String fileName) {
         byte[] read = FileTools.read(fileName);
         return voiceIdentifyWithFile16kZh(id, key, Base64Util.encodeBase64(read), read.length);
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithUrl(String id, String key,
+    public static VoiceIdentifyResponse voiceIdentifyWithUrl(String id, String key,
         String engineModelType, Integer channelNum,
         Integer resTextFormat, Integer speakerDiarization, Integer speakerNumber, String callbackUrl,
         String url,
@@ -156,7 +158,7 @@ public class TencntVoiceApi {
             url, null, dataLen, hotwordId, filterDirty, filterModal, convertNumMode, filterPunc);
     }
 
-    public static VoiceIdentifyResultDTO voiceIdentifyWithUrl(String id, String key,
+    public static VoiceIdentifyResponse voiceIdentifyWithUrl(String id, String key,
         String engineModelType, String url) {
         return voiceIdentifyWithUrl(id, key, engineModelType, 1,
             0, 0, 0, null,
@@ -197,9 +199,9 @@ public class TencntVoiceApi {
         Long timestamp, Integer speakerDiarization, Integer filterDirty, Integer filterModal, Integer filterPunc,
         Integer convertNumMode, Integer wordInfo, Integer firstChannelOnly, String fileName) {
         String type = fileName.substring(fileName.lastIndexOf(".") + 1);
-        return voiceFastIdentify(appId, secretid, key, engineType, type,
+        return voiceFastIdentify(appId, secretid, key, new VoiceFastIdentifyDTO(engineType, type,
             timestamp, speakerDiarization, filterDirty, filterModal, filterPunc,
-            convertNumMode, wordInfo, firstChannelOnly, fileName);
+            convertNumMode, wordInfo, firstChannelOnly, fileName));
     }
 
     public static FlashRecognitionResponse voiceFastIdentifyWith16kZh(String appId, String secretid, String key,
@@ -215,40 +217,24 @@ public class TencntVoiceApi {
      * @param appId 用户在腾讯云注册账号的 AppId，可以进入 API 密钥管理页面 获取。
      * @param secretid 用户在腾讯云注册账号 AppId 对应的 SecretId，可以进入 API 密钥管理页面 获取。 https://console.cloud.tencent.com/cam/capi
      * @param key
-     * @param engineType 引擎模型类型。
-     * 8k_zh：8k 中文普通话通用；
-     * 16k_zh：16k 中文普通话通用；
-     * 16k_zh_video：16k 音视频领域。
-     * @param voiceFormat 音频格式。支持 wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac。
-     * @param timestamp 当前 UNIX 时间戳，如果与当前时间相差超过3分钟，会报签名失败错误。
-     * @param speakerDiarization 是否开启说话人分离（目前支持中文普通话引擎），默认为0，0：不开启，1：开启。
-     * @param filterDirty 是否过滤脏词（目前支持中文普通话引擎），默认为0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 *。
-     * @param filterModal 是否过滤语气词（目前支持中文普通话引擎），默认为0。0：不过滤语气词；1：部分过滤；2：严格过滤。
-     * @param filterPunc 是否过滤标点符号（目前支持中文普通话引擎），默认为0。0：不过滤，1：过滤句末标点，2：过滤所有标点。
-     * @param convertNumMode 是否进行阿拉伯数字智能转换，默认为1。0：全部转为中文数字；1：根据场景智能转换为阿拉伯数字。
-     * @param wordInfo 是否显示词级别时间戳，默认为0。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。
-     * @param firstChannelOnly 是否只识别首个声道，默认为1。0：识别所有声道；1：识别首个声道。
-     * @param fileName
+     * @param voiceFastIdentifyDTO
      * @return
      */
     public static FlashRecognitionResponse voiceFastIdentify(String appId, String secretid, String key,
-        String engineType,
-        String voiceFormat,
-        Long timestamp, Integer speakerDiarization, Integer filterDirty, Integer filterModal, Integer filterPunc,
-        Integer convertNumMode, Integer wordInfo, Integer firstChannelOnly, String fileName) {
+        VoiceFastIdentifyDTO voiceFastIdentifyDTO) {
 
         TreeMap<String, Object> map = Maps.newTreeMap();
         MapUtils.putIfNull(map, "secretid", secretid);
-        MapUtils.putIfNull(map, "engine_type", engineType);
-        MapUtils.putIfNull(map, "voice_format", voiceFormat);
-        MapUtils.putIfNull(map, "timestamp", timestamp);
-        MapUtils.putIfNull(map, "speaker_diarization", speakerDiarization);
-        MapUtils.putIfNull(map, "filter_dirty", filterDirty);
-        MapUtils.putIfNull(map, "filter_modal", filterModal);
-        MapUtils.putIfNull(map, "filter_punc", filterPunc);
-        MapUtils.putIfNull(map, "convert_num_mode", convertNumMode);
-        MapUtils.putIfNull(map, "word_info", wordInfo);
-        MapUtils.putIfNull(map, "first_channel_only", firstChannelOnly);
+        MapUtils.putIfNull(map, "engine_type", voiceFastIdentifyDTO.getEngineType());
+        MapUtils.putIfNull(map, "voice_format", voiceFastIdentifyDTO.getVoiceFormat());
+        MapUtils.putIfNull(map, "timestamp", voiceFastIdentifyDTO.getTimestamp());
+        MapUtils.putIfNull(map, "speaker_diarization", voiceFastIdentifyDTO.getSpeakerDiarization());
+        MapUtils.putIfNull(map, "filter_dirty", voiceFastIdentifyDTO.getFilterDirty());
+        MapUtils.putIfNull(map, "filter_modal", voiceFastIdentifyDTO.getFilterModal());
+        MapUtils.putIfNull(map, "filter_punc", voiceFastIdentifyDTO.getFilterPunc());
+        MapUtils.putIfNull(map, "convert_num_mode", voiceFastIdentifyDTO.getConvertNumMode());
+        MapUtils.putIfNull(map, "word_info", voiceFastIdentifyDTO.getWordInfo());
+        MapUtils.putIfNull(map, "first_channel_only", voiceFastIdentifyDTO.getFirstChannelOnly());
 
         String url =
             HttpUtils.buildUrlObject("https://" + TencentConstant.VOICE_FAST_IDENTIFY, "/asr/flash/v1/" + appId, map);
@@ -261,7 +247,7 @@ public class TencntVoiceApi {
                         HttpUtilsConstant.MEDIA,
                         "Authorization", authorization),
                     null,
-                    FileTools.read(fileName));
+                    FileTools.read(voiceFastIdentifyDTO.getFileName()));
             String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
             FlashRecognitionResponse flashRecognitionResponse =
                 JSON.parseObject(response, FlashRecognitionResponse.class);
@@ -284,59 +270,27 @@ public class TencntVoiceApi {
      * @param secretid
      * @param key
      * @param projectId 腾讯云项目 ID，可填 0，总长度不超过 1024 字节。
-     * @param engSerViceType 引擎模型类型。
-     * 电话场景：
-     * • 8k_en：电话 8k 英语；
-     * • 8k_zh：电话 8k 中文普通话通用；
-     * 非电话场景：
-     * • 16k_zh：16k 中文普通话通用；
-     * • 16k_en：16k 英语；
-     * • 16k_ca：16k 粤语；
-     * • 16k_ja：16k 日语；
-     * •16k_wuu-SH：16k 上海话方言；
-     * •16k_zh_medical：16k 医疗。
-     * @param sourceType 语音数据来源。0：语音 URL；1：语音数据（post body）
-     * @param voiceFormat 识别音频的音频格式。mp3、wav。
-     * @param usrAudioKey 用户端对此任务的唯一标识，用户自助生成，用于用户查找识别结果。
-     * @param url 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于
-     * 2048，需进行urlencode编码。音频时间长度要小于60s。
-     * @param data 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音
-     * URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据长度要小于3MB（Base64后）。
-     * @param dataLen 数据长度，单位为字节。当 SourceType 值为1（本地语音数据上传）时必须填写，当 SourceType 值为0（语音
-     * URL上传）可不写（此数据长度为数据未进行base64编码时的数据长度）。
-     * @param hotwordId 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-     * @param filterDirty 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
-     * @param filterModal 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
-     * @param filterPunc 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
-     * @param convertNumMode 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1。
-     * @param wordInfo 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH。默认值为
-     * 0。
      */
-    public static VoiceOneMinutesResultDTO voiceIdentifyOneMinutes(String secretid, String key, Integer projectId,
-        String engSerViceType,
-        Integer sourceType, String voiceFormat, String usrAudioKey,
-        String url, String data,
-        Integer dataLen, Integer hotwordId, Integer filterDirty, Integer filterModal, Integer filterPunc,
-        Integer convertNumMode,
-        Integer wordInfo) {
+    public static VoiceOneMinutesResponse voiceIdentifyOneMinutes(String secretid, String key, Integer projectId,
+        VoiceOneMinutesDTO voiceOneMinutesDTO) {
         HashMap<String, Object> map = Maps.newHashMap();
 
         MapUtils.putIfNull(map, "ProjectId", projectId);
         // 子服务类型。2： 一句话识别。
         MapUtils.putIfNull(map, "SubServiceType", 2);
-        MapUtils.putIfNull(map, "EngSerViceType", engSerViceType);
-        MapUtils.putIfNull(map, "SourceType", sourceType);
-        MapUtils.putIfNull(map, "VoiceFormat", voiceFormat);
-        MapUtils.putIfNull(map, "UsrAudioKey", usrAudioKey);
-        MapUtils.putIfNull(map, "Url", url);
-        MapUtils.putIfNull(map, "Data", data);
-        MapUtils.putIfNull(map, "DataLen", dataLen);
-        MapUtils.putIfNull(map, "HotwordId", hotwordId);
-        MapUtils.putIfNull(map, "FilterDirty", filterDirty);
-        MapUtils.putIfNull(map, "FilterModal", filterModal);
-        MapUtils.putIfNull(map, "FilterPunc", filterPunc);
-        MapUtils.putIfNull(map, "ConvertNumMode", convertNumMode);
-        MapUtils.putIfNull(map, "WordInfo", wordInfo);
+        MapUtils.putIfNull(map, "EngSerViceType", voiceOneMinutesDTO.getEngSerViceType());
+        MapUtils.putIfNull(map, "SourceType", voiceOneMinutesDTO.getSourceType());
+        MapUtils.putIfNull(map, "VoiceFormat", voiceOneMinutesDTO.getVoiceFormat());
+        MapUtils.putIfNull(map, "UsrAudioKey", voiceOneMinutesDTO.getUsrAudioKey());
+        MapUtils.putIfNull(map, "Url", voiceOneMinutesDTO.getUrl());
+        MapUtils.putIfNull(map, "Data", voiceOneMinutesDTO.getData());
+        MapUtils.putIfNull(map, "DataLen", voiceOneMinutesDTO.getDataLen());
+        MapUtils.putIfNull(map, "HotwordId", voiceOneMinutesDTO.getHotwordId());
+        MapUtils.putIfNull(map, "FilterDirty", voiceOneMinutesDTO.getFilterDirty());
+        MapUtils.putIfNull(map, "FilterModal", voiceOneMinutesDTO.getFilterModal());
+        MapUtils.putIfNull(map, "FilterPunc", voiceOneMinutesDTO.getFilterPunc());
+        MapUtils.putIfNull(map, "ConvertNumMode", voiceOneMinutesDTO.getConvertNumMode());
+        MapUtils.putIfNull(map, "WordInfo", voiceOneMinutesDTO.getWordInfo());
 
         String body = JSONArray.toJSONString(map);
         Map postHeader =
@@ -346,13 +300,13 @@ public class TencntVoiceApi {
             HttpUtils.doPost("https://" + TencentConstant.FACE_CHECK, "/", postHeader, null, body);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         String response = JSON.parseObject(s).getString("Response");
-        VoiceOneMinutesResultDTO voiceOneMinutesResultDTO = JSON.parseObject(response, VoiceOneMinutesResultDTO.class);
-        log.info("voiceIdentifyOneMinutes start secretid={}, key={}, voiceOneMinutesResultDTO={}", secretid, key,
-            JSON.toJSONString(voiceOneMinutesResultDTO));
-        return voiceOneMinutesResultDTO;
+        VoiceOneMinutesResponse voiceOneMinutesResponse = JSON.parseObject(response, VoiceOneMinutesResponse.class);
+        log.info("voiceIdentifyOneMinutes start secretid={}, key={}, voiceOneMinutesResponse={}", secretid, key,
+            JSON.toJSONString(voiceOneMinutesResponse));
+        return voiceOneMinutesResponse;
     }
 
-    public static VoiceOneMinutesResultDTO voiceIdentifyOneMinutesWithFile(String secretid, String key,
+    public static VoiceOneMinutesResponse voiceIdentifyOneMinutesWithFile(String secretid, String key,
         Integer projectId,
         String engSerViceType, String voiceFormat, String usrAudioKey,
         String fileName, Integer hotwordId, Integer filterDirty, Integer filterModal, Integer filterPunc,
@@ -360,13 +314,13 @@ public class TencntVoiceApi {
         Integer wordInfo) {
         byte[] read = FileTools.read(fileName);
         return voiceIdentifyOneMinutes(secretid, key, projectId,
-            engSerViceType, 1, voiceFormat, usrAudioKey,
-            null, Base64.getEncoder().encodeToString(read),
-            read.length, hotwordId, filterDirty, filterModal, filterPunc,
-            convertNumMode, wordInfo);
+            new VoiceOneMinutesDTO(engSerViceType, 1, voiceFormat, usrAudioKey,
+                null, Base64.getEncoder().encodeToString(read),
+                read.length, hotwordId, filterDirty, filterModal, filterPunc,
+                convertNumMode, wordInfo));
     }
 
-    public static VoiceOneMinutesResultDTO voiceIdentifyOneMinutesWithFile16kZh(String secretid, String key,
+    public static VoiceOneMinutesResponse voiceIdentifyOneMinutesWithFile16kZh(String secretid, String key,
         String voiceFormat, String usrAudioKey, String fileName) {
         return voiceIdentifyOneMinutesWithFile(secretid, key, 0,
             "16k_zh", voiceFormat, usrAudioKey,

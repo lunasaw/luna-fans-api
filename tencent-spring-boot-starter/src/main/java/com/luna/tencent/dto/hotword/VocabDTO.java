@@ -7,6 +7,10 @@ package com.luna.tencent.dto.hotword;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+/**
+ * @author luna
+ * 2021/6/14
+ */
 public class VocabDTO {
     @JSONField(name = "Name")
     private String       name;

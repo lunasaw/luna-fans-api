@@ -1,13 +1,10 @@
-package com.luna.tencent.dto.card;
+package com.luna.tencent.response.card;
 
 /**
- * @Package: com.luna.dto.dto
- * @ClassName: IdCardPictureCheckInfoDTO
- * @Author: luna
- * @CreateTime: 2020/8/6 14:18
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class IdCardPictureCheckInfoDTO {
+public class IdCardPictureCheckInfoResponse {
 
     private String Result;
 

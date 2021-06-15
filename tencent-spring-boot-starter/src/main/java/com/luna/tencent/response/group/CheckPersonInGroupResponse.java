@@ -1,21 +1,18 @@
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
 import java.util.List;
 
 /**
- * @Package: com.luna.tencent.dto.personGroup
- * @ClassName: CheckPersonInGroupResultDTO
- * @Author: luna
- * @CreateTime: 2020/8/14 23:17
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class CheckPersonInGroupResultDTO {
+public class CheckPersonInGroupResponse {
 
     private String                         faceModelVersion;
 
     private Integer                        faceNum;
 
-    private List<ResultsReturnsByGroupDTO> resultsReturnsByGroup;
+    private List<ResultsReturnsByGroupResponse> resultsReturnsByGroup;
 
     public String getFaceModelVersion() {
         return faceModelVersion;
@@ -33,11 +30,11 @@ public class CheckPersonInGroupResultDTO {
         this.faceNum = faceNum;
     }
 
-    public List<ResultsReturnsByGroupDTO> getResultsReturnsByGroup() {
+    public List<ResultsReturnsByGroupResponse> getResultsReturnsByGroup() {
         return resultsReturnsByGroup;
     }
 
-    public void setResultsReturnsByGroup(List<ResultsReturnsByGroupDTO> resultsReturnsByGroup) {
+    public void setResultsReturnsByGroup(List<ResultsReturnsByGroupResponse> resultsReturnsByGroup) {
         this.resultsReturnsByGroup = resultsReturnsByGroup;
     }
 }

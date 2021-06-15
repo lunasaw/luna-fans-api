@@ -1,4 +1,4 @@
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.luna.tencent.dto.error.ErrorDTO;
  * @CreateTime: 2020/8/14 22:56
  * @Description:
  */
-public class PersonBaseInfoResultDTO {
+public class PersonBaseInfoResponse {
 
     /**
      * 人员名称

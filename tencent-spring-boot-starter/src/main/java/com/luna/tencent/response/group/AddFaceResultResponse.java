@@ -1,16 +1,13 @@
-package com.luna.tencent.dto.group;
+package com.luna.tencent.response.group;
 
 import com.luna.tencent.dto.error.ErrorDTO;
 import com.luna.tencent.dto.face.FaceInfosDTO;
 
 /**
- * @Package: com.luna.tencent.dto.face
- * @ClassName: AddFaceResultDTO
- * @Author: luna
- * @CreateTime: 2020/8/14 20:37
- * @Description:
+ * @author luna
+ * 2021/6/14
  */
-public class AddFaceResultDTO {
+public class AddFaceResultResponse {
 
     private FaceInfosDTO faceRect;
 
