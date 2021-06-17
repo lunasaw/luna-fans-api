@@ -1,6 +1,8 @@
+
+
 # baidu-spring-boot-starter
 
-baidu-spring-boot-starter-baidu
+[baidu-spring-boot-starter-baidu](https://github.com/lunasaw/baidu-spring-boot-starter)
 
 <!-- PROJECT SHIELDS -->
 
@@ -15,40 +17,39 @@ baidu-spring-boot-starter-baidu
 <br />
 
 <p align="center">
-  <a href="https://github.com/lunasaw/baidu-spring-boot-starter/">
-    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/czy1024/baidu-spring-boot-starter/">
+    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grloxhfbmkj30f00760sv.jpg" alt="Logo" width="540" height="258">
   </a>
 
-<h3 align="center">百度开放平台工具</h3>
+  <h3 align="center">百度开放平台工具</h3>
   <p align="center">
     百度开放平台工具
     <br />
-    <a href="https://github.com/lunasaw/baidu-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/czy1024/baidu-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="">查看Demo</a>
     ·
     <a href="">报告Bug</a>
     ·
-    <a href="https://github.com/lunasaw/baidu-spring-boot-starter/issues">提出新特性</a>
+    <a href="https://github.com/czy1024/baidu-spring-boot-starter/issues">提出新特性</a>
   </p>
 
 </p>
 
 ## 日志
+ 增加人员组人脸识别相关接口
 
-增加语音识别和成相关接口
+ 增加语音识别合成相关接口
 
-增加人脸库相关操作，人脸搜索，比对等
+ 增加百度人脸识别,卡证审核等Api请求封装
 
-增加百度人脸识别,卡证审核等Api请求封装
+ 增加百度OcrApi接口
 
-增加百度OcrApi接口
+ 增加百度身体状态检测
 
-增加百度身体状态检测
-
-增加百度身份证审核
-
+ 增加百度身份证审核
+ 
 ## 目录
 
 - [安装步骤](#安装步骤)
@@ -57,23 +58,23 @@ baidu-spring-boot-starter-baidu
 
 ###### **安装步骤**
 
+
 引入项目依赖
 
 ```xml
 
-<dependency>
-    <groupId>io.github.lunasaw</groupId>
-    <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-    <version>2.2.1-RELEASE</version>
-</dependency>
+    <dependency>
+        <groupId>io.github.lunasaw</groupId>
+        <artifactId>baidu-spring-boot-starter-baidu</artifactId>
+        <version>2.2.3-RELEASE</version>
+    </dependency>
 ```
-在配置文件application.properties加入可选配置
+在配置文件 application.yml 加入可选配置
 
 ```text
        # 百度API
 luna:
   baidu:
-    enable: true
     // 生成地址https://console.bce.baidu.com/
     appId: xxx
     appKey: xxxx
@@ -97,20 +98,24 @@ public class BaiduApiTest {
 
     @Test
     public void atest() throws Exception {
-        System.out.println(BaiduApiContent.BAIDU_KEY);
         baiduKeyGenerate.getAuth();
     }
 }
 
 
 ```
+结果即刻得到配置数据,进而调用api里的静态方法完成调用
+[文档链接](https://lunasaw.github.io/baidu-spring-boot-starter/)
 
-[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
 
 ### 文件目录说明
 eg:
 
 ```
+├── LICENSE
+├── README.md
+├── baidu-spring-boot-starter.iml
+├── pom.xml
 ├── src
 │   ├── main
 │   │   ├── java
@@ -118,7 +123,7 @@ eg:
 │   │   │       └── luna
 │   │   │           └── baidu
 │   │   │               ├── api
-│   │   │               │   ├── BaiduAddress.java
+│   │   │               │   ├── BaiduAddressApi.java
 │   │   │               │   ├── BaiduApiConstant.java
 │   │   │               │   ├── BaiduBodyApi.java
 │   │   │               │   ├── BaiduCreationApi.java
@@ -127,59 +132,77 @@ eg:
 │   │   │               │   ├── BaiduOcrApi.java
 │   │   │               │   ├── BaiduTextApi.java
 │   │   │               │   ├── BaiduUserFaceApi.java
-│   │   │               │   ├── BaiduVoiceApi.java
-│   │   │               │   └── VoiceSDK.java
+│   │   │               │   └── BaiduVoiceApi.java
 │   │   │               ├── config
 │   │   │               │   ├── BaiduAutoConfiguration.java
 │   │   │               │   ├── BaiduKeyGenerate.java
 │   │   │               │   └── BaiduProperties.java
-│   │   │               └── dto
-│   │   │                   ├── body
-│   │   │                   │   ├── BodyAttributesDTO.java
-│   │   │                   │   ├── BodyCheckDTO.java
-│   │   │                   │   └── BodyScoreNameDTO.java
-│   │   │                   ├── face
-│   │   │                   │   ├── FaceCheckResultDTO.java
-│   │   │                   │   ├── FaceLiveResultDTO.java
-│   │   │                   │   ├── FaceMatchResultDTO.java
-│   │   │                   │   ├── IdCardAllinfoDTO.java
-│   │   │                   │   ├── IdCardCheckResultDTO.java
-│   │   │                   │   ├── IdCardInfoDTO.java
-│   │   │                   │   ├── UserFaceListResultDTO.java
-│   │   │                   │   ├── UserFaceResultDTO.java
-│   │   │                   │   ├── UserInfoListDTO.java
-│   │   │                   │   └── UserInfoResultDTO.java
-│   │   │                   ├── goods
-│   │   │                   │   ├── BaiKeInfoDTO.java
-│   │   │                   │   └── GoodsInfoDTO.java
-│   │   │                   ├── location
-│   │   │                   │   └── LocationDO.java
-│   │   │                   ├── text
-│   │   │                   │   ├── TextSimilarDTO.java
-│   │   │                   │   ├── TextSimilarResultDTO.java
-│   │   │                   │   ├── TextSimilarityDTO.java
-│   │   │                   │   └── TextSimnetResultDTO.java
-│   │   │                   ├── voice
-│   │   │                   │   ├── VoiceCheckDTO.java
-│   │   │                   │   └── VoiceSynthesisDTO.java
-│   │   │                   ├── word
-│   │   │                   │   ├── BodyDTO.java
-│   │   │                   │   ├── FaceDTO.java
-│   │   │                   │   └── WordDTO.java
-│   │   │                   └── write
-│   │   │                       ├── CompositionDTO.java
-│   │   │                       ├── EventContextDTO.java
-│   │   │                       ├── EventKeyDTO.java
-│   │   │                       ├── HotEventContentDTO.java
-│   │   │                       ├── HotEventDTO.java
-│   │   │                       ├── VeinDTO.java
-│   │   │                       └── WriterResultCheckDTO.java
+│   │   │               ├── dto
+│   │   │               │   ├── body
+│   │   │               │   │   ├── BodyAttributesDTO.java
+│   │   │               │   │   ├── BodyCheckDTO.java
+│   │   │               │   │   └── BodyScoreNameDTO.java
+│   │   │               │   ├── face
+│   │   │               │   │   ├── BaiduUserFaceApi.java
+│   │   │               │   │   ├── FaceCheckResultDTO.java
+│   │   │               │   │   ├── FaceLiveResultDTO.java
+│   │   │               │   │   ├── FaceMatchResultDTO.java
+│   │   │               │   │   ├── FaceResultDTO.java
+│   │   │               │   │   ├── IdCardAllInfoDTO.java
+│   │   │               │   │   ├── IdCardCheckResultDTO.java
+│   │   │               │   │   ├── IdCardInfoDTO.java
+│   │   │               │   │   ├── UserFaceListResultDTO.java
+│   │   │               │   │   ├── UserFaceResultDTO.java
+│   │   │               │   │   ├── UserInfoListDTO.java
+│   │   │               │   │   └── UserInfoResultDTO.java
+│   │   │               │   ├── goods
+│   │   │               │   │   ├── BaiKeInfoDTO.java
+│   │   │               │   │   └── GoodsInfoDTO.java
+│   │   │               │   ├── location
+│   │   │               │   │   └── LocationDO.java
+│   │   │               │   ├── map
+│   │   │               │   │   ├── ip2address
+│   │   │               │   │   │   ├── AddressContentDTO.java
+│   │   │               │   │   │   ├── AddressDetailDTO.java
+│   │   │               │   │   │   ├── AddressResultDTO.java
+│   │   │               │   │   │   └── LocationDTO.java
+│   │   │               │   │   └── weather
+│   │   │               │   │       ├── WeatherForecastDTO.java
+│   │   │               │   │       ├── WeatherLocationDTO.java
+│   │   │               │   │       ├── WeatherNowDTO.java
+│   │   │               │   │       └── WeatherResultDTO.java
+│   │   │               │   ├── text
+│   │   │               │   │   ├── TextSimilarDTO.java
+│   │   │               │   │   ├── TextSimilarResultDTO.java
+│   │   │               │   │   ├── TextSimilarityDTO.java
+│   │   │               │   │   └── TextSimnetResultDTO.java
+│   │   │               │   ├── voice
+│   │   │               │   │   └── VoiceWriteResultDTO.java
+│   │   │               │   ├── word
+│   │   │               │   │   ├── BodyDTO.java
+│   │   │               │   │   ├── FaceDTO.java
+│   │   │               │   │   └── WordDTO.java
+│   │   │               │   └── write
+│   │   │               │       ├── CompositionDTO.java
+│   │   │               │       ├── EventContextDTO.java
+│   │   │               │       ├── EventKeyDTO.java
+│   │   │               │       ├── HotEventContentDTO.java
+│   │   │               │       ├── HotEventDTO.java
+│   │   │               │       ├── VeinDTO.java
+│   │   │               │       └── WriterResultCheckDTO.java
+│   │   │               └── req
+│   │   │                   ├── VoiceCheckReq.java
+│   │   │                   ├── VoiceSynthesisReq.java
+│   │   │                   └── face
+│   │   │                       └── FaceLiveReq.java
 │   │   └── resources
 │   │       ├── META-INF
 │   │       │   └── spring.factories
 │   │       ├── application-pro.yml
 │   │       └── log
 │   │           └── logback.xml
+│   └── test
+│       └── java
 
 
 ```
@@ -190,17 +213,17 @@ eg:
 
 
 <!-- links -->
-[your-project-path]:lunasaw/baidu-spring-boot-starter
-[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
-[contributors-url]: https://github.com/lunasaw/baidu-spring-boot-starter/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
-[forks-url]: https://github.com/lunasaw/baidu-spring-boot-starter/network/members
-[stars-shield]: https://img.shields.io/github/stars/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
-[stars-url]: https://github.com/lunasaw/baidu-spring-boot-starter/stargazers
-[issues-shield]: https://img.shields.io/github/issues/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/lunasaw/baidu-spring-boot-starter.svg
-[license-shield]: https://img.shields.io/github/license/lunasaw/baidu-spring-boot-starter.svg?style=flat-square
-[license-url]: https://github.com/lunasaw/baidu-spring-boot-starter/blob/master/LICENSE.txt
+[your-project-path]:czy1024/baidu-spring-boot-starter
+[contributors-shield]: https://img.shields.io/github/contributors/czy1024/baidu-spring-boot-starter.svg?style=flat-square
+[contributors-url]: https://github.com/czy1024/baidu-spring-boot-starter/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/czy1024/baidu-spring-boot-starter.svg?style=flat-square
+[forks-url]: https://github.com/czy1024/baidu-spring-boot-starter/network/members
+[stars-shield]: https://img.shields.io/github/stars/czy1024/baidu-spring-boot-starter.svg?style=flat-square
+[stars-url]: https://github.com/czy1024/baidu-spring-boot-starter/stargazers
+[issues-shield]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/czy1024/baidu-spring-boot-starter.svg
+[license-shield]: https://img.shields.io/github/license/czy1024/baidu-spring-boot-starter.svg?style=flat-square
+[license-url]: https://github.com/czy1024/baidu-spring-boot-starter/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/baidu-spring-boot-starter
 

@@ -1,7 +1,6 @@
 luna:
   baidu:
     # \u767E\u5EA6API
-    enable: true
     appId: xxx
     appKey: xxxx
     secretKey: xxx
