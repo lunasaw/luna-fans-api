@@ -52,11 +52,17 @@
  
 ## 目录
 
+- [文档](#文档)
 - [安装步骤](#安装步骤)
 - [文件目录说明](#文件目录说明)
-- [部署](#部署)
+
+### 文档
+
+[文档链接](https://lunasaw.github.io/baidu-spring-boot-starter/)
+
 
 ###### **安装步骤**
+
 
 
 引入项目依赖
@@ -105,7 +111,6 @@ public class BaiduApiTest {
 
 ```
 结果即刻得到配置数据,进而调用api里的静态方法完成调用
-[文档链接](https://lunasaw.github.io/baidu-spring-boot-starter/)
 
 
 ### 文件目录说明
@@ -207,9 +212,6 @@ eg:
 
 ```
 
-### 部署
-
-暂无
 
 
 <!-- links -->
