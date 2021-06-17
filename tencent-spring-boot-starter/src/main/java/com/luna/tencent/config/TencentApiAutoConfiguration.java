@@ -21,10 +21,10 @@ import org.springframework.context.annotation.Configuration;
  * @createTime 2021年03月27日 17:06:00
  */
 @Configuration
-@ConditionalOnProperty(prefix = "luna.ten", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "luna.ten", name = "secretId")
 @EnableConfigurationProperties({TencentApiConfigProperties.class, TencentPayConfigProperties.class,
     TencentPayMqConfigProperties.class})
-public class TencentConfiguration {
+public class TencentApiAutoConfiguration {
 
     @Autowired
     private TencentApiConfigProperties   tencentApiConfigProperties;
@@ -35,7 +35,7 @@ public class TencentConfiguration {
     @Autowired
     private TencentPayMqConfigProperties tencentPayMqConfigProperties;
 
-    public TencentConfiguration(TencentApiConfigProperties tencentApiConfigProperties,
+    public TencentApiAutoConfiguration(TencentApiConfigProperties tencentApiConfigProperties,
         TencentPayConfigProperties tencentPayConfigProperties,
         TencentPayMqConfigProperties tencentPayMqConfigProperties) {
         this.tencentApiConfigProperties = tencentApiConfigProperties;

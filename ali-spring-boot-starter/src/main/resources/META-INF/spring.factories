@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.luna.ali.config.AliConfiguration
+com.luna.ali.config.AliOssAutoConfiguration,com.luna.ali.config.AliPayAutoConfiguration

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.luna.tencent.config.TencentConfiguration
+com.luna.tencent.config.TencentApiAutoConfiguration,com.luna.tencent.config.TencentPayAutoConfiguration
