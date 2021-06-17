@@ -1,6 +1,6 @@
 # tencent-spring-boot-starter
 
-tencent-spring-boot-starter-tencent
+[tencent-spring-boot-starter-tencent](https://github.com/lunasaw/tencent-spring-boot-starter)
 
 <!-- PROJECT SHIELDS -->
 
@@ -13,12 +13,10 @@ tencent-spring-boot-starter-tencent
 
 <!-- PROJECT LOGO -->
 <br />
-
 <p align="center">
   <a href="https://github.com/lunasaw/tencent-spring-boot-starter/">
-    <img src="https://www.isczy.tk/luna-image-bed/img/20210119001858.png" alt="Logo" width="80" height="80">
+    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grlpk1p1wwj30hb0a0ab2.jpg" alt="Logo" width="800" height="250">
   </a>
-
 <h3 align="center">腾讯开放平台工具</h3>
   <p align="center">
     腾讯开放平台工具 springboot starter
@@ -37,6 +35,8 @@ tencent-spring-boot-starter-tencent
 
 ## 日志
 
+增加语音识别相关接口，包括语音合成，实时识别等
+
 增加微信支付Api接口
 
 - 超时30分钟自动关闭订单
@@ -50,28 +50,35 @@ tencent-spring-boot-starter-tencent
 
 - [安装步骤](#安装步骤)
 - [文件目录说明](#文件目录说明)
+- [文档](#文档)
 - [作者](#作者)
 
 ###### **安装步骤**
 
 1. Get a free API Key at [https://console.cloud.tencent.com](https://console.cloud.tencent.com)
-2. 找到config目录下的xxxConfigValue,TencentPayConfigValue
+
 3. Clone the repo
 
 ```sh
 git clone https://github.com/lunasaw/tencent-spring-boot-starter.git
 ```
 
-引入项目依赖
+直接使用引入项目依赖
 
 ```xml
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>tencent-spring-boot-starter-tencent</artifactId>
-    <version>2.2.1-RELEASE</version>
+    <version>2.2.3-RELEASE</version>
 </dependency>
 ```
+
+### 文档
+
+[文档链接](https://lunasaw.github.io/tencent-spring-boot-starter/)
+
+
 
 在配置文件application.properties加入可选配置
 
@@ -145,87 +152,109 @@ eg:
 
 ```
 ./
-├── java
-│   └── com
-│       └── luna
-│           └── tencent
-│               ├── api
-│               │   ├── TencentAuthAPI.java
-│               │   ├── TencentCloudAPITC3.java
-│               │   ├── TencentConstant.java
-│               │   ├── TencentFaceApi.java
-│               │   ├── TencentGroupPersonApi.java
-│               │   ├── TencentMapApi.java
-│               │   ├── TencentMarketApi.java
-│               │   └── TencentMessageApi.java
-│               ├── config
-│               │   ├── TencentConfigValue.java
-│               │   ├── TencentConfiguration.java
-│               │   ├── TencentPayConfigValue.java
-│               │   ├── TencentPayMqConfigValue.java
-│               │   └── TencentPayQueueConfig.java
-│               ├── dto
-│               │   ├── card
-│               │   │   ├── IdCardAndBankCardCheckInfoDTO.java
-│               │   │   ├── IdCardCheckInfoDTO.java
-│               │   │   ├── IdCardOcrDTO.java
-│               │   │   └── IdCardPictureCheckInfoDTO.java
-│               │   ├── error
-│               │   │   └── ErrorDTO.java
-│               │   ├── face
-│               │   │   └── FaceInfosDTO.java
-│               │   ├── group
-│               │   │   ├── AddFaceResultDTO.java
-│               │   │   ├── CandidateDTO.java
-│               │   │   ├── CheckPersonInGroupResultDTO.java
-│               │   │   ├── CompareFaceResultDTO.java
-│               │   │   ├── FaceAttributesInfoDTO.java
-│               │   │   ├── FaceHairAttributesInfoDTO.java
-│               │   │   ├── GroupCandidateDTO.java
-│               │   │   ├── GroupExDescriptionInfoDTO.java
-│               │   │   ├── PersonBaseInfoResultDTO.java
-│               │   │   ├── PersonExDescriptionInfoDTO.java
-│               │   │   ├── PersonGroupInfoDTO.java
-│               │   │   └── ResultsReturnsByGroupDTO.java
-│               │   ├── map
-│               │   │   ├── AddressComponentDTO.java
-│               │   │   ├── AddressResultDTO.java
-│               │   │   ├── Ip2AddressResultDTO.java
-│               │   │   ├── KeyWordSearchResultDTO.java
-│               │   │   └── LocationDTO.java
-│               │   └── message
-│               │       ├── MobileCheckInfoDTO.java
-│               │       └── SendStatusDTO.java
-│               └── pay
-│                   ├── api
-│                   │   └── TencentPayApi.java
-│                   ├── constant
-│                   │   └── TencentPayConstant.java
-│                   ├── dto
-│                   │   ├── CloseOderResultDTO.java
-│                   │   ├── NotifyResultDTO.java
-│                   │   └── QueryResultDTO.java
-│                   ├── entity
-│                   │   └── TencentPayEntity.java
-│                   ├── mq
-│                   │   ├── DelayMessageListener.java
-│                   │   └── OrderMessageListener.java
-│                   └── nortify
-│                       ├── TencentPayNotifyController.java
-│                       └── TencentPayNotifyService.java
-└── resources
-    ├── META-INF
-    │   └── spring.factories
-    ├── application-pro.yml
-    └── log
-        └── logback.xml
-
+├── README.md
+├── _config.yml
+├── logo
+│   └── tencent-logo.png
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── luna
+│   │   │           └── tencent
+│   │   │               ├── api
+│   │   │               │   ├── TencentAuthAPI.java
+│   │   │               │   ├── TencentCloudAPITC3.java
+│   │   │               │   ├── TencentConstant.java
+│   │   │               │   ├── TencentFaceApi.java
+│   │   │               │   ├── TencentGroupPersonApi.java
+│   │   │               │   ├── TencentHotWordsApi.java
+│   │   │               │   ├── TencentMapApi.java
+│   │   │               │   ├── TencentMarketApi.java
+│   │   │               │   ├── TencentMessageApi.java
+│   │   │               │   ├── TencentRealTimeVoiceApi.java
+│   │   │               │   └── TencntVoiceApi.java
+│   │   │               ├── config
+│   │   │               │   ├── TencentApiAutoConfiguration.java
+│   │   │               │   ├── TencentPayAutoConfiguration.java
+│   │   │               │   └── TencentPayQueueConfiguration.java
+│   │   │               ├── dto
+│   │   │               │   ├── error
+│   │   │               │   │   └── ErrorDTO.java
+│   │   │               │   ├── face
+│   │   │               │   │   └── FaceInfosDTO.java
+│   │   │               │   ├── group
+│   │   │               │   │   ├── GroupExDescriptionInfoDTO.java
+│   │   │               │   │   └── PersonExDescriptionInfoDTO.java
+│   │   │               │   ├── hotword
+│   │   │               │   │   ├── HotWordDTO.java
+│   │   │               │   │   └── VocabDTO.java
+│   │   │               │   ├── map
+│   │   │               │   │   ├── AddressComponentDTO.java
+│   │   │               │   │   ├── AddressResultDTO.java
+│   │   │               │   │   ├── Ip2AddressResultDTO.java
+│   │   │               │   │   ├── KeyWordSearchResultDTO.java
+│   │   │               │   │   └── LocationDTO.java
+│   │   │               │   └── voice
+│   │   │               │       ├── VoiceFastIdentifyDTO.java
+│   │   │               │       └── VoiceOneMinutesDTO.java
+│   │   │               ├── pay
+│   │   │               │   ├── api
+│   │   │               │   │   └── TencentPayApi.java
+│   │   │               │   ├── constant
+│   │   │               │   │   └── TencentPayConstant.java
+│   │   │               │   ├── dto
+│   │   │               │   │   ├── CloseOderResultDTO.java
+│   │   │               │   │   ├── NotifyResultDTO.java
+│   │   │               │   │   └── QueryResultDTO.java
+│   │   │               │   ├── entity
+│   │   │               │   │   └── TencentPayEntity.java
+│   │   │               │   ├── mq
+│   │   │               │   │   ├── DelayMessageListener.java
+│   │   │               │   │   └── OrderMessageListener.java
+│   │   │               │   └── nortify
+│   │   │               │       ├── TencentPayNotifyController.java
+│   │   │               │       └── TencentPayNotifyService.java
+│   │   │               ├── properties
+│   │   │               │   ├── TencentApiConfigProperties.java
+│   │   │               │   ├── TencentPayConfigProperties.java
+│   │   │               │   └── TencentPayMqConfigProperties.java
+│   │   │               └── response
+│   │   │                   ├── card
+│   │   │                   │   ├── IdCardAndBankCardCheckInfoResponse.java
+│   │   │                   │   ├── IdCardCheckInfoResponse.java
+│   │   │                   │   ├── IdCardOcrResponse.java
+│   │   │                   │   └── IdCardPictureCheckInfoResponse.java
+│   │   │                   ├── group
+│   │   │                   │   ├── AddFaceResultResponse.java
+│   │   │                   │   ├── CandidateResponse.java
+│   │   │                   │   ├── CheckPersonInGroupResponse.java
+│   │   │                   │   ├── CompareFaceResponse.java
+│   │   │                   │   ├── GroupCandidateResponse.java
+│   │   │                   │   ├── PersonBaseInfoResponse.java
+│   │   │                   │   ├── PersonGroupInfoResponse.java
+│   │   │                   │   └── ResultsReturnsByGroupResponse.java
+│   │   │                   ├── message
+│   │   │                   │   ├── MobileCheckInfoResponse.java
+│   │   │                   │   └── SendStatusDTO.java
+│   │   │                   └── voice
+│   │   │                       ├── FlashRecognitionResponse.java
+│   │   │                       ├── SpeechRecognitionResponse.java
+│   │   │                       ├── SpeechRecognitionResponseResult.java
+│   │   │                       ├── VoiceIdentifyResponse.java
+│   │   │                       └── VoiceOneMinutesResponse.java
+│   │   └── resources
+│   │       ├── META-INF
+│   │       │   └── spring.factories
+│   │       ├── application-pro.yml
+│   │       └── log
+│   │           └── logback.xml
+│   └── test
+│       └── java
 
 ```
 
-### 部署
-
-暂无
 
 ### 作者
 
