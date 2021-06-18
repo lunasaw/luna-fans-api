@@ -9,7 +9,7 @@
         <version>2.2.3-RELEASE</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
-    <version>2.2.3-RELEASE</version>
+    <version>2.2.4-RELEASE</version>
     <name>tencent-spring-boot-starter</name>
     <description>Tencent API Toolkit</description>
     <url>https://lunasaw.github.io/fans-spring-boot-starter/tencent-spring-boot-starter</url>
