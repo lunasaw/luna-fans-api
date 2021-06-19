@@ -94,7 +94,6 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
         UserFaceResultDTO userFaceResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceResultDTO.class);
         log.info("faceUserAdd success userFaceResultDTO={}", userFaceResultDTO);
