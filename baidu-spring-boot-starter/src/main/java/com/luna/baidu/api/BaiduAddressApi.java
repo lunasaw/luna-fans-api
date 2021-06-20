@@ -3,6 +3,7 @@ package com.luna.baidu.api;
 import java.util.HashMap;
 
 import com.luna.common.net.HttpUtils;
+import com.luna.common.text.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
@@ -22,7 +23,7 @@ public class BaiduAddressApi {
      * ip 地址获取地图地址
      * 
      * @param ak 密钥
-     * @param coor coor不出现、或为空：百度墨卡托坐标，即百度米制坐标
+     * @param coor coor 不出现、或为空：百度墨卡托坐标，即百度米制坐标
      * coor = bd09ll：百度经纬度坐标，在国测局坐标基础之上二次加密而来
      * coor = gcj02：国测局02坐标，在原始GPS坐标基础上，按照国家测绘行业统一要求，加密后的坐标
      * @param ip ip地址
@@ -36,7 +37,7 @@ public class BaiduAddressApi {
         if (StringUtils.isNotBlank(ip)) {
             map.put("ip", ip);
         }
-        map.put("ak", ak);
+        map.put("ak", ak);;
         HttpResponse httpResponse =
             HttpUtils.doGet(BaiduApiConstant.MAP_HOST, BaiduApiConstant.IP_TO_ADDRESS, null, map);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);

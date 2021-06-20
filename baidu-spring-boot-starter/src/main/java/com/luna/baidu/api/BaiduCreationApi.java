@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
@@ -26,11 +27,10 @@ public class BaiduCreationApi {
      * @throws IOException
      */
     public static List<HotEventDTO> hotEvent(String key, String domain) {
-        String body = "{\"domain\":\"" + domain + "\"}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.HOT_EVENT,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
             ImmutableMap.of("access_token", key),
-            body);
+            JSON.toJSONString(ImmutableMap.of("domain", domain)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         JSONObject response = JSON.parseObject(s);
         return JSON.parseArray(response.getString("content"), HotEventDTO.class);
@@ -46,7 +46,7 @@ public class BaiduCreationApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.EVENT_CONTEXT,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
             ImmutableMap.of("access_token", key),
-            "");
+            StringUtils.EMPTY);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         JSONObject response = JSON.parseObject(s);
         return JSON.parseArray(response.getString("content"), EventContextDTO.class);

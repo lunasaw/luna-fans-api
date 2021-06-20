@@ -3,13 +3,12 @@ package com.luna.tencent.api;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
 import com.luna.common.text.ByteUtils;
-import com.luna.common.text.MapUtils;
+import com.luna.common.text.ChainTreeMap;
 import com.luna.common.text.RandomStrUtil;
 import com.luna.tencent.response.voice.SpeechRecognitionResponse;
 import org.apache.http.HttpResponse;
@@ -18,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -92,30 +90,29 @@ public class TencentRealTimeVoiceApi {
         Long expired, Long nonce, Integer filterDirty, Integer filterModal, Integer filterPunc,
         Integer convertNumMode,
         Integer wordInfo, byte[] bytes) {
-        TreeMap<String, Object> map = Maps.newTreeMap();
 
-        MapUtils.putIfNull(map, "projectid", projectId);
-        MapUtils.putIfNull(map, "secretid", secretid);
-        MapUtils.putIfNull(map, "sub_service_type", subServiceType);
-        MapUtils.putIfNull(map, "engine_model_type", engineModelType);
-        MapUtils.putIfNull(map, "hotword_id", hotwordId);
-        MapUtils.putIfNull(map, "customization_id", customizationId);
-        MapUtils.putIfNull(map, "result_text_format", resultTextFormat);
-        MapUtils.putIfNull(map, "res_type", resType);
-        MapUtils.putIfNull(map, "voice_format", voiceFormat);
-        MapUtils.putIfNull(map, "needvad", needvad);
-        MapUtils.putIfNull(map, "vad_silence_time", vadSilenceTime);
+        ChainTreeMap<String, Object> chainHashMap = ChainTreeMap.newChainMap();
 
-        MapUtils.putIfNull(map, "source", source);
-        MapUtils.putIfNull(map, "voice_id", voiceId);
-        MapUtils.putIfNull(map, "timestamp", timestamp);
-        MapUtils.putIfNull(map, "expired", expired);
-        MapUtils.putIfNull(map, "nonce", nonce);
-        MapUtils.putIfNull(map, "filter_dirty", filterDirty);
-        MapUtils.putIfNull(map, "filter_modal", filterModal);
-        MapUtils.putIfNull(map, "filter_punc", filterPunc);
-        MapUtils.putIfNull(map, "convert_num_mode", convertNumMode);
-        MapUtils.putIfNull(map, "word_info", wordInfo);
+        ChainTreeMap<String, Object> map = chainHashMap
+            .putIfNotEmpty("projectid", projectId)
+            .putIfNotEmpty("secretid", secretid)
+            .putIfNotEmpty("sub_service_type", subServiceType)
+            .putIfNotEmpty("engine_model_type", engineModelType)
+            .putIfNotEmpty("hotword_id", hotwordId)
+            .putIfNotEmpty("customization_id", customizationId)
+            .putIfNotEmpty("result_text_format", resultTextFormat)
+            .putIfNotEmpty("res_type", resType).putIfNotEmpty("voice_format", voiceFormat)
+            .putIfNotEmpty("needvad", needvad)
+            .putIfNotEmpty("vad_silence_time", vadSilenceTime)
+            .putIfNotEmpty("source", source)
+            .putIfNotEmpty("voice_id", voiceId)
+            .putIfNotEmpty("timestamp", timestamp)
+            .putIfNotEmpty("expired", expired)
+            .putIfNotEmpty("nonce", nonce).putIfNotEmpty("filter_dirty", filterDirty)
+            .putIfNotEmpty("filter_modal", filterModal)
+            .putIfNotEmpty("filter_punc", filterPunc)
+            .putIfNotEmpty("convert_num_mode", convertNumMode)
+            .putIfNotEmpty("word_info", wordInfo);
 
         try {
             // http 建议每次传输200ms数据 websocket建议每次传输40ms数据
@@ -128,8 +125,8 @@ public class TencentRealTimeVoiceApi {
                 if (size.get() == 0) {
                     tempEnd = 1;
                 }
-                MapUtils.putIfNull(map, "seq", tempSeq++);
-                MapUtils.putIfNull(map, "end", tempEnd);
+                map.putIfNotEmpty("seq", tempSeq++);
+                map.putIfNotEmpty("end", tempEnd);
                 String url =
                     HttpUtils.buildUrlObject("http://" + TencentConstant.VOICE_FAST_IDENTIFY, "/asr/v1/" + appId, map);
                 String post = url.replace("http://", "POST");

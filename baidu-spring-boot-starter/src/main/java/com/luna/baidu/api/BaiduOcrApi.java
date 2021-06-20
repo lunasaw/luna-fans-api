@@ -55,8 +55,9 @@ public class BaiduOcrApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
             ImmutableMap.of("access_token", key),
             HttpUtils.urlEncode(ImmutableMap.of(imageType, image, "language_type", languageType)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        log.info("baiDuOcr success response={}", response);
+        return JSON.parseArray(JSON.parseObject(response).get("words_result").toString(), WordDTO.class);
     }
 
     public static List<WordDTO> baiDuOcrWithBase64(String key, String image, String languageType) {
@@ -79,35 +80,32 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<WordDTO> baiduOcrAndAddress(String key, String image) {
-        image = getString(image);
-        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key), image);
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
-    }
-
-    /**
-     * 字符串判断操作
-     * 
-     * @param image
-     * @return
-     */
-    private static String getString(String image) {
+    public static List<WordDTO> baiduOcrAndAddress(String key, String imageType, String image) {
         try {
-            if (HttpUtils.isNetUrl(image)) {
-                image = "url=" + URLEncoder.encode(image, CharsetKit.UTF_8);
-            } else if (Base64Util.isBase64(image)) {
-                image = "image=" + URLEncoder.encode(image, CharsetKit.UTF_8);
-            } else {
-                image = "image="
-                    + URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8);
-            }
-            return image;
+            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
+                ImmutableMap.of("access_token", key), imagePath);
+            String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+            log.info("baiduOcrAndAddress success response={}", response);
+            return JSON.parseArray(JSON.parseObject(response).get("words_result").toString(), WordDTO.class);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<WordDTO> baiduOcrAndAddressWithUrl(String key, String image) {
+        return baiduOcrAndAddress(key, ImageConstant.URL.getImageStr(), image);
+    }
+
+    public static List<WordDTO> baiduOcrAndAddressWithBase64(String key, String image) {
+        return baiduOcrAndAddress(key,
+            ImageConstant.IMAGE.getImageStr(), image);
+    }
+
+    public static List<WordDTO> baiduOcrAndAddressWithFile(String key, String image) {
+        return baiduOcrAndAddress(key,
+            ImageConstant.IMAGE.getImageStr(), Base64Util.encodeBase64(FileTools.read(image)));
     }
 
     /**
@@ -117,13 +115,31 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<WordDTO> baiduOcrAndAddressNormal(String key, String image) {
-        image = getString(image);
-        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS_NORMAL,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key), image);
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
+    public static List<WordDTO> baiduOcrAndAddressNormal(String key, String imageType, String image) {
+        try {
+            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS_NORMAL,
+                ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
+                ImmutableMap.of("access_token", key), imagePath);
+            String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+            return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public static List<WordDTO> baiduOcrAndAddressNormalWithUrl(String key, String image) {
+        return baiduOcrAndAddressNormal(key, ImageConstant.URL.getImageStr(), image);
+    }
+
+    public static List<WordDTO> baiduOcrAndAddressNormalWithBase64(String key, String image)
+        throws UnsupportedEncodingException {
+        return baiduOcrAndAddressNormal(key,
+            ImageConstant.IMAGE.getImageStr(), image);
+    }
+
+    public static List<WordDTO> baiduOcrAndAddressNormalWithFile(String key, String image) {
+        return baiduOcrAndAddressNormal(key, ImageConstant.IMAGE.getImageStr(),
+            Base64Util.encodeBase64(FileTools.read(image)));
+    }
 }

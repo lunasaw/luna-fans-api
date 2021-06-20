@@ -63,7 +63,8 @@ public class BaiduAuthApi {
         String qualityControl, String livenessControl, String spoofingControl) {
         ImmutableMap<String, String> map = ImmutableMap.<String, String>builder()
             .put("image_type", imageType)
-            .put("name", name).put("id_card_number", idCardNumber)
+            .put("name", name)
+            .put("id_card_number", idCardNumber)
             .put("quality_control", qualityControl)
             .put("liveness_control", livenessControl)
             .put("spoofing_control", spoofingControl)

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.luna.baidu.constant.ImageConstant;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
@@ -33,26 +34,28 @@ public class BaiduGoodsIdentifyApi {
      * @param baikeNum 联系百度百科条目结果数
      * @return
      */
-    public static List<GoodsInfoDTO> goodsIdentify(String key, String image, Integer baikeNum)
-    {
+    public static List<GoodsInfoDTO> goodsIdentify(String key, String image, Integer baikeNum) {
         log.info("goodsIdentify start");
-        HashMap<String, Object> params = Maps.newHashMap();
-        if (Base64Util.isBase64(image)) {
-            params.put("image", image);
-        } else {
-            params.put("image", Base64Util.encodeBase64(FileTools.read(image)));
-        }
 
-        if (baikeNum != null) {
-            params.put("baike_num", baikeNum);
-        }
+        ImmutableMap<String, Object> map =
+            ImmutableMap.<String, Object>builder().put("image", image).put("baike_num", baikeNum).build();
+
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.GOODS_IDENTIFY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
             ImmutableMap.of("access_token", key),
-            HttpUtils.urlEncode(params));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        List<GoodsInfoDTO> goodsInfoDTOS = JSON.parseArray(JSON.parseObject(s).getString("result"), GoodsInfoDTO.class);
-        log.info("goodsIdentify success goodsInfoDTOS={}", goodsInfoDTOS);
-        return goodsInfoDTOS;
+            HttpUtils.urlEncode(map));
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        List<GoodsInfoDTO> goodsInfos =
+            JSON.parseArray(JSON.parseObject(response).getString("result"), GoodsInfoDTO.class);
+        log.info("goodsIdentify success goodsInfoDTOS={}, response={}", goodsInfos, response);
+        return goodsInfos;
+    }
+
+    public static List<GoodsInfoDTO> goodsIdentifyWithBase64(String key, String image, Integer baikeNum) {
+        return goodsIdentify(key, image, baikeNum);
+    }
+
+    public static List<GoodsInfoDTO> goodsIdentifyWithFile(String key, String image, Integer baikeNum) {
+        return goodsIdentify(key, Base64Util.encodeBase64(FileTools.read(image)), baikeNum);
     }
 }

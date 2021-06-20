@@ -39,10 +39,10 @@ public class BaiduTextApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
             ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             body);
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        JSONObject jsonObject = JSON.parseObject(JSON.parseObject(s).get("item").toString());
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        JSONObject jsonObject = JSON.parseObject(JSON.parseObject(response).get("item").toString());
         String query = jsonObject.get("correct_query").toString();
-        log.info("correction success query={}, text={}", query, text);
+        log.info("correction success query={}, text={}, response={}", query, text, response);
         return query;
     }
 
@@ -72,9 +72,10 @@ public class BaiduTextApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
             ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             JSON.toJSONString(textParam));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        TextSimnetResultDTO textSimnetResultDTO = JSON.parseObject(s, TextSimnetResultDTO.class);
-        log.info("similarityText success key={},textSimnetResultDTO={}", key, JSON.toJSONString(textSimnetResultDTO));
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        TextSimnetResultDTO textSimnetResultDTO = JSON.parseObject(response, TextSimnetResultDTO.class);
+        log.info("similarityText success key={},textSimnetResultDTO={}, response={}", key,
+            JSON.toJSONString(textSimnetResultDTO), response);
         return textSimnetResultDTO;
     }
 
@@ -95,9 +96,10 @@ public class BaiduTextApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
             ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
             JSON.toJSONString(wordParam));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        TextSimilarResultDTO similarResultDTO = JSON.parseObject(s, TextSimilarResultDTO.class);
-        log.info("similarityWords success key={},similarResultDTO={}", key, JSON.toJSONString(similarResultDTO));
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        TextSimilarResultDTO similarResultDTO = JSON.parseObject(response, TextSimilarResultDTO.class);
+        log.info("similarityWords success key={},similarResultDTO={}, response={}", key,
+            JSON.toJSONString(similarResultDTO), response);
         return similarResultDTO;
     }
 

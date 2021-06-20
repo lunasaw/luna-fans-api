@@ -86,10 +86,10 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_ADD,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceResultDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceResultDTO.class);
-        log.info("faceUserAdd success userFaceResultDTO={}", userFaceResultDTO);
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceResultDTO.class);
+        log.info("faceUserAdd success userFaceResultDTO={}, response={}", userFaceResultDTO, response);
         return userFaceResultDTO;
     }
 
@@ -153,10 +153,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_UPDATE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceResultDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceResultDTO.class);
-        log.info("faceUserUpdate success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceResultDTO.class);
+        log.info("faceUserUpdate success userFaceResultDTO={}, response={}", JSON.toJSONString(userFaceResultDTO),
+            response);
         return userFaceResultDTO;
 
     }
@@ -180,8 +181,8 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("face_token", faceToken, "group_id", groupId, "user_id", userId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        Integer errorCode = JSON.parseObject(response).getInteger("error_code");
         log.info("faceUserDelete success error_code={}", errorCode);
         return errorCode == 0;
     }
@@ -201,10 +202,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_INFO,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "groupId", groupId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userInfoListDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("faceUserDelete success userInfoListDTO={}", JSON.toJSONString(userInfoListDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserInfoListDTO.class);
+        log.info("faceUserDelete success userInfoListDTO={}, response={}", JSON.toJSONString(userInfoListDTO),
+            response);
         return userInfoListDTO;
     }
 
@@ -220,10 +222,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_FACE_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserFaceListResultDTO userFaceListResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserFaceListResultDTO.class);
-        log.info("faceUserDelete success userInfoListDTO={}", JSON.toJSONString(userFaceListResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserFaceListResultDTO.class);
+        log.info("faceUserDelete success userInfoListDTO={}, response={}", JSON.toJSONString(userFaceListResultDTO),
+            response);
         return userFaceListResultDTO;
     }
 
@@ -240,9 +243,7 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("userCopy success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
@@ -263,9 +264,7 @@ public class BaiduUserFaceApi {
             JSON.toJSONString(
                 ImmutableMap.of("user_id", userId, "src_group_id", srcGroupId, "dst_group_id", dstGroupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("userCopy success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
@@ -282,10 +281,10 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_GROUP_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("start", start, "length", length)));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         List<String> groupIdList = JSON.parseArray(
-            JSON.parseObject(JSON.parseObject(s).getString("result")).getString("group_id_list"), String.class);
-        log.info("getUserGroup success groupIdList={}", groupIdList);
+            JSON.parseObject(JSON.parseObject(response).getString("result")).getString("group_id_list"), String.class);
+        log.info("getUserGroup success groupIdList={}, response={}", groupIdList, response);
         return groupIdList;
     }
 
@@ -303,9 +302,7 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("createUserGroup success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
@@ -321,9 +318,7 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        Integer errorCode = JSON.parseObject(s).getInteger("error_code");
-        log.info("deleteUserGroup success errorCode={}", errorCode);
-        return errorCode == 0;
+        return JSON.parseObject(s).getInteger("error_code") == 0;
     }
 
     /**
@@ -377,10 +372,11 @@ public class BaiduUserFaceApi {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.SEARCH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         UserInfoListDTO userFaceResultDTO =
-            JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
-        log.info("userFaceSearch success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
+            JSON.parseObject(JSON.parseObject(response).getString("result"), UserInfoListDTO.class);
+        log.info("userFaceSearch success userFaceResultDTO={}, response={}", JSON.toJSONString(userFaceResultDTO),
+            response);
         return userFaceResultDTO;
     }
 
