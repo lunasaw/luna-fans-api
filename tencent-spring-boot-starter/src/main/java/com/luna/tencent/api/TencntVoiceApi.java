@@ -8,7 +8,7 @@ import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
-import com.luna.common.text.MapUtils;
+import com.luna.common.text.ChainTreeMap;
 import com.luna.tencent.dto.voice.VoiceFastIdentifyDTO;
 import com.luna.tencent.dto.voice.VoiceOneMinutesDTO;
 import com.luna.tencent.response.voice.FlashRecognitionResponse;
@@ -223,18 +223,19 @@ public class TencntVoiceApi {
     public static FlashRecognitionResponse voiceFastIdentify(String appId, String secretid, String key,
         VoiceFastIdentifyDTO voiceFastIdentifyDTO) {
 
-        TreeMap<String, Object> map = Maps.newTreeMap();
-        MapUtils.putIfNull(map, "secretid", secretid);
-        MapUtils.putIfNull(map, "engine_type", voiceFastIdentifyDTO.getEngineType());
-        MapUtils.putIfNull(map, "voice_format", voiceFastIdentifyDTO.getVoiceFormat());
-        MapUtils.putIfNull(map, "timestamp", voiceFastIdentifyDTO.getTimestamp());
-        MapUtils.putIfNull(map, "speaker_diarization", voiceFastIdentifyDTO.getSpeakerDiarization());
-        MapUtils.putIfNull(map, "filter_dirty", voiceFastIdentifyDTO.getFilterDirty());
-        MapUtils.putIfNull(map, "filter_modal", voiceFastIdentifyDTO.getFilterModal());
-        MapUtils.putIfNull(map, "filter_punc", voiceFastIdentifyDTO.getFilterPunc());
-        MapUtils.putIfNull(map, "convert_num_mode", voiceFastIdentifyDTO.getConvertNumMode());
-        MapUtils.putIfNull(map, "word_info", voiceFastIdentifyDTO.getWordInfo());
-        MapUtils.putIfNull(map, "first_channel_only", voiceFastIdentifyDTO.getFirstChannelOnly());
+        ChainTreeMap<String, Object> map = ChainTreeMap.newChainMap();
+
+        map.putIfNotEmpty("secretid", secretid)
+            .putIfNotEmpty("engine_type", voiceFastIdentifyDTO.getEngineType())
+            .putIfNotEmpty("voice_format", voiceFastIdentifyDTO.getVoiceFormat())
+            .putIfNotEmpty("timestamp", voiceFastIdentifyDTO.getTimestamp())
+            .putIfNotEmpty("speaker_diarization", voiceFastIdentifyDTO.getSpeakerDiarization())
+            .putIfNotEmpty("filter_dirty", voiceFastIdentifyDTO.getFilterDirty())
+            .putIfNotEmpty("filter_modal", voiceFastIdentifyDTO.getFilterModal())
+            .putIfNotEmpty("filter_punc", voiceFastIdentifyDTO.getFilterPunc())
+            .putIfNotEmpty("convert_num_mode", voiceFastIdentifyDTO.getConvertNumMode())
+            .putIfNotEmpty("word_info", voiceFastIdentifyDTO.getWordInfo())
+            .putIfNotEmpty("first_channel_only", voiceFastIdentifyDTO.getFirstChannelOnly());
 
         String url =
             HttpUtils.buildUrlObject("https://" + TencentConstant.VOICE_FAST_IDENTIFY, "/asr/flash/v1/" + appId, map);

@@ -3,7 +3,6 @@ package com.luna.baidu.api;
 import java.util.HashMap;
 
 import com.luna.common.net.HttpUtils;
-import com.luna.common.text.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 

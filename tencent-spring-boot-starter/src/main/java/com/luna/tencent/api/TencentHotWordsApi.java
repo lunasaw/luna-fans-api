@@ -2,17 +2,19 @@ package com.luna.tencent.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
-import com.luna.common.text.MapUtils;
+import com.luna.common.text.ChainTreeMap;
 import com.luna.tencent.dto.hotword.HotWordDTO;
 import com.luna.tencent.dto.hotword.VocabDTO;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,12 +45,12 @@ public class TencentHotWordsApi {
      */
     public static String createHotWords(String secretid, String key, String name, String description,
         List<HotWordDTO> wordWeights, String wordWeightStr) {
-        HashMap<String, Object> map = Maps.newHashMap();
 
-        MapUtils.putIfNull(map, "Name", name);
-        MapUtils.putIfNull(map, "Description", description);
-        MapUtils.putIfNull(map, "WordWeights", wordWeights);
-        MapUtils.putIfNull(map, "WordWeightStr", wordWeightStr);
+        ChainTreeMap<String, Object> map = ChainTreeMap.newChainMap();
+        map.putIfNotEmpty("Name", name);
+        map.putIfNotEmpty("Description", description);
+        map.putIfNotEmpty("WordWeights", wordWeights);
+        map.putIfNotEmpty("WordWeightStr", wordWeightStr);
 
         String body = JSONArray.toJSONString(map);
         Map postHeader =
@@ -94,9 +96,7 @@ public class TencentHotWordsApi {
      * @param vocabId
      */
     public static byte[] downloadHotWords(String secretid, String key, String vocabId) {
-        HashMap<String, Object> map = Maps.newHashMap();
-
-        MapUtils.putIfNull(map, "VocabId", vocabId);
+        ImmutableMap<String, String> map = ImmutableMap.of("VocabId", vocabId);
         String body = JSONArray.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(secretid, key, "asr",
@@ -140,12 +140,7 @@ public class TencentHotWordsApi {
      */
     public static List<VocabDTO> getHotWordsList(String secretid, String key, List<String> tagInfos,
         String offset, String limit) {
-
-        HashMap<String, Object> map = Maps.newHashMap();
-        MapUtils.putIfNull(map, "TagInfos", tagInfos);
-        MapUtils.putIfNull(map, "Offset", offset);
-        MapUtils.putIfNull(map, "Limit", limit);
-
+        ImmutableMap<String, Object> map = ImmutableMap.of("TagInfos", tagInfos, "Offset", offset, "Limit", limit);
         String body = JSONArray.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(secretid, key, "asr",
@@ -189,13 +184,8 @@ public class TencentHotWordsApi {
      */
     public static String updateHotWords(String secretid, String key, String vocabId, String name, String description,
         List<HotWordDTO> wordWeights, String wordWeightStr) {
-        HashMap<String, Object> map = Maps.newHashMap();
-
-        MapUtils.putIfNull(map, "Name", name);
-        MapUtils.putIfNull(map, "VocabId", vocabId);
-        MapUtils.putIfNull(map, "Description", description);
-        MapUtils.putIfNull(map, "WordWeights", wordWeights);
-        MapUtils.putIfNull(map, "WordWeightStr", wordWeightStr);
+        ImmutableMap<String, Object> map = ImmutableMap.of("Name", name, "VocabId", vocabId, "Description", description,
+            "WordWeights", wordWeights, "WordWeightStr", wordWeightStr);
 
         String body = JSONArray.toJSONString(map);
         Map postHeader =
@@ -244,9 +234,7 @@ public class TencentHotWordsApi {
      * @param state 热词表状态，1：设为默认状态；0：设为非默认状态。
      */
     public static String setHotWordsStatus(String secretid, String key, String vocabId, Integer state) {
-        HashMap<String, Object> map = Maps.newHashMap();
-        MapUtils.putIfNull(map, "VocabId", vocabId);
-        MapUtils.putIfNull(map, "State", state);
+        ImmutableMap<String, Object> map = ImmutableMap.of("VocabId", vocabId, "State", state);
         String body = JSONArray.toJSONString(map);
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(secretid, key, "asr",
@@ -271,8 +259,7 @@ public class TencentHotWordsApi {
     public static void deleteHotWordsStatus(String secretid, String key, String vocabId) {
         HashMap<String, Object> map = Maps.newHashMap();
 
-        MapUtils.putIfNull(map, "VocabId", vocabId);
-        String body = JSONArray.toJSONString(map);
+        String body = JSONArray.toJSONString(ImmutableMap.of("VocabId", vocabId));
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(secretid, key, "asr",
                 TencentConstant.VOICE_IDENTIFY, "", "SetVocabState", "2019-06-14", body);
@@ -290,9 +277,7 @@ public class TencentHotWordsApi {
      */
     public static VocabDTO getHotWordsListWithVocabId(String secretid, String key, String vocabId) {
         HashMap<String, Object> map = Maps.newHashMap();
-
-        MapUtils.putIfNull(map, "VocabId", vocabId);
-        String body = JSONArray.toJSONString(map);
+        String body = JSONArray.toJSONString(ImmutableMap.of("VocabId", vocabId));
         Map postHeader =
             TencentCloudAPITC3.getPostHeader(secretid, key, "asr",
                 TencentConstant.VOICE_IDENTIFY, "", "GetAsrVocab", "2019-06-14", body);
