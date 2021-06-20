@@ -24,13 +24,6 @@ public class TencentAuthAPI {
 
     private static final Logger log = LoggerFactory.getLogger(TencentAuthAPI.class);
 
-    /**
-     *
-     * 
-     * @param ImageBase64 身份证照片可为URL
-     * @return
-     * @throws Exception
-     */
 
     /**
      * 腾讯身份证识别

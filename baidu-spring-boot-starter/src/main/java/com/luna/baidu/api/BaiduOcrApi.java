@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
+import com.luna.baidu.constant.ImageConstant;
 import com.luna.baidu.dto.word.WordDTO;
 
 import com.luna.common.file.FileTools;
@@ -49,23 +50,26 @@ public class BaiduOcrApi {
      * - RUS：俄语
      * @return
      */
-    public static List<WordDTO> baiDuOcr(String key, String image, String languageType)
-        throws UnsupportedEncodingException {
-        HashMap<String, Object> map = Maps.newHashMap();
-        if (HttpUtils.isNetUrl(image)) {
-            map.put("url", image);
-        } else if (Base64Util.isBase64(image)) {
-            map.put("image", image);
-        } else {
-            map.put("image", Base64Util.encodeBase64(FileTools.read(image)));
-        }
-
-        map.put("language_type", languageType);
+    public static List<WordDTO> baiDuOcr(String key, String image, String imageType, String languageType) {
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
-            ImmutableMap.of("access_token", key), HttpUtils.urlEncode(map));
+            ImmutableMap.of("access_token", key),
+            HttpUtils.urlEncode(ImmutableMap.of(imageType, image, "language_type", languageType)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         return JSON.parseArray(JSON.parseObject(s).get("words_result").toString(), WordDTO.class);
+    }
+
+    public static List<WordDTO> baiDuOcrWithBase64(String key, String image, String languageType) {
+        return baiDuOcr(key, image, ImageConstant.IMAGE.getImageStr(), languageType);
+    }
+
+    public static List<WordDTO> baiDuOcrWithUrl(String key, String image, String languageType) {
+        return baiDuOcr(key, image, ImageConstant.URL.getImageStr(), languageType);
+    }
+
+    public static List<WordDTO> baiDuOcrWithFile(String key, String image, String languageType) {
+        return baiDuOcr(key, Base64Util.encodeBase64(FileTools.read(image)), ImageConstant.URL.getImageStr(),
+            languageType);
     }
 
     /**
@@ -75,7 +79,7 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<WordDTO> baiduOcrAndAddress(String key, String image) throws UnsupportedEncodingException {
+    public static List<WordDTO> baiduOcrAndAddress(String key, String image) {
         image = getString(image);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
@@ -89,18 +93,21 @@ public class BaiduOcrApi {
      * 
      * @param image
      * @return
-     * @throws UnsupportedEncodingException
      */
-    private static String getString(String image) throws UnsupportedEncodingException {
-        if (HttpUtils.isNetUrl(image)) {
-            image = "url=" + URLEncoder.encode(image, CharsetKit.UTF_8);
-        } else if (Base64Util.isBase64(image)) {
-            image = "image=" + URLEncoder.encode(image, CharsetKit.UTF_8);
-        } else {
-            image = "image="
-                + URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8);
+    private static String getString(String image) {
+        try {
+            if (HttpUtils.isNetUrl(image)) {
+                image = "url=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            } else if (Base64Util.isBase64(image)) {
+                image = "image=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            } else {
+                image = "image="
+                    + URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8);
+            }
+            return image;
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
-        return image;
     }
 
     /**
@@ -110,7 +117,7 @@ public class BaiduOcrApi {
      * @return
      * @throws IOException
      */
-    public static List<WordDTO> baiduOcrAndAddressNormal(String key, String image) throws UnsupportedEncodingException {
+    public static List<WordDTO> baiduOcrAndAddressNormal(String key, String image) {
         image = getString(image);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS_NORMAL,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),

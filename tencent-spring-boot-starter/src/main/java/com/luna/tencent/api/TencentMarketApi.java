@@ -23,13 +23,12 @@ public class TencentMarketApi {
     private static final Logger log = LoggerFactory.getLogger(TencentMarketApi.class);
 
     /**
-     * 身份证审核
+     * 腾讯云市场身份证审核
      *
      * @param name 姓名
      * @param id 身份证号
      * @return
      * @throws NoSuchAlgorithmException
-     * @throws UnsupportedEncodingException
      * @throws InvalidKeyException
      */
     public static JSONObject checkIdByLuna(String secretId, String secretKey, String name, String id) {

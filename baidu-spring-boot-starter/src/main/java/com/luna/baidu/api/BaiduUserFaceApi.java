@@ -47,7 +47,7 @@ public class BaiduUserFaceApi {
      * HIGH: 较高的质量要求
      * 默认 NONE
      * 若图片质量不满足要求，则返回结果中会提示质量检测失败
-     * @param livenessControl 活体检测控制 (非必需)
+     * @param liveNessControl 活体检测控制 (非必需)
      * NONE: 不进行控制
      * LOW:较低的活体要求(高通过率 低攻击拒绝率)
      * NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率)
@@ -66,29 +66,20 @@ public class BaiduUserFaceApi {
      */
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId,
-        String userInfo, String qualityControl, String livenessControl, String actionType, String faceSortType) {
+        String userInfo, String qualityControl, String liveNessControl, String actionType, Integer faceSortType) {
         log.info("faceUserAdd start");
 
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("image", image);
-        map.put("image_type", imageType);
-        map.put("group_id", groupId);
-        map.put("user_id", userId);
-        if (StringUtils.isNotEmpty(userInfo)) {
-            map.put("user_info", userInfo);
-        }
-        if (StringUtils.isNotEmpty(qualityControl)) {
-            map.put("quality_control", qualityControl);
-        }
-        if (StringUtils.isNotEmpty(livenessControl)) {
-            map.put("liveness_control", livenessControl);
-        }
-        if (StringUtils.isNotEmpty(actionType)) {
-            map.put("action_type", actionType);
-        }
-        if (StringUtils.isNotEmpty(faceSortType)) {
-            map.put("face_sort_type", faceSortType);
-        }
+        ImmutableMap<String, Object> map = ImmutableMap.<String, Object>builder()
+            .put("image", image)
+            .put("image_type", imageType)
+            .put("group_id", groupId)
+            .put("user_id", userId)
+            .put("user_info", userInfo)
+            .put("quality_control", qualityControl)
+            .put("liveness_control", liveNessControl)
+            .put("action_type", actionType)
+            .put("face_sort_type", faceSortType)
+            .build();
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_ADD,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
@@ -102,50 +93,60 @@ public class BaiduUserFaceApi {
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId) {
-        return faceUserAdd(key, image, imageType, groupId, userId, null, null, null, null, null);
+        return faceUserAdd(key, image, imageType, groupId, userId, "", "NONE", "NONE", "APPEND", 0);
     }
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId, String userInfo) {
-        return faceUserAdd(key, image, imageType, groupId, userId, userInfo, null, null, null, null);
+        return faceUserAdd(key, image, imageType, groupId, userId, userInfo, "NONE", "NONE", "APPEND", 0);
     }
 
     /**
      * 更新人脸接口
      * 
      * @param key
-     * @param image
-     * @param imageType
-     * @param groupId
-     * @param userId
-     * @param userInfo
-     * @param qualityControl
-     * @param livenessControl
-     * @param actionType
+     * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
+     * @param imageType 图片类型
+     * BASE64:图片的base64值，base64编码后的图片数据，编码后的图片大小不超过2M；
+     * URL:图片的 URL地址( 可能由于网络等原因导致下载图片时间过长)；
+     * FACE_TOKEN: 人脸图片的唯一标识
+     * @param groupId 用户组id，标识一组用户（由数字、字母、下划线组成），长度限制128B
+     * @param userId 用户id（由数字、字母、下划线组成），长度限制48B
+     * @param userInfo 用户资料，长度限制48B 默认空
+     * @param qualityControl 图片质量控制
+     * NONE: 不进行控制
+     * LOW:较低的质量要求
+     * NORMAL: 一般的质量要求
+     * HIGH: 较高的质量要求
+     * 默认 NONE
+     * 若图片质量不满足要求，则返回结果中会提示质量检测失败
+     * @param liveNessControl 活体检测控制
+     * NONE: 不进行控制
+     * LOW:较低的活体要求(高通过率 低攻击拒绝率)
+     * NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率)
+     * HIGH: 较高的活体要求(高攻击拒绝率 低通过率)
+     * 默认NONE
+     * 若活体检测结果不满足要求，则返回结果中会提示活体检测失败
+     * @param actionType 操作方式
+     * UPDATE: 会使用新图替换库中该user_id下所有图片, 若user_id不存在则会报错
+     * REPLACE : 当user_id不存在时, 则会注册这个user_id的用户
+     * 默认使用UPDATE
      * @return
      */
     public static UserFaceResultDTO faceUserUpdate(String key, String image, String imageType, String groupId,
-        String userId, String userInfo, String qualityControl, String livenessControl, String actionType) {
+        String userId, String userInfo, String qualityControl, String liveNessControl, String actionType) {
 
         log.info("faceUserUpdate start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("image", image);
-        map.put("image_type", imageType);
-        map.put("group_id", groupId);
-        map.put("user_id", userId);
-        if (StringUtils.isNotEmpty(userInfo)) {
-            map.put("user_info", userInfo);
-        }
-        if (StringUtils.isNotEmpty(qualityControl)) {
-            map.put("quality_control", qualityControl);
-        }
-        if (StringUtils.isNotEmpty(livenessControl)) {
-            map.put("liveness_control", livenessControl);
-        }
-        if (StringUtils.isNotEmpty(actionType)) {
-            map.put("action_type", actionType);
-        }
+        ImmutableMap<String, Object> map = ImmutableMap.<String, Object>builder()
+            .put("image", image)
+            .put("image_type", imageType)
+            .put("group_id", groupId)
+            .put("user_id", userId)
+            .put("user_info", userInfo)
+            .put("quality_control", qualityControl)
+            .put("liveness_control", liveNessControl)
+            .put("action_type", actionType)
+            .build();
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_UPDATE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
@@ -160,7 +161,7 @@ public class BaiduUserFaceApi {
 
     public static UserFaceResultDTO faceUserUpdate(String key, String image, String imageType, String groupId,
         String userId) {
-        return faceUserUpdate(key, image, imageType, groupId, userId, null, null, null, null);
+        return faceUserUpdate(key, image, imageType, groupId, userId, StringUtils.EMPTY, "NONE", "NONE", "UPDATE");
     }
 
     /**
@@ -237,7 +238,6 @@ public class BaiduUserFaceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(ImmutableMap.of("user_id", userId, "group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("userCopy success errorCode={}", errorCode);
         return errorCode == 0;
@@ -253,18 +253,14 @@ public class BaiduUserFaceApi {
      * @return
      */
     public static Boolean userCopy(String key, String userId, String srcGroupId, String dstGroupId) {
-        log.info("userCopy start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("user_id", userId);
-        map.put("src_group_id", srcGroupId);
-        map.put("dst_group_id", dstGroupId);
+        log.info("userCopy start, key={}, userId={}, srcGroupId={}, dstGroupId={}", key, userId, srcGroupId,
+            dstGroupId);
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_COPY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(
+                ImmutableMap.of("user_id", userId, "src_group_id", srcGroupId, "dst_group_id", dstGroupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("userCopy success errorCode={}", errorCode);
         return errorCode == 0;
@@ -279,14 +275,11 @@ public class BaiduUserFaceApi {
      * @return
      */
     public static List<String> getUserGroup(String key, Integer start, Integer length) {
-        log.info("getUserGroup start");
+        log.info("getUserGroup start, key={}, start={}", key, start);
 
-        HashMap<String, Object> map = Maps.newHashMap();
-        map.put("start", start);
-        map.put("length", length);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_GROUP_LIST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("start", start, "length", length)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         List<String> groupIdList = JSON.parseArray(
             JSON.parseObject(JSON.parseObject(s).getString("result")).getString("group_id_list"), String.class);
@@ -302,14 +295,11 @@ public class BaiduUserFaceApi {
      * @return
      */
     public static Boolean createUserGroup(String key, String groupId) {
-        log.info("createUserGroup start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("group_id", groupId);
+        log.info("createUserGroup start, key={}, groupId={}", key, groupId);
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_CREATE_GROUP,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("createUserGroup success errorCode={}", errorCode);
@@ -324,14 +314,10 @@ public class BaiduUserFaceApi {
      * @return
      */
     public static Boolean deleteUserGroup(String key, String groupId) {
-        log.info("deleteUserGroup start");
-
-        HashMap<String, String> map = Maps.newHashMap();
-        map.put("group_id", groupId);
-
+        log.info("deleteUserGroup start, key={}, groupId={}", key, groupId);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.FACE_USER_GROUP_DELETE,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
-            JSON.toJSONString(map));
+            JSON.toJSONString(ImmutableMap.of("group_id", groupId)));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         Integer errorCode = JSON.parseObject(s).getInteger("error_code");
         log.info("deleteUserGroup success errorCode={}", errorCode);
@@ -340,6 +326,8 @@ public class BaiduUserFaceApi {
 
     /**
      *
+     * 人脸搜索
+     * 
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
      * @param imageType 图片类型
@@ -354,7 +342,7 @@ public class BaiduUserFaceApi {
      * HIGH: 较高的质量要求
      * 默认 NONE
      * 若图片质量不满足要求，则返回结果中会提示质量检测失败
-     * @param livenessControl 活体检测控制 (非必需)
+     * @param liveNessControl 活体检测控制 (非必需)
      * NONE: 不进行控制
      * LOW:较低的活体要求(高通过率 低攻击拒绝率)
      * NORMAL: 一般的活体要求(平衡的攻击拒绝率, 通过率)
@@ -369,35 +357,26 @@ public class BaiduUserFaceApi {
      * 默认为0
      */
     public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, String groupIdList,
-        String qualityControl, String livenessControl, String userId, Integer maxUserNum, String faceSortType) {
+        String qualityControl, String liveNessControl, String userId, Integer maxUserNum, Integer faceSortType) {
         log.info("userFaceSearch start");
 
         HashMap<String, Object> map = Maps.newHashMap();
-        map.put("image", image);
-        map.put("image_type", imageType);
-        map.put("group_id_list", groupIdList);
 
-        if (StringUtils.isNotEmpty(qualityControl)) {
-            map.put("quality_control", qualityControl);
-        }
-        if (StringUtils.isNotEmpty(livenessControl)) {
-            map.put("liveness_control", livenessControl);
-        }
-        if (StringUtils.isNotEmpty(userId)) {
-            map.put("user_id", userId);
-        }
-        if (Objects.nonNull(maxUserNum)) {
-            map.put("max_user_num", maxUserNum);
-        }
-        if (StringUtils.isNotEmpty(faceSortType)) {
-            map.put("face_sort_type", faceSortType);
-        }
+        ImmutableMap.<String, Object>builder()
+            .put("image", image)
+            .put("image_type", imageType)
+            .put("group_id_list", groupIdList)
+            .put("quality_control", qualityControl)
+            .put("liveness_control", liveNessControl)
+            .put("user_id", userId)
+            .put("max_user_num", maxUserNum)
+            .put("face_sort_type", faceSortType)
+            .build();
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.SEARCH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
             JSON.toJSONString(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
         UserInfoListDTO userFaceResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), UserInfoListDTO.class);
         log.info("userFaceSearch success userFaceResultDTO={}", JSON.toJSONString(userFaceResultDTO));
@@ -405,6 +384,11 @@ public class BaiduUserFaceApi {
     }
 
     public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, String groupIdList) {
-        return userFaceSearch(key, image, imageType, groupIdList, null, null, null, null, null);
+        return userFaceSearch(key, image, imageType, groupIdList, "NONE", "NONE", StringUtils.EMPTY, 1, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, imageType, groupIdList, "NONE", "NONE", StringUtils.EMPTY, maxUserNum, 0);
     }
 }

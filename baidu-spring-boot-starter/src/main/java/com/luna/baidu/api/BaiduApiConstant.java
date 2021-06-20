@@ -66,7 +66,7 @@ public class BaiduApiConstant {
     public static final String FACE_USER_GROUP_DELETE = "/rest/2.0/face/v3/faceset/group/delete";
 
     /** 身份证号与姓名 */
-    public static final String NAME_IDCARD            = "/rest/2.0/location/v3/person/idmatch";
+    public static final String NAME_ID_CARD           = "/rest/2.0/face/v3/person/idmatch";
 
     /** 人脸对比 */
     public static final String MATCH                  = "/rest/2.0/face/v3/match";

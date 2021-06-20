@@ -1,24 +1,23 @@
 package com.luna.baidu.api;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
+import com.luna.baidu.constant.ImageConstant;
 import com.luna.baidu.dto.face.*;
 import com.luna.baidu.req.face.FaceLiveReq;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 /**
  * @author Luna@win10
@@ -97,22 +96,25 @@ public class BaiduFaceApi {
      * @return 比较数值
      * @throws IOException
      */
-    public static FaceMatchResultDTO faceMathch(String key, String live, String idCard) {
-        String imageType1 = checkUrl(live);
-        String imageType2 = checkUrl(live);
-        return faceMatch(key, live, imageType1, "LIVE", idCard, imageType2, "IDCARD");
+    public static FaceMatchResultDTO faceMathch(String key, String live, Integer liveImageType, String idCard,
+        Integer idCardImageType) {
+        return faceMatch(key, live, ImageConstant.getTypeStr(liveImageType), "LIVE", idCard,
+            ImageConstant.getTypeStr(idCardImageType), "IDCARD");
     }
 
-    private static String checkUrl(String live) {
-        String imageType = StringUtils.EMPTY;
-        if (Base64Util.isBase64(live)) {
-            imageType = "BASE64";
-        } else if (HttpUtils.isNetUrl(live)) {
-            imageType = "URL";
-        } else {
-            imageType = "FACE_TOKEN";
-        }
-        return imageType;
+    public static FaceMatchResultDTO faceMathchWithBase64(String key, String live, String idCard) {
+        return faceMatch(key, live, ImageConstant.IMAGE_BASE.getImageStr(), "LIVE", idCard,
+            ImageConstant.IMAGE_BASE.getImageStr(), "IDCARD");
+    }
+
+    public static FaceMatchResultDTO faceMathchWithURL(String key, String live, String idCard) {
+        return faceMatch(key, live, ImageConstant.IMAGE_URL.getImageStr(), "LIVE", idCard,
+            ImageConstant.IMAGE_URL.getImageStr(), "IDCARD");
+    }
+
+    public static FaceMatchResultDTO faceMathchWithFaceToken(String key, String live, String idCard) {
+        return faceMatch(key, live, ImageConstant.FACE_TOKEN.getImageStr(), "LIVE", idCard,
+            ImageConstant.FACE_TOKEN.getImageStr(), "IDCARD");
     }
 
     /**
@@ -123,14 +125,12 @@ public class BaiduFaceApi {
      * @return
      */
     public static FaceLiveResultDTO checkLive(String key, List<FaceLiveReq> faceField) {
-        log.info("checkLive start");
-        System.out.println(JSON.toJSONString(faceField));
+        log.info("checkLive start faceField={}", JSON.toJSONString(faceField));
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.LIVE,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
                 JSON.toJSONString(faceField));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        System.out.println(s);
         FaceLiveResultDTO faceLiveResultDTO =
             JSON.parseObject(JSON.parseObject(s).getString("result"), FaceLiveResultDTO.class);
         log.info("checkLive success faceLiveResultDTO={}", JSON.toJSONString(faceLiveResultDTO));
@@ -144,22 +144,47 @@ public class BaiduFaceApi {
      * @param image
      * @return
      */
-    public static FaceLiveResultDTO checkLive(String key, String image) {
-        String imageType = checkUrl(image);
-        return checkLive(key, Lists.newArrayList(new FaceLiveReq(image, imageType, "age,beauty,spoofing", "COMMON")));
+    public static FaceLiveResultDTO checkLiveWithBase64(String key, String image) {
+        return checkLive(key, Lists.newArrayList(
+            new FaceLiveReq(image, ImageConstant.IMAGE_BASE.getImageStr(), "age,beauty,spoofing", "COMMON")));
+    }
+
+    public static FaceLiveResultDTO checkLiveWithUrl(String key, String image) {
+        return checkLive(key, Lists.newArrayList(
+            new FaceLiveReq(image, ImageConstant.IMAGE_URL.getImageStr(), "age,beauty,spoofing", "COMMON")));
+    }
+
+    public static FaceLiveResultDTO checkLiveWithFaceToken(String key, String image) {
+        return checkLive(key, Lists.newArrayList(
+            new FaceLiveReq(image, ImageConstant.FACE_TOKEN.getImageStr(), "age,beauty,spoofing", "COMMON")));
     }
 
     /**
-     * 多张活体检测
+     * 多张活体检测 base64 编码
      * 
      * @param key
      * @param image
      */
-    public static void checkLive(String key, Set<String> image) {
-        ArrayList<FaceLiveReq> list = Lists.newArrayList();
-        image.stream().forEach(s -> {
-            list.add(new FaceLiveReq(s, checkUrl(s), "age,beauty,spoofing", "COMMON"));
-        });
+    public static FaceLiveResultDTO checkLiveWithBase64(String key, Set<String> image) {
+        List<FaceLiveReq> faceLiveReqs = image.stream()
+            .map(img -> new FaceLiveReq(img, ImageConstant.IMAGE_BASE.getImageStr(), "age,beauty,spoofing", "COMMON"))
+            .collect(Collectors.toList());
+
+        return checkLive(key, faceLiveReqs);
+    }
+
+    /**
+     * 多张活体检测 url链接
+     *
+     * @param key
+     * @param image
+     */
+    public static FaceLiveResultDTO checkLiveWithUrl(String key, Set<String> image) {
+        List<FaceLiveReq> faceLiveReqs = image.stream()
+            .map(img -> new FaceLiveReq(img, ImageConstant.IMAGE_URL.getImageStr(), "age,beauty,spoofing", "COMMON"))
+            .collect(Collectors.toList());
+
+        return checkLive(key, faceLiveReqs);
     }
 
     /**
@@ -176,47 +201,51 @@ public class BaiduFaceApi {
      * 2: 身份证证号和性别、出生信息都不一致
      * 3: 身份证证号和出生信息不一致
      * 4: 身份证证号和性别信息不一致
-     * @throws UnsupportedEncodingException
+     * @
      */
-    public static IdCardCheckResultDTO checkIdCard(String key, String image, String idCardSide)
-        throws UnsupportedEncodingException {
+    public static IdCardCheckResultDTO checkIdCard(String key, String image, Integer imageType, String idCardSide) {
         log.info("checkIdCard start");
-        HashMap<String, Object> param = Maps.newHashMap();
-        param.put("id_card_side", idCardSide);
-        param.put("detect_risk", true);
-        param.put("detect_photo", true);
-        if (Base64Util.isBase64(image)) {
-            param.put("image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
-            param.put("url", image);
-        } else {
-            image = Base64Util.encodeBase64(FileTools.read(image));
-            param.put("image", image);
-        }
+        Map<?, ?> map = getParam(image, imageType, idCardSide);
         HttpResponse httpResponse =
             HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.ID_OCR,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
                 ImmutableMap.of("access_token", key),
-                HttpUtils.urlEncode(param));
+                HttpUtils.urlEncode(map));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         IdCardCheckResultDTO idCardCheckResultDTO = JSON.parseObject(s, IdCardCheckResultDTO.class);
         log.info("checkIdCard success idCardCheckResultDTO={}", JSON.toJSONString(idCardCheckResultDTO));
         return idCardCheckResultDTO;
     }
 
-    public static IdCardCheckResultDTO checkIdCardFront(String key, String image) {
-        try {
-            return checkIdCard(key, image, "front");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+    public static Map<?, ?> getParam(String image, Integer imageType, String idCardSide) {
+        return ImmutableMap.<String, Object>builder().put("id_card_side", idCardSide)
+            .put("detect_risk", true)
+            .put("detect_photo", true).put(ImageConstant.getTypeStr(imageType), image).build();
     }
 
-    public static IdCardCheckResultDTO checkIdCardBack(String key, String image) {
-        try {
-            return checkIdCard(key, image, "back");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+    public static IdCardCheckResultDTO checkIdCardWithBase64Front(String key, String image) {
+        return checkIdCard(key, image, ImageConstant.IMAGE.getImageType(), "front");
+    }
+
+    public static IdCardCheckResultDTO checkIdCardWithBase64Back(String key, String image) {
+        return checkIdCard(key, image, ImageConstant.IMAGE.getImageType(), "back");
+    }
+
+    public static IdCardCheckResultDTO checkIdCardWithUrlFront(String key, String image) {
+        return checkIdCard(key, image, ImageConstant.URL.getImageType(), "front");
+    }
+
+    public static IdCardCheckResultDTO checkIdCardWithUrlBack(String key, String image) {
+        return checkIdCard(key, image, ImageConstant.URL.getImageType(), "back");
+    }
+
+    public static IdCardCheckResultDTO checkIdCardWithFileFront(String key, String image) {
+        return checkIdCard(key, Base64Util.encodeBase64(FileTools.read(image)), ImageConstant.IMAGE.getImageType(),
+            "front");
+    }
+
+    public static IdCardCheckResultDTO checkIdCardWithFIleBack(String key, String image) {
+        return checkIdCard(key, Base64Util.encodeBase64(FileTools.read(image)), ImageConstant.IMAGE.getImageType(),
+            "back");
     }
 }

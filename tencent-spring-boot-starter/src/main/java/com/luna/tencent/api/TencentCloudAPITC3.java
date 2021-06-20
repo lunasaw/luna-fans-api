@@ -30,7 +30,6 @@ public class TencentCloudAPITC3 {
      * @param datetime
      * @return
      * @throws NoSuchAlgorithmException
-     * @throws UnsupportedEncodingException
      * @throws InvalidKeyException
      */
     public static String calcAuthorization(String source, String secretId, String secretKey, String datetime) {

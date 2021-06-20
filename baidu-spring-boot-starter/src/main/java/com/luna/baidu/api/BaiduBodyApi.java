@@ -28,21 +28,25 @@ public class BaiduBodyApi {
      * 人体检测
      * 
      * @param key 获取的Key
-     * @param image 图像 URL或者Base64编码
+     * @param image 图像数据，base64编码后进行urlencode，要求base64编码和urlencode后大小不超过4M。
+     * 图片的base64编码是不包含图片头的，如(data:image/jpg;base64,)，
+     * 支持图片格式：jpg、bmp、png，最短边至少50px，最长边最大4096px
      * @return
-     * @throws UnsupportedEncodingException
      */
-    public static List<BodyCheckDTO> checkBodies(String key, String image) throws UnsupportedEncodingException {
-        if (Base64Util.isBase64(image)) {
-            image = "image=" + URLEncoder.encode(image, CharsetKit.UTF_8);
-        } else {
-            image = "image="
-                + URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8);
-        }
+    public static List<BodyCheckDTO> checkBodies(String key, String image) {
         HttpResponse response = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.BODIES,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
             ImmutableMap.of("access_token", key), image);
         String s = HttpUtils.checkResponseAndGetResult(response, true);
         return JSON.parseArray(JSON.parseObject(s).getString("person_info"), BodyCheckDTO.class);
+    }
+
+    public static List<BodyCheckDTO> checkBodiesWithBase64(String key, String image)
+        throws UnsupportedEncodingException {
+        return checkBodies(key, URLEncoder.encode(image, CharsetKit.UTF_8));
+    }
+
+    public static List<BodyCheckDTO> checkBodiesWithFile(String key, String image) throws UnsupportedEncodingException {
+        return checkBodies(key, URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8));
     }
 }
