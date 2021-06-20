@@ -60,7 +60,7 @@ fans-spring-boot-starter-fans
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>fans-spring-boot-starter-fans</artifactId>
-    <version>2.2.1-RELEASE</version>
+    <version>2.2.7-RELEASE</version>
 </dependency>
 ```
 
