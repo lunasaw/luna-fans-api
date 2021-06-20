@@ -3,6 +3,10 @@ package com.luna.baidu.constant;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * @author luna
+ */
+
 public enum ImageConstant {
 
     /** URL */

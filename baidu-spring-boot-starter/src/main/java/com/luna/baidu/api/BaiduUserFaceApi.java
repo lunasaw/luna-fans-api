@@ -2,8 +2,10 @@ package com.luna.baidu.api;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import com.luna.baidu.constant.ImageConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -28,7 +30,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 人脸注册Api 返回face_token
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断。
      * 注：组内每个uid下的人脸图片数目上限为20张
@@ -93,7 +95,7 @@ public class BaiduUserFaceApi {
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId) {
-        return faceUserAdd(key, image, imageType, groupId, userId, "", "NONE", "NONE", "APPEND", 0);
+        return faceUserAdd(key, image, imageType, groupId, userId, StringUtils.EMPTY, "NONE", "NONE", "APPEND", 0);
     }
 
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
@@ -103,7 +105,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 更新人脸接口
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
      * @param imageType 图片类型
@@ -166,7 +168,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 删除人脸
-     * 
+     *
      * @param key
      * @param groupId
      * @param userId
@@ -208,7 +210,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 获取用户人脸列表
-     * 
+     *
      * @param key
      * @param userId
      * @param groupId
@@ -245,7 +247,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 复制用户
-     * 
+     *
      * @param key
      * @param userId 用户id，长度限制48B
      * @param srcGroupId 从指定组里复制信息
@@ -268,7 +270,7 @@ public class BaiduUserFaceApi {
 
     /**
      * 查询用户组
-     * 
+     *
      * @param key
      * @param start 默认值0，起始序号
      * @param length 返回数量，默认值100，最大值1000
@@ -327,7 +329,7 @@ public class BaiduUserFaceApi {
     /**
      *
      * 人脸搜索
-     * 
+     *
      * @param key
      * @param image 图片信息(总数据大小应小于10M)，图片上传方式根据image_type来判断
      * @param imageType 图片类型
@@ -360,18 +362,17 @@ public class BaiduUserFaceApi {
         String qualityControl, String liveNessControl, String userId, Integer maxUserNum, Integer faceSortType) {
         log.info("userFaceSearch start");
 
-        HashMap<String, Object> map = Maps.newHashMap();
-
-        ImmutableMap.<String, Object>builder()
-            .put("image", image)
-            .put("image_type", imageType)
-            .put("group_id_list", groupIdList)
-            .put("quality_control", qualityControl)
-            .put("liveness_control", liveNessControl)
-            .put("user_id", userId)
-            .put("max_user_num", maxUserNum)
-            .put("face_sort_type", faceSortType)
-            .build();
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("image", image);
+        map.put("image_type", imageType);
+        map.put("group_id_list", groupIdList);
+        map.put("quality_control", qualityControl);
+        map.put("liveness_control", liveNessControl);
+        if (StringUtils.isNotBlank(userId)) {
+            map.put("user_id", userId);
+        }
+        map.put("max_user_num", maxUserNum);
+        map.put("face_sort_type", faceSortType);
 
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.SEARCH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", key),
@@ -390,5 +391,23 @@ public class BaiduUserFaceApi {
     public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, Integer maxUserNum,
         String groupIdList) {
         return userFaceSearch(key, image, imageType, groupIdList, "NONE", "NONE", StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithBase64(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.IMAGE_BASE.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithUrl(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.IMAGE_URL.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
+    }
+
+    public static UserInfoListDTO userFaceSearchWithFaceToken(String key, String image, Integer maxUserNum,
+        String groupIdList) {
+        return userFaceSearch(key, image, ImageConstant.FACE_TOKEN.getImageStr(), groupIdList, "NONE", "NONE",
+            StringUtils.EMPTY, maxUserNum, 0);
     }
 }
