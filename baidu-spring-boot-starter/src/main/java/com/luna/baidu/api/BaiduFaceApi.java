@@ -18,7 +18,7 @@ import com.luna.baidu.enums.FaceTypeEnum;
 import com.luna.common.constant.Constant;
 import com.luna.common.constant.ImageConstant;
 import com.luna.common.net.HttpContentTypeEnum;
-import com.luna.common.text.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

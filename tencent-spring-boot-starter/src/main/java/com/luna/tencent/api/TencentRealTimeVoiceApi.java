@@ -136,7 +136,7 @@ public class TencentRealTimeVoiceApi {
                 HttpResponse httpResponse =
                     HttpUtils.doPost(url, "",
                         ImmutableMap.of("Host", TencentConstant.VOICE_FAST_IDENTIFY, "Content-Type",
-                            HttpUtilsConstant.MEDIA,
+                            HttpUtilsConstant.OCTET_STREAM,
                             "Authorization", authorization),
                         null, bytesTemp);
                 String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);

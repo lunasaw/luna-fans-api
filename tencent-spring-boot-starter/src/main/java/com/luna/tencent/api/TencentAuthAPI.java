@@ -6,8 +6,8 @@ import java.util.Map;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.text.Base64Util;
+import com.luna.common.text.MapUtils;
 import com.luna.tencent.response.card.IdCardPictureCheckInfoResponse;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -52,7 +52,7 @@ public class TencentAuthAPI {
         HashMap<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("ImageBase64", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("ImageUrl", image);
         } else {
             map.put("ImageBase64", Base64Util.encodeBase64(FileTools.read(image)));

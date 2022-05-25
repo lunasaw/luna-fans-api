@@ -245,7 +245,7 @@ public class TencntVoiceApi {
             HttpResponse httpResponse =
                 HttpUtils.doPost(url, "",
                     ImmutableMap.of("Host", TencentConstant.VOICE_FAST_IDENTIFY, "Content-Type",
-                        HttpUtilsConstant.MEDIA,
+                        HttpUtilsConstant.OCTET_STREAM,
                         "Authorization", authorization),
                     null,
                     FileTools.read(voiceFastIdentifyDTO.getFileName()));

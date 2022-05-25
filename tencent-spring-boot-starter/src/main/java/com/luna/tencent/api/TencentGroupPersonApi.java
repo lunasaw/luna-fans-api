@@ -10,7 +10,7 @@ import com.luna.common.text.Base64Util;
 import com.luna.tencent.response.group.AddFaceResultResponse;
 import com.luna.tencent.response.group.CheckPersonInGroupResponse;
 import com.luna.tencent.response.group.PersonBaseInfoResponse;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ public class TencentGroupPersonApi {
     public static List<FaceInfosDTO> detectFace(String id, String key, String image, Integer maxFaceNum,
         Integer needFaceAttributes) {
         HashMap<String, Object> map = Maps.newHashMap();
-        if (HttpUtils.isNetUrl(image)) {
+        if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else if (Base64Util.isBase64(image)) {
             map.put("Image", image);
@@ -200,7 +200,7 @@ public class TencentGroupPersonApi {
         HashMap<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else {
             map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
@@ -323,7 +323,7 @@ public class TencentGroupPersonApi {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else {
             map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
@@ -358,7 +358,7 @@ public class TencentGroupPersonApi {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else {
             map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
@@ -373,7 +373,7 @@ public class TencentGroupPersonApi {
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         log.info("getVerifyFaceByPersonId success id={}, key={}, response={}", id, key, s);
         JSONObject response = JSON.parseObject(s);
-        return JSON.parseObject(response.getString("Response")).getBoolean("IsMatch");
+        return JSON.parseObject(response.getString("Response")).getBooleanValue("IsMatch");
     }
 
     /**
@@ -391,7 +391,7 @@ public class TencentGroupPersonApi {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else {
             map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
@@ -407,6 +407,6 @@ public class TencentGroupPersonApi {
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         log.info("getVerifyPersonByPersonId success id={}, key={}, response={}", id, key, s);
         JSONObject response = JSON.parseObject(s);
-        return JSON.parseObject(response.getString("Response")).getBoolean("IsMatch");
+        return JSON.parseObject(response.getString("Response")).getBooleanValue("IsMatch");
     }
 }

@@ -62,7 +62,7 @@ public class ImageApiFromString {
         HttpResponse httpResponse = HttpUtils.doGet(SmMsConstant.HOST, "/delete" + "/" + hash,
             ImmutableMap.of("Authorization", token, "User-Agent", UserAgentConstant.CHROME_WIN_10), null);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse);
-        return JSON.parseObject(s).getBoolean("success");
+        return JSON.parseObject(s).getBooleanValue("success");
     }
 
     /**
@@ -104,6 +104,6 @@ public class ImageApiFromString {
         HttpResponse httpResponse = HttpUtils.doGet(SmMsConstant.HOST, "/clear",
                 ImmutableMap.of("Authorization", token, "User-Agent", UserAgentConstant.CHROME_WIN_10), null);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse);
-        return  JSON.parseObject(s).getBoolean("success");
+        return JSON.parseObject(s).getBooleanValue("success");
     }
 }

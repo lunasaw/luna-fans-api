@@ -88,6 +88,10 @@
             <groupId>io.github.lunasaw</groupId>
             <artifactId>json-fastJson</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <distributionManagement>

@@ -37,14 +37,14 @@ public class TencentFaceApi {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(imageA)) {
             map.put("ImageA", imageA);
-        } else if (HttpUtils.isNetUrl(imageA)) {
+        } else if (HttpUtils.isUrl(imageA)) {
             map.put("UrlA", imageA);
         } else {
             map.put("ImageA", Base64Util.encodeBase64(FileTools.read(imageA)));
         }
         if (Base64Util.isBase64(imageB)) {
             map.put("ImageB", imageB);
-        } else if (HttpUtils.isNetUrl(imageB)) {
+        } else if (HttpUtils.isUrl(imageB)) {
             map.put("UrlB", imageB);
         } else {
             map.put("ImageB", Base64Util.encodeBase64(FileTools.read(imageB)));
@@ -75,7 +75,7 @@ public class TencentFaceApi {
         Map<String, Object> map = Maps.newHashMap();
         if (Base64Util.isBase64(image)) {
             map.put("Image", image);
-        } else if (HttpUtils.isNetUrl(image)) {
+        } else if (HttpUtils.isUrl(image)) {
             map.put("Url", image);
         } else {
             map.put("Image", Base64Util.encodeBase64(FileTools.read(image)));
@@ -89,6 +89,6 @@ public class TencentFaceApi {
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         log.info("faceLiveCheck start id={}, key={}, response={}", id, key, s);
         JSONObject response = JSON.parseObject(s);
-        return JSON.parseObject(response.getString("Response")).getBoolean("IsLiveness");
+        return JSON.parseObject(response.getString("Response")).getBooleanValue("IsLiveness");
     }
 }
