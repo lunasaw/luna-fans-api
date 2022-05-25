@@ -5,17 +5,31 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.internal.OSSUtils;
 import com.aliyun.oss.model.Callback;
+import com.google.common.collect.Lists;
 import com.luna.ali.config.AliOssConfigProperties;
+import com.luna.ali.oss.constant.OssConstants;
 import com.luna.common.encrypt.HashUtils;
 import com.luna.common.text.Base64Util;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
+/**
+ * @author luna
+ */
+@Slf4j
 public class PostObjectSample {
     /**
      * 表单上传
@@ -23,42 +37,49 @@ public class PostObjectSample {
      * @param localFilePath 上传文件
      * @param bucketName
      * @param objectName 设置文件名称
-     * @param aliOssConfigProperties
      * @throws Exception
      */
-    private void postObjectByForm(String localFilePath, String bucketName, String objectName,
-        AliOssConfigProperties aliOssConfigProperties) throws Exception {
+    public static void postObjectByForm(String localFilePath, String bucketName, String objectName, String serverUrl, String accessKey,
+        String secretKey,
+        String endpoint) throws Exception {
         // 在URL中添加存储空间名称，添加后URL如下：http://yourBucketName.oss-cn-hangzhou.aliyuncs.com。
-        String host = aliOssConfigProperties.getHost().replace("http://", "http://" + bucketName + ".");
+        if (StringUtils.isEmpty(endpoint)) {
+            endpoint = OssConstants.HOST;
+        }
+        String host = endpoint.replace("yourBucketName", bucketName);
         // 设置表单Map。
         Map<String, String> formFields = new LinkedHashMap<String, String>();
         // 设置文件名称。
         formFields.put("objectName", objectName);
         // 设置Content-Disposition。
-        formFields.put("Content-Disposition", "attachment;filename="
-            + localFilePath);
+        formFields.put("Content-Disposition", "attachment;filename=" + localFilePath);
         // 设置回调参数。
-        Callback callback = AliOssUtil.getCallback(aliOssConfigProperties.getServerUrl());
-        // 在表单Map中设置回调参数。
-        setCallBack(formFields, callback);
+        if (StringUtils.isNotEmpty(serverUrl)) {
+            Callback callback = AliOssUtil.getCallback(serverUrl);
+            // 在表单Map中设置回调参数。
+            setCallBack(formFields, callback);
+        }
         // 设置OSSAccessKeyId。
-        formFields.put("OSSAccessKeyId", aliOssConfigProperties.getOssId());
-        String policy =
-            "{\"expiration\": \"2120-01-01T12:00:00.000Z\",\"conditions\": [[\"content-length-range\", 0, 104857600]]}";
+        formFields.put("OSSAccessKeyId", accessKey);
+        String policy = JSON.toJSONString(Policy.getInstance());
         String encodePolicy = Base64Util.encodeBase64(policy.getBytes());
         // 设置policy。
         formFields.put("policy", encodePolicy);
         // 生成签名。
         String signaturecom =
-            com.aliyun.oss.common.auth.ServiceSignature.create().computeSignature(aliOssConfigProperties.getOssKey(),
+            com.aliyun.oss.common.auth.ServiceSignature.create().computeSignature(secretKey,
                 encodePolicy);
         // 设置签名。
         formFields.put("Signature", signaturecom);
-        String ret = formUpload(host, formFields, localFilePath);
-        System.out.println("Post Object [" + objectName + "] to bucket [" + bucketName + "]");
-        System.out.println("post reponse:" + ret);
+        String result = formUpload(host, formFields, localFilePath);
+        log.info("postObjectByForm::localFilePath = {}, bucketName = {}, objectName = {}, serverUrl = {}, accessKey = {}, result = {}, endpoint = {}",
+            localFilePath, bucketName, objectName, serverUrl, accessKey, result, endpoint);
     }
 
+    /**
+     * @param args
+     * @throws Exception
+     */
     private static String formUpload(String host, Map<String, String> formFields, String localFile)
         throws Exception {
         String res = "";
@@ -165,5 +186,25 @@ public class PostObjectSample {
                 }
             }
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class Policy {
+
+        private String       expiration;
+
+        private List<Object> conditions;
+
+        String               policy =
+            "{\"expiration\": \"2120-01-01T12:00:00.000Z\",\"conditions\": [[\"content-length-range\", 0, 104857600]]}";
+
+        public static Policy getInstance() {
+            return Policy.builder().expiration("2120-01-01T12:00:00.000Z")
+                .conditions(Lists.newArrayList(Lists.newArrayList("content-length-range", 0, 104857600))).build();
+        }
+
     }
 }

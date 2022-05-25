@@ -5,38 +5,41 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.Objects;
 
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.model.DownloadFileRequest;
-import com.aliyun.oss.model.DownloadFileResult;
-import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.*;
 import com.luna.ali.config.AliOssConfigProperties;
 import com.luna.common.net.base.HttpBaseUtils;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
- * @Package: com.luna.ali.oss
- * @ClassName: AliOssDownLoadApi
- * @Author: luna
- * @CreateTime: 2020/8/22 15:43
- * @Description:
+ * @author Luna@win10
+ * @date 2020/4/20 11:46
  */
 public class AliOssDownloadApi {
+
+    public AliOssDownloadApi(OSS ossClient) {
+        this.ossClient = ossClient;
+    }
+
+    private OSS                 ossClient;
+
+    private static final Logger log = LoggerFactory.getLogger(AliOssUploadApi.class);
 
     /**
      * 文本读取下载
      * 
      * @param bucketName
      * @param objectName
-     * @param aliOssConfigProperties
      * @return
      */
-    public String downloadByStream(String bucketName, String objectName,
-        AliOssConfigProperties aliOssConfigProperties) {
-
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+    public String downloadByStream(String bucketName, String objectName) {
 
         // ossObject包含文件所在的存储空间名称、文件名称、文件元信息以及一个输入流。
         OSSObject ossObject = ossClient.getObject(bucketName, objectName);
@@ -48,6 +51,7 @@ public class AliOssDownloadApi {
         try {
             reader.close();
         } catch (IOException e) {
+            log.error("downloadByStream::bucketName = {}, objectName = {} ", bucketName, objectName, e);
         }
 
         // 关闭OSSClient。
@@ -61,13 +65,9 @@ public class AliOssDownloadApi {
      * @param bucketName
      * @param objectName
      * @param loaclFile
-     * @param aliOssConfigProperties
+     * 
      */
-    public void downloadByFile(String bucketName, String objectName, String loaclFile,
-        AliOssConfigProperties aliOssConfigProperties) {
-
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+    public void downloadByFile(String bucketName, String objectName, String loaclFile) {
 
         // 下载OSS文件到本地文件。如果指定的本地文件存在会覆盖，不存在则新建。
         ossClient.getObject(new GetObjectRequest(bucketName, objectName), new File(loaclFile));
@@ -85,14 +85,9 @@ public class AliOssDownloadApi {
      * 
      * @param bucketName
      * @param objectName
-     * @param loaclFile
-     * @param aliOssConfigProperties
+     * @param localFile
      */
-    public void downloadByCondition(String bucketName, String objectName, String loaclFile,
-        AliOssConfigProperties aliOssConfigProperties) {
-
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+    public void downloadByCondition(String bucketName, String objectName, String localFile) {
 
         GetObjectRequest request = new GetObjectRequest(bucketName, objectName);
         // 设置限定条件。
@@ -100,7 +95,7 @@ public class AliOssDownloadApi {
         request.setModifiedSinceConstraint(new Date());
 
         // 下载OSS文件到本地文件。
-        ossClient.getObject(request, new File(loaclFile));
+        ossClient.getObject(request, new File(localFile));
 
         // 关闭OSSClient。
         ossClient.shutdown();
@@ -113,18 +108,13 @@ public class AliOssDownloadApi {
      * @param objectName
      * @param loaclFile
      * @param checkFile
-     * @param aliOssConfigProperties
      */
-    public void downloadByGoOn(String bucketName, String objectName, String loaclFile, String checkFile,
-        AliOssConfigProperties aliOssConfigProperties) {
-
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+    public ObjectMetadata downloadByGoOn(String bucketName, String objectName, String loaclFile, String checkFile) {
 
         // 下载请求，10个任务并发下载，启动断点续传。
         DownloadFileRequest downloadFileRequest = new DownloadFileRequest(bucketName, objectName);
         downloadFileRequest.setDownloadFile(loaclFile);
-        downloadFileRequest.setPartSize(1 * 1024 * 1024);
+        downloadFileRequest.setPartSize(1024 * 1024);
         downloadFileRequest.setTaskNum(10);
         downloadFileRequest.setEnableCheckpoint(true);
         if (StringUtils.isNotEmpty(checkFile)) {
@@ -139,10 +129,15 @@ public class AliOssDownloadApi {
             throwable.printStackTrace();
         }
         // 下载成功时，会返回文件元信息。
-        downloadRes.getObjectMetadata();
+        ObjectMetadata objectMetadata = null;
+        if (Objects.nonNull(downloadRes)) {
+            objectMetadata = downloadRes.getObjectMetadata();
+        }
 
         // 关闭OSSClient。
         ossClient.shutdown();
+
+        return objectMetadata;
 
     }
 }

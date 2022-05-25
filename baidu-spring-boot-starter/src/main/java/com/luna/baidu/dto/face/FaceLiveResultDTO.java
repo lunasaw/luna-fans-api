@@ -1,16 +1,17 @@
 package com.luna.baidu.dto.face;
 
 import com.luna.baidu.dto.word.FaceDTO;
+import lombok.Data;
 
 import java.util.List;
 
+
 /**
- * @Package: com.luna.baidu.dto.face
- * @ClassName: FaceLiveResultDTO
- * @Author: luna
- * @CreateTime: 2020/8/14 11:26
- * @Description:
+ * 2020/8/10 17:05
+ * 
+ * @author luna
  */
+@Data
 public class FaceLiveResultDTO {
 
     /**
@@ -23,19 +24,4 @@ public class FaceLiveResultDTO {
      */
     private List<FaceResultDTO> faceList;
 
-    public Float getFaceLiveness() {
-        return faceLiveness;
-    }
-
-    public void setFaceLiveness(Float faceLiveness) {
-        this.faceLiveness = faceLiveness;
-    }
-
-    public List<FaceResultDTO> getFaceList() {
-        return faceList;
-    }
-
-    public void setFaceList(List<FaceResultDTO> faceList) {
-        this.faceList = faceList;
-    }
 }

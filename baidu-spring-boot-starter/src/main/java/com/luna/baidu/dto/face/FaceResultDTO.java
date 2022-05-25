@@ -1,6 +1,7 @@
 package com.luna.baidu.dto.face;
 
 import com.luna.baidu.dto.location.LocationDO;
+import lombok.Data;
 
 /**
  * @Package: com.luna.baidu.dto
@@ -9,6 +10,7 @@ import com.luna.baidu.dto.location.LocationDO;
  * @CreateTime: 2020/8/10 17:05
  * @Description:
  */
+@Data
 public class FaceResultDTO {
 
     private String     faceToken;
@@ -25,71 +27,9 @@ public class FaceResultDTO {
 
     private String     faceProbability;
 
-    public String getFaceToken() {
-        return faceToken;
+    @Data
+    public static class LiveNess {
+        private String livemapscore;
     }
 
-    public void setFaceToken(String faceToken) {
-        this.faceToken = faceToken;
-    }
-
-    public LocationDO getLocationDO() {
-        return locationDO;
-    }
-
-    public void setLocationDO(LocationDO locationDO) {
-        this.locationDO = locationDO;
-    }
-
-    public LiveNess getLiveness() {
-        return liveness;
-    }
-
-    public void setLiveness(LiveNess liveness) {
-        this.liveness = liveness;
-    }
-
-    public String getSpoofing() {
-        return spoofing;
-    }
-
-    public void setSpoofing(String spoofing) {
-        this.spoofing = spoofing;
-    }
-
-    public Double getAge() {
-        return age;
-    }
-
-    public void setAge(Double age) {
-        this.age = age;
-    }
-
-    public Integer getBeauty() {
-        return beauty;
-    }
-
-    public void setBeauty(Integer beauty) {
-        this.beauty = beauty;
-    }
-
-    public String getFaceProbability() {
-        return faceProbability;
-    }
-
-    public void setFaceProbability(String faceProbability) {
-        this.faceProbability = faceProbability;
-    }
-}
-
-class LiveNess {
-    private String livemapscore;
-
-    public String getLivemapscore() {
-        return livemapscore;
-    }
-
-    public void setLivemapscore(String livemapscore) {
-        this.livemapscore = livemapscore;
-    }
 }

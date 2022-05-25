@@ -8,7 +8,7 @@ import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
-import com.luna.common.text.CharsetKit;
+import com.luna.common.text.CharsetUtil;
 import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
@@ -43,10 +43,10 @@ public class BaiduBodyApi {
 
     public static List<BodyCheckDTO> checkBodiesWithBase64(String key, String image)
         throws UnsupportedEncodingException {
-        return checkBodies(key, URLEncoder.encode(image, CharsetKit.UTF_8));
+        return checkBodies(key, URLEncoder.encode(image, CharsetUtil.UTF_8));
     }
 
     public static List<BodyCheckDTO> checkBodiesWithFile(String key, String image) throws UnsupportedEncodingException {
-        return checkBodies(key, URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetKit.UTF_8));
+        return checkBodies(key, URLEncoder.encode(Base64Util.encodeBase64(FileTools.read(image)), CharsetUtil.UTF_8));
     }
 }

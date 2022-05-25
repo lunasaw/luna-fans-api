@@ -3,24 +3,21 @@ package com.luna.baidu.api;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
-
-import com.luna.baidu.constant.ImageConstant;
 import com.luna.baidu.dto.word.WordDTO;
 
+import com.luna.common.constant.ImageConstant;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.Base64Util;
-import com.luna.common.text.CharsetKit;
+import com.luna.common.text.CharsetUtil;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 /**
  * @author Luna@win10
@@ -82,7 +79,7 @@ public class BaiduOcrApi {
      */
     public static List<WordDTO> baiduOcrAndAddress(String key, String imageType, String image) {
         try {
-            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetUtil.UTF_8);
             HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
                 ImmutableMap.of("access_token", key), imagePath);
@@ -117,7 +114,7 @@ public class BaiduOcrApi {
      */
     public static List<WordDTO> baiduOcrAndAddressNormal(String key, String imageType, String image) {
         try {
-            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetKit.UTF_8);
+            String imagePath = imageType + "=" + URLEncoder.encode(image, CharsetUtil.UTF_8);
             HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.OCR_ADDRESS_NORMAL,
                 ImmutableMap.of("Content-Type", HttpUtilsConstant.X_WWW_FORM_URLENCODED),
                 ImmutableMap.of("access_token", key), imagePath);

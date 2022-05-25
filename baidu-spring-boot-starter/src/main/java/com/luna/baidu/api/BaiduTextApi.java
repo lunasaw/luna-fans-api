@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.CharsetKit;
+import com.luna.common.text.CharsetUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class BaiduTextApi {
         String body = "{\"text\": \"" + text + "\"" + "}";
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.LANGUAGE_PROCESSING,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetUtil.UTF_8),
             body);
         String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         JSONObject jsonObject = JSON.parseObject(JSON.parseObject(response).get("item").toString());
@@ -70,7 +70,7 @@ public class BaiduTextApi {
         textParam.put("model", model);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.TEXT_SIMILARITY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetUtil.UTF_8),
             JSON.toJSONString(textParam));
         String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         TextSimnetResultDTO textSimnetResultDTO = JSON.parseObject(response, TextSimnetResultDTO.class);
@@ -94,7 +94,7 @@ public class BaiduTextApi {
         wordParam.put("word_2", word2);
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.WOEDS_SIMILARITY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON),
-            ImmutableMap.of("access_token", key, "charset", CharsetKit.UTF_8),
+            ImmutableMap.of("access_token", key, "charset", CharsetUtil.UTF_8),
             JSON.toJSONString(wordParam));
         String response = HttpUtils.checkResponseAndGetResult(httpResponse, true);
         TextSimilarResultDTO similarResultDTO = JSON.parseObject(response, TextSimilarResultDTO.class);

@@ -1,4 +1,4 @@
-package com.luna.baidu.dto.face;
+package com.luna.baidu.dto.face.facecheck;
 
 import com.luna.baidu.dto.word.FaceDTO;
 

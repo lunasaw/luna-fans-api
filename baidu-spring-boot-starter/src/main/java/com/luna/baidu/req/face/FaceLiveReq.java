@@ -1,11 +1,13 @@
 package com.luna.baidu.req.face;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
 
 /**
  * @author luna@mac
  * 2021年05月11日 11:07
  */
+@Data
 public class FaceLiveReq {
 
     /**
@@ -29,38 +31,6 @@ public class FaceLiveReq {
     private String faceField;
     /** 场景信息，程序会视不同的场景选用相对应的模型。当前支持的场景有COMMON(通用场景)，GATE(闸机场景)，默认使用COMMON */
     private String option = "COMMON";
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
-
-    public String getFaceField() {
-        return faceField;
-    }
-
-    public void setFaceField(String faceField) {
-        this.faceField = faceField;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
-    }
 
     public FaceLiveReq() {}
 

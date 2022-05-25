@@ -15,7 +15,7 @@ import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.os.SystemInfoUtil;
 import com.luna.common.text.Base64Util;
-import com.luna.common.text.CharsetKit;
+import com.luna.common.text.CharsetUtil;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +125,7 @@ public class BaiduVoiceApi {
     public static byte[] voiceSynthesis(VoiceSynthesisReq voiceSynthesisReq) throws IOException {
         log.info("voiceSynthesis start voiceSynthesisReq={}", JSON.toJSONString(voiceSynthesisReq));
         Map<String, String> map = Maps.newHashMap();
-        map.put("tex", URLEncoder.encode(voiceSynthesisReq.getTex(), CharsetKit.UTF_8));
+        map.put("tex", URLEncoder.encode(voiceSynthesisReq.getTex(), CharsetUtil.UTF_8));
         map.put("per", voiceSynthesisReq.getPer());
         map.put("spd", voiceSynthesisReq.getSpd());
         map.put("pit", voiceSynthesisReq.getPit());

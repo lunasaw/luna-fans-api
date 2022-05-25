@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.luna.baidu.constant.ImageConstant;
+import com.luna.common.constant.ImageConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -69,7 +69,6 @@ public class BaiduUserFaceApi {
     public static UserFaceResultDTO faceUserAdd(String key, String image, String imageType, String groupId,
         String userId,
         String userInfo, String qualityControl, String liveNessControl, String actionType, Integer faceSortType) {
-        log.info("faceUserAdd start");
 
         ImmutableMap<String, Object> map = ImmutableMap.<String, Object>builder()
             .put("image", image)
@@ -355,7 +354,9 @@ public class BaiduUserFaceApi {
      */
     public static UserInfoListDTO userFaceSearch(String key, String image, String imageType, String groupIdList,
         String qualityControl, String liveNessControl, String userId, Integer maxUserNum, Integer faceSortType) {
-        log.info("userFaceSearch start");
+        log.info(
+            "userFaceSearch::key = {}, imageType = {}, groupIdList = {}, qualityControl = {}, liveNessControl = {}, userId = {}, maxUserNum = {}, faceSortType = {}",
+            key, imageType, groupIdList, qualityControl, liveNessControl, userId, maxUserNum, faceSortType);
 
         Map<String, Object> map = Maps.newHashMap();
         map.put("image", image);

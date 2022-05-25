@@ -1,6 +1,5 @@
 package com.luna.ali.oss;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Date;
 
@@ -9,7 +8,6 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
 import com.luna.ali.config.AliOssConfigProperties;
-import com.luna.common.text.RandomStrUtil;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -29,12 +27,10 @@ public class AliOssUtil {
         ObjectMetadata metadata = new ObjectMetadata();
         if (StringUtils.isNotEmpty(access)) {
             metadata.setObjectAcl(CannedAccessControlList.parse(access));
-
         }
 
         if (StringUtils.isNotEmpty(type)) {
             metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.parse(type));
-
         }
         return metadata;
     }
@@ -53,37 +49,6 @@ public class AliOssUtil {
         return callback;
     }
 
-    /**
-     * 上传文件
-     * 
-     * @param imagePath
-     * @param bucketName
-     * @param imgFolder
-     * @param configVale
-     */
-    public static String ossUpload(String imagePath, String bucketName, String imgFolder,
-        AliOssConfigProperties configVale) {
-        // 创建PutObjectRequest对象。
-        File file = new File(imagePath);
-        String fileName = file.getName();
-        if (!imgFolder.endsWith("/")) {
-            imgFolder = imgFolder + "/";
-        }
-        fileName = System.currentTimeMillis() + "_" + RandomStrUtil.generateNonceStrWithUUID() + "_" + fileName;
-        PutObjectRequest putObjectRequest =
-            new PutObjectRequest(bucketName, imgFolder + fileName, file);
-
-        // 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
-        metadata.setObjectAcl(CannedAccessControlList.PublicRead);
-        putObjectRequest.setMetadata(metadata);
-        OSS ossClient = configVale.getOssClient(false);
-        /** 上传文件 */
-        PutObjectResult putObjectResult = ossClient.putObject(putObjectRequest);
-        ossClient.shutdown();
-        return configVale.getDomain() + "/" + imgFolder + file.getName();
-    }
 
     /**
      * 创建自定义域名oss服务
@@ -93,7 +58,7 @@ public class AliOssUtil {
      * @return
      */
     public static OSS createOssWithCname(AliOssConfigProperties configVale) {
-        return configVale.getOssClient(true);
+        return configVale.getInstanceClient(true);
     }
 
     /**
@@ -101,7 +66,7 @@ public class AliOssUtil {
      * 
      * @param name
      */
-    public static void movie2Image(String name, String bucketName, OSS ossClient) {
+    public static String movie2Image(String name, String bucketName, OSS ossClient) {
         String objectName = name;
         // 设置视频截帧操作。
         String style = "video/snapshot,t_50000,f_jpg,w_1024,h_768";
@@ -112,10 +77,11 @@ public class AliOssUtil {
         req.setExpiration(expiration);
         req.setProcess(style);
         URL signedUrl = ossClient.generatePresignedUrl(req);
-        System.out.println(signedUrl);
         // 关闭OSSClient。
         ossClient.shutdown();
         ossClient.shutdown();
+
+        return signedUrl.toString();
     }
 
 }

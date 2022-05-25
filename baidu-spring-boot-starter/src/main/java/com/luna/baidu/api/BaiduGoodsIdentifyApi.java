@@ -1,10 +1,6 @@
 package com.luna.baidu.api;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
-
-import com.luna.baidu.constant.ImageConstant;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
@@ -15,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.luna.baidu.dto.goods.GoodsInfoDTO;
 
 /**
@@ -35,7 +30,7 @@ public class BaiduGoodsIdentifyApi {
      * @return
      */
     public static List<GoodsInfoDTO> goodsIdentify(String key, String image, Integer baikeNum) {
-        log.info("goodsIdentify start");
+        log.info("goodsIdentify::key = {}, image = {}, baikeNum = {}", key, image, baikeNum);
 
         ImmutableMap<String, Object> map =
             ImmutableMap.<String, Object>builder().put("image", image).put("baike_num", baikeNum).build();

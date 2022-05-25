@@ -1,50 +1,26 @@
 package com.luna.baidu.dto.location;
 
+import lombok.Data;
+
 /**
  * @author Luna@win10
  * @date 2020/4/29 14:37
  */
+@Data
 public class LocationDO {
 
-    private double top;
+    private Double  top;
 
-    private double left;
+    private Double  left;
 
-    private double width;
+    private Double  width;
 
-    private double height;
+    private Double  height;
 
-    public double getTop() {
-        return top;
-    }
-
-    public void setTop(double top) {
-        this.top = top;
-    }
-
-    public double getLeft() {
-        return left;
-    }
-
-    public void setLeft(double left) {
-        this.left = left;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
+    /**
+     * ++rotation 是 int64 人脸框相对于竖直方向的顺时针旋转角，[-180,180]
+     */
+    private Integer rotation;
 
     @Override
     public String toString() {

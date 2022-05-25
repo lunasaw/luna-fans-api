@@ -35,6 +35,9 @@ public class BaiduApiConstant {
     /** 人脸识别 */
     public static final String FACE                   = "/rest/2.0/location/v3/detect";
 
+    /** 人脸识别 v3 */
+    public static final String FACE_V3                = "/rest/2.0/face/v3/detect";
+
     /** 人脸注册 */
     public static final String FACE_USER_ADD          = "/rest/2.0/face/v3/faceset/user/add";
 
@@ -123,7 +126,7 @@ public class BaiduApiConstant {
     public static final String FIND_WEARHER           = "/weather/v1/";
 
     /** TODO Key 30天更换一次 暂定固定值 */
-    public static final String BAIDU_KEY              =
-        "24.879f8135d8bab56b057a73fe9c3d133b.2592000.1619419464.282335-19618961";
+    public static final String ACCESS_TOKEN           =
+        "24.4c1d95a735701d0aba4657c91e4273a4.2592000.1654275162.282335-25321172";
 
 }

@@ -37,6 +37,10 @@ fans-spring-boot-starter-fans
 
 ## 日志
 
+增加阿里Oss平台，升级SpringBoot 2.7.0
+
+### 2022-05-25
+
 增加Smms图床
 
 增加百度Api开放平台
@@ -60,7 +64,7 @@ fans-spring-boot-starter-fans
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>fans-spring-boot-starter-fans</artifactId>
-    <version>2.2.7-RELEASE</version>
+    <version>2.0.0-SNAPSHOT</version>
 </dependency>
 ```
 

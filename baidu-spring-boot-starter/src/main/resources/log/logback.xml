@@ -1,35 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
 <configuration>
-    <property name="LOG_HOME" value="log"/>
 
-    <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,%i索引【从数字0开始递增】 -->
+    <property name="logRoot" value="log"/>
+    <property name="app" value="luna-baidu"/>
+    <property name="pattern" value="%d %p [%t] %c{20} %X{traceId:--} %m%n"/>
+    <property name="logHistory" value="7"/>
+    <property name="totalSizeCap" value="500M"/>
+    <property name="maxFileSize" value="10M"/>
 
-    <!-- ConsoleAppender：把日志输出到控制台 -->
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d %X{traceId} %p (%file:%line\) - %m%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
-    <appender name="serverLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/server.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/server.%d{yyyy-MM-dd}.log</fileNamePattern>
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/${app}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-error.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
         <encoder>
-            <pattern>%d %X{traceId} %p [%thread] (%file:%line\) - %m %X{uri}%n</pattern>
-            <charset>UTF-8</charset>
+            <pattern>${pattern}</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.luna.commons" additivity="false" level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </logger>
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
 
-    <!-- 控制台输出日志 -->
-    <root level="info">
-        <appender-ref ref="serverLog"/>
+
+    <!-- 日志输出级别 -->
+    <root level="${logLevel}">
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
     </root>
+
+
 </configuration>

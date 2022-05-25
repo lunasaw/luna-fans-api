@@ -1,13 +1,9 @@
 package com.luna.baidu.dto.word;
-
 import com.luna.baidu.dto.location.LocationDO;
 
 /**
- * @Package: com.luna.baidu.dto
- * @ClassName: FaceDTO
- * @Author: luna
- * @CreateTime: 2020/8/10 17:05
- * @Description:
+ * author: luna
+ * 2020/8/10 17:05
  */
 public class FaceDTO {
 

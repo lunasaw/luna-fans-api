@@ -9,15 +9,25 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
 import com.luna.ali.config.AliOssConfigProperties;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
- * @Package: com.luna.ali.oss
- * @ClassName: AliOssBucketApi
- * @Author: luna
- * @CreateTime: 2020/8/21 21:54
- * @Description:
+ * @author Luna@win10
+ * @date 2020/4/20 11:46
  */
 public class AliOssBucketApi {
+
+    private OSS ossClient;
+
+    public AliOssBucketApi(OSS ossClient) {
+        this.ossClient = ossClient;
+    }
+
+    private static final Logger log = LoggerFactory.getLogger(AliOssBucketApi.class);
 
     /**
      * 创建对象存储空间
@@ -26,24 +36,24 @@ public class AliOssBucketApi {
      * 只能包括小写字母、数字和短划线（-）。
      * 必须以小写字母或者数字开头和结尾。
      * 长度必须在3~63字节之间。
-     * @param aliOssConfigProperties
      */
-    public void createBucket(String bucketName, String accress, String type,
-        AliOssConfigProperties aliOssConfigProperties) {
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+    public void createBucket(String bucketName, String access, String type) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 创建CreateBucketRequest对象。
         CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
 
         // 设置存储空间的权限为公共读，默认是私有。
-        if (StringUtils.isNotEmpty(accress)) {
-            createBucketRequest.setCannedACL(CannedAccessControlList.parse(accress));
+        if (StringUtils.isEmpty(access)) {
+            access = CannedAccessControlList.Private.toString();
         }
+        createBucketRequest.setCannedACL(CannedAccessControlList.parse(access));
+
         // 设置存储空间的存储类型为低频访问类型，默认是标准类型。
-        if (StringUtils.isNotEmpty(type)) {
-            createBucketRequest.setStorageClass(StorageClass.parse(type));
+        if (StringUtils.isEmpty(type)) {
+            type = StorageClass.Standard.toString();
         }
+        createBucketRequest.setStorageClass(StorageClass.parse(type));
 
         // 创建存储空间。
         ossClient.createBucket(createBucketRequest);
@@ -55,14 +65,9 @@ public class AliOssBucketApi {
     /**
      * 列举所有的存储空间
      * 
-     * @param aliOssConfigProperties
      * @return
      */
-    public List<Bucket> listBuckets(String prefix, Integer maxKeys, String marker,
-        AliOssConfigProperties aliOssConfigProperties) {
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
-
+    public List<Bucket> listBuckets(String prefix, Integer maxKeys, String marker) {
         // 列举存储空间。
         ListBucketsRequest listBucketsRequest = new ListBucketsRequest();
         // 列举指定前缀的存储空间。
@@ -89,13 +94,11 @@ public class AliOssBucketApi {
      * 判断存储空间是否存在
      * 
      * @param bucketName
-     * @param configValue
      * @return
      */
-    public boolean isBucket(String bucketName, AliOssConfigProperties configValue) {
+    public boolean isBucket(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
 
         boolean exists = ossClient.doesBucketExist(bucketName);
 
@@ -108,12 +111,11 @@ public class AliOssBucketApi {
      * 获取存储空间的地域
      * 
      * @param bucketName
-     * @param configValue
      * @return
      */
-    public String getBucketRegion(String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public String getBucketRegion(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
+
         String location = ossClient.getBucketLocation(bucketName);
 
         // 关闭OSSClient。
@@ -125,12 +127,10 @@ public class AliOssBucketApi {
      * 获取存储空间的信息
      * 
      * @param bucketName
-     * @param configValue
      * @return
      */
-    public BucketInfo getBucketInfo(String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public BucketInfo getBucketInfo(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 存储空间的信息包括地域（Region或Location）、创建日期（CreationDate）、拥有者（Owner）、权限（Grants）等。
         BucketInfo info = ossClient.getBucketInfo(bucketName);
@@ -152,16 +152,13 @@ public class AliOssBucketApi {
      * 设置存储空间访问权限
      * 
      * @param bucketName
-     * @param configValue
-     * 
+     *
      * 私有 存储空间的拥有者和授权用户有该存储空间内的文件的读写权限，其他用户没有权限操作该存储空间内的文件。 CannedAccessControlList.Private
      * 公共读 存储空间的拥有者和授权用户有该存储空间内的文件的读写权限，其他用户只有该存储空间内的文件的读权限。请谨慎使用该权限。 CannedAccessControlList.PublicRead
      * 公共读写 所有用户都有该存储空间内的文件的读写权限。请谨慎使用该权限。 CannedAccessControlList.PublicReadWrite
      */
-    public void setBucketAccess(String bucketName, String access, AliOssConfigProperties configValue) {
-
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public void setBucketAccess(String bucketName, String access) {
+        Assert.notNull(access, "权限名称不能为空");
 
         // 设置存储空间的访问权限为私有。
         ossClient.setBucketAcl(bucketName, CannedAccessControlList.parse(access));
@@ -174,12 +171,11 @@ public class AliOssBucketApi {
      * 获取存储空间的访问权限
      *
      * @param bucketName
-     * @param configValue
      * @return
      */
-    public String getBucketAccess(String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public String getBucketAccess(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
+
         // 获取存储空间的访问权限。
         AccessControlList acl = ossClient.getBucketAcl(bucketName);
 
@@ -192,11 +188,9 @@ public class AliOssBucketApi {
      * 删除存储空间
      * 
      * @param bucketName
-     * @param configValue
      */
-    public void deleteBucket(String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public void deleteBucket(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 删除存储空间。
         ossClient.deleteBucket(bucketName);
@@ -210,11 +204,9 @@ public class AliOssBucketApi {
      *
      * @param tags
      * @param bucketName
-     * @param configValue
      */
-    public void setBucketTag(Map<String, String> tags, String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public void setBucketTag(Map<String, String> tags, String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 设置Bucket标签。
         SetBucketTaggingRequest request = new SetBucketTaggingRequest(bucketName);
@@ -234,12 +226,10 @@ public class AliOssBucketApi {
      * 获取存储空间标签
      * 
      * @param bucketName
-     * @param configValue
      * @return
      */
-    public Map<String, String> getBucketTags(String bucketName, AliOssConfigProperties configValue) {
-        // 创建OSSClient实例。
-        OSS ossClient = configValue.getOssClient(false);
+    public Map<String, String> getBucketTags(String bucketName) {
+        Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 获取Bucket标签信息。
         TagSet tagSet = ossClient.getBucketTagging(new GenericRequest(bucketName));

@@ -1,45 +1,73 @@
 package com.luna.ali.oss;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.AppendObjectRequest;
 import com.aliyun.oss.model.AppendObjectResult;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.UploadFileRequest;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.luna.ali.config.AliOssConfigProperties;
+import com.luna.common.net.HttpUtilsConstant;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 /**
- * @Package: com.luna.ali.oss
- * @ClassName: AliOssUploadGoOnApi
- * @Author: luna
- * @CreateTime: 2020/8/22 15:26
- * @Description:
+ * @author Luna@win10
+ * @date 2020/4/20 11:46
  */
 public class AliOssUploadGoOnApi {
+
+    public AliOssUploadGoOnApi(OSS ossClient) {
+        this.ossClient = ossClient;
+    }
+
+    private OSS                 ossClient;
+
+    private static final Logger log = LoggerFactory.getLogger(AliOssUploadApi.class);
+
+    public AppendObjectResult uploadGoOn(String bucketName, String objectName, List<String> contents, String contentType) {
+
+        // 指定上传的内容类型。
+        if (StringUtils.isEmpty(contentType)) {
+            contentType = "text/plain";
+        }
+
+        ObjectMetadata meta = new ObjectMetadata();
+
+        Assert.notNull(contentType, "内容类型不能为空");
+        Assert.notNull(bucketName, "存储空间名称不能为空");
+
+        meta.setContentType(contentType);
+        AppendObjectResult objectResult = null;
+        for (String content : contents) {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
+
+            // 通过AppendObjectRequest设置多个参数。
+            AppendObjectRequest appendObjectRequest =
+                new AppendObjectRequest(bucketName, objectName, inputStream, meta);
+
+            objectResult = uploadGoOn(appendObjectRequest);
+            appendObjectRequest.setPosition(objectResult.getNextPosition());
+            appendObjectRequest.setInitCRC(objectResult.getClientCRC());
+        }
+
+        return objectResult;
+    }
 
     /**
      * 追加上传
      *
-     * @param bucketName
-     * @param contents
-     * @param objectName
-     * @param aliOssConfigProperties
+     * @param appendObjectRequest
      */
-    public static void uploadGoOn(String bucketName, List<String> contents, String objectName,
-        AliOssConfigProperties aliOssConfigProperties) {
-        // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
-
-        ObjectMetadata meta = new ObjectMetadata();
-        // 指定上传的内容类型。
-        meta.setContentType("text/plain");
-
-        // 通过AppendObjectRequest设置多个参数。
-        AppendObjectRequest appendObjectRequest =
-            new AppendObjectRequest(bucketName, objectName, new ByteArrayInputStream(contents.get(0).getBytes()), meta);
+    public AppendObjectResult uploadGoOn(AppendObjectRequest appendObjectRequest) {
 
         // 通过AppendObjectRequest设置单个参数。
         // 设置存储空间名称。
@@ -53,21 +81,8 @@ public class AliOssUploadGoOnApi {
         // 指定文件的元信息，第一次追加时有效。
         // appendObjectRequest.setMetadata(meta);
 
-        // 第一次追加。
-        // 设置文件的追加位置。
-        appendObjectRequest.setPosition(0L);
-        AppendObjectResult appendObjectResult = ossClient.appendObject(appendObjectRequest);
-        // 文件的64位CRC值。此值根据ECMA-182标准计算得出。
-        System.out.println(appendObjectResult.getObjectCRC());
 
-        for (int i = 1; i < contents.size(); i++) {
-            appendObjectRequest.setPosition(appendObjectResult.getNextPosition());
-            appendObjectRequest.setInputStream(new ByteArrayInputStream(contents.get(i).getBytes()));
-            appendObjectResult = ossClient.appendObject(appendObjectRequest);
-        }
-
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        return ossClient.appendObject(appendObjectRequest);
     }
 
     /**
@@ -84,7 +99,7 @@ public class AliOssUploadGoOnApi {
         String objectName,
         AliOssConfigProperties aliOssConfigProperties) throws Throwable {
         // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getOssClient(false);
+        OSS ossClient = aliOssConfigProperties.getInstanceClient(false);
 
         ObjectMetadata meta = new ObjectMetadata();
         // 指定上传的内容类型。
@@ -116,7 +131,7 @@ public class AliOssUploadGoOnApi {
         // 文件的元数据。
         uploadFileRequest.setObjectMetadata(meta);
         // 设置上传成功回调，参数为Callback类型。
-        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliOssConfigProperties.getServerUrl()));
+        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliOssConfigProperties.getCallbackUrl()));
 
         // 断点续传上传。
         ossClient.uploadFile(uploadFileRequest);

@@ -1,4 +1,4 @@
-package com.luna.baidu.dto.face;
+package com.luna.baidu.api;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.luna.baidu.api.BaiduApiConstant;
+import com.luna.baidu.dto.face.UserFaceListResultDTO;
+import com.luna.baidu.dto.face.UserFaceResultDTO;
+import com.luna.baidu.dto.face.UserInfoListDTO;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 
@@ -20,9 +22,9 @@ import com.luna.common.net.HttpUtilsConstant;
  * @author luna@mac
  * 2021年05月07日 19:21
  */
-public class BaiduUserFaceApi {
+public class BaiduUserFaceApi2 {
 
-    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceApi.class);
+    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceApi2.class);
 
     /**
      * 人脸注册Api 返回face_token

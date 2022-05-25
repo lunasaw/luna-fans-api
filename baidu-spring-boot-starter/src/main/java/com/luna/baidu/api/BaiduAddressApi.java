@@ -36,7 +36,7 @@ public class BaiduAddressApi {
         if (StringUtils.isNotBlank(ip)) {
             map.put("ip", ip);
         }
-        map.put("ak", ak);;
+        map.put("ak", ak);
         HttpResponse httpResponse =
             HttpUtils.doGet(BaiduApiConstant.MAP_HOST, BaiduApiConstant.IP_TO_ADDRESS, null, map);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
