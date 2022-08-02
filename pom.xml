@@ -7,7 +7,7 @@
     <groupId>io.github.lunasaw</groupId>
     <artifactId>fans-spring-boot-starter</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0</version>
+    <version>3.0.0</version>
     <name>fans-spring-boot-starter</name>
     <description>fans API Toolkit</description>
     <url>https://lunasaw.github.io/fans-spring-boot-starter</url>

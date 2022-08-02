@@ -72,7 +72,7 @@
     <dependency>
         <groupId>io.github.lunasaw</groupId>
         <artifactId>baidu-spring-boot-starter-baidu</artifactId>
-        <version>2.1.0</version>
+        <version>3.0.0</version>
     </dependency>
 ```
 在配置文件 application.yml 加入可选配置
