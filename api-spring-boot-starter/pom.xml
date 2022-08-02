@@ -5,10 +5,10 @@
     <parent>
         <artifactId>fans-spring-boot-starter</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>2.0.0-SNAPSHOT</version>
+        <version>2.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.1.0</version>
     <artifactId>api-spring-boot-starter</artifactId>
     <name>api-spring-boot-starter</name>
     <description>fans API Toolkit</description>
