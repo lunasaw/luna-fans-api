@@ -10,7 +10,7 @@ import com.luna.common.text.Base64Util;
 import com.luna.tencent.response.group.AddFaceResultResponse;
 import com.luna.tencent.response.group.CheckPersonInGroupResponse;
 import com.luna.tencent.response.group.PersonBaseInfoResponse;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
