@@ -26,7 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.0</spring-boot.version>
-        <luna-common.veriosn>2.0.1-RELEASE</luna-common.veriosn>
+        <luna-common.veriosn>2.0.2</luna-common.veriosn>
         <json-fastJson.veriosn>1.1.0-RELEASE</json-fastJson.veriosn>
     </properties>
 
