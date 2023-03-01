@@ -42,4 +42,36 @@
         <developerConnection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter/ali-spring-boot-starter
         </developerConnection>
     </scm>
+
+    <profiles>
+        <profile>
+            <id>github_auth</id>
+            <distributionManagement>
+                <repository>
+                    <id>github_auth</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github_auth</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <repositories>
+                <repository>
+                    <!-- id需要与上面的server对应的id匹配 -->
+                    <id>github_auth</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </project>

@@ -26,7 +26,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.0</spring-boot.version>
-        <luna-common.veriosn>2.0.2</luna-common.veriosn>
+        <luna-common.veriosn>2.2.1</luna-common.veriosn>
         <json-fastJson.veriosn>1.1.0-RELEASE</json-fastJson.veriosn>
     </properties>
 
@@ -95,31 +95,22 @@
     </dependencies>
 
     <distributionManagement>
-        <!--        <repository>-->
-        <!--            <id>ossrh</id>-->
-        <!--            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-        <!--        </repository>-->
-        <!--        <snapshotRepository>-->
-        <!--            <id>ossrh</id>-->
-        <!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
-        <!--        </snapshotRepository>-->
 
-        <!-- 两个ID必须与setting.xml中的<server><id>nexus-releases</id></server>保持一致-->
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://localhost:8082/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://localhost:8082/repository/maven-snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <profiles>
         <profile>
             <id>ossrh</id>
+            <distributionManagement>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -129,11 +120,12 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <!--自动释放，deploy就不需要在仓库中在操作部署了-->
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
@@ -145,7 +137,8 @@
                         <configuration>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
                             <useReleaseProfile>false</useReleaseProfile>
-                            <releaseProfiles>release</releaseProfiles>
+                            <!--正式包release 快照包snapshots-->
+                            <releaseProfiles>snapshots</releaseProfiles>
                             <goals>deploy</goals>
                         </configuration>
                     </plugin>
@@ -156,12 +149,13 @@
                         <configuration>
                             <source>1.8</source>
                             <target>1.8</target>
+                            <encoding>utf-8</encoding>
                         </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>3.0.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -171,6 +165,12 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -190,82 +190,12 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
                         <configuration>
-                            <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+                            <!--<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
                             <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>nexus-releases</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <version>2.3.2</version>
-                        <configuration>
-                            <autoVersionSubmodules>true</autoVersionSubmodules>
-                            <useReleaseProfile>false</useReleaseProfile>
-                            <releaseProfiles>release</releaseProfiles>
-                            <goals>deploy</goals>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.0</version>
-                        <configuration>
-                            <source>1.8</source>
-                            <target>1.8</target>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.0.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
-                        <configuration>
-                            <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <aggregate>true</aggregate>
+                            <charset>UTF-8</charset><!-- utf-8读取文件 -->
+                            <encoding>UTF-8</encoding><!-- utf-8进行编码代码 -->
+                            <docencoding>UTF-8</docencoding><!-- utf-8进行编码文档 -->
                         </configuration>
                         <executions>
                             <execution>

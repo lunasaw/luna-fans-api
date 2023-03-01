@@ -15,10 +15,10 @@ import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.internal.OSSUtils;
 import com.aliyun.oss.model.Callback;
 import com.google.common.collect.Lists;
-import com.luna.ali.config.AliOssConfigProperties;
 import com.luna.ali.oss.constant.OssConstants;
+import com.luna.common.encrypt.Base64Util;
 import com.luna.common.encrypt.HashUtils;
-import com.luna.common.text.Base64Util;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
