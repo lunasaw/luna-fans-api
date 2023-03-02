@@ -30,7 +30,7 @@ import com.luna.baidu.req.face.FaceLiveReq;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
+import com.luna.common.encrypt.Base64Util;
 import org.springframework.beans.BeanUtils;
 
 /**

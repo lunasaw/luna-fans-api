@@ -10,7 +10,7 @@ import com.luna.common.constant.ImageConstant;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
+import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.CharsetUtil;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;

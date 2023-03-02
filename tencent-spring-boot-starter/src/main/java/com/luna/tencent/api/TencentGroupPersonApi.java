@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.luna.common.encrypt.Base64Util;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
-import com.luna.common.text.Base64Util;
 import com.luna.tencent.response.group.AddFaceResultResponse;
 import com.luna.tencent.response.group.CheckPersonInGroupResponse;
 import com.luna.tencent.response.group.PersonBaseInfoResponse;
