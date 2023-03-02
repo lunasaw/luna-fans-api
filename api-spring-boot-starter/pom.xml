@@ -3,24 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>fans-spring-boot-starter</artifactId>
+        <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>3.0.0</version>
+    <version>${luna-fans-api.version}</version>
     <artifactId>api-spring-boot-starter</artifactId>
     <name>api-spring-boot-starter</name>
     <description>fans API Toolkit</description>
-    <url>https://lunasaw.github.io/fans-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/luna-fans-api</url>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <scm>
-        <url>https://github.com/lunasaw/fans-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter</developerConnection>
+        <url>https://github.com/lunasaw/luna-fans-api</url>
+        <connection>scm:git:https://github.com/lunasaw/luna-fans-api.git</connection>
+        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api</developerConnection>
     </scm>
     <dependencies>
         <dependency>

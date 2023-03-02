@@ -4,21 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>fans-spring-boot-starter</artifactId>
+        <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
-    <version>3.0.0</version>
+    <version>${luna-fans-api.version}</version>
     <name>tencent-spring-boot-starter</name>
     <description>Tencent API Toolkit</description>
-    <url>https://lunasaw.github.io/fans-spring-boot-starter/tencent-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/luna-fans-api/tencent-spring-boot-starter</url>
 
     <scm>
-        <url>https://github.com/lunasaw/fans-spring-boot-starter/tencent-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter/tencent-spring-boot-starter.git
+        <url>https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter.git
         </connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter/tencent-spring-boot-starter
+        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter
         </developerConnection>
     </scm>
 

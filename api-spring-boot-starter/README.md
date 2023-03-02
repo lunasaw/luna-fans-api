@@ -15,7 +15,7 @@ api-spring-boot-starter
 <br />
 
 <p align="center">
-  <a href="https://github.com/lunasaw/fans-spring-boot-starter/">
+  <a href="https://github.com/lunasaw/luna-fans-api/">
     <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -23,14 +23,14 @@ api-spring-boot-starter
   <p align="center">
     Api开放平台工具
     <br />
-    <a href="https://github.com/lunasaw/fans-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://github.com/lunasaw/luna-fans-api"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="">查看Demo</a>
     ·
     <a href="">报告Bug</a>
     ·
-    <a href="https://github.com/lunasaw/fans-spring-boot-starter/issues">提出新特性</a>
+    <a href="https://github.com/lunasaw/luna-fans-api/issues">提出新特性</a>
   </p>
 
 </p>
@@ -128,31 +128,31 @@ eg:
 
 <!-- links -->
 
-[your-project-path]:lunasaw/fans-spring-boot-starter
+[your-project-path]:lunasaw/luna-fans-api
 
-[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/fans-spring-boot-starter.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/luna-fans-api.svg?style=flat-square
 
-[contributors-url]: https://github.com/lunasaw/fans-spring-boot-starter/graphs/contributors
+[contributors-url]: https://github.com/lunasaw/luna-fans-api/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/lunasaw/fans-spring-boot-starter.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/lunasaw/luna-fans-api.svg?style=flat-square
 
-[forks-url]: https://github.com/lunasaw/fans-spring-boot-starter/network/members
+[forks-url]: https://github.com/lunasaw/luna-fans-api/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/lunasaw/fans-spring-boot-starter.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/lunasaw/luna-fans-api.svg?style=flat-square
 
-[stars-url]: https://github.com/lunasaw/fans-spring-boot-starter/stargazers
+[stars-url]: https://github.com/lunasaw/luna-fans-api/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/lunasaw/fans-spring-boot-starter.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/lunasaw/luna-fans-api.svg?style=flat-square
 
-[issues-url]: https://img.shields.io/github/issues/lunasaw/fans-spring-boot-starter.svg
+[issues-url]: https://img.shields.io/github/issues/lunasaw/luna-fans-api.svg
 
-[license-shield]: https://img.shields.io/github/license/lunasaw/fans-spring-boot-starter.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/lunasaw/luna-fans-api.svg?style=flat-square
 
-[license-url]: https://github.com/lunasaw/fans-spring-boot-starter/blob/master/LICENSE.txt
+[license-url]: https://github.com/lunasaw/luna-fans-api/blob/master/LICENSE.txt
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 
-[linkedin-url]: https://linkedin.com/in/fans-spring-boot-starter
+[linkedin-url]: https://linkedin.com/in/luna-fans-api
 
 
 

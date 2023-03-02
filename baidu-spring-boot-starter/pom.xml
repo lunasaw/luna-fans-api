@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>fans-spring-boot-starter</artifactId>
+        <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
     </parent>
     <artifactId>baidu-spring-boot-starter</artifactId>
     <name>baidu-spring-boot-starter</name>
-    <version>3.0.0</version>
+    <version>${luna-fans-api.version}</version>
     <description>Baidu API Toolkit</description>
-    <url>https://lunasaw.github.io/fans-spring-boot-starter/baidu-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/luna-fans-api/baidu-spring-boot-starter</url>
 
     <scm>
-        <url>https://github.com/lunasaw/fans-spring-boot-starter/baidu-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter/baidu-spring-boot-starter.git
+        <url>https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter</url>
+        <connection>scm:git:https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter.git
         </connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter/baidu-spring-boot-starter
+        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter
         </developerConnection>
     </scm>
 
