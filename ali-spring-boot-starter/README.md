@@ -55,7 +55,7 @@
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>ali-spring-boot-starter-ali</artifactId>
-    <version>3.0.0</version>
+    <version>${last.version}</version>
 </dependency>
 ```
 

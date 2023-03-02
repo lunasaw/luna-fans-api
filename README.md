@@ -64,7 +64,7 @@ luna-fans-api-fans
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>luna-fans-api-fans</artifactId>
-    <version>3.0.0</version>
+    <version>${last.version}</version>
 </dependency>
 ```
 
