@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
-import com.luna.common.text.Base64Util;
+import com.luna.common.encrypt.Base64Util;
 import com.luna.tencent.response.card.IdCardPictureCheckInfoResponse;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;

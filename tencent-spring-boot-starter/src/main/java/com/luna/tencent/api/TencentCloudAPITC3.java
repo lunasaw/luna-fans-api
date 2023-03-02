@@ -1,7 +1,7 @@
 package com.luna.tencent.api;
 
 import com.luna.common.net.HttpUtilsConstant;
-import com.luna.common.text.Base64Util;
+import com.luna.common.encrypt.Base64Util;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
