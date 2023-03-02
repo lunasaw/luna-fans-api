@@ -22,7 +22,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: GPG_PASSPHRASE
       - name: Publish to the Maven Central Repository
-        run: mvn -DskipTests --batch-mode deploy -P ossrh
+        run: mvn -DskipTests --batch-mode deploy -Possrh
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
           distribution: 'zulu'
           server-id: github_auth
       - name: Publish package
-        run: mvn -DskipTests --batch-mode deploy -P github_auth
+        run: mvn -DskipTests --batch-mode deploy -Pgithub_auth
         env:
           GITHUB_TOKEN: ${{ secrets.SECRET_KEY }}
 
