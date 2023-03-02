@@ -54,7 +54,7 @@ api-spring-boot-starter
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>api-spring-boot-starter-fans</artifactId>
-    <version>3.0.0</version>
+    <version>${last.version}</version>
 </dependency>
 ```
 

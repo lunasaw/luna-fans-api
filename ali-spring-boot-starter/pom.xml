@@ -50,12 +50,12 @@
                 <repository>
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
                 </repository>
                 <snapshotRepository>
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
                 </snapshotRepository>
             </distributionManagement>
             <repositories>
@@ -63,7 +63,7 @@
                     <!-- id需要与上面的server对应的id匹配 -->
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/ali-spring-boot-starter</url>
+                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
