@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>fans-spring-boot-starter</artifactId>
+    <artifactId>luna-fans-api</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0</version>
-    <name>fans-spring-boot-starter</name>
+    <version>3.1.0</version>
+    <name>luna-fans-api</name>
     <description>fans API Toolkit</description>
-    <url>https://lunasaw.github.io/fans-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/luna-fans-api</url>
     <modules>
         <module>api-spring-boot-starter</module>
         <module>baidu-spring-boot-starter</module>
@@ -28,6 +28,7 @@
         <spring-boot.version>2.7.0</spring-boot.version>
         <luna-common.veriosn>2.2.1</luna-common.veriosn>
         <json-fastJson.veriosn>1.1.0-RELEASE</json-fastJson.veriosn>
+        <luna-fans-api.version>3.1.0</luna-fans-api.version>
     </properties>
 
     <developers>
@@ -44,9 +45,9 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/lunasaw/fans-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/fans-spring-boot-starter</developerConnection>
+        <url>https://github.com/lunasaw/luna-fans-api</url>
+        <connection>scm:git:https://github.com/lunasaw/luna-fans-api.git</connection>
+        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api</developerConnection>
     </scm>
     <dependencyManagement>
         <dependencies>
