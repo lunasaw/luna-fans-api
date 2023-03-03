@@ -6,6 +6,7 @@ import com.luna.api.email.constant.MessageTypeConstant;
 import com.luna.api.email.dto.EmailSmallDTO;
 import com.luna.api.email.dto.MessageDTO;
 import com.luna.api.email.dto.SendKeyMessageDTO;
+import com.luna.api.email.dto.TemplateDTO;
 import com.luna.api.email.entity.TemplateDO;
 import com.luna.api.email.exception.MessageException;
 import com.luna.api.email.warpper.MailWrapper;
@@ -16,6 +17,7 @@ import org.apache.commons.collections4.PredicateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +37,10 @@ import java.util.stream.Collectors;
 public class MessageService {
 
     @Autowired
-    private MailSendProperties mailSendProperties;
+    private MailSendProperties              mailSendProperties;
+
+    @Autowired
+    private MailProperties                  mailProperties;
 
     /**
      * 发消息用线程池
@@ -46,13 +51,13 @@ public class MessageService {
             new ThreadPoolExecutor.AbortPolicy());
 
     @Autowired
-    private TemplateDAO templateDAO;
+    private TemplateService                 templateService;
     @Autowired
     private MailWrapper                     mailWrapper;
 
-    private TemplateDO getTemplate(String messageType, Long templateId) {
+    private TemplateDTO getTemplate(String messageType, Long templateId) {
         checkParam(messageType);
-        return Optional.ofNullable(templateDAO.get(templateId)).orElseThrow(
+        return Optional.ofNullable(templateService.getTemplateById(templateId)).orElseThrow(
             () -> new MessageException(ResultCode.PARAMETER_INVALID, ResultCode.MSG_PARAMETER_INVALID));
     }
 
@@ -66,10 +71,10 @@ public class MessageService {
         if (CollectionUtils.isEmpty(messageDTO.getTargetList())) {
             return;
         }
-        TemplateDO templateDO = getTemplate(messageDTO.getMessageType(), messageDTO.getTemplateId());
+        TemplateDTO templateDTO = getTemplate(messageDTO.getMessageType(), messageDTO.getTemplateId());
 
         // 异步提交任务
-        SEND_MESSAGE_THREAD_POOL_EXECUTOR.execute(new MessageTask(messageDTO, templateDO, mailWrapper));
+        SEND_MESSAGE_THREAD_POOL_EXECUTOR.execute(new MessageTask(messageDTO, templateDTO, mailWrapper));
     }
 
     public void asyncSendMessage(SendKeyMessageDTO sendKeyMessageDTO) {
@@ -94,17 +99,23 @@ public class MessageService {
         }
 
         extracted(targetList, sendKeyMessageDTO.getMessageType(), sendKeyMessageDTO.getTemplateId(),
-            sendKeyMessageDTO.getPlaceholderContent());
+            sendKeyMessageDTO.getPlaceholderContent(), mailProperties.getUsername(), mailSendProperties.getNick());
     }
 
-    private void extracted(List<String> targetList, String messageType, long templateId, Map<String, String> placeholderContent) {
+    private void extracted(List<String> targetList, String messageType, Long templateId, Map<String, String> placeholderContent, String fromEmail,
+        String nick) {
         EmailSmallDTO emailSmallDTO = new EmailSmallDTO();
         emailSmallDTO.setTargetList(targetList);
         emailSmallDTO.setMessageType(messageType);
         emailSmallDTO.setTemplateId(templateId);
         emailSmallDTO.setPlaceholderContent(placeholderContent);
-        emailSmallDTO.setFromMail(mailSendProperties.getUsername());
-        emailSmallDTO.setNickName(mailSendProperties.getUserNick());
+        emailSmallDTO.setFromMail(fromEmail);
+        emailSmallDTO.setNickName(nick);
         asyncSendMessage(emailSmallDTO);
+    }
+
+    public void sendSimpleMessage(String subject, String content) {
+        SEND_MESSAGE_THREAD_POOL_EXECUTOR
+            .execute(() -> mailWrapper.sendSimpleMessage(mailProperties.getUsername(), mailSendProperties.getNick(), subject, content));
     }
 }

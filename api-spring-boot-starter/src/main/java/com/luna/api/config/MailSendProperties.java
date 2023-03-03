@@ -7,14 +7,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author chenzhangyue
  * 2023/3/1
  */
-@ConfigurationProperties(prefix = "luna.mail")
+@ConfigurationProperties(prefix = "spring.mail")
 @Data
 public class MailSendProperties {
 
+    /** 发送方昵称 */
+    private String nick;
 
-    /** 发送方邮件地址 */
-    private String              username;
-
-    /** 发送方邮件昵称 */
-    private String              userNick;
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
 }

@@ -57,4 +57,12 @@ public class EmailSmallDTO {
     /** 附件地址<名称,路径> */
     private Map<String, String> pathMap;
 
+    public EmailSmallDTO(String fromMail, String fromMailPassword, String subject, String content) {
+        this.fromMail = fromMail;
+        this.fromMailPassword = fromMailPassword;
+        this.subject = subject;
+        this.content = content;
+    }
+
+    public EmailSmallDTO() {}
 }
