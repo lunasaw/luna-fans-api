@@ -5,7 +5,7 @@ name: Publish package to the Maven Central Repository and GitHub Packages
       - master
 jobs:
   publish:
-    environment: deploy
+    environment: deploy # 注意环境
     runs-on: ubuntu-latest
     permissions:
       contents: read
