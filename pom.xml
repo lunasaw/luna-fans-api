@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.0</spring-boot.version>
-        <luna-common.veriosn>2.2.1</luna-common.veriosn>
+        <luna-common.veriosn>2.2.2-SNAPSHOT</luna-common.veriosn>
         <json-fastJson.veriosn>1.1.0-RELEASE</json-fastJson.veriosn>
         <luna-fans-api.version>3.1.1-SNAPSHOT</luna-fans-api.version>
     </properties>

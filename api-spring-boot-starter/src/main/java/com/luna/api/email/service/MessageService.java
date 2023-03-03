@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -68,6 +69,7 @@ public class MessageService {
     }
 
     public void asyncSendMessage(EmailSmallDTO messageDTO) {
+        Objects.requireNonNull(messageDTO.getTemplateId(), "templateId now allow null");
         if (CollectionUtils.isEmpty(messageDTO.getTargetList())) {
             return;
         }
@@ -109,13 +111,12 @@ public class MessageService {
         emailSmallDTO.setMessageType(messageType);
         emailSmallDTO.setTemplateId(templateId);
         emailSmallDTO.setPlaceholderContent(placeholderContent);
-        emailSmallDTO.setFromMail(fromEmail);
-        emailSmallDTO.setNickName(nick);
+        emailSmallDTO.setFromUser(new EmailSmallDTO.Personal(fromEmail, nick));
         asyncSendMessage(emailSmallDTO);
     }
 
-    public void sendSimpleMessage(String subject, String content) {
+    public void sendSimpleMessage(String toEmail, String subject, String content) {
         SEND_MESSAGE_THREAD_POOL_EXECUTOR
-            .execute(() -> mailWrapper.sendSimpleMessage(mailProperties.getUsername(), mailSendProperties.getNick(), subject, content));
+            .execute(() -> mailWrapper.sendSimpleMessage(mailProperties.getUsername(), toEmail, subject, content));
     }
 }

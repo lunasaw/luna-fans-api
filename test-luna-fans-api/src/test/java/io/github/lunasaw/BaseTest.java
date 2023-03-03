@@ -7,22 +7,16 @@ import com.luna.api.email.dto.EmailSmallDTO;
 import com.luna.api.email.service.MessageService;
 import com.luna.api.email.service.TemplateService;
 import io.github.lunasaw.listener.ApiMethodListener;
+import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author chenzhangyue
@@ -40,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // MergeMode: 自定义的监听器是否与父类监听器合并输出 MERGE_WITH_DEFAULTS 合并，REPLACE_DEFAULTS 替换默认
 @TestPropertySource(
     locations = "classpath:application-dev.properties")
-// @Import(BaseTest.TemplateServiceContextConfiguration.class)
 public class BaseTest {
 
     @Autowired
@@ -55,16 +48,12 @@ public class BaseTest {
     }
 
     @Test
+    @SneakyThrows
     public void btest() {
-        messageService.sendSimpleMessage("主题", "内容");
+        messageService.sendSimpleMessage("15696756582@163.com", "主题", "内容");
+        Thread.sleep(20L);
+        while (true) {
+
+        }
     }
-
-    // @TestConfiguration
-    // static class TemplateServiceContextConfiguration {
-    // @Bean
-    // public TemplateService templateService() {
-    // return new TemplateService();
-    // }
-    // }
-
 }

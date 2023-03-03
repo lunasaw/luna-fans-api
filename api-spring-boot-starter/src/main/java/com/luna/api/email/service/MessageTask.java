@@ -1,15 +1,18 @@
 package com.luna.api.email.service;
 
+import com.google.common.collect.Maps;
 import com.luna.api.email.constant.MessageTypeConstant;
 import com.luna.api.email.dto.EmailSmallDTO;
-import com.luna.api.email.dto.MessageDTO;
 import com.luna.api.email.dto.TemplateDTO;
-import com.luna.api.email.entity.TemplateDO;
 import com.luna.api.email.warpper.MailWrapper;
 import com.luna.common.text.StringTools;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Luna
@@ -37,12 +40,14 @@ public class MessageTask implements Runnable {
         // 填充内容
         String content = templateDTO.getContent();
         if (MapUtils.isNotEmpty(emailSmallDTO.getPlaceholderContent())) {
-            content = StringTools.format(content, emailSmallDTO.getPlaceholderContent());
+            content = replaceHolder(content, emailSmallDTO.getPlaceholderContent());
+            emailSmallDTO.setContent(new EmailSmallDTO.Content(content));
         }
         // 填充标题
         String subject = templateDTO.getSubject();
         if (MapUtils.isNotEmpty(emailSmallDTO.getPlaceholderContent())) {
-            subject = StringTools.format(subject, emailSmallDTO.getPlaceholderContent());
+            subject = replaceHolder(subject, emailSmallDTO.getPlaceholderContent());
+            emailSmallDTO.setSubject(subject);
         }
 
         if (StringUtils.equals(MessageTypeConstant.MOBILE, emailSmallDTO.getMessageType())) {
@@ -50,11 +55,14 @@ public class MessageTask implements Runnable {
                 // TODO 暂不打开
             }
         } else if (StringUtils.equals(MessageTypeConstant.EMAIL_SIMPLE, emailSmallDTO.getMessageType())) {
-            for (String email : emailSmallDTO.getTargetList()) {
-                mailWrapper.sendSimpleMessage(emailSmallDTO.getFromMail(), email, subject, content);
-            }
+            mailWrapper.sendSimpleMessage(emailSmallDTO);
         } else if (StringUtils.equals(MessageTypeConstant.COMPLEX_EMAIL, emailSmallDTO.getMessageType())) {
-            mailWrapper.send(emailSmallDTO);
+            mailWrapper.sendMultiMessage(emailSmallDTO);
         }
     }
+
+    public String replaceHolder(String content, Map<String, String> placeholderContent) {
+        return StringTools.format(content, "$", placeholderContent, true);
+    }
+
 }
