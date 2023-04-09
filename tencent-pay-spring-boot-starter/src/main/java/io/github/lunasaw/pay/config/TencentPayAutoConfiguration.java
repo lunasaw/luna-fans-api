@@ -33,40 +33,5 @@ public class TencentPayAutoConfiguration {
         this.tencentPayMqConfigProperties = tencentPayMqConfigProperties;
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public TencentPayQueueConfiguration tencentPayQueueConfig() {
-        return new TencentPayQueueConfiguration();
-    }
-
-    /***
-     * 创建DirectExchange交换机
-     *
-     * @return
-     */
-    @Bean
-    public DirectExchange basicExchange() {
-        return new DirectExchange(tencentPayMqConfigProperties.getExchange(), true, false);
-    }
-
-    /***
-     * 创建队列
-     *
-     * @return
-     */
-    @Bean(name = "queueOrder")
-    public Queue queueOrder() {
-        return new Queue(tencentPayMqConfigProperties.getQueue(), true);
-    }
-
-    /****
-     * 队列绑定到交换机上
-     *
-     * @return
-     */
-    @Bean
-    public Binding basicBinding() {
-        return BindingBuilder.bind(queueOrder()).to(basicExchange()).with(tencentPayMqConfigProperties.getRouting());
-    }
 
 }

@@ -1,8 +1,9 @@
 package io.github.lunasaw.pay.properties;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import lombok.Data;
 
 /**
  * @Package: com.luna.tencent.config
@@ -12,17 +13,17 @@ import org.springframework.stereotype.Component;
  * @Description:
  */
 @Component
-@ConfigurationProperties(prefix = "spring.wechat.pay-mq.order")
+@ConfigurationProperties(prefix = "spring.wechat.pay-mq.delay")
 @Data
-public class TencentPayMqConfigProperties {
+public class TencentPayDelayMqConfigProperties {
 
     private Boolean enable;
 
-    private String exchange;
+    private String  exchange;
 
-    private String queue;
+    private String  queue;
 
-    private String routing;
+    private String  routing;
 
     public String getExchange() {
         return exchange;

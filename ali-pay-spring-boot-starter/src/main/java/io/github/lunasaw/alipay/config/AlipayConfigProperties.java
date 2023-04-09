@@ -15,15 +15,17 @@ import org.springframework.stereotype.Component;
 @Data
 public class AlipayConfigProperties {
 
-    private String appId;
+    private boolean enable;
 
-    private String privateKey;
+    private String  appId;
 
-    private String gatewayUrl;
+    private String  privateKey;
 
-    private String publicKey;
+    private String  gatewayUrl;
 
-    private String notifyUrl;
+    private String  publicKey;
 
-    private String returnUrl;
+    private String  notifyUrl;
+
+    private String  returnUrl;
 }

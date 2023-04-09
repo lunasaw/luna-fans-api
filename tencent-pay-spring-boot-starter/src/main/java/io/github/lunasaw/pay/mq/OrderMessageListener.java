@@ -18,8 +18,8 @@ import io.github.lunasaw.pay.nortify.TencentPayNotifyService;
  * @since 1.0
  */
 @Component
-@ConditionalOnProperty(prefix = "spring.wechat", name = "pay-mq.queue")
-@RabbitListener(queues = "${spring.wechat.pay-mq.queue}")
+@ConditionalOnProperty(prefix = "spring.wechat", name = "pay-mq.queue.delay.enable", havingValue = "true")
+@RabbitListener(queues = "${spring.wechat.pay-mq.delay.queue}")
 public class OrderMessageListener {
 
     @Autowired

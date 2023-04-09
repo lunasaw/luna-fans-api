@@ -1,10 +1,11 @@
 spring:
   ali:
-    enable: true
-    #
-    bucket-ame: luna97
-    host: oss-cn-beijing.aliyuncs.com
-    ossId: xxx
-    oss-key: xxx
-    domain: xxx
-    server-url: http://111.229.114.126:7777/index.html
+    oss:
+      enable: true
+      # 阿里oss服务
+      bucket-name: luna97
+      access-key: xxx
+      secret-key: xxx
+      domain: xxx
+      enable-cname: true
+      endpoint: oss-cn-beijing.aliyuncs.com

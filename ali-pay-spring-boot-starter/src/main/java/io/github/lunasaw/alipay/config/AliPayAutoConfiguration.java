@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author luna@mac
  */
 @Configuration
-@ConditionalOnProperty(prefix = "spring.alipay", name = "app-id")
+@ConditionalOnProperty(prefix = "spring.alipay", name = "enable", havingValue = "true")
 @EnableConfigurationProperties({AlipayConfigProperties.class})
 @ComponentScan("io.github.lunasaw.alipay")
 public class AliPayAutoConfiguration {

@@ -4,6 +4,7 @@ import io.github.lunasaw.pay.properties.TencentPayConfigProperties;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import io.github.lunasaw.pay.api.TencentPayApi;
@@ -16,7 +17,8 @@ import io.github.lunasaw.pay.api.TencentPayApi;
  * @Description:
  */
 @Component
-@RabbitListener(queues = "orderListenerQueue")
+@ConditionalOnProperty(prefix = "spring.wechat", name = "pay-mq.queue.delay.enable", havingValue = "true")
+@RabbitListener(queues = "${spring.wechat.pay-mq.order.queue}")
 public class DelayMessageListener {
 
     @Autowired

@@ -1,5 +1,6 @@
 spring:
   alipay:
+    enable: true
     app-id: 206xxx1018x00xx713019 #应用ID
     gateway-url: https://openapi.alipaydev.com/gateway.do #支付宝网关
     notify-url: http://111.229.114.126:7777/ali/notify #异步通知地址

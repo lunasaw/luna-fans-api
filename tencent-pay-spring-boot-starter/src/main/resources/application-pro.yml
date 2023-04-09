@@ -13,6 +13,13 @@ spring:
 
     # 消息处理
     pay-mq:
-      exchange: exchange.order
-      queue: queue.order
-      routing: queue.order
+      order:
+        enable: false
+        exchange: exchange.order
+        queue: queue.order
+        routing: queue.order
+      delay:
+        enable: false
+        exchange: exchange.order
+        queue: queue.order
+        routing: queue.order

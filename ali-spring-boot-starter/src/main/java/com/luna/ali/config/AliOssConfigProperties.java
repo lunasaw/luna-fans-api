@@ -14,9 +14,11 @@ import javax.annotation.PostConstruct;
  * @author Luna@win10
  * @date 2020/5/6 21:09
  */
-@ConfigurationProperties(prefix = "spring.ali")
+@ConfigurationProperties(prefix = "spring.ali.oss")
 @Data
 public class AliOssConfigProperties {
+
+    private Boolean enable;
 
     private String  accessKey;
 
@@ -25,7 +27,7 @@ public class AliOssConfigProperties {
     private String  bucketName;
 
     /**
-     * endpoint http 开头
+     * endpoint 拼接 http 开头
      */
     private String  endpoint;
     /**
