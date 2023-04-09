@@ -13,11 +13,11 @@
     <name>baidu-spring-boot-starter</name>
     <version>${luna-fans-api.version}</version>
     <description>Baidu API Toolkit</description>
-    <url>https://lunasaw.github.io/${github.username}/${project.name}</url>
+    <url>https://lunasaw.github.io/${github.username}/${parent.artifactId}/${project.name}</url>
 
     <scm>
         <url>https://github.com/lunasaw/${github.username}/${parent.artifactId}/${project.name}</url>
-        <connection>scm:git:https://github.com/${github.username}/${project.name}.git
+        <connection>scm:git:https://github.com/${github.username}/${parent.artifactId}/${project.name}.git
         </connection>
         <developerConnection>scm:git:https://github.com/${github.username}/${parent.artifactId}/${project.name}
         </developerConnection>

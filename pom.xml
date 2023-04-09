@@ -10,7 +10,7 @@
     <version>3.1.2</version>
     <name>luna-fans-api</name>
     <description>fans API Toolkit</description>
-    <url>https://lunasaw.github.io/luna-fans-api</url>
+    <url>https://lunasaw.github.io/${project.name}</url>
     <modules>
         <module>api-spring-boot-starter</module>
         <module>baidu-spring-boot-starter</module>
@@ -73,19 +73,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>io.github.lunasaw</groupId>
             <artifactId>luna-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <version>${luna-common.veriosn}</version>
         </dependency>
     </dependencies>
 
