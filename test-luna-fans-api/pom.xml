@@ -5,9 +5,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>io.github.lunasaw</groupId>
     <artifactId>test-luna-fans-api</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -20,6 +20,23 @@
         <luna-fans-api.version>3.1.2</luna-fans-api.version>
         <github.username>lunasaw</github.username>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.lunasaw</groupId>
+                <artifactId>luna-common</artifactId>
+                <version>${luna-common.veriosn}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,13 +58,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -99,18 +117,7 @@
             <artifactId>baidu-spring-boot-starter</artifactId>
             <version>${luna-fans-api.version}</version>
         </dependency>
-
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>ossrh</id>
-        </profile>
-        <profile>
-            <id>github_auth</id>
-        </profile>
-    </profiles>
-
 
     <build>
         <plugins>

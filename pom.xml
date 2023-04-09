@@ -16,7 +16,6 @@
         <module>baidu-spring-boot-starter</module>
         <module>tencent-spring-boot-starter</module>
         <module>ali-spring-boot-starter</module>
-        <module>test-luna-fans-api</module>
         <module>tencent-pay-spring-boot-starter</module>
         <module>ali-pay-spring-boot-starter</module>
     </modules>
