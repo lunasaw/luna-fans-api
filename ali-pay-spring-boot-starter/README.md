@@ -1,12 +1,10 @@
-# ali-spring-boot-starter
-
+# ali-pay-spring-boot-starter
 
 ## 日志
 
 - 2023-04-09 拆分项目,增加支付宝Api操作
 - 8.19 增加支付宝Api操作
 - 8.21 增加阿里Oss存储Api调用
-
 
 ###### **安装步骤**
 
@@ -16,7 +14,7 @@
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>ali-spring-boot-starter-ali</artifactId>
+    <artifactId>ali-pay-spring-boot-starter-ali</artifactId>
     <version>${last.version}</version>
 </dependency>
 ```
@@ -62,14 +60,19 @@ public class BaiduApiTest {
 
 ### 文档
 
-[文档](https://lunasaw.github.io/ali-spring-boot-starter)
+[文档](https://lunasaw.github.io/ali-pay-spring-boot-starter)
 
 [结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
 
+### 文件目录说明
+
+eg:
 
 ```
 
 
+
+```
 
 静态Api调用
 
@@ -214,6 +217,3 @@ public class AlipayApi {
 }
 
 ```
-
-
-

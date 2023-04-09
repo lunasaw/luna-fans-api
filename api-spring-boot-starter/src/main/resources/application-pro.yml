@@ -1,7 +1,8 @@
 spring:
+  # https://doc.sm.ms/
   smms:
     enable: true
-    authorization-code: NFfqBMvYH6RfXaqEgjo79oDfQ7Ckrchg
+    authorization-code: xxx
     password: qyEF63QVT4!NwT9
     username: luna_nov
 

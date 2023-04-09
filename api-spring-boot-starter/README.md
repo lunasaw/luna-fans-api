@@ -1,51 +1,12 @@
 # api-spring-boot-starter
 
-api-spring-boot-starter
-
-<!-- PROJECT SHIELDS -->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-<!-- PROJECT LOGO -->
-<br />
-
-<p align="center">
-  <a href="https://github.com/lunasaw/luna-fans-api/">
-    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
-  </a>
-
-<h3 align="center">Api开放平台工具</h3>
-  <p align="center">
-    Api开放平台工具
-    <br />
-    <a href="https://github.com/lunasaw/luna-fans-api"><strong>探索本项目的文档 »</strong></a>
-    <br />
-    <br />
-    <a href="">查看Demo</a>
-    ·
-    <a href="">报告Bug</a>
-    ·
-    <a href="https://github.com/lunasaw/luna-fans-api/issues">提出新特性</a>
-  </p>
-
-</p>
-
 ## 日志
+
+2023-04-09 增加邮件发送
 
 增加Smms图床
 
-## 目录
-
-- [安装步骤](#安装步骤)
-- [文件目录说明](#文件目录说明)
-- [部署](#部署)
-
-###### **安装步骤**
+#### 使用
 
 引入项目依赖
 
@@ -61,7 +22,27 @@ api-spring-boot-starter
 在配置文件application.properties加入可选配置
 
 ```text
-       
+# https://doc.sm.ms/
+spring:
+  smms:
+    enable: true
+    authorization-code: xxx
+    password: xx!xx
+    username: luna_nov
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    nick: LUNA
+    password: xxx
+    port: 465
+    properties:
+      mail:
+        debug: false
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+    username: 1173x@qq.com
 ```
 
 引用示例
@@ -85,75 +66,6 @@ public class AliApiTest {
 
 
 ```
-
-[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
-
-### 文件目录说明
-
-eg:
-
-```
-./
-├── java
-│   └── com
-│       └── luna
-│           └── api
-│               ├── config
-│               │   └── ApiAutoConfiguration.java
-│               └── smms
-│                   ├── api
-│                   │   ├── ImageApiFromString.java
-│                   │   ├── UserApiFromFile.java
-│                   │   └── UserApiFromString.java
-│                   ├── config
-│                   │   └── SmMsConfigValue.java
-│                   ├── constant
-│                   │   └── SmMsConstant.java
-│                   └── dto
-│                       ├── UploadResultDTO.java
-│                       └── UserProfileDTO.java
-└── resources
-    ├── META-INF
-    │   └── spring.factories
-    ├── conf.json
-    └── log
-        └── logback.xml
-
-```
-
-### 部署
-
-暂无
-
-
-<!-- links -->
-
-[your-project-path]:lunasaw/luna-fans-api
-
-[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/luna-fans-api.svg?style=flat-square
-
-[contributors-url]: https://github.com/lunasaw/luna-fans-api/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/lunasaw/luna-fans-api.svg?style=flat-square
-
-[forks-url]: https://github.com/lunasaw/luna-fans-api/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/lunasaw/luna-fans-api.svg?style=flat-square
-
-[stars-url]: https://github.com/lunasaw/luna-fans-api/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/lunasaw/luna-fans-api.svg?style=flat-square
-
-[issues-url]: https://img.shields.io/github/issues/lunasaw/luna-fans-api.svg
-
-[license-shield]: https://img.shields.io/github/license/lunasaw/luna-fans-api.svg?style=flat-square
-
-[license-url]: https://github.com/lunasaw/luna-fans-api/blob/master/LICENSE.txt
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-
-[linkedin-url]: https://linkedin.com/in/luna-fans-api
-
 
 
 

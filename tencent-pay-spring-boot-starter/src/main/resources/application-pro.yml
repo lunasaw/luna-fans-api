@@ -20,6 +20,6 @@ spring:
         routing: queue.order
       delay:
         enable: false
-        exchange: exchange.order
+        listener-exchange: exchange.order
         queue: queue.order
         routing: queue.order

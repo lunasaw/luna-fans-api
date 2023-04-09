@@ -6,18 +6,11 @@
   <a href="https://github.com/lunasaw/tencent-spring-boot-starter/">
     <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grlpk1p1wwj30hb0a0ab2.jpg" alt="Logo" width="800" height="250">
   </a>
-
 </p>
 
 ## 日志
 
-- 增加语音识别相关接口，包括语音合成，实时识别等
-- 增加微信支付Api接口
-- 超时30分钟自动关闭订单
-- Mq队列处理
-- 增加腾讯地图Api接口
-- 增加腾讯人脸识别等Api接口
-
+- 2023-04-09 项目拆分支付模块
 
 直接使用引入项目依赖
 
@@ -25,7 +18,7 @@
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>tencent-spring-boot-starter-tencent</artifactId>
+    <artifactId>tencent-pay-spring-boot-starter-tencent</artifactId>
     <version>${last.version}</version>
 </dependency>
 ```
@@ -34,22 +27,35 @@
 
 [文档链接](https://lunasaw.github.io/tencent-spring-boot-starter/)
 
-
-
 在配置文件application.properties加入可选配置
 
 ```text
 spring:
-  tencent:
-    # 腾讯api
-    secret-id: xxx
-    secret-key: xxx
-    # 腾讯市场api
-    sky-eye-secret-id: xxx
-    sky-eye-secret-key: xxx
+  #微信支付信息配置
+  wechat:
+    enable: true
+    # 应用ID
+    app-id: xxx
+    # 公钥
+    partner: xxx
+    # 私钥
+    partner-key: xxx
+    # 异步通知URL
+    notify-url: xxx
 
-    # 腾讯地图api
-    map-key: xxx
+    # 消息处理
+    pay-mq:
+      order:
+        enable: false
+        exchange: exchange.order
+        queue: queue.order
+        routing: queue.order
+      delay:
+        enable: false
+        listener-exchange: exchange.order
+        queue: queue.order
+        routing: queue.order
+
 
 ```
 
@@ -95,5 +101,4 @@ email Keyluna@126.com &ensp; qq:1173288254
 
 - [tencent]()
 - [rabbitmq]()
-
 
