@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @createTime 2021年03月27日 12:58:00
  */
 @Configuration
-@ConditionalOnProperty(prefix = "spring.baidu", name = "appId")
+@ConditionalOnProperty(prefix = "spring.baidu", name = "enable", havingValue = "true")
 @EnableConfigurationProperties(BaiduProperties.class)
 public class BaiduAutoConfiguration {
 
