@@ -62,20 +62,7 @@ public class BaiduApiTest {
     }
 
 }
-
-
 ```
-
-### 文档
-
-[文档](https://lunasaw.github.io/ali-spring-boot-starter)
-
-[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
-
-
-```
-
-
 
 静态Api调用
 
