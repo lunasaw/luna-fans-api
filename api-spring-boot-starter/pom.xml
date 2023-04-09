@@ -5,7 +5,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <version>${luna-fans-api.version}</version>
@@ -19,9 +19,10 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
     </properties>
     <scm>
-        <url>https://github.com/lunasaw/luna-fans-api</url>
-        <connection>scm:git:https://github.com/lunasaw/luna-fans-api.git</connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api</developerConnection>
+        <url>https://github.com/${github.username}/${parent.artifactId}/${project.name}</url>
+        <connection>scm:git:https://github.com/${github.username}/${project.name}.git</connection>
+        <developerConnection>scm:git:https://github.com/${github.username}/${parent.artifactId}/${project.name}
+        </developerConnection>
     </scm>
     <dependencies>
         <dependency>

@@ -6,14 +6,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * @author luna@mac
  */
 @Configuration
-@ConditionalOnProperty(prefix = "luna.ali", name = "access-key")
+@ConditionalOnProperty(prefix = "spring.ali", name = "enable", havingValue = "true")
 @EnableConfigurationProperties({AliOssConfigProperties.class})
+@ComponentScan("com.luna.ali.oss")
 public class AliOssAutoConfiguration {
 
     @Autowired

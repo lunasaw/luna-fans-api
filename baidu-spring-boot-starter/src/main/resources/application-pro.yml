@@ -1,13 +1,9 @@
-luna:
+spring:
   baidu:
-    # \u767E\u5EA6API
-    appId: xxx
-    appKey: xxxx
-    secretKey: xxx
-    # \u83B7\u53D6\u7684access_token
-    baiduKey: xxx
-    jsKey: xxx
-    # \u767E\u5EA6\u5199\u4F5CId
-    projectId: xxx
-
+    # 百度appId
+    app-id: xxx
+    # 百度appKey
+    app-key: xxxx
+    secret-key: xxx
+    enable: false
 

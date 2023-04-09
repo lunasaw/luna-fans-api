@@ -33,7 +33,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 }, mergeMode = TestExecutionListeners.MergeMode.REPLACE_DEFAULTS)
 // MergeMode: 自定义的监听器是否与父类监听器合并输出 MERGE_WITH_DEFAULTS 合并，REPLACE_DEFAULTS 替换默认
 @TestPropertySource(
-    locations = "classpath:application-dev.properties")
+    locations = "classpath:application-dev.yml")
 public class BaseTest {
 
     @Autowired

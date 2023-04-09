@@ -1,0 +1,61 @@
+<configuration>
+
+    <property name="logRoot" value="log"/>
+    <property name="logLevel" value="${logging.level.root}"/>
+    <property name="app" value="${spring.application.name}"/>
+    <property name="pattern" value="%d %p [%t] %c{20} %X{traceId:--} %line %m%n"/>
+    <property name="logHistory" value="7"/>
+    <property name="totalSizeCap" value="500MB"/>
+    <property name="maxFileSize" value="10MB"/>
+
+    <!-- ConsoleAppender：把日志输出到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/${app}.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-error.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logRoot}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logRoot}/${app}-info.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxHistory>${logHistory}</maxHistory>
+            <totalSizeCap>${totalSizeCap}</totalSizeCap>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 日志输出级别 -->
+    <root level="${logLevel}">
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+</configuration>

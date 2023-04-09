@@ -7,19 +7,19 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.2</version>
     </parent>
     <artifactId>baidu-spring-boot-starter</artifactId>
     <name>baidu-spring-boot-starter</name>
     <version>${luna-fans-api.version}</version>
     <description>Baidu API Toolkit</description>
-    <url>https://lunasaw.github.io/luna-fans-api/baidu-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/${github.username}/${project.name}</url>
 
     <scm>
-        <url>https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter.git
+        <url>https://github.com/lunasaw/${github.username}/${parent.artifactId}/${project.name}</url>
+        <connection>scm:git:https://github.com/${github.username}/${project.name}.git
         </connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api/baidu-spring-boot-starter
+        <developerConnection>scm:git:https://github.com/${github.username}/${parent.artifactId}/${project.name}
         </developerConnection>
     </scm>
 

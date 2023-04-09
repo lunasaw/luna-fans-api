@@ -1,5 +1,6 @@
 package com.luna.tencent.properties;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -7,8 +8,11 @@ import org.springframework.stereotype.Component;
  * @author luna
  */
 @Component
-@ConfigurationProperties(prefix = "luna.ten")
+@ConfigurationProperties(prefix = "spring.tencent")
+@Data
 public class TencentApiConfigProperties {
+
+    private Boolean enable;
 
     private String secretId;
 

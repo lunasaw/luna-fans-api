@@ -7,13 +7,13 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.2</version>
     </parent>
     <artifactId>ali-spring-boot-starter</artifactId>
     <version>${luna-fans-api.version}</version>
     <name>ali-spring-boot-starter</name>
     <description>Ali API Toolkit Contain Oss And AliPay...</description>
-    <url>https://lunasaw.github.io/luna-fans-api/ali-spring-boot-starter</url>
+    <url>https://lunasaw.github.io/${github.username}/${project.name}</url>
 
     <dependencies>
         <dependency>
@@ -21,25 +21,27 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--      阿里云OSS服务器-->
+        <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.8.0</version>
+            <version>3.16.2</version>
         </dependency>
 
         <!-- alipay -->
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
-            <version>4.10.90.ALL</version>
+            <version>4.35.101.ALL</version>
         </dependency>
+
     </dependencies>
 
     <scm>
-        <url>https://github.com/lunasaw/luna-fans-api/ali-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/luna-fans-api/ali-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api/ali-spring-boot-starter
+        <url>https://github.com/${github.username}/${parent.artifactId}/${project.name}</url>
+        <connection>scm:git:https://github.com/${github.username}/${project.name}.git</connection>
+        <developerConnection>scm:git:https://github.com/lunasaw/${github.username}/${parent.artifactId}/${project.name}
         </developerConnection>
     </scm>
 

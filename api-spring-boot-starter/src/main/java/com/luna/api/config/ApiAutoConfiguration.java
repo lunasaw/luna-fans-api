@@ -1,6 +1,5 @@
 package com.luna.api.config;
 
-import com.luna.api.email.service.MessageService;
 import com.luna.api.smms.config.SmMsProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;

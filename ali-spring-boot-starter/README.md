@@ -1,50 +1,18 @@
 # ali-spring-boot-starter
 
-[ali-spring-boot-starter-ali](https://github.com/lunasaw/ali-spring-boot-starter-ali)
-
-<!-- PROJECT SHIELDS -->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/lunasaw/ali-spring-boot-starter/">
     <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grnvzio673j30bf03fwea.jpg" alt="Logo" width="411" height="123">
   </a>
-
-<h3 align="center">阿里开放平台工具</h3>
-  <p align="center">
-    百度开放平台工具
-    <br />
-    <a href="https://github.com/lunasaw/ali-spring-boot-starter"><strong>探索本项目的文档 »</strong></a>
-    <br />
-    <br />
-    <a href="">查看Demo</a>
-    ·
-    <a href="">报告Bug</a>
-    ·
-    <a href="https://github.com/lunasaw/ali-spring-boot-starter/issues">提出新特性</a>
-  </p>
-
 </p>
 
 ## 日志
 
-8.19 增加支付宝Api操作
-
-8.21 增加阿里Oss存储Api调用
-
-## 目录
-
-- [安装步骤](#安装步骤)
-- [文档](#文档)
-- [文件目录说明](#文件目录说明)
+- 2023-04-09 拆分项目,增加支付宝Api操作
+- 8.19 增加支付宝Api操作
+- 8.21 增加阿里Oss存储Api调用
 
 ###### **安装步骤**
 
@@ -62,25 +30,17 @@
 在配置文件application.properties加入可选配置
 
 ```text
-       # API
-     luna:
-       ali:
-         # 阿里云oss
-         bucketName: xxx
-         host: xxx
-         ossId: xxx
-         ossKey: xxx
-       alipay:
-         # 应用ID
-         appId: xxx
-         # 异步数据返回地址
-         notifyUrl: xxx
-         # 私钥
-         privateKey: xxx
-         # 公钥
-         publicKey: xxx
-         # 同步返回地址
-         returnUrl: xxx
+spring:
+  ali:
+    oss:
+      enable: true
+      # 阿里oss服务
+      bucket-name: luna97
+      access-key: xxx
+      secret-key: xxx
+      domain: xxx
+      enable-cname: true
+      endpoint: oss-cn-beijing.aliyuncs.com
      
 ```
 
@@ -111,90 +71,6 @@ public class BaiduApiTest {
 [文档](https://lunasaw.github.io/ali-spring-boot-starter)
 
 [结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
-
-### 文件目录说明
-
-eg:
-
-```
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── luna
-│   │   │           └── ali
-│   │   │               ├── alipay
-│   │   │               │   ├── container
-│   │   │               │   │   ├── PayCheckFactoryContainer.java
-│   │   │               │   │   ├── PayClientConstant.java
-│   │   │               │   │   └── PayParamConstant.java
-│   │   │               │   ├── factory
-│   │   │               │   │   ├── PayCheckFactory.java
-│   │   │               │   │   └── PayRootChainFactory.java
-│   │   │               │   └── pay
-│   │   │               │       ├── AppPayChain.java
-│   │   │               │       ├── DefaultPayChain.java
-│   │   │               │       ├── PagePayChain.java
-│   │   │               │       ├── WapPayChain.java
-│   │   │               │       ├── close
-│   │   │               │       │   ├── PayCloseChain.java
-│   │   │               │       │   └── param
-│   │   │               │       │       └── PayCloseParamChain.java
-│   │   │               │       ├── download
-│   │   │               │       │   ├── PayDownloadQueryChain.java
-│   │   │               │       │   └── param
-│   │   │               │       │       └── PayDownloadQueryParamChain.java
-│   │   │               │       ├── param
-│   │   │               │       │   ├── AppPayParamChain.java
-│   │   │               │       │   ├── PagePayParamChain.java
-│   │   │               │       │   └── WapPayParamChain.java
-│   │   │               │       ├── query
-│   │   │               │       │   ├── PayQueryChain.java
-│   │   │               │       │   └── param
-│   │   │               │       │       └── PayQueryParamChain.java
-│   │   │               │       └── refund
-│   │   │               │           ├── PayRefundChain.java
-│   │   │               │           ├── param
-│   │   │               │           │   └── PayRefundParamChain.java
-│   │   │               │           └── query
-│   │   │               │               ├── PayRefundQueryChain.java
-│   │   │               │               └── param
-│   │   │               │                   └── PayRefundQueryParamChain.java
-│   │   │               ├── api
-│   │   │               │   └── AlipayApi.java
-│   │   │               ├── config
-│   │   │               │   ├── AliOssAutoConfiguration.java
-│   │   │               │   ├── AliOssConfigProperties.java
-│   │   │               │   ├── AliPayAutoConfiguration.java
-│   │   │               │   └── AlipayConfigProperties.java
-│   │   │               ├── controller
-│   │   │               │   └── AliPayController.java
-│   │   │               ├── dto
-│   │   │               │   ├── AliPayGoodsDetailDTO.java
-│   │   │               │   ├── AlipayOrderDTO.java
-│   │   │               │   ├── CloseOrderDTO.java
-│   │   │               │   ├── OssUploadDTO.java
-│   │   │               │   ├── QueryBillDTO.java
-│   │   │               │   ├── QueryOrderDTO.java
-│   │   │               │   ├── QueryOrderResultDTO.java
-│   │   │               │   ├── RefundAmountDTO.java
-│   │   │               │   └── RefundQueryDTO.java
-│   │   │               ├── oss
-│   │   │               │   ├── AliOssBucketApi.java
-│   │   │               │   ├── AliOssDownloadApi.java
-│   │   │               │   ├── AliOssUploadApi.java
-│   │   │               │   ├── AliOssUploadGoOnApi.java
-│   │   │               │   ├── AliOssUtil.java
-│   │   │               │   └── PostObjectSample.java
-│   │   │               └── service
-│   │   │                   └── AlipayService.java
-│   │   └── resources
-│   │       ├── META-INF
-│   │       │   └── spring.factories
-│   │       └── log
-│   │           └── logback.xml
-│   └── test
-│       └── java
 
 
 ```
@@ -344,35 +220,6 @@ public class AlipayApi {
 }
 
 ```
-
-<!-- links -->
-
-[your-project-path]:lunasaw/ali-spring-boot-starter
-
-[contributors-shield]: https://img.shields.io/github/contributors/lunasaw/ali-spring-boot-starter.svg?style=flat-square
-
-[contributors-url]: https://github.com/lunasaw/ali-spring-boot-starter/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/lunasaw/ali-spring-boot-starter.svg?style=flat-square
-
-[forks-url]: https://github.com/lunasaw/ali-spring-boot-starter/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/lunasaw/ali-spring-boot-starter.svg?style=flat-square
-
-[stars-url]: https://github.com/lunasaw/ali-spring-boot-starter/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/lunasaw/ali-spring-boot-starter.svg?style=flat-square
-
-[issues-url]: https://img.shields.io/github/issues/lunasaw/ali-spring-boot-starter.svg
-
-[license-shield]: https://img.shields.io/github/license/lunasaw/ali-spring-boot-starter.svg?style=flat-square
-
-[license-url]: https://github.com/lunasaw/ali-spring-boot-starter/blob/master/LICENSE.txt
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-
-[linkedin-url]: https://linkedin.com/in/ali-spring-boot-starter
-
 
 
 

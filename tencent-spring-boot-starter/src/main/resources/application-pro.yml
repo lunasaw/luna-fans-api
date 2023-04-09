@@ -1,27 +1,11 @@
-luna:
-  ten:
-    # 腾讯地图api
-    mapKey: xxx
+spring:
+  tencent:
     # 腾讯api
-    secretId: xxx
-    secretKey: xxx
+    secret-id: xxx
+    secret-key: xxx
     # 腾讯市场api
-    skyEyeSecretid: xxx
-    skyEyeSecretkey: xxx
+    sky-eye-secret-id: xxx
+    sky-eye-secret-key: xxx
 
-  #微信支付信息配置
-  wechat:
-    # 应用ID
-    appId: xxx
-    # 公钥
-    partner: xxx
-    # 私钥
-    partnerKey: xxx
-    # 异步通知URL
-    notifyUrl: xxx
-
-mq:
-  pay:
-    exchange: exchange.order
-    queue: queue.order
-    routing: queue.order
+    # 腾讯地图api
+    map-key: xxx
