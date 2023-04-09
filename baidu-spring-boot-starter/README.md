@@ -1,17 +1,23 @@
-
-
 # baidu-spring-boot-starter
 
+<!-- PROJECT LOGO -->
+<br />
+
+<p align="center">
+  <a href="https://github.com/czy1024/baidu-spring-boot-starter/">
+    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grloxhfbmkj30f00760sv.jpg" alt="Logo" width="300" height="150">
+  </a>
+</p>
 
 ### 日志
 
- 增加人员组人脸识别相关接口
+增加人员组人脸识别相关接口
 
- 增加语音识别合成相关接口
+增加语音识别合成相关接口
 
- 增加百度人脸识别,卡证审核等Api请求封装
+增加百度人脸识别,卡证审核等Api请求封装
 
- 增加百度OcrApi接口
+增加百度OcrApi接口
 
  增加百度身体状态检测
 

@@ -1,5 +1,11 @@
 # api-spring-boot-starter
 
+<p align="center">
+  <a href="https://github.com/lunasaw/luna-fans-api/">
+    <img src="https://i.loli.net/2020/07/28/5MzIVArBZyp8NgX.png" alt="Logo" width="80" height="80">
+  </a>
+</p>
+
 ## 日志
 
 2023-04-09 增加邮件发送
