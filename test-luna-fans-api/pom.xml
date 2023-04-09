@@ -2,22 +2,41 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>luna-fans-api</artifactId>
-        <groupId>io.github.lunasaw</groupId>
-        <version>3.1.2</version>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test-luna-fans-api</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.7.10</spring-boot.version>
+        <luna-common.veriosn>2.3.9</luna-common.veriosn>
+        <luna-fans-api.version>3.1.2</luna-fans-api.version>
+        <github.username>lunasaw</github.username>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.github.lunasaw</groupId>
+            <artifactId>luna-common</artifactId>
+            <version>${luna-common.veriosn}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
