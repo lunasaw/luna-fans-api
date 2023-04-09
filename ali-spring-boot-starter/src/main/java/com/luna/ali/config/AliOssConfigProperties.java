@@ -14,9 +14,10 @@ import javax.annotation.PostConstruct;
  * @author Luna@win10
  * @date 2020/5/6 21:09
  */
-@ConfigurationProperties(prefix = "luna.ali")
+@ConfigurationProperties(prefix = "spring.ali")
 @Data
 public class AliOssConfigProperties {
+
     private String  accessKey;
 
     private String  secretKey;

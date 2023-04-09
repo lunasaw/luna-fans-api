@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @author luna
  */
 @Component
-@ConfigurationProperties(prefix = "luna.ten")
+@ConfigurationProperties(prefix = "spring.tencent")
 public class TencentApiConfigProperties {
 
     private String secretId;

@@ -79,7 +79,7 @@
 
 ```text
        # 百度API
-luna:
+spring:
   baidu:
     // 生成地址https://console.bce.baidu.com/
     appId: xxx

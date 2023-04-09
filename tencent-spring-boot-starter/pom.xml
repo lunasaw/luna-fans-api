@@ -6,7 +6,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.2</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
     <version>${luna-fans-api.version}</version>
@@ -15,10 +15,9 @@
     <url>https://lunasaw.github.io/luna-fans-api/tencent-spring-boot-starter</url>
 
     <scm>
-        <url>https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter</url>
-        <connection>scm:git:https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter.git
-        </connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api/tencent-spring-boot-starter
+        <url>https://github.com/lunasaw/${github.username}/${parent.artifactId}/${project.name}</url>
+        <connection>scm:git:https://github.com/lunasaw/${github.username}/${project.name}.git</connection>
+        <developerConnection>scm:git:https://github.com/${github.username}/${parent.artifactId}/${project.name}
         </developerConnection>
     </scm>
 
@@ -26,11 +25,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!--腾讯Api-->
@@ -44,9 +38,8 @@
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-speech-sdk-java</artifactId>
-            <version>1.0.15</version>
+            <version>1.0.23</version>
         </dependency>
-
     </dependencies>
 
 </project>

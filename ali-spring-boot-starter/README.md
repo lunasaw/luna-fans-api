@@ -63,7 +63,7 @@
 
 ```text
        # API
-     luna:
+     spring:
        ali:
          # 阿里云oss
          bucketName: xxx

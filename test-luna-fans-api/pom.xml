@@ -5,7 +5,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.1.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,11 +18,17 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>io.github.lunasaw</groupId>
-            <artifactId>api-spring-boot-starter</artifactId>
-            <version>${luna-fans-api.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
@@ -30,17 +36,45 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.32</version>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.lunasaw</groupId>
+            <artifactId>tencent-spring-boot-starter</artifactId>
+            <version>${luna-fans-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.lunasaw</groupId>
+            <artifactId>ali-pay-spring-boot-starter</artifactId>
+            <version>${luna-fans-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.lunasaw</groupId>
+            <artifactId>api-spring-boot-starter</artifactId>
+            <version>${luna-fans-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.lunasaw</groupId>
+            <artifactId>tencent-pay-spring-boot-starter</artifactId>
+            <version>3.1.2</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <profiles>

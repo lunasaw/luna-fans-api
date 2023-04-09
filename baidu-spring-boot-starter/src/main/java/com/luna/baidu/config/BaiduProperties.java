@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description TODO 参数设置
  * @createTime 2021年03月27日 13:02:00
  */
-@ConfigurationProperties(prefix = "luna.baidu")
+@ConfigurationProperties(prefix = "spring.baidu")
 public class BaiduProperties {
 
     private String          appKey;

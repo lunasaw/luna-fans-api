@@ -37,7 +37,8 @@ luna-fans-api-fans
 
 ## 日志
 
-增加阿里Oss平台，升级SpringBoot 2.7.0
+2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2
+2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0
 
 ### 2022-05-25
 

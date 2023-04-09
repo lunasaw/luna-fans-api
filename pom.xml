@@ -7,7 +7,7 @@
     <groupId>io.github.lunasaw</groupId>
     <artifactId>luna-fans-api</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.1-SNAPSHOT</version>
+    <version>3.1.2</version>
     <name>luna-fans-api</name>
     <description>fans API Toolkit</description>
     <url>https://lunasaw.github.io/luna-fans-api</url>
@@ -17,6 +17,8 @@
         <module>tencent-spring-boot-starter</module>
         <module>ali-spring-boot-starter</module>
         <module>test-luna-fans-api</module>
+        <module>tencent-pay-spring-boot-starter</module>
+        <module>ali-pay-spring-boot-starter</module>
     </modules>
 
     <properties>
@@ -26,16 +28,16 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.0</spring-boot.version>
-        <luna-common.veriosn>2.3.4</luna-common.veriosn>
-        <json-fastJson.veriosn>1.1.0-RELEASE</json-fastJson.veriosn>
-        <luna-fans-api.version>3.1.1-SNAPSHOT</luna-fans-api.version>
+        <spring-boot.version>2.7.10</spring-boot.version>
+        <luna-common.veriosn>2.3.9</luna-common.veriosn>
+        <luna-fans-api.version>3.1.2</luna-fans-api.version>
+        <github.username>lunasaw</github.username>
     </properties>
 
     <developers>
         <developer>
-            <name>luna</name>
-            <id>luna</id>
+            <name>lunasaw</name>
+            <id>lunasaw</id>
             <email>iszychen@gmail.com</email>
         </developer>
     </developers>
@@ -46,9 +48,9 @@
         </license>
     </licenses>
     <scm>
-        <url>https://github.com/lunasaw/luna-fans-api</url>
-        <connection>scm:git:https://github.com/lunasaw/luna-fans-api.git</connection>
-        <developerConnection>scm:git:https://github.com/lunasaw/luna-fans-api</developerConnection>
+        <url>https://github.com/${github.username}/${project.name}</url>
+        <connection>scm:git:https://github.com/${github.username}/${project.name}.git</connection>
+        <developerConnection>scm:git:https://github.com/${github.username}/${project.name}</developerConnection>
     </scm>
     <dependencyManagement>
         <dependencies>
@@ -56,11 +58,6 @@
                 <groupId>io.github.lunasaw</groupId>
                 <artifactId>luna-common</artifactId>
                 <version>${luna-common.veriosn}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.lunasaw</groupId>
-                <artifactId>json-fastJson</artifactId>
-                <version>${json-fastJson.veriosn}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -87,10 +84,6 @@
             <artifactId>luna-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.lunasaw</groupId>
-            <artifactId>json-fastJson</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -107,12 +100,12 @@
                 <repository>
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
+                    <url>https://maven.pkg.github.com/${github.username}/${project.name}</url>
                 </repository>
                 <snapshotRepository>
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
+                    <url>https://maven.pkg.github.com/${github.username}/${project.name}</url>
                 </snapshotRepository>
             </distributionManagement>
             <repositories>
@@ -120,7 +113,7 @@
                     <!-- id需要与上面的server对应的id匹配 -->
                     <id>github_auth</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/lunasaw/luna-fans-api</url>
+                    <url>https://maven.pkg.github.com/${github.username}/${project.name}</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
@@ -227,6 +220,13 @@
                             <charset>UTF-8</charset><!-- utf-8读取文件 -->
                             <encoding>UTF-8</encoding><!-- utf-8进行编码代码 -->
                             <docencoding>UTF-8</docencoding><!-- utf-8进行编码文档 -->
+                            <tags>
+                                <tag>
+                                    <name>date</name>
+                                    <name>description</name>
+                                    <name>package</name>
+                                </tag>
+                            </tags>
                         </configuration>
                         <executions>
                             <execution>

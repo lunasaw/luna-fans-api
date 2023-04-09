@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author luna@mac
  */
 @Configuration
-@ConditionalOnProperty(prefix = "luna.ali", name = "access-key")
+@ConditionalOnProperty(prefix = "spring.ali", name = "enable", value = "true")
 @EnableConfigurationProperties({AliOssConfigProperties.class})
 public class AliOssAutoConfiguration {
 

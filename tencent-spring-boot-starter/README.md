@@ -83,7 +83,7 @@ git clone https://github.com/lunasaw/tencent-spring-boot-starter.git
 在配置文件application.properties加入可选配置
 
 ```text
-luna:
+spring:
   ten:
     # 腾讯地图api
     mapKey: xxx
