@@ -21,7 +21,11 @@ public class TencentPayDelayMqConfigProperties {
 
     private String  exchange;
 
+    private String  listenerExchange;
+
     private String  queue;
+
+    private String  listenerQueue;
 
     private String  routing;
 

@@ -1,16 +1,16 @@
 package io.github.lunasaw.pay.config;
 
-import io.github.lunasaw.pay.properties.TencentPayDelayMqConfigProperties;
 import io.github.lunasaw.pay.properties.TencentPayMqConfigProperties;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author luna
+ * @author weidian
  */
 @Configuration
 @ConditionalOnProperty(prefix = "spring.wechat", name = "pay-mq.order.enable", havingValue = "true")
@@ -19,23 +19,13 @@ public class TencentPayQueueConfiguration {
     @Autowired
     private TencentPayMqConfigProperties tencentPayMqConfigProperties;
 
-    /** 创建交换机 */
-    @Qualifier("${spring.wechat.pay-mq.order.exchange}}")
-    public Exchange orderListenerExchange() {
-        return new DirectExchange(tencentPayMqConfigProperties.getExchange());
-    }
-
-    /** 队列绑定交换机 */
-    @Bean
-    public Binding orderListenerBinding(Queue orderListenerQueue, Exchange orderListenerExchange) {
-        return BindingBuilder.bind(orderListenerQueue).to(orderListenerExchange).with(tencentPayMqConfigProperties.getRouting()).noargs();
-    }
 
     /***
      * 创建DirectExchange交换机
      *
      * @return
      */
+    @Qualifier("${spring.wechat.pay-mq.order.exchange}")
     @Bean
     public DirectExchange basicExchange() {
         return new DirectExchange(tencentPayMqConfigProperties.getExchange(), true, false);
@@ -46,7 +36,8 @@ public class TencentPayQueueConfiguration {
      *
      * @return
      */
-    @Qualifier("${spring.wechat.pay-mq.order.queue}}")
+    @Qualifier("${spring.wechat.pay-mq.order.queue}")
+    @Bean
     public Queue queueOrder() {
         return new Queue(tencentPayMqConfigProperties.getQueue(), true);
     }
@@ -60,5 +51,4 @@ public class TencentPayQueueConfiguration {
     public Binding basicBinding() {
         return BindingBuilder.bind(queueOrder()).to(basicExchange()).with(tencentPayMqConfigProperties.getRouting());
     }
-
 }
