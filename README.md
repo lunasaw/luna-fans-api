@@ -21,32 +21,24 @@ luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用�
 
 <h3 align="center">Api开放平台工具</h3>
   <p align="center">
-    Api开放平台工具
-    <br />
     <a href="https://github.com/lunasaw/luna-fans-api"><strong>探索本项目的文档 »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/lunasaw/luna-fans-api/tree/master/test-luna-fans-api">查看Demo</a>
     ·
     <a href="https://github.com/lunasaw/luna-fans-api/issues">报告Bug</a>
     ·
     <a href="https://github.com/lunasaw/luna-fans-api/issues">提出新特性</a>
-  </p>
-
 </p>
 
 ## 日志
 
-2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
-2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0
+- 2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
+- 2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0
 
-### 2022-05-25
-
-Smms图床，邮件发送，百度Api开放平台，腾讯Api开放平台，微信支付，阿里Api开放平台，阿里云oss，阿里pay
+- 2022-05-25 Smms图床，邮件发送，百度Api开放平台，腾讯Api开放平台，微信支付，阿里Api开放平台，阿里云oss，阿里pay
 
 ###### **使用步骤**
 
-引入项目依赖
 
 ```xml
 全部引入，或者引入单个模块
