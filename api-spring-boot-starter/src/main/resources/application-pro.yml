@@ -1,0 +1,20 @@
+spring:
+  smms:
+    enable: true
+    authorization-code: NFfqBMvYH6RfXaqEgjo79oDfQ7Ckrchg
+    password: qyEF63QVT4!NwT9
+    username: luna_nov
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    nick: LUNA
+    password: xxx
+    port: 465
+    properties:
+      mail:
+        debug: false
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+    username: 1173x@qq.com

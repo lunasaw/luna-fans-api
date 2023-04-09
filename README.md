@@ -1,6 +1,6 @@
 # luna-fans-api
 
-luna-fans-api-fans
+luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用原生http调用。
 
 <!-- PROJECT SHIELDS -->
 
@@ -26,9 +26,9 @@ luna-fans-api-fans
     <a href="https://github.com/lunasaw/luna-fans-api"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="">查看Demo</a>
+    <a href="https://github.com/lunasaw/luna-fans-api/tree/master/test-luna-fans-api">查看Demo</a>
     ·
-    <a href="">报告Bug</a>
+    <a href="https://github.com/lunasaw/luna-fans-api/issues">报告Bug</a>
     ·
     <a href="https://github.com/lunasaw/luna-fans-api/issues">提出新特性</a>
   </p>
@@ -37,31 +37,19 @@ luna-fans-api-fans
 
 ## 日志
 
-2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2
+2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
 2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0
 
 ### 2022-05-25
 
-增加Smms图床
+Smms图床，邮件发送，百度Api开放平台，腾讯Api开放平台，微信支付，阿里Api开放平台，阿里云oss，阿里pay
 
-增加百度Api开放平台
-
-增加腾讯Api开放平台
-
-增加阿里Api开放平台
-
-## 目录
-
-- [安装步骤](#安装步骤)
-- [文件目录说明](#文件目录说明)
-- [部署](#部署)
-
-###### **安装步骤**
+###### **使用步骤**
 
 引入项目依赖
 
 ```xml
-
+全部引入，或者引入单个模块
 <dependency>
     <groupId>io.github.lunasaw</groupId>
     <artifactId>luna-fans-api-fans</artifactId>
@@ -69,27 +57,21 @@ luna-fans-api-fans
 </dependency>
 ```
 
-在配置文件application.properties加入可选配置
+在配置文件application.properties加入可选配置，具体使用见各个模块
 
-| items          | items-src                        | items Guide                                        |
-| -------------- | -------------------------------- | -------------------------------------------------- |
-| ali            | [ali](./ali-spring-boot-starter) | ali-spring-boot-starter                                  |
-| api            | [api](./api-spring-boot-starter) | api-spring-boot-starter                      |
-| badiu          | [baidu](./baidu-spring-boot-starter) |baidu-spring-boot-starter                           |
-| tencent        | [tencent](./tencent-spring-boot-starter) | tencent-spring-boot-starter
+| items          | items-src                                        | items Guide                     |
+|----------------|--------------------------------------------------|---------------------------------|
+| ali            | [ali](./ali-spring-boot-starter)                 | ali-spring-boot-starter         |
+| api            | [api](./api-spring-boot-starter)                 | api-spring-boot-starter         |
+| api-pay        | [ali-pay](./ali-pay-spring-boot-starter)         | ali-pay-spring-boot-starter     |
+| badiu          | [baidu](./baidu-spring-boot-starter)             | baidu-spring-boot-starter       |
+| tencent        | [tencent](./tencent-spring-boot-starter)         | tencent-spring-boot-starter     |
+| tencent-wechat | [tencent-pay](./tencent-pay-spring-boot-starter) | tencent-pay-spring-boot-starter |
+| test           | [test](./test-luna-fans-api)                     | 测试工具模块                          |
 
-引用示例
+### 使用示例
 
-```java
-若采用SpringBoot构建项目可通过将第三方包中的 通过Spring配置文件注入Spring管理
-```
-
-[结果即刻得到配置数据,进而调用api里的静态方法完成调用]()
-
-### 部署
-
-暂无
-
+采用SpringBoot构建项目可通过将第三方包中的，通过Spring配置文件注入Spring管理，根据配置数据初始化项目, 调用api里的静态方法完成调用
 
 <!-- links -->
 
