@@ -32,7 +32,7 @@ luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用�
 
 ## 日志
 
-- 2023.04.09 升级SpringBoot 2.7.10, 精简maven，升级到3.1.2, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
+- 2023.04.09 升级SpringBoot 2.7.10, 精简maven, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
 - 2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0
 
 - 2022-05-25 Smms图床，邮件发送，百度Api开放平台，腾讯Api开放平台，微信支付，阿里Api开放平台，阿里云oss，阿里pay
