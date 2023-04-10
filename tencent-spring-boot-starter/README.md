@@ -25,7 +25,7 @@
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>tencent-spring-boot-starter-tencent</artifactId>
+    <artifactId>tencent-spring-boot-starter</artifactId>
     <version>${last.version}</version>
 </dependency>
 ```

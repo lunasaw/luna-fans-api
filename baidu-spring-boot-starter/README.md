@@ -34,7 +34,7 @@
 
     <dependency>
         <groupId>io.github.lunasaw</groupId>
-        <artifactId>baidu-spring-boot-starter-baidu</artifactId>
+        <artifactId>baidu-spring-boot-starter</artifactId>
         <version>${last.version}</version>
     </dependency>
 ```

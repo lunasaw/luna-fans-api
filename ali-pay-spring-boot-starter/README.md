@@ -22,7 +22,7 @@
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>ali-pay-spring-boot-starter-ali</artifactId>
+    <artifactId>ali-pay-spring-boot-starter</artifactId>
     <version>${last.version}</version>
 </dependency>
 ```
