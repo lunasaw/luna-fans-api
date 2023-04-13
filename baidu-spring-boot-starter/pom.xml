@@ -23,4 +23,13 @@
         </developerConnection>
     </scm>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.16.14</version>
+        </dependency>
+
+    </dependencies>
 </project>

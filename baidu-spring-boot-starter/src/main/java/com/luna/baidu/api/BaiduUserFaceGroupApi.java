@@ -22,9 +22,9 @@ import com.luna.common.net.HttpUtilsConstant;
  * @author luna@mac
  * 2021年05月07日 19:21
  */
-public class BaiduUserFaceApi2 {
+public class BaiduUserFaceGroupApi {
 
-    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceApi2.class);
+    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceGroupApi.class);
 
     /**
      * 人脸注册Api 返回face_token

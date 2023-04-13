@@ -18,6 +18,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author chenzhangyue
  * 2023/3/3
@@ -43,7 +45,7 @@ public class BaseTest {
     private MessageService  messageService;
 
     @Test
-    public void atest() {
+    public void atest() throws FileNotFoundException {
         System.out.println(JSON.toJSONString(templateService.listTemplate()));
     }
 
