@@ -6,7 +6,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.2</version>
+        <version>3.1.4</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
     <version>${luna-fans-api.version}</version>
@@ -28,11 +28,13 @@
         </dependency>
 
         <!--腾讯Api-->
+        <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java-common -->
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.288</version>
+            <artifactId>tencentcloud-sdk-java-common</artifactId>
+            <version>3.1.731</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-speech-sdk-java -->
         <dependency>

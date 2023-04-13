@@ -20,7 +20,7 @@
 
 <dependency>
     <groupId>io.github.lunasaw</groupId>
-    <artifactId>api-spring-boot-starter-fans</artifactId>
+    <artifactId>api-spring-boot-starter</artifactId>
     <version>${last.version}</version>
 </dependency>
 ```

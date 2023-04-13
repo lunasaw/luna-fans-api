@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.lunasaw</groupId>
         <artifactId>luna-fans-api</artifactId>
-        <version>3.1.2</version>
+        <version>3.1.4</version>
     </parent>
 
     <artifactId>tencent-pay-spring-boot-starter</artifactId>
@@ -21,13 +21,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-
-        <!--腾讯Api-->
-        <dependency>
-            <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-            <version>3.1.288</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-speech-sdk-java -->
