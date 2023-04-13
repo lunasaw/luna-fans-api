@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
+import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.baidu.dto.face.*;
 import com.luna.baidu.dto.face.facecheck.FaceCheckResultDTO;
 import com.luna.baidu.dto.face.facecheck.FaceDetailDTO;

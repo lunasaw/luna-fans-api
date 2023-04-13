@@ -1,4 +1,4 @@
-package com.luna.baidu.api;
+package com.luna.baidu.config;
 
 /**
  * @author Luna@win10

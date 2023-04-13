@@ -7,7 +7,7 @@
     <groupId>io.github.lunasaw</groupId>
     <artifactId>luna-fans-api</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.4</version>
+    <version>3.1.5</version>
     <name>luna-fans-api</name>
     <description>fans API Toolkit</description>
     <url>https://lunasaw.github.io/${project.name}</url>
@@ -29,7 +29,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.10</spring-boot.version>
         <luna-common.veriosn>2.4.0</luna-common.veriosn>
-        <luna-fans-api.version>3.1.4</luna-fans-api.version>
+        <luna-fans-api.version>3.1.5</luna-fans-api.version>
         <github.username>lunasaw</github.username>
     </properties>
 

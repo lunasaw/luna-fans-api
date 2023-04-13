@@ -3,6 +3,7 @@ package com.luna.baidu.api;
 import java.io.IOException;
 import java.util.List;
 
+import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import org.apache.commons.lang3.StringUtils;

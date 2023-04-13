@@ -22,4 +22,6 @@ public class BaiduProperties {
     private String  appId;
 
     private String  baiduKey;
+
+    private String  mapAk;
 }
