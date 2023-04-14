@@ -1,6 +1,7 @@
 package io.github.lunasaw;
 
 import com.luna.api.email.service.MessageService;
+import com.luna.baidu.config.BaiduKeyGenerate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+
+import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.baidu.dto.word.WordDTO;
 
 import com.luna.common.constant.ImageConstant;

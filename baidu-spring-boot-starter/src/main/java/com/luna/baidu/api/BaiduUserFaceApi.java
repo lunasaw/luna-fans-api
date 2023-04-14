@@ -1,10 +1,9 @@
 package com.luna.baidu.api;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
+import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.common.constant.ImageConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;

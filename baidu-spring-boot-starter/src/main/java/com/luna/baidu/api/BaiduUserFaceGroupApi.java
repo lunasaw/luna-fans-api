@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import com.luna.baidu.config.BaiduApiConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -22,9 +23,9 @@ import com.luna.common.net.HttpUtilsConstant;
  * @author luna@mac
  * 2021年05月07日 19:21
  */
-public class BaiduUserFaceApi2 {
+public class BaiduUserFaceGroupApi {
 
-    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceApi2.class);
+    private static final Logger log = LoggerFactory.getLogger(BaiduUserFaceGroupApi.class);
 
     /**
      * 人脸注册Api 返回face_token

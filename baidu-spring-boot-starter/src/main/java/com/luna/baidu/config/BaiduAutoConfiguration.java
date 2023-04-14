@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  * @createTime 2021年03月27日 12:58:00
  */
 @Configuration
-@ConditionalOnProperty(prefix = "spring.baidu", name = "enable", havingValue = "true")
 @EnableConfigurationProperties(BaiduProperties.class)
 public class BaiduAutoConfiguration {
 
@@ -26,7 +25,7 @@ public class BaiduAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "spring.baidu", name = "enable", havingValue = "true")
     public BaiduKeyGenerate getBaiduKey() {
         return new BaiduKeyGenerate(baiduProperties);
     }

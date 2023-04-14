@@ -1,16 +1,18 @@
 package com.luna.baidu.api;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
+import com.luna.baidu.config.BaiduApiConstant;
+import com.luna.baidu.dto.voice.VoiceDetailResult;
 import com.luna.baidu.dto.voice.VoiceWriteResultDTO;
+import com.luna.baidu.hander.ByteResponseHandler;
+import com.luna.baidu.hander.StringResponseHandler;
 import com.luna.baidu.req.VoiceCheckReq;
 import com.luna.baidu.req.VoiceSynthesisReq;
 import com.luna.common.file.FileTools;
+import com.luna.common.net.HttpConnectionPoolUtil;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.os.SystemInfoUtil;
@@ -34,7 +36,9 @@ import com.google.common.collect.Maps;
 public class BaiduVoiceApi {
     private static final Logger log          = LoggerFactory.getLogger(BaiduVoiceApi.class);
 
-    // 极速版限定ID
+    /**
+     * 极速版限定ID
+     */
     public static final int     FAST_DEV_PID = 80001;
 
     /**
@@ -43,28 +47,61 @@ public class BaiduVoiceApi {
      * @param voiceCheckReq
      * @return
      */
-    public static List<String> checkVoice(VoiceCheckReq voiceCheckReq) {
-        log.info("checkVoice start voiceCheckReq={}", JSON.toJSONString(voiceCheckReq));
-        HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.VOICE_HOST, BaiduApiConstant.VOICE_SPEECH,
-            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(voiceCheckReq));
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        List<String> list = JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
-        log.info("checkVoice success list={}", JSON.toJSONString(list));
-        return list;
+    public static VoiceDetailResult voiceDetailApi(VoiceCheckReq voiceCheckReq) {
+        String response = HttpConnectionPoolUtil.doPost(BaiduApiConstant.VOICE_HOST, BaiduApiConstant.VOICE_SPEECH,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(voiceCheckReq),
+            new StringResponseHandler());
+
+        return JSON.parseObject(response, VoiceDetailResult.class);
     }
 
-    public static List<String> checkVoice(String token, Integer lmId, String path) {
-        byte[] read = FileTools.read(path);
+    /**
+     * 语音识别标准版
+     *
+     * @param token token
+     * @param read 语音文件
+     * @return
+     */
+    public static List<String> voiceDetailApi(String token, byte[] read) {
         VoiceCheckReq voiceCheckReq =
-            new VoiceCheckReq(token, SystemInfoUtil.getMac(), lmId, Base64Util.encodeBase64(read), read.length);
-        return checkVoice(voiceCheckReq);
+            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), null, Base64Util.encodeBase64(read), read.length);
+        return voiceDetailApi(voiceCheckReq).getResult();
     }
 
-    public static List<String> checkVoiceFast(String token, Integer lmId, String path) {
+    /**
+     * 语音识别标准版
+     * 
+     * @param token token
+     * @param lmId 语言模型id
+     * @param path 语音文件路径
+     * @return
+     */
+    public static List<String> voiceDetailApi(String token, Integer lmId, String path) {
         byte[] read = FileTools.read(path);
         VoiceCheckReq voiceCheckReq =
-            new VoiceCheckReq(token, SystemInfoUtil.getMac(), lmId, Base64Util.encodeBase64(read), read.length);
-        return checkVoiceFast(voiceCheckReq);
+            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
+        return voiceDetailApi(voiceCheckReq).getResult();
+    }
+
+    /**
+     * 极速版限定dev_pid为 80001
+     * 语音识别
+     *
+     * @param token token
+     * @param read 语音文件
+     * @return
+     */
+    public static List<String> voiceProApi(String token, byte[] read) {
+        VoiceCheckReq voiceCheckReq =
+            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), null, Base64Util.encodeBase64(read), read.length);
+        return voiceProApi(voiceCheckReq).getResult();
+    }
+
+    public static List<String> voiceProApi(String token, Integer lmId, String path) {
+        byte[] read = FileTools.read(path);
+        VoiceCheckReq voiceCheckReq =
+            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
+        return voiceProApi(voiceCheckReq).getResult();
     }
 
     /**
@@ -74,31 +111,24 @@ public class BaiduVoiceApi {
      * @param voiceCheckReq
      * @return
      */
-    public static List<String> checkVoiceFast(VoiceCheckReq voiceCheckReq) {
+    public static VoiceDetailResult voiceProApi(VoiceCheckReq voiceCheckReq) {
         voiceCheckReq.setDevPid(FAST_DEV_PID);
-        log.info("checkVoice start, voiceCheckReq={}", JSON.toJSONString(voiceCheckReq));
         HttpResponse httpResponse = HttpUtils.doPost(BaiduApiConstant.VOICE_HOST, BaiduApiConstant.VOICE_SPEECH_FAST,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(voiceCheckReq));
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
-        List<String> list = JSON.parseArray(JSON.parseObject(s).getString("result"), String.class);
-        log.info("checkVoiceFast success list={}", JSON.toJSONString(list));
-        return list;
+        return JSON.parseObject(s, VoiceDetailResult.class);
     }
 
     /**
      * 语音合成
      * 
      * @param tex 合成文字
-     * @param tok token
+     * @param accessToken token
      * @param savePath 保存目录
      */
-    public static void voiceSynthesis(String tex, String tok, String savePath) {
-        try {
-            VoiceSynthesisReq voiceSynthesisReq = new VoiceSynthesisReq(SystemInfoUtil.getMac(), tex, tok);
-            FileTools.write(voiceSynthesis(voiceSynthesisReq), savePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static void voiceSynthesis(String tex, String accessToken, String savePath) {
+        VoiceSynthesisReq voiceSynthesisReq = new VoiceSynthesisReq(SystemInfoUtil.getRandomMac(), tex, accessToken);
+        FileTools.write(voiceSynthesis(voiceSynthesisReq), savePath);
     }
 
     /**
@@ -108,11 +138,7 @@ public class BaiduVoiceApi {
      * @param savePath 保存目录
      */
     public static void voiceSynthesis(VoiceSynthesisReq voiceSynthesisReq, String savePath) {
-        try {
-            FileTools.write(voiceSynthesis(voiceSynthesisReq), savePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        FileTools.write(voiceSynthesis(voiceSynthesisReq), savePath);
     }
 
     /**
@@ -122,23 +148,47 @@ public class BaiduVoiceApi {
      * @return
      * @throws IOException
      */
-    public static byte[] voiceSynthesis(VoiceSynthesisReq voiceSynthesisReq) throws IOException {
+    public static byte[] voiceSynthesis(VoiceSynthesisReq voiceSynthesisReq) {
         log.info("voiceSynthesis start voiceSynthesisReq={}", JSON.toJSONString(voiceSynthesisReq));
         Map<String, String> map = Maps.newHashMap();
-        map.put("tex", URLEncoder.encode(voiceSynthesisReq.getTex(), CharsetUtil.UTF_8));
+        map.put("tex", HttpUtils.urlEncode(voiceSynthesisReq.getTex(), CharsetUtil.UTF_8));
         map.put("per", voiceSynthesisReq.getPer());
         map.put("spd", voiceSynthesisReq.getSpd());
         map.put("pit", voiceSynthesisReq.getPit());
         map.put("vol", voiceSynthesisReq.getVol());
         map.put("cuid", voiceSynthesisReq.getCuid());
-        map.put("tok", voiceSynthesisReq.getTok());
+        map.put("tok", voiceSynthesisReq.getAccessToken());
         map.put("aue", voiceSynthesisReq.getAue());
         map.put("lan", voiceSynthesisReq.getLan());
         map.put("ctp", voiceSynthesisReq.getCtp());
-        HttpResponse httpResponse =
-            HttpUtils.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
-                ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlEncode(map));
-        return HttpUtils.checkResponseStreamAndGetResult(httpResponse);
+        return HttpConnectionPoolUtil.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlEncode(map), new ByteResponseHandler());
+    }
+
+    /**
+     * 创建音频转写任务
+     *
+     * @param token
+     * @param speechUrl 可使用百度云对象存储进行音频存储，生成云端可外网访问的url链接，音频大小不超过500MB
+     * @param format ["mp3", "wav", "pcm","m4a","amr"]单声道，编码 16bits 位深
+     * pid [ 1737（英文模型） ]
+     * rare [16000] 固定值
+     */
+    public static String voiceCreateEn(String token, String speechUrl, String format) {
+        return voiceCreate(token, speechUrl, format, 1737);
+    }
+
+    /**
+     * 创建音频转写任务
+     *
+     * @param token
+     * @param speechUrl 可使用百度云对象存储进行音频存储，生成云端可外网访问的url链接，音频大小不超过500MB
+     * @param format ["mp3", "wav", "pcm","m4a","amr"]单声道，编码 16bits 位深
+     * pid [80001（中文普通话输入法模型）]
+     * rare [16000] 固定值
+     */
+    public static String voiceCreateZh(String token, String speechUrl, String format) {
+        return voiceCreate(token, speechUrl, format, 80001);
     }
 
     /**

@@ -3,7 +3,6 @@ package com.luna.baidu.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
-import com.luna.baidu.api.BaiduApiConstant;
 import com.luna.common.date.DateUtils;
 import com.luna.common.net.HttpUtils;
 import org.apache.http.HttpResponse;

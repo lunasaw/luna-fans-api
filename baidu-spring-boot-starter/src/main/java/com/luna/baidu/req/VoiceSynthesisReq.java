@@ -1,9 +1,11 @@
 package com.luna.baidu.req;
 
+import lombok.Data;
 
 /**
  * @author luna
  */
+@Data
 public class VoiceSynthesisReq {
 
     /**
@@ -36,103 +38,15 @@ public class VoiceSynthesisReq {
     /** 合成文字 urlEncode,utf-8 编码 */
     private String tex;
 
-    private String tok;
+    private String accessToken;
 
-    public VoiceSynthesisReq() {}
 
-    public VoiceSynthesisReq(String cuid, String tex, String tok) {
-        this.cuid = cuid;
+    public VoiceSynthesisReq(String mac, String tex, String accessToken) {
+        this.cuid = mac;
         this.tex = tex;
-        this.tok = tok;
+        this.accessToken = accessToken;
     }
 
-    public String getPer() {
-        return per;
-    }
-
-    public VoiceSynthesisReq setPer(String per) {
-        this.per = per;
-        return this;
-    }
-
-    public String getSpd() {
-        return spd;
-    }
-
-    public VoiceSynthesisReq setSpd(String spd) {
-        this.spd = spd;
-        return this;
-    }
-
-    public String getPit() {
-        return pit;
-    }
-
-    public VoiceSynthesisReq setPit(String pit) {
-        this.pit = pit;
-        return this;
-    }
-
-    public String getVol() {
-        return vol;
-    }
-
-    public VoiceSynthesisReq setVol(String vol) {
-        this.vol = vol;
-        return this;
-    }
-
-    public String getCuid() {
-        return cuid;
-    }
-
-    public VoiceSynthesisReq setCuid(String cuid) {
-        this.cuid = cuid;
-        return this;
-    }
-
-    public String getAue() {
-        return aue;
-    }
-
-    public VoiceSynthesisReq setAue(String aue) {
-        this.aue = aue;
-        return this;
-    }
-
-    public String getLan() {
-        return lan;
-    }
-
-    public VoiceSynthesisReq setLan(String lan) {
-        this.lan = lan;
-        return this;
-    }
-
-    public String getCtp() {
-        return ctp;
-    }
-
-    public VoiceSynthesisReq setCtp(String ctp) {
-        this.ctp = ctp;
-        return this;
-    }
-
-    public String getTex() {
-        return tex;
-    }
-
-    public VoiceSynthesisReq setTex(String tex) {
-        this.tex = tex;
-        return this;
-    }
-
-    public String getTok() {
-        return tok;
-    }
-
-    public VoiceSynthesisReq setTok(String tok) {
-        this.tok = tok;
-        return this;
+    public VoiceSynthesisReq() {
     }
 }
