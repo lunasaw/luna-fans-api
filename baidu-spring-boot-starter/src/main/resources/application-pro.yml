@@ -1,0 +1,10 @@
+spring:
+  baidu:
+    # 百度appId
+    app-id: xxx
+    # 百度appKey
+    app-key: xxxx
+    secret-key: xxx
+    map-ak: xxx
+    enable: false
+

@@ -1,0 +1,21 @@
+spring:
+  # https://doc.sm.ms/
+  smms:
+    enable: true
+    authorization-code: xxx
+    password: qyEF63QVT4!NwT9
+    username: luna_nov
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    nick: LUNA
+    password: xxx
+    port: 465
+    properties:
+      mail:
+        debug: false
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+    username: 1173x@qq.com

@@ -1,0 +1,13 @@
+com.luna.tencent.api
+com.luna.tencent.config
+com.luna.tencent.dto.error
+com.luna.tencent.dto.face
+com.luna.tencent.dto.group
+com.luna.tencent.dto.hotword
+com.luna.tencent.dto.map
+com.luna.tencent.dto.voice
+com.luna.tencent.properties
+com.luna.tencent.response.card
+com.luna.tencent.response.group
+com.luna.tencent.response.message
+com.luna.tencent.response.voice

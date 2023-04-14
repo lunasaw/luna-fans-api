@@ -1,0 +1,11 @@
+spring:
+  tencent:
+    # 腾讯api
+    secret-id: xxx
+    secret-key: xxx
+    # 腾讯市场api
+    sky-eye-secret-id: xxx
+    sky-eye-secret-key: xxx
+
+    # 腾讯地图api
+    map-key: xxx

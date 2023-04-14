@@ -1,0 +1,25 @@
+spring:
+  #微信支付信息配置
+  wechat:
+    enable: true
+    # 应用ID
+    app-id: xxx
+    # 公钥
+    partner: xxx
+    # 私钥
+    partner-key: xxx
+    # 异步通知URL
+    notify-url: xxx
+
+    # 消息处理
+    pay-mq:
+      order:
+        enable: false
+        exchange: exchange.order
+        queue: queue.order
+        routing: queue.order
+      delay:
+        enable: false
+        listener-exchange: exchange.order
+        queue: queue.order
+        routing: queue.order
