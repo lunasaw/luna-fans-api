@@ -19,4 +19,4 @@ jobs:
           target-folder: docs
           project: maven # or gradle
           custom-command: 'mvn package javadoc:aggregate -pl :tencent-spring-boot-starter,:tencent-pay-spring-boot-starter,:baidu-spring-boot-starter,:ali-pay-spring-boot-starter,:ali-spring-boot-starter,:api-spring-boot-starter'
-
+          javadoc-source-folder: target/apidocs/
