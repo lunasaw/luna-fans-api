@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.google.common.base.Joiner;
 import com.luna.baidu.config.BaiduApiConstant;
+import com.luna.baidu.dto.map.BaiduMapLocation;
 import com.luna.baidu.enums.map.CoordinateType;
 import com.luna.baidu.enums.map.DataTypeEnum;
 import com.luna.common.net.HttpUtils;
@@ -60,6 +61,24 @@ public class BaiduAddressApi {
         return district2Weather(ak, districtId, null, dataType.getData(), coordType.getData());
     }
 
+    public static WeatherResultDTO district2Weather(String ak, String city) {
+        String districtCode = BaiduMapLocation.getByDistrict(city).getDistrictCode();
+        return district2Weather(ak, districtCode, DataTypeEnum.NOW, CoordinateType.BD09MC);
+    }
+
+    /**
+     * 国内经纬度天气查询
+     * 
+     * @param ak
+     * @param city
+     * 注意：经纬度天气查询是付费服务，仅限高级权限用户使用，您可以联系百度开通15天试用并了解更多信息。
+     * @return
+     */
+    public static WeatherResultDTO district2WeatherFuture(String ak, String city) {
+        BaiduMapLocation byDistrict = BaiduMapLocation.getByDistrict(city);
+        return district2Weather(ak, byDistrict.getLatitude() + "," + byDistrict.getLongitude(), DataTypeEnum.NOW, CoordinateType.BD09MC);
+    }
+
     /**
      * 国内经纬度天气查询
      * 
@@ -104,6 +123,6 @@ public class BaiduAddressApi {
         HttpResponse httpResponse =
             HttpUtils.doGet(BaiduApiConstant.MAP_HOST, BaiduApiConstant.FIND_WEARHER, ImmutableMap.of(), map);
         String s = HttpUtils.checkResponseAndGetResult(httpResponse, false);
-        return JSON.parseObject(JSON.parseObject(s).getString("result"), WeatherResultDTO.class);
+        return JSON.parseObject(s, WeatherResultDTO.class);
     }
 }

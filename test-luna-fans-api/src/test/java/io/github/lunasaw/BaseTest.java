@@ -1,9 +1,6 @@
 package io.github.lunasaw;
 
 import com.alibaba.fastjson.JSON;
-import com.apple.eawt.Application;
-import com.google.common.net.MediaType;
-import com.luna.api.email.dto.EmailSmallDTO;
 import com.luna.api.email.service.MessageService;
 import com.luna.api.email.service.TemplateService;
 import io.github.lunasaw.listener.ApiMethodListener;
