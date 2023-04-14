@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author weidian
+ * @author luna
  * @description 语音识别结果
  * @date 2023/4/13
  */

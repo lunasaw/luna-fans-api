@@ -1,7 +1,7 @@
 package com.luna.baidu.enums.map;
 
 /**
- * @author weidian
+ * @author luna
  */
 
 public enum CoordinateType {

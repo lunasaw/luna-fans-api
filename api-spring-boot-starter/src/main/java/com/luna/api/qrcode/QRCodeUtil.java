@@ -24,7 +24,7 @@ import com.luna.common.dto.constant.ResultCode;
 import com.luna.common.exception.BaseException;
 
 /**
- * @author chenzhangyue@weidian.com 2021/7/12
+ * @author chenzhangyue@luna.com 2021/7/12
  */
 public class QRCodeUtil {
 

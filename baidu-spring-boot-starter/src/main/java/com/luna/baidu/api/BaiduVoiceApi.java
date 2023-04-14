@@ -1,17 +1,22 @@
 package com.luna.baidu.api;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.baidu.dto.voice.VoiceDetailResult;
 import com.luna.baidu.dto.voice.VoiceWriteResultDTO;
+import com.luna.baidu.enums.voice.EnableSubtitle;
+import com.luna.baidu.enums.voice.PersonVoice;
+import com.luna.baidu.enums.voice.VideoFormat;
 import com.luna.baidu.hander.ByteResponseHandler;
 import com.luna.baidu.hander.StringResponseHandler;
-import com.luna.baidu.req.VoiceCheckReq;
-import com.luna.baidu.req.VoiceSynthesisReq;
+import com.luna.baidu.req.voice.VoiceCheckReq;
+import com.luna.baidu.req.voice.VoiceSynthesisReq;
+import com.luna.baidu.req.voice.VoiceSynthesisResponse;
+import com.luna.baidu.req.voice.VoiceSynthesisV2Req;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpConnectionPoolUtil;
 import com.luna.common.net.HttpUtils;
@@ -173,6 +178,49 @@ public class BaiduVoiceApi {
         map.put("ctp", voiceSynthesisReq.getCtp());
         return HttpConnectionPoolUtil.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlEncode(map), new ByteResponseHandler());
+    }
+
+    /**
+     * 语音合成
+     * 
+     * @param text 合成文字
+     */
+    public static VoiceSynthesisResponse voiceSynthesis(List<String> text, String token) {
+        return voiceSynthesis(text, VideoFormat.MP3_16K.getName(), PersonVoice.DU_XIAO_MEI.getCode(), token);
+    }
+
+    public static VoiceSynthesisResponse voiceSynthesis(List<String> text, VideoFormat videoFormat, PersonVoice personVoice, String token) {
+        return voiceSynthesis(text, videoFormat.getName(), personVoice.getCode(), token);
+    }
+
+    public static VoiceSynthesisResponse voiceSynthesis(List<String> text, String format, int voice, String token) {
+        return voiceSynthesis(text, format, voice, Locale.SIMPLIFIED_CHINESE.getLanguage(), 5, 5, 5, token);
+    }
+
+    public static VoiceSynthesisResponse voiceSynthesis(List<String> text, String format, int voice, String lang, int speed, int pitch, int volume,
+        String token) {
+        return voiceSynthesis(text, format, voice, lang, speed, pitch, volume, EnableSubtitle.NO_SUBTITLE.getCode(), token);
+    }
+
+    /**
+     * @param text 待合成的文本，需要为UTF-8 编码；输入多段文本时，文本间会插入1s长度的空白间隔。总字数不超过10万个字符，1个中文字、英文字母、数字或符号均算作1个字符
+     * @param format 音频格式。"mp3-16k"，"mp3-48k"，"wav"，"pcm-8k"，"pcm-16k"，默认为mp3-16k
+     * @param voice
+     * 音库。基础音库：度小宇=1，度小美=0，度逍遥（基础）=3，度丫丫=4；精品音库：度逍遥（精品）=5003，度小鹿=5118，度博文=106，度小童=110，度小萌=111，度米朵=103，度小娇=5。默认为度小美
+     * @param lang 语言。固定值zh。语言选择,目前只有中英文混合模式，填写固定值zh
+     * @param speed 语速。取值0-15，默认为5中语速
+     * @param pitch 音调。取值0-15，默认为5中语调
+     * @param volume 音量。取值0-15，默认为5中音量（取值为0时为音量最小值，并非为无声）
+     * @param enableSubtitle 是否开启字幕。取值范围0, 1, 2，默认为0。0表示不开启字幕，1表示开启句级别字幕，2表示开启词级别字幕。
+     * @param token
+     */
+    public static VoiceSynthesisResponse voiceSynthesis(List<String> text, String format, int voice, String lang, int speed, int pitch, int volume,
+        int enableSubtitle, String token) {
+        VoiceSynthesisV2Req voiceSynthesisV2Req = new VoiceSynthesisV2Req(text, format, voice, lang, speed, pitch, volume, enableSubtitle);
+        String s = HttpConnectionPoolUtil.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_PATH_V2,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", token), JSON.toJSONString(voiceSynthesisV2Req),
+            new StringResponseHandler());
+        return JSON.parseObject(s, VoiceSynthesisResponse.class);
     }
 
     /**

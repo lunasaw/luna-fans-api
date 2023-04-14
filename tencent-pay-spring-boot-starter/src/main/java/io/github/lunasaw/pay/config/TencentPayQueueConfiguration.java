@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author weidian
+ * @author luna
  */
 @Configuration
 @ConditionalOnProperty(prefix = "spring.wechat", name = "pay-mq.order.enable", havingValue = "true")

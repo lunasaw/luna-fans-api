@@ -1,4 +1,4 @@
-package com.luna.baidu.req;
+package com.luna.baidu.req.voice;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
