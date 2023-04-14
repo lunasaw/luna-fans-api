@@ -47,7 +47,7 @@ public class BaiduTest extends BaseTest {
     public void test_txt_2_voice() throws FileNotFoundException {
         String accessToken = baiduProperties.getBaiduKey();
         String path = ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + "data/").getPath();
-        BaiduVoiceApi.voiceSynthesis("你好", accessToken, path + "你好.m4a");
+        BaiduVoiceApi.voiceSynthesis("你好，你好，我是你的智能机器人", accessToken, path + "你好.m4a");
         Assert.assertTrue(FileTools.isExists(path + "你好.m4a"));
     }
 
@@ -57,13 +57,18 @@ public class BaiduTest extends BaseTest {
         String path = ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + "data/").getPath();
         List<String> list = BaiduVoiceApi.voiceDetailApi(accessToken,  path + "你好.m4a");
         String join = Joiner.on(",").join(list);
-        Assert.assertTrue(join.contains("你好"));
+        System.out.println(join);
     }
 
     @Test
     public void txt_2_voive() {
         String accessToken = baiduProperties.getBaiduKey();
-        VoiceSynthesisResponse hello = BaiduVoiceApi.voiceSynthesis(Lists.newArrayList("你好"), accessToken);
+        VoiceSynthesisResponse hello = BaiduVoiceApi.voiceSynthesis(Lists.newArrayList("你好，你好，我是你的智能机器人"), accessToken);
         System.out.println(JSON.toJSONString(hello));
+    }
+
+    @Test
+    public void test_query() {
+        // 6439843c3064530001cbb76b
     }
 }

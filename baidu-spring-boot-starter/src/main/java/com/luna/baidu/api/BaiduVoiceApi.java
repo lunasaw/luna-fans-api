@@ -8,6 +8,7 @@ import java.util.Map;
 import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.baidu.dto.voice.VoiceDetailResult;
 import com.luna.baidu.dto.voice.VoiceWriteResultDTO;
+import com.luna.baidu.enums.voice.AudioFormat;
 import com.luna.baidu.enums.voice.EnableSubtitle;
 import com.luna.baidu.enums.voice.PersonVoice;
 import com.luna.baidu.enums.voice.VideoFormat;
@@ -59,6 +60,7 @@ public class BaiduVoiceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(voiceCheckReq),
             new StringResponseHandler());
 
+        System.out.println(response);
         return JSON.parseObject(response, VoiceDetailResult.class);
     }
 
@@ -69,19 +71,24 @@ public class BaiduVoiceApi {
      * @param read 语音文件
      * @return
      */
-    public static List<String> voiceDetailApi(String token, Integer lmId, byte[] read) {
+    public static List<String> voiceDetailApi(String token, String fromat, Integer lmId, byte[] read) {
         VoiceCheckReq voiceCheckReq =
             new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
+        voiceCheckReq.setFormat(fromat);
         VoiceDetailResult voiceDetailResult = voiceDetailApi(voiceCheckReq);
         List<String> result = voiceDetailResult.getResult();
         if (CollectionUtils.isEmpty(result)) {
-            log.error("语音识别失败,请检查语音文件是否正确 voiceDetailApi::lmId = {}, voiceDetailResult = {}", lmId, voiceDetailResult);
+            log.error("语音识别失败,请检查错误码 voiceDetailApi::lmId = {}, voiceDetailResult = {}", lmId, voiceDetailResult);
         }
         return result;
     }
 
     public static List<String> voiceDetailApi(String token, String path) {
-        return voiceDetailApi(token, null, path);
+        return voiceDetailApi(token, AudioFormat.M4A.getName(), null, path);
+    }
+
+    public static List<String> voiceDetailApi(String token, String format, String path) {
+        return voiceDetailApi(token, format, null, path);
     }
 
     /**
@@ -92,10 +99,10 @@ public class BaiduVoiceApi {
      * @param path 语音文件路径
      * @return
      */
-    public static List<String> voiceDetailApi(String token, Integer lmId, String path) {
+    public static List<String> voiceDetailApi(String token, String format, Integer lmId, String path) {
         byte[] read = FileTools.read(path);
 
-        return voiceDetailApi(token, lmId, read);
+        return voiceDetailApi(token, format, lmId, read);
     }
 
     /**
