@@ -1,8 +1,8 @@
 <configuration>
 
     <property name="logRoot" value="log"/>
-    <property name="logLevel" value="${logging.level.root}"/>
-    <property name="app" value="${spring.application.name}"/>
+    <property name="logLevel" value="info"/>
+    <property name="app" value="fans-api"/>
     <property name="pattern" value="%d %p [%t] %c{20} %X{traceId:--} %line %m%n"/>
     <property name="logHistory" value="7"/>
     <property name="totalSizeCap" value="500MB"/>

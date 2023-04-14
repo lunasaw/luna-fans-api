@@ -1,6 +1,7 @@
 package com.luna.baidu.api;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.os.SystemInfoUtil;
 import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.CharsetUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,10 +64,19 @@ public class BaiduVoiceApi {
      * @param read 语音文件
      * @return
      */
-    public static List<String> voiceDetailApi(String token, byte[] read) {
+    public static List<String> voiceDetailApi(String token, Integer lmId, byte[] read) {
         VoiceCheckReq voiceCheckReq =
-            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), null, Base64Util.encodeBase64(read), read.length);
-        return voiceDetailApi(voiceCheckReq).getResult();
+            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
+        VoiceDetailResult voiceDetailResult = voiceDetailApi(voiceCheckReq);
+        List<String> result = voiceDetailResult.getResult();
+        if (CollectionUtils.isEmpty(result)) {
+            log.error("语音识别失败,请检查语音文件是否正确 voiceDetailApi::lmId = {}, voiceDetailResult = {}", lmId, voiceDetailResult);
+        }
+        return result;
+    }
+
+    public static List<String> voiceDetailApi(String token, String path) {
+        return voiceDetailApi(token, null, path);
     }
 
     /**
@@ -78,9 +89,8 @@ public class BaiduVoiceApi {
      */
     public static List<String> voiceDetailApi(String token, Integer lmId, String path) {
         byte[] read = FileTools.read(path);
-        VoiceCheckReq voiceCheckReq =
-            new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
-        return voiceDetailApi(voiceCheckReq).getResult();
+
+        return voiceDetailApi(token, lmId, read);
     }
 
     /**

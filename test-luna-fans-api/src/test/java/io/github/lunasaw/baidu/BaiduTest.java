@@ -6,8 +6,13 @@ import com.luna.baidu.config.BaiduProperties;
 import com.luna.common.file.FileTools;
 import com.luna.common.os.SystemInfoUtil;
 import io.github.lunasaw.BaseTest;
+import io.github.lunasaw.FansApi;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
@@ -38,15 +43,16 @@ public class BaiduTest extends BaseTest {
     public void test_txt_2_voice() throws FileNotFoundException {
         String accessToken = baiduProperties.getBaiduKey();
         String path = ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + "data/").getPath();
-        System.out.println(path);
-        BaiduVoiceApi.voiceSynthesis("你好", accessToken, path + "你好.mp3");
+        BaiduVoiceApi.voiceSynthesis("你好", accessToken, path + "你好.m4a");
+        Assert.assertTrue(FileTools.isExists(path + "你好.m4a"));
     }
 
     @Test
     public void voice_2_txt() throws FileNotFoundException {
         String accessToken = baiduProperties.getBaiduKey();
-        String path = ResourceUtils.getURL("").getPath();
-        List<String> list = BaiduVoiceApi.voiceDetailApi(accessToken, FileTools.read(path + "16k.pcm"));
+        String path = ResourceUtils.getURL(ResourceUtils.CLASSPATH_URL_PREFIX + "data/").getPath();
+        List<String> list = BaiduVoiceApi.voiceDetailApi(accessToken,  path + "你好.m4a");
+
         System.out.println(list);
     }
 }
