@@ -6,8 +6,9 @@
   <a href="https://github.com/lunasaw/tencent-spring-boot-starter/">
     <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grlpk1p1wwj30hb0a0ab2.jpg" alt="Logo" width="800" height="250">
   </a>
-
 </p>
+
+[Api文档链接](https://www.isluna.ml/luna-fans-api/tencent-spring-boot-starter/apidocs/){:target="_blank"}
 
 ## 日志
 

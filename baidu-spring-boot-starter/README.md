@@ -9,6 +9,8 @@
   </a>
 </p>
 
+[Api文档链接](https://www.isluna.ml/luna-fans-api/baidu-spring-boot-starter/apidocs/){:target="_blank"}
+
 ### 日志
 
 增加人员组人脸识别相关接口
