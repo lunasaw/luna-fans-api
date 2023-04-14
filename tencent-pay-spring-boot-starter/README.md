@@ -4,11 +4,11 @@
 <br />
 <p align="center">
   <a href="https://github.com/lunasaw/tencent-spring-boot-starter/">
-    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grlpk1p1wwj30hb0a0ab2.jpg" alt="Logo" width="800" height="250">
+    <img src="https://raw.githubusercontent.com/lunasaw/luna-fans-api/master/tencent-spring-boot-starter/logo/tencent-logo.jpeg" alt="Logo" width="800" height="250">
   </a>
 </p>
 
-[Api文档链接](https://www.isluna.ml/luna-fans-api/tencent-pay-spring-boot-starter/apidocs/){:target="_blank"}
+[Api文档链接](https://lunasaw.github.io/luna-fans-api/tencent-pay-spring-boot-starter/apidocs/){:target="_blank"}
 
 ## 日志
 

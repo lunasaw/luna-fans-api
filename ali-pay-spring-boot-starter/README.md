@@ -4,13 +4,13 @@
 <br />
 <p align="center">
   <a href="https://github.com/lunasaw/ali-spring-boot-starter/">
-    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1grnvzio673j30bf03fwea.jpg" alt="Logo" width="411" height="123">
+    <img src="https://raw.githubusercontent.com/lunasaw/luna-fans-api/master/ali-spring-boot-starter/logo/ali-logo.png" alt="Logo" width="411" height="123">
   </a>
 </p>
 
 
 
-[Api文档链接](https://www.isluna.ml/luna-fans-api/ali-pay-spring-boot-starter/apidocs/){:target="_blank"}
+[Api文档链接](https://lunasaw.github.io/luna-fans-api/ali-pay-spring-boot-starter/apidocs/){:target="_blank"}
 
 ## 日志
 

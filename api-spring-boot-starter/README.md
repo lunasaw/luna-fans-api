@@ -6,7 +6,7 @@
   </a>
 </p>
 
-[Api文档链接](https://www.isluna.ml/luna-fans-api/api-spring-boot-starter/apidocs/){:target="_blank"}
+[Api文档链接](https://lunasaw.github.io/luna-fans-api/api-spring-boot-starter/apidocs/){:target="_blank"}
 
 ## 日志
 
