@@ -2,9 +2,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   build-and-deploy:
+    environment: deploy # 注意环境
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -33,3 +34,4 @@ jobs:
         with:
           branch: gh-pages
           folder: .
+          GITHUB_TOKEN: ${{ secrets.SECRET_KEY }}
