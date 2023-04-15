@@ -69,7 +69,7 @@ public class BaiduTest extends BaseTest {
      */
     @Test
     public void test_query() {
-        VoiceSynthesisDetailResponse voiceSynthesisDetailResponse = BaiduVoiceApi.voiceSynthesisQuery(Lists.newArrayList("6439843c3064530001cbb76b"), baiduProperties.getBaiduKey());
+        VoiceSynthesisDetailResponse voiceSynthesisDetailResponse = BaiduVoiceApi.voiceSynthesisQuery(Lists.newArrayList("6439843c3064530001cbb76b", "643a35103064530001cbdebf"), baiduProperties.getBaiduKey());
         System.out.println(JSON.toJSONString(voiceSynthesisDetailResponse));
     }
 }
