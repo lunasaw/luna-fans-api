@@ -95,6 +95,11 @@ public class BaiduApiConstant {
     /** 语音合成 长文本 */
     public static final String VOICE_SYNTHESIS_PATH_V2 = "/rpc/2.0/tts/v1/create";
 
+    /**
+     * 语音合成 长文本查询
+     */
+    public static final String VOICE_SYNTHESIS_V2_QUERY = "/rpc/2.0/tts/v1/query";
+
     /** 音频文件转写 */
     public static final String VOICE_TO_WRITE          = "/rpc/2.0/aasr/v1/create";
 

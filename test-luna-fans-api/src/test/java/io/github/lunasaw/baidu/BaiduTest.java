@@ -4,19 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.luna.baidu.api.BaiduVoiceApi;
-import com.luna.baidu.config.BaiduKeyGenerate;
 import com.luna.baidu.config.BaiduProperties;
+import com.luna.baidu.dto.voice.VoiceSynthesisDetailResponse;
 import com.luna.baidu.req.voice.VoiceSynthesisResponse;
 import com.luna.common.file.FileTools;
 import com.luna.common.os.SystemInfoUtil;
 import io.github.lunasaw.BaseTest;
-import io.github.lunasaw.FansApi;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
@@ -67,8 +63,13 @@ public class BaiduTest extends BaseTest {
         System.out.println(JSON.toJSONString(hello));
     }
 
+
+    /**
+     * {"log_id":16815359839745637,"tasks_info":[{"task_id":"6439843c3064530001cbb76b","task_result":{"speech_url":"http://bj.bcebos.com/aipe-speech/text_to_speech/2023-04-15/6439843c3064530001cbb76b/speech/0.mp3?authorization=bce-auth-v1%2F8a6ca9b78c124d89bb6bca18c6fc5944%2F2023-04-14T16%3A50%3A11Z%2F259200%2F%2Ff6229135e98f509140924fbabefa75ace3a186f91582ba943ee1b35e865eb3a8"},"task_status":"Success"}]}
+     */
     @Test
     public void test_query() {
-        // 6439843c3064530001cbb76b
+        VoiceSynthesisDetailResponse voiceSynthesisDetailResponse = BaiduVoiceApi.voiceSynthesisQuery(Lists.newArrayList("6439843c3064530001cbb76b"), baiduProperties.getBaiduKey());
+        System.out.println(JSON.toJSONString(voiceSynthesisDetailResponse));
     }
 }

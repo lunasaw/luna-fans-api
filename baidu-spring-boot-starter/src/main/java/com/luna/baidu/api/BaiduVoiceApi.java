@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.baidu.dto.voice.VoiceDetailResult;
+import com.luna.baidu.dto.voice.VoiceSynthesisDetailResponse;
 import com.luna.baidu.dto.voice.VoiceWriteResultDTO;
 import com.luna.baidu.enums.voice.AudioFormat;
 import com.luna.baidu.enums.voice.EnableSubtitle;
@@ -18,6 +19,7 @@ import com.luna.baidu.req.voice.VoiceCheckReq;
 import com.luna.baidu.req.voice.VoiceSynthesisReq;
 import com.luna.baidu.req.voice.VoiceSynthesisResponse;
 import com.luna.baidu.req.voice.VoiceSynthesisV2Req;
+import com.luna.common.file.FileNameUtil;
 import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpConnectionPoolUtil;
 import com.luna.common.net.HttpUtils;
@@ -25,6 +27,7 @@ import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.os.SystemInfoUtil;
 import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.CharsetUtil;
+import com.luna.common.utils.Assert;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
@@ -71,10 +74,10 @@ public class BaiduVoiceApi {
      * @param read 语音文件
      * @return
      */
-    public static List<String> voiceDetailApi(String token, String fromat, Integer lmId, byte[] read) {
+    public static List<String> voiceDetailApi(String token, String format, Integer lmId, byte[] read) {
         VoiceCheckReq voiceCheckReq =
             new VoiceCheckReq(token, SystemInfoUtil.getRandomMac(), lmId, Base64Util.encodeBase64(read), read.length);
-        voiceCheckReq.setFormat(fromat);
+        voiceCheckReq.setFormat(format);
         VoiceDetailResult voiceDetailResult = voiceDetailApi(voiceCheckReq);
         List<String> result = voiceDetailResult.getResult();
         if (CollectionUtils.isEmpty(result)) {
@@ -84,7 +87,10 @@ public class BaiduVoiceApi {
     }
 
     public static List<String> voiceDetailApi(String token, String path) {
-        return voiceDetailApi(token, AudioFormat.M4A.getName(), null, path);
+        String name = FileNameUtil.getSuffix(path);
+        AudioFormat audioFormat = AudioFormat.fromName(name);
+        Assert.notNull(audioFormat, "格式不支持");
+        return voiceDetailApi(token, audioFormat.getName(), null, path);
     }
 
     public static List<String> voiceDetailApi(String token, String format, String path) {
@@ -210,6 +216,7 @@ public class BaiduVoiceApi {
     }
 
     /**
+     * 长文本语音合成
      * @param text 待合成的文本，需要为UTF-8 编码；输入多段文本时，文本间会插入1s长度的空白间隔。总字数不超过10万个字符，1个中文字、英文字母、数字或符号均算作1个字符
      * @param format 音频格式。"mp3-16k"，"mp3-48k"，"wav"，"pcm-8k"，"pcm-16k"，默认为mp3-16k
      * @param voice
@@ -228,6 +235,20 @@ public class BaiduVoiceApi {
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", token), JSON.toJSONString(voiceSynthesisV2Req),
             new StringResponseHandler());
         return JSON.parseObject(s, VoiceSynthesisResponse.class);
+    }
+
+
+    /**
+     * 语音合成查询
+     * @param taskIds 推荐一次查询多个任务id，单次最多可查询200个
+     * @param token
+     * @return
+     */
+    public static VoiceSynthesisDetailResponse voiceSynthesisQuery(List<String> taskIds, String token){
+        String s = HttpConnectionPoolUtil.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_V2_QUERY,
+            ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", token), JSON.toJSONString(ImmutableMap.of("task_ids", taskIds)),
+            new StringResponseHandler());
+        return JSON.parseObject(s, VoiceSynthesisDetailResponse.class);
     }
 
     /**
