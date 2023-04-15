@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * @author weidian
+ * @author luna
  */
 @Data
 public class BaiduMapLocation {
