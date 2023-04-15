@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.lunasaw</groupId>
         <artifactId>luna-fans-api</artifactId>
-        <version>3.1.7</version>
+        <version>3.1.8</version>
     </parent>
 
     <artifactId>ali-pay-spring-boot-starter</artifactId>

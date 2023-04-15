@@ -14,44 +14,44 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "spring.ali", name = "enable", havingValue = "true")
-@EnableConfigurationProperties({AliOssConfigProperties.class})
-@ComponentScan("com.luna.ali.oss")
+@EnableConfigurationProperties({AliConfigProperties.class})
+@ComponentScan("com.luna.ali")
 public class AliOssAutoConfiguration {
 
     @Autowired
-    private final AliOssConfigProperties aliOssConfigProperties;
+    private final AliConfigProperties aliConfigProperties;
 
-    public AliOssAutoConfiguration(final AliOssConfigProperties aliOssConfigProperties) {
-        this.aliOssConfigProperties = aliOssConfigProperties;
+    public AliOssAutoConfiguration(final AliConfigProperties aliConfigProperties) {
+        this.aliConfigProperties = aliConfigProperties;
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AliOssUploadApi aliOssUploadApi() {
-        return new AliOssUploadApi(aliOssConfigProperties.getInstanceClient());
+        return new AliOssUploadApi(aliConfigProperties.getInstanceClient());
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AliOssDownloadApi aliOssDownloadApi() {
-        return new AliOssDownloadApi(aliOssConfigProperties.getInstanceClient());
+        return new AliOssDownloadApi(aliConfigProperties.getInstanceClient());
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AliOssBucketApi aliOssBucketApi() {
-        return new AliOssBucketApi(aliOssConfigProperties.getInstanceClient());
+        return new AliOssBucketApi(aliConfigProperties.getInstanceClient());
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AliOssUploadGoOnApi aliOssUploadGoOnApi() {
-        return new AliOssUploadGoOnApi(aliOssConfigProperties.getInstanceClient());
+        return new AliOssUploadGoOnApi(aliConfigProperties.getInstanceClient());
     }
 
     @Bean
     @ConditionalOnMissingBean
     public AliOssWebApi aliOssWebApi() {
-        return new AliOssWebApi(aliOssConfigProperties.getInstanceClient());
+        return new AliOssWebApi(aliConfigProperties.getInstanceClient());
     }
 }

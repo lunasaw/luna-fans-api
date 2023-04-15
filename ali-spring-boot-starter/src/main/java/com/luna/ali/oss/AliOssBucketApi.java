@@ -7,12 +7,9 @@ import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliOssConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
