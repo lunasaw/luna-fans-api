@@ -2,12 +2,13 @@ package com.luna.ali.face;
 
 import com.aliyun.facebody20191230.models.*;
 import com.luna.ali.config.AliClientSupport;
-import com.luna.ali.face.enums.ExpressionEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author weidian
@@ -21,6 +22,60 @@ public class AliFaceCheckApi {
     @Autowired
     private AliClientSupport aliClientSupport;
 
+    /**
+     * 图像Base64编码字符串。
+     * @param listImage
+     * @return
+     */
+    public RecognizePublicFaceResponse recognizePublicFaceWithOptionsWithData(List<String> listImage){
+        List<RecognizePublicFaceRequest.RecognizePublicFaceRequestTask> taskList = listImage.stream().map(e -> new RecognizePublicFaceRequest.RecognizePublicFaceRequestTask().setImageData(e)).collect(Collectors.toList());
+        return recognizePublicFaceWithOptions(taskList);
+    }
+
+    /**
+     * oss 编码
+     * @param listUrl
+     * @return
+     */
+    public RecognizePublicFaceResponse recognizePublicFaceWithOptionsWithUrl(List<String> listUrl){
+        List<RecognizePublicFaceRequest.RecognizePublicFaceRequestTask> taskList = listUrl.stream().map(e -> new RecognizePublicFaceRequest.RecognizePublicFaceRequestTask().setImageURL(e)).collect(Collectors.toList());
+        return recognizePublicFaceWithOptions(taskList);
+    }
+
+    public RecognizePublicFaceResponse recognizePublicFaceWithOptions(List<RecognizePublicFaceRequest.RecognizePublicFaceRequestTask> list){
+        RecognizePublicFaceRequest request = new RecognizePublicFaceRequest();
+        request.setTask(list);
+        return recognizePublicFaceWithOptions(request);
+    }
+
+    /**
+     * 公众人物识别
+     * 文件在本地或文件在同一地域OSS
+     * <a href="https://help.aliyun.com/document_detail/478122.htm">表情识别</a>
+     * @param request
+     * @return
+     */
+    public RecognizePublicFaceResponse recognizePublicFaceWithOptions(RecognizePublicFaceRequest request) {
+        try {
+            return aliClientSupport.getClient().recognizePublicFaceWithOptions(request, aliClientSupport.getRuntimeOptions());
+        } catch (Exception teaException) {
+            throw new RuntimeException(teaException);
+        }
+    }
+
+    /**
+     * 公众人物识别
+     * 文件在本地或文件不在同一地域OSS
+     * @param request
+     * @return
+     */
+    public RecognizePublicFaceResponse recognizePublicFaceAdvance(RecognizePublicFaceAdvanceRequest request) {
+        try {
+            return aliClientSupport.getClient().recognizePublicFaceAdvance(request, aliClientSupport.getRuntimeOptions());
+        } catch (Exception teaException) {
+            throw new RuntimeException(teaException);
+        }
+    }
 
     /**
      * 人脸表情识别

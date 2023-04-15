@@ -30,12 +30,6 @@
             <artifactId>facebody20191230</artifactId>
             <version>3.0.7</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-java-sdk-viapiutils</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 
     <scm>

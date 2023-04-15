@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java-common</artifactId>
-            <version>3.1.831</version>
+            <version>3.1.731</version>
         </dependency>
 
 
