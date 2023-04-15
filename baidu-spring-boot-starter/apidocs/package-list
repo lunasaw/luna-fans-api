@@ -14,6 +14,7 @@ com.luna.baidu.dto.word
 com.luna.baidu.dto.write
 com.luna.baidu.enums
 com.luna.baidu.enums.map
+com.luna.baidu.enums.voice
 com.luna.baidu.hander
-com.luna.baidu.req
 com.luna.baidu.req.face
+com.luna.baidu.req.voice

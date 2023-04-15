@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * @author weidian
+ * @author luna
  */
 
 public enum ErrorCode {
