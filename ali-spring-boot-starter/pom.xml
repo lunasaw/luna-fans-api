@@ -7,7 +7,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.7</version>
+        <version>3.1.8</version>
     </parent>
     <artifactId>ali-spring-boot-starter</artifactId>
     <version>${luna-fans-api.version}</version>
@@ -16,10 +16,6 @@
     <url>https://lunasaw.github.io/${github.username}/${project.name}</url>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
         <dependency>
@@ -28,12 +24,18 @@
             <version>3.16.2</version>
         </dependency>
 
-        <!-- alipay -->
-        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <!-- https://mvnrepository.com/artifact/com.aliyun/facebody20191230 -->
         <dependency>
-            <groupId>com.alipay.sdk</groupId>
-            <artifactId>alipay-sdk-java</artifactId>
-            <version>4.35.101.ALL</version>
+            <groupId>com.aliyun</groupId>
+            <artifactId>facebody20191230</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.aliyun/facebody20200910 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>facebody20200910</artifactId>
+            <version>3.0.0</version>
         </dependency>
 
     </dependencies>

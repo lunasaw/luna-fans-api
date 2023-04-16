@@ -6,7 +6,7 @@ import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
 import com.google.common.collect.ImmutableMap;
-import com.luna.ali.config.AliOssConfigProperties;
+import com.luna.ali.config.AliConfigProperties;
 import com.luna.ali.oss.dto.OssSignDTO;
 import com.luna.common.constant.StrPoolConstant;
 import com.luna.common.date.DateUtils;
@@ -30,7 +30,7 @@ public class AliOssWebApi {
 
     private static final Long      MAX = 1048576000L;
     @Autowired
-    private AliOssConfigProperties aliOssConfigProperties;
+    private AliConfigProperties aliConfigProperties;
 
     public AliOssWebApi(OSS ossClient) {
         this.ossClient = ossClient;
@@ -109,7 +109,7 @@ public class AliOssWebApi {
 
         objectName = RandomStrUtil.generateNonceStrWithUUID() + "_" + objectName;
         // https://bucketname.endpoint
-        String host = "https://" + aliOssConfigProperties.getBucketName() + StrPoolConstant.DOT + aliOssConfigProperties.getEndpoint();
+        String host = "https://" + aliConfigProperties.getBucketName() + StrPoolConstant.DOT + aliConfigProperties.getEndpoint();
         if (StringUtils.isEmpty(callback)) {
             callback = JSON.toJSONString(ImmutableMap.of("url", host + "/" + dir + objectName));
         }
@@ -123,10 +123,10 @@ public class AliOssWebApi {
         policy.put("host", host);
         policy.put("objectName", objectName);
         policy.put("dir", dir);
-        policy.put("accessKey", aliOssConfigProperties.getAccessKey());
-        policy.put("callbackUrl", aliOssConfigProperties.getCallbackUrl());
-        policy.put("enableCname", aliOssConfigProperties.getEnableCname());
-        policy.put("domain", aliOssConfigProperties.getDomain());
+        policy.put("accessKey", aliConfigProperties.getAccessKey());
+        policy.put("callbackUrl", aliConfigProperties.getCallbackUrl());
+        policy.put("enableCname", aliConfigProperties.getEnableCname());
+        policy.put("domain", aliConfigProperties.getDomain());
 
         if (StringUtils.isNotEmpty(callback)) {
             String base64CallbackBody = BinaryUtil.toBase64String(callback.getBytes());

@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * VoiceSynthesisResponse
- * @author weidian
+ * @author luna
  */
 @Data
 public class VoiceSynthesisResponse {

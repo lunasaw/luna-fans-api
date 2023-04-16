@@ -9,14 +9,10 @@ import java.util.Objects;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliOssConfigProperties;
 import com.luna.common.net.base.HttpBaseUtils;
-import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * @author Luna@win10
