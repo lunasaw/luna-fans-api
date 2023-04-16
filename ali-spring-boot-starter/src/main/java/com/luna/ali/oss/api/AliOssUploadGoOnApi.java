@@ -1,14 +1,14 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
-import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.AppendObjectRequest;
 import com.aliyun.oss.model.AppendObjectResult;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.UploadFileRequest;
 import com.luna.ali.config.AliConfigProperties;
+import com.luna.ali.oss.AliOssClientSupport;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

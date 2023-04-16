@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.io.*;
 import java.net.HttpURLConnection;

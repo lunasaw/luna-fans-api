@@ -1,12 +1,12 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import com.alibaba.fastjson.JSON;
-import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
 import com.google.common.collect.ImmutableMap;
 import com.luna.ali.config.AliConfigProperties;
+import com.luna.ali.oss.AliOssClientSupport;
 import com.luna.ali.oss.dto.OssSignDTO;
 import com.luna.common.constant.StrPoolConstant;
 import com.luna.common.date.DateUtils;

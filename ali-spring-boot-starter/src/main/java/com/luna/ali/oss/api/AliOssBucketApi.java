@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
+import com.luna.ali.oss.AliOssClientSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

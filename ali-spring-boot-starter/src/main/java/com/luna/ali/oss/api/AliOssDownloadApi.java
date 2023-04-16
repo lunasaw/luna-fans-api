@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Objects;
 
-import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
+import com.luna.ali.oss.AliOssClientSupport;
 import com.luna.common.net.base.HttpBaseUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

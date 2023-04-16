@@ -62,9 +62,9 @@ public class AliFaceBodyClientSupport implements InitializingBean {
                     com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
                         .setAccessKeyId(accessKeyId)
                         .setAccessKeySecret(accessKeySecret)
-                        .setConnectTimeout(3000)
-                        .setMaxIdleConns(10)
-                        .setReadTimeout(3000)
+                        .setConnectTimeout(aliConfigProperties.getConnectTimeout())
+                        .setMaxIdleConns(aliConfigProperties.getMaxIdleConns())
+                        .setReadTimeout(aliConfigProperties.getReadTimeout())
                         .setEndpoint(AliAccessConstant.FACE_BODY_HOST);
                     faceClient = new FaceClient();
                     faceClient.setFaceCheckClient(new com.aliyun.facebody20191230.Client(config));
