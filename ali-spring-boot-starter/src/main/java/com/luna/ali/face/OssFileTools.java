@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package com.luna.ali.fileUrl;
+package com.luna.ali.face;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -29,11 +29,9 @@ import com.luna.common.text.RandomStrUtil;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
