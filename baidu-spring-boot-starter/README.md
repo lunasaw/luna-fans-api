@@ -9,7 +9,6 @@
   </a>
 </p>
 
-[Api文档链接](https://lunasaw.github.io/luna-fans-api/baidu-spring-boot-starter/apidocs/){:target="_blank"}
 
 ### 日志
 
@@ -24,7 +23,8 @@
 
 ### 文档
 
-[文档链接](https://lunasaw.github.io/luna-fans-api/javadocs/)
+
+[Api文档链接](https://lunasaw.github.io/luna-fans-api/baidu-spring-boot-starter/apidocs/){:target="_blank"}
 
 引入项目依赖
 

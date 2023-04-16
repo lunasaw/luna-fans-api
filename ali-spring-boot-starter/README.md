@@ -8,12 +8,18 @@
   </a>
 </p>
 
+
 ## 日志
 
+- 2023-04-16 增加阿里云人脸库处理
 - 2023-04-15 增加阿里云sdk，人脸检测，表情识别
 - 2023-04-09 拆分项目,增加支付宝Api操作
 - 8.19 增加支付宝Api操作
 - 8.21 增加阿里Oss存储Api调用
+
+## 文档
+[Api文档链接](https://lunasaw.github.io/luna-fans-api/ali-spring-boot-starter/apidocs/){:target="_blank"}
+
 
 ###### **安装步骤**
 
