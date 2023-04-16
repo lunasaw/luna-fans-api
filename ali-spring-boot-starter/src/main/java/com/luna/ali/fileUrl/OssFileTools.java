@@ -44,7 +44,7 @@ import javax.annotation.PreDestroy;
 /**
  * 上传生成阿里云访问的私有地址 只有一天有效
  * 
- * @author weidian
+ * @author luna
  */
 @Component
 public class OssFileTools implements InitializingBean {

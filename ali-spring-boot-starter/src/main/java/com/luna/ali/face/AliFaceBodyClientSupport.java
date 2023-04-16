@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author weidian
+ * @author luna
  * @description
  * @date 2023/4/15
  */
@@ -22,25 +22,22 @@ public class AliFaceBodyClientSupport implements InitializingBean {
     @Autowired
     private AliConfigProperties aliConfigProperties;
 
-    private FaceClient          faceCLient;
+    private FaceClient          faceClient;
 
-    private RuntimeOptions      runtimeOptions = null;
+    private RuntimeOptions      runtimeOptions;
 
-    public Client getClient() {
-        return null;
-    }
 
     public com.aliyun.teaopenapi.Client getClient(FaceTypeEnum faceType) {
         if (FaceTypeEnum.FACE_DETECTION.equals(faceType)) {
-            return faceCLient.getFaceBodyClient();
+            return faceClient.getFaceBodyClient();
         } else if (FaceTypeEnum.FACE_VERIFICATION.equals(faceType)) {
-            return faceCLient.getFaceBodyClient();
+            return faceClient.getFaceBodyClient();
         }
         throw new RuntimeException("getClient not found");
     }
 
     @Data
-    public class FaceClient {
+    public static class FaceClient {
 
         /**
          * 人脸检测
@@ -62,14 +59,14 @@ public class AliFaceBodyClientSupport implements InitializingBean {
             // CLIENT 单例模式创建
             synchronized (AliFaceCheckApi.class) {
 
-                if (faceCLient == null) {
+                if (faceClient == null) {
                     com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
                         .setAccessKeyId(accessKeyId)
                         .setAccessKeySecret(accessKeySecret)
                         .setEndpoint(AliAccessConstant.FACE_BODY_HOST);
-                    faceCLient = new FaceClient();
-                    faceCLient.setFaceCheckClient(new com.aliyun.facebody20191230.Client(config));
-                    faceCLient.setFaceBodyClient(new com.aliyun.facebody20200910.Client(config));
+                    faceClient = new FaceClient();
+                    faceClient.setFaceCheckClient(new com.aliyun.facebody20191230.Client(config));
+                    faceClient.setFaceBodyClient(new com.aliyun.facebody20200910.Client(config));
                 }
 
                 if (runtimeOptions == null) {
