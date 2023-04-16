@@ -1,13 +1,14 @@
-package com.luna.ali.face;
+package com.luna.ali.face.api;
 
+import com.aliyun.facebody20191230.Client;
 import com.aliyun.facebody20191230.models.*;
-import com.luna.ali.config.AliClientSupport;
+import com.luna.ali.face.AliFaceBodyClientSupport;
+import com.luna.ali.face.enums.FaceTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +21,30 @@ import java.util.stream.Collectors;
 public class AliFaceCheckApi {
 
     @Autowired
-    private AliClientSupport aliClientSupport;
+    private AliFaceBodyClientSupport aliFaceBodyClientSupport;
+
+
+    private Client getClient() {
+        return (Client) aliFaceBodyClientSupport.getClient(FaceTypeEnum.FACE_DETECTION);
+    }
+
+    public DetectCelebrityResponse detectCelebrityWithOptions(String url){
+        return detectCelebrityWithOptions(new DetectCelebrityRequest().setImageURL(url));
+    }
+
+    /**
+     * 明星识别
+     * @param request
+     * @return
+     */
+    public DetectCelebrityResponse detectCelebrityWithOptions(DetectCelebrityRequest request) {
+        try {
+            return getClient().detectCelebrityWithOptions(request, aliFaceBodyClientSupport.getRuntimeOptions());
+        } catch (Exception teaException) {
+            throw new RuntimeException(teaException);
+        }
+    }
+
 
     /**
      * 图像Base64编码字符串。
@@ -57,7 +81,7 @@ public class AliFaceCheckApi {
      */
     public RecognizePublicFaceResponse recognizePublicFaceWithOptions(RecognizePublicFaceRequest request) {
         try {
-            return aliClientSupport.getClient().recognizePublicFaceWithOptions(request, aliClientSupport.getRuntimeOptions());
+            return getClient().recognizePublicFaceWithOptions(request, aliFaceBodyClientSupport.getRuntimeOptions());
         } catch (Exception teaException) {
             throw new RuntimeException(teaException);
         }
@@ -71,7 +95,7 @@ public class AliFaceCheckApi {
      */
     public RecognizePublicFaceResponse recognizePublicFaceAdvance(RecognizePublicFaceAdvanceRequest request) {
         try {
-            return aliClientSupport.getClient().recognizePublicFaceAdvance(request, aliClientSupport.getRuntimeOptions());
+            return getClient().recognizePublicFaceAdvance(request, aliFaceBodyClientSupport.getRuntimeOptions());
         } catch (Exception teaException) {
             throw new RuntimeException(teaException);
         }
@@ -94,7 +118,7 @@ public class AliFaceCheckApi {
      */
     public RecognizeExpressionResponse recognizeExpressionWithOptions(RecognizeExpressionRequest request) {
         try {
-            return aliClientSupport.getClient().recognizeExpressionWithOptions(request, aliClientSupport.getRuntimeOptions());
+            return getClient().recognizeExpressionWithOptions(request, aliFaceBodyClientSupport.getRuntimeOptions());
         } catch (Exception teaException) {
             throw new RuntimeException(teaException);
         }
@@ -108,7 +132,7 @@ public class AliFaceCheckApi {
      */
     public RecognizeFaceResponse recognizeFaceWithOptions(RecognizeFaceRequest request) {
         try {
-            return aliClientSupport.getClient().recognizeFaceWithOptions(request, aliClientSupport.getRuntimeOptions());
+            return getClient().recognizeFaceWithOptions(request, aliFaceBodyClientSupport.getRuntimeOptions());
         } catch (Exception teaException) {
             throw new RuntimeException(teaException);
         }
@@ -151,7 +175,7 @@ public class AliFaceCheckApi {
      */
     public DetectFaceResponse detectFaceWithOptions(DetectFaceRequest detectFaceRequest) {
         try {
-            return aliClientSupport.getClient().detectFaceWithOptions(detectFaceRequest, aliClientSupport.getRuntimeOptions());
+            return getClient().detectFaceWithOptions(detectFaceRequest, aliFaceBodyClientSupport.getRuntimeOptions());
         } catch (Exception teaException) {
             throw new RuntimeException(teaException);
         }

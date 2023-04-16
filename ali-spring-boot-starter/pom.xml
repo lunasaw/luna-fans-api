@@ -30,6 +30,14 @@
             <artifactId>facebody20191230</artifactId>
             <version>3.0.7</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.aliyun/facebody20200910 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>facebody20200910</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <scm>

@@ -6,7 +6,7 @@ import com.aliyun.facebody20191230.models.RecognizeExpressionResponse;
 import com.aliyun.facebody20191230.models.RecognizeFaceResponse;
 import com.aliyun.facebody20191230.models.RecognizePublicFaceResponse;
 import com.google.common.collect.Lists;
-import com.luna.ali.face.AliFaceCheckApi;
+import com.luna.ali.face.api.AliFaceCheckApi;
 import com.luna.ali.fileUrl.OssFileTools;
 import io.github.lunasaw.BaseTest;
 import org.junit.Test;
