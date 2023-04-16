@@ -5,7 +5,6 @@
 
 package com.luna.ali.fileUrl;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -21,6 +20,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.kms.Endpoint;
 import com.aliyuncs.transform.UnmarshallerContext;
 import com.luna.ali.config.AliConfigProperties;
+import com.luna.common.constant.StrPoolConstant;
 import com.luna.common.file.FileNameUtil;
 import com.luna.common.io.IoUtil;
 import com.luna.common.net.HttpUtils;
@@ -37,8 +37,13 @@ import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+
+import javax.annotation.PreDestroy;
 
 /**
+ * 上传生成阿里云访问的私有地址 只有一天有效
+ * 
  * @author weidian
  */
 @Component
@@ -50,15 +55,16 @@ public class OssFileTools implements InitializingBean {
 
     @Autowired
     private AliConfigProperties aliConfigProperties;
-    DefaultAcsClient            client;
+
+    private OSSClient           ossClient;
 
     public String upload(String filePath) {
         String fileName = FileNameUtil.getName(filePath);
         InputStream ins = null;
         try {
             if (HttpUtils.isUrl(filePath)) {
-                filePath = URLDecoder.decode(filePath, CharsetUtil.defaultCharsetName());
-                URL url = new URL(filePath);
+                String decode = URLDecoder.decode(filePath, CharsetUtil.defaultCharsetName());
+                URL url = new URL(decode);
                 URLConnection urlConnection = url.openConnection();
                 ins = urlConnection.getInputStream();
             } else {
@@ -72,32 +78,35 @@ public class OssFileTools implements InitializingBean {
         }
     }
 
-    public String upload(String fileName, InputStream stream) throws ClientException {
-        GetOssStsTokenResponse acsResponse = this.client.getAcsResponse(new GetOssStsTokenRequest());
-        OSSClient ossClient = null;
+    public String upload(String fileName, InputStream stream) {
+        Assert.notNull(stream, "输入流不能为空");
+        Assert.notNull(fileName, "文件名不能为空");
         try {
-            DefaultCredentialProvider credentialProvider =
-                new DefaultCredentialProvider(acsResponse.getAccessKeyId(), acsResponse.getAccessKeySecret(), acsResponse.getSecurityToken());
-            ossClient = new OSSClient(ENDPOINT, credentialProvider, new ClientConfiguration());
-            String key = aliConfigProperties.getAccessKey() + "/" + RandomStrUtil.getUUID() + fileName;
+            String key = aliConfigProperties.getAccessKey() + StrPoolConstant.SLASH + RandomStrUtil.getUUID() + fileName;
             ossClient.putObject(BUCKET_NAME, key, stream);
             return ALIYUNCS_COM + key;
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
         IClientProfile profile = DefaultProfile.getProfile("cn-shanghai", aliConfigProperties.getAccessKey(), aliConfigProperties.getSecretKey());
         DefaultProfile.addEndpoint("cn-shanghai", "viapiutils", ENDPOINT_DOMAIN);
-        this.client = new DefaultAcsClient(profile);
+        GetOssStsTokenResponse acsResponse = new DefaultAcsClient(profile).getAcsResponse(new GetOssStsTokenRequest());
+        DefaultCredentialProvider credentialProvider =
+            new DefaultCredentialProvider(acsResponse.getAccessKeyId(), acsResponse.getAccessKeySecret(), acsResponse.getSecurityToken());
+        ossClient = new OSSClient(ENDPOINT, credentialProvider, new ClientConfiguration());
     }
 
-    @EqualsAndHashCode(callSuper = true)
+    @PreDestroy
+    public void destroy() {
+        if (ossClient != null) {
+            ossClient.shutdown();
+        }
+    }
+
     @Data
     public static class GetOssStsTokenResponse extends AcsResponse {
 
@@ -107,10 +116,10 @@ public class OssFileTools implements InitializingBean {
 
         private String accessKeySecret;
 
-        public GetOssStsTokenResponse getInstance(UnmarshallerContext _ctx) {
-            securityToken = _ctx.stringValue("OssFileTools$GetOssStsTokenResponse.Data.SecurityToken");
-            accessKeyId = _ctx.stringValue("OssFileTools$GetOssStsTokenResponse.Data.AccessKeyId");
-            accessKeySecret = _ctx.stringValue("OssFileTools$GetOssStsTokenResponse.Data.AccessKeySecret");
+        public GetOssStsTokenResponse getInstance(UnmarshallerContext context) {
+            securityToken = context.stringValue("OssFileTools$GetOssStsTokenResponse.Data.SecurityToken");
+            accessKeyId = context.stringValue("OssFileTools$GetOssStsTokenResponse.Data.AccessKeyId");
+            accessKeySecret = context.stringValue("OssFileTools$GetOssStsTokenResponse.Data.AccessKeySecret");
             return this;
         }
 
