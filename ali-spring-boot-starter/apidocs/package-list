@@ -1,6 +1,12 @@
 com.luna.ali.config
+com.luna.ali.constant
+com.luna.ali.face
+com.luna.ali.face.api
+com.luna.ali.face.enums
+com.luna.ali.fileUrl
 com.luna.ali.oss
 com.luna.ali.oss.constant
 com.luna.ali.oss.dto
 com.luna.ali.oss.listener
 com.luna.ali.oss.req
+com.luna.ali.sign

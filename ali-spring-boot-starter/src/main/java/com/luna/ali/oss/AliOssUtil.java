@@ -7,7 +7,7 @@ import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.*;
-import com.luna.ali.config.AliOssConfigProperties;
+import com.luna.ali.config.AliConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -57,7 +57,7 @@ public class AliOssUtil {
      * @param configVale
      * @return
      */
-    public static OSS createOssWithCname(AliOssConfigProperties configVale) {
+    public static OSS createOssWithCname(AliConfigProperties configVale) {
         return configVale.getInstanceClient(true);
     }
 

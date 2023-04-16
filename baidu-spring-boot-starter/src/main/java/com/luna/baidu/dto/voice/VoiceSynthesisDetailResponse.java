@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * This class represents the structure of the data described in the table.
  * 
- * @author weidian
+ * @author luna
  */
 @Data
 public class VoiceSynthesisDetailResponse {

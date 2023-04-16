@@ -1,19 +1,14 @@
 package com.luna.ali.oss;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.AppendObjectRequest;
 import com.aliyun.oss.model.AppendObjectResult;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.UploadFileRequest;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.luna.ali.config.AliOssConfigProperties;
-import com.luna.common.net.HttpUtilsConstant;
+import com.luna.ali.config.AliConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,14 +87,14 @@ public class AliOssUploadGoOnApi {
      * @param localFile
      * @param checkpointFile
      * @param objectName
-     * @param aliOssConfigProperties
+     * @param aliConfigProperties
      * @throws Throwable
      */
     public void uploadBreakPoint(String bucketName, String localFile, String checkpointFile, Integer taskNum,
         String objectName,
-        AliOssConfigProperties aliOssConfigProperties) throws Throwable {
+        AliConfigProperties aliConfigProperties) throws Throwable {
         // 创建OSSClient实例。
-        OSS ossClient = aliOssConfigProperties.getInstanceClient(false);
+        OSS ossClient = aliConfigProperties.getInstanceClient(false);
 
         ObjectMetadata meta = new ObjectMetadata();
         // 指定上传的内容类型。
@@ -131,7 +126,7 @@ public class AliOssUploadGoOnApi {
         // 文件的元数据。
         uploadFileRequest.setObjectMetadata(meta);
         // 设置上传成功回调，参数为Callback类型。
-        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliOssConfigProperties.getCallbackUrl()));
+        uploadFileRequest.setCallback(AliOssUtil.getCallback(aliConfigProperties.getCallbackUrl()));
 
         // 断点续传上传。
         ossClient.uploadFile(uploadFileRequest);
