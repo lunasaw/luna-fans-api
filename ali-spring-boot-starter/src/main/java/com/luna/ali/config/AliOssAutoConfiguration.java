@@ -24,23 +24,10 @@ public class AliOssAutoConfiguration {
     public AliOssAutoConfiguration(final AliConfigProperties aliConfigProperties) {
         this.aliConfigProperties = aliConfigProperties;
     }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public AliOssUploadApi aliOssUploadApi() {
-        return new AliOssUploadApi(aliConfigProperties.getInstanceClient());
-    }
-
     @Bean
     @ConditionalOnMissingBean
     public AliOssDownloadApi aliOssDownloadApi() {
         return new AliOssDownloadApi(aliConfigProperties.getInstanceClient());
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public AliOssBucketApi aliOssBucketApi() {
-        return new AliOssBucketApi(aliConfigProperties.getInstanceClient());
     }
 
     @Bean

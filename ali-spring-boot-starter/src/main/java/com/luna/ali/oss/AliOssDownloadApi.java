@@ -13,19 +13,17 @@ import com.luna.common.net.base.HttpBaseUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Luna@win10
  * @date 2020/4/20 11:46
  */
+@Component
 public class AliOssDownloadApi {
-
-    public AliOssDownloadApi(OSS ossClient) {
-        this.ossClient = ossClient;
-    }
-
-    private OSS                 ossClient;
-
+    @Autowired
+    private AliOssClientSupport aliOssClientSupport;
     private static final Logger log = LoggerFactory.getLogger(AliOssUploadApi.class);
 
     /**
@@ -38,7 +36,7 @@ public class AliOssDownloadApi {
     public String downloadByStream(String bucketName, String objectName) {
 
         // ossObject包含文件所在的存储空间名称、文件名称、文件元信息以及一个输入流。
-        OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+        OSSObject ossObject = aliOssClientSupport.getInstanceClient().getObject(bucketName, objectName);
 
         // 读取文件内容。
         BufferedReader reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent()));
@@ -50,8 +48,8 @@ public class AliOssDownloadApi {
             log.error("downloadByStream::bucketName = {}, objectName = {} ", bucketName, objectName, e);
         }
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return s;
     }
 
@@ -66,10 +64,10 @@ public class AliOssDownloadApi {
     public void downloadByFile(String bucketName, String objectName, String loaclFile) {
 
         // 下载OSS文件到本地文件。如果指定的本地文件存在会覆盖，不存在则新建。
-        ossClient.getObject(new GetObjectRequest(bucketName, objectName), new File(loaclFile));
+        aliOssClientSupport.getInstanceClient().getObject(new GetObjectRequest(bucketName, objectName), new File(loaclFile));
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
     }
 
     /**
@@ -91,10 +89,10 @@ public class AliOssDownloadApi {
         request.setModifiedSinceConstraint(new Date());
 
         // 下载OSS文件到本地文件。
-        ossClient.getObject(request, new File(localFile));
+        aliOssClientSupport.getInstanceClient().getObject(request, new File(localFile));
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
     }
 
     /**
@@ -120,7 +118,7 @@ public class AliOssDownloadApi {
         // 下载文件。
         DownloadFileResult downloadRes = null;
         try {
-            downloadRes = ossClient.downloadFile(downloadFileRequest);
+            downloadRes = aliOssClientSupport.getInstanceClient().downloadFile(downloadFileRequest);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -130,8 +128,8 @@ public class AliOssDownloadApi {
             objectMetadata = downloadRes.getObjectMetadata();
         }
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
 
         return objectMetadata;
 

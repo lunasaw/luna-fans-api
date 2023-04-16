@@ -28,16 +28,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class AliOssWebApi {
 
-    private static final Long      MAX = 1048576000L;
+    private static final Long   MAX = 1048576000L;
+
+    @Autowired
+    private AliOssClientSupport aliOssClientSupport;
+
     @Autowired
     private AliConfigProperties aliConfigProperties;
-
-    public AliOssWebApi(OSS ossClient) {
-        this.ossClient = ossClient;
-    }
-
-    private OSS                 ossClient;
-
     private static final Logger log = LoggerFactory.getLogger(AliOssUploadApi.class);
 
     /**
@@ -153,10 +150,10 @@ public class AliOssWebApi {
         policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, MAX);
         policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
 
-        String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);
+        String postPolicy = aliOssClientSupport.getInstanceClient().generatePostPolicy(expiration, policyConds);
         byte[] binaryData = postPolicy.getBytes(StandardCharsets.UTF_8);
         String encodedPolicy = BinaryUtil.toBase64String(binaryData);
-        String postSignature = ossClient.calculatePostSignature(postPolicy);
+        String postSignature = aliOssClientSupport.getInstanceClient().calculatePostSignature(postPolicy);
 
         Map<String, Object> respMap = new LinkedHashMap<>();
         respMap.put("policy", encodedPolicy);

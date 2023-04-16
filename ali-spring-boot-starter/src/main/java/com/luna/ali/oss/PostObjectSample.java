@@ -77,7 +77,6 @@ public class PostObjectSample {
     }
 
     /**
-     * @param args
      * @throws Exception
      */
     private static String formUpload(String host, Map<String, String> formFields, String localFile)
