@@ -6,7 +6,7 @@ luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用�
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.lunasaw/luna-fans-api)](https://mvnrepository.com/artifact/io.github.lunasaw/luna-fans-api)
 [![GitHub license](https://img.shields.io/badge/MIT_License-blue.svg)](https://raw.githubusercontent.com/lunasaw/luna-fans-api/master/LICENSE)
-[![Build Status](https://github.com/lunasaw/luna-fans-api/actions/workflows/maven-publish.yml/badge.svg?branch=master)](https://github.com/lunasaw/luna-fans-api/actions)
+[![Build Status](https://github.com/lunasaw/luna-fans-api/actions/workflows/publish-javadoc.yml/badge.svg?branch=master)](https://github.com/lunasaw/luna-fans-api/actions)
 
 <!-- PROJECT LOGO -->
 <br />

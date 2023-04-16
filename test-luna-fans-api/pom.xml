@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.7.10</spring-boot.version>
         <luna-common.veriosn>2.4.1</luna-common.veriosn>
-        <luna-fans-api.version>3.1.8</luna-fans-api.version>
+        <luna-fans-api.version>3.1.9</luna-fans-api.version>
         <github.username>lunasaw</github.username>
     </properties>
     <dependencyManagement>
