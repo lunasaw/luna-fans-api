@@ -7,7 +7,7 @@ import com.aliyun.facebody20191230.models.RecognizeFaceResponse;
 import com.aliyun.facebody20191230.models.RecognizePublicFaceResponse;
 import com.google.common.collect.Lists;
 import com.luna.ali.face.api.AliFaceCheckApi;
-import com.luna.ali.fileUrl.OssFileTools;
+import com.luna.ali.face.OssFileTools;
 import io.github.lunasaw.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

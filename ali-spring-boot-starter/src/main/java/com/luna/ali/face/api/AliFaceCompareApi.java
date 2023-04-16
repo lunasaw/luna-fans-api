@@ -71,8 +71,6 @@ public class AliFaceCompareApi {
         }
     }
 
-    // 以下是人脸库构造 ========================================
-
     // 以下是人脸活体检测 ========================================
 
     /**
@@ -132,7 +130,7 @@ public class AliFaceCompareApi {
     }
 
     /**
-     * <a href="https://help.aliyun.com/document_detail/1000225.html">...</a>
+     * <a href="https://help.aliyun.com/document_detail/1000225.html">红外人脸活体检测</a>
      * 红外人脸活体检测 图片 需要企业认证
      *
      * @param tasks
@@ -149,7 +147,7 @@ public class AliFaceCompareApi {
     }
 
     /**
-     * <a href="https://help.aliyun.com/document_detail/167847.html">...</a>
+     * <a href="https://help.aliyun.com/document_detail/167847.html">视频活体验证</a>
      * 视频活体验证
      * 视频格式：MP4、AVI。
      * 视频大小：不超过30 MB。

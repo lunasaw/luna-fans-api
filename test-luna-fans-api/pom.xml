@@ -101,26 +101,22 @@
             <groupId>io.github.lunasaw</groupId>
             <artifactId>ali-pay-spring-boot-starter</artifactId>
             <version>${luna-fans-api.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.github.lunasaw</groupId>
             <artifactId>ali-spring-boot-starter</artifactId>
             <version>${luna-fans-api.version}</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>io.github.lunasaw</groupId>
             <artifactId>api-spring-boot-starter</artifactId>
             <version>${luna-fans-api.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.github.lunasaw</groupId>
             <artifactId>baidu-spring-boot-starter</artifactId>
             <version>${luna-fans-api.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
