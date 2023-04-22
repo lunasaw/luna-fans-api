@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.net.URL;
 import java.util.Date;

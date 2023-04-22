@@ -51,6 +51,20 @@ public class AliConfigProperties {
     private Boolean enableCname;
 
     /**
+     * 连接超时时间
+     */
+    public Integer  connectTimeout;
+
+    /**
+     * 最大连接数
+     */
+    public Integer  maxIdleConns;
+
+    /**
+     * 读取超时时间
+     */
+    public Integer  readTimeout;
+    /**
      * 创建OSSClient实例
      */
     private OSS     client;

@@ -3,12 +3,12 @@ package com.luna.api.smms.api;
 import com.luna.api.smms.dto.UserProfileDTO;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.UserAgentConstant;
-import org.apache.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.api.smms.constant.SmMsConstant;
+import org.apache.hc.core5.http.HttpResponse;
 
 /**
  * @Package: com.luna.api.smMs
@@ -46,7 +46,7 @@ public class UserApiFromString {
             HttpUtils.doPost(SmMsConstant.HOST, "/profile",
                 ImmutableMap.of("Authorization", token, "User-Agent", UserAgentConstant.CHROME_WIN_10),
                 null, "");
-        String s = HttpUtils.checkResponseAndGetResult(httpResponse, true);
+        String s = HttpUtils.checkResponseAndGetResult(httpResponse);
         return JSON.parseObject(JSON.parseObject(s).getString("data"), UserProfileDTO.class);
     }
 

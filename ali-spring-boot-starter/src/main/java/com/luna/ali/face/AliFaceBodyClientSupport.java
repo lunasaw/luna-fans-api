@@ -26,7 +26,6 @@ public class AliFaceBodyClientSupport implements InitializingBean {
 
     private RuntimeOptions      runtimeOptions;
 
-
     public com.aliyun.teaopenapi.Client getClient(FaceTypeEnum faceType) {
         if (FaceTypeEnum.FACE_DETECTION.equals(faceType)) {
             return faceClient.getFaceBodyClient();
@@ -63,6 +62,9 @@ public class AliFaceBodyClientSupport implements InitializingBean {
                     com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
                         .setAccessKeyId(accessKeyId)
                         .setAccessKeySecret(accessKeySecret)
+                        .setConnectTimeout(aliConfigProperties.getConnectTimeout())
+                        .setMaxIdleConns(aliConfigProperties.getMaxIdleConns())
+                        .setReadTimeout(aliConfigProperties.getReadTimeout())
                         .setEndpoint(AliAccessConstant.FACE_BODY_HOST);
                     faceClient = new FaceClient();
                     faceClient.setFaceCheckClient(new com.aliyun.facebody20191230.Client(config));

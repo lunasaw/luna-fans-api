@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.io.*;
 import java.net.URL;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.aliyun.oss.event.ProgressListener;
 import com.google.common.collect.Maps;
+import com.luna.ali.oss.AliOssClientSupport;
 import com.luna.common.date.DateUtils;
 import com.luna.common.text.RandomStrUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -13,21 +14,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
  * @author Luna@win10
  * @date 2020/4/20 11:46
  */
+@Component
 public class AliOssUploadApi {
 
-    public AliOssUploadApi(OSS ossClient) {
-        this.ossClient = ossClient;
-    }
-
-    private OSS                 ossClient;
+    @Autowired
+    private AliOssClientSupport aliOssClientSupport;
 
     private static final Logger log = LoggerFactory.getLogger(AliOssUploadApi.class);
 
@@ -262,11 +262,9 @@ public class AliOssUploadApi {
 
     public PutObjectResult doRequest(PutObjectRequest putObjectRequest) {
         try {
-            return ossClient.putObject(putObjectRequest);
+            return aliOssClientSupport.getInstanceClient().putObject(putObjectRequest);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            ossClient.shutdown();
         }
     }
 
@@ -281,7 +279,6 @@ public class AliOssUploadApi {
         try {
             InputStream inputStream = content.openStream();
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, inputStream);
-
             putObjectRequest.setMetadata(metadata);
             return doRequest(putObjectRequest);
         } catch (Exception e) {

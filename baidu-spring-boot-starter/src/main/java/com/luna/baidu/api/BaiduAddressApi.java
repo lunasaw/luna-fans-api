@@ -9,7 +9,7 @@ import com.luna.baidu.enums.map.CoordinateType;
 import com.luna.baidu.enums.map.DataTypeEnum;
 import com.luna.common.net.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;

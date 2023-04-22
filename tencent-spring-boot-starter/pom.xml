@@ -6,7 +6,7 @@
     <parent>
         <artifactId>luna-fans-api</artifactId>
         <groupId>io.github.lunasaw</groupId>
-        <version>3.1.8</version>
+        <version>3.1.9</version>
     </parent>
     <artifactId>tencent-spring-boot-starter</artifactId>
     <version>${luna-fans-api.version}</version>

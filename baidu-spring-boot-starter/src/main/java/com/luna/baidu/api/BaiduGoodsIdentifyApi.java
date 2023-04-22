@@ -7,7 +7,7 @@ import com.luna.common.file.FileTools;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.encrypt.Base64Util;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

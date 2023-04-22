@@ -6,7 +6,7 @@ luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用�
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.lunasaw/luna-fans-api)](https://mvnrepository.com/artifact/io.github.lunasaw/luna-fans-api)
 [![GitHub license](https://img.shields.io/badge/MIT_License-blue.svg)](https://raw.githubusercontent.com/lunasaw/luna-fans-api/master/LICENSE)
-[![Build Status](https://github.com/lunasaw/luna-fans-api/actions/workflows/maven-publish.yml/badge.svg?branch=master)](https://github.com/lunasaw/luna-fans-api/actions)
+[![Build Status](https://github.com/lunasaw/luna-fans-api/actions/workflows/publish-javadoc.yml/badge.svg?branch=master)](https://github.com/lunasaw/luna-fans-api/actions)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -29,6 +29,7 @@ luna-fans-api-fans 基于各个开放平台的api整合优化，大部分采用�
 
 ## 日志
 
+- 2023.0422 升级httpClient5.2 支持更优秀的异步请求方式
 - 2023.0414 自助github action Java doc打包📦部署
 - 2023.04.09 升级SpringBoot 2.7.10, 精简maven, 拆分Tencent的微信支付模块，和aliPay的支付模块，新增支付测试controller
 - 2022.10.03 增加阿里Oss平台，升级SpringBoot 2.7.0

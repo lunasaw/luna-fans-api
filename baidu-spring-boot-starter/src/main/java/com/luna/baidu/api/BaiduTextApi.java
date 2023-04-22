@@ -8,7 +8,7 @@ import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.text.CharsetUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

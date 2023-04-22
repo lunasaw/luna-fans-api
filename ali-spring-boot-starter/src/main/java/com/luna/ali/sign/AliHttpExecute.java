@@ -1,16 +1,10 @@
 package com.luna.ali.sign;
 
+import com.google.common.collect.ImmutableMap;
+import com.luna.common.net.base.HttpBaseUtils;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
@@ -80,16 +74,8 @@ public class AliHttpExecute {
         String apiEndpoint) {
         try {
             String signature = getSignature(action, accessKeyId, accessSecret, bizParams, apiVersion);
-            URIBuilder builder = new URIBuilder("https://" + apiEndpoint + "/?Signature=" + signature);
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
-            HttpClient httpclient = HttpClients.createDefault();
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                return EntityUtils.toString(entity);
-            }
-            return StringUtils.EMPTY;
+            String string = HttpBaseUtils.doURLWithString("https://" + apiEndpoint, "/?Signature=" + signature, API_HTTP_METHOD, ImmutableMap.of(), null, StringUtils.EMPTY);
+            return string;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

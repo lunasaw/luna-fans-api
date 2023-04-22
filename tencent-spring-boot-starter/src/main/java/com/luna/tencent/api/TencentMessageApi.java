@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.luna.common.net.HttpUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

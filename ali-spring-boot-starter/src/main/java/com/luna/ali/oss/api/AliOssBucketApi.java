@@ -1,4 +1,4 @@
-package com.luna.ali.oss;
+package com.luna.ali.oss.api;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -7,24 +7,25 @@ import java.util.Map;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.model.*;
+import com.luna.ali.oss.AliOssClientSupport;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
  * @author Luna@win10
  * @date 2020/4/20 11:46
  */
+@Component
+@Slf4j
 public class AliOssBucketApi {
 
-    private OSS ossClient;
-
-    public AliOssBucketApi(OSS ossClient) {
-        this.ossClient = ossClient;
-    }
-
-    private static final Logger log = LoggerFactory.getLogger(AliOssBucketApi.class);
+    @Autowired
+    private AliOssClientSupport aliOssClientSupport;
 
     /**
      * 创建对象存储空间
@@ -53,10 +54,7 @@ public class AliOssBucketApi {
         createBucketRequest.setStorageClass(StorageClass.parse(type));
 
         // 创建存储空间。
-        ossClient.createBucket(createBucketRequest);
-
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        aliOssClientSupport.getInstanceClient().createBucket(createBucketRequest);
     }
 
     /**
@@ -79,11 +77,11 @@ public class AliOssBucketApi {
         if (StringUtils.isNotEmpty(marker)) {
             listBucketsRequest.setMarker(marker);
         }
-        BucketList bucketList = ossClient.listBuckets(listBucketsRequest);
+        BucketList bucketList = aliOssClientSupport.getInstanceClient().listBuckets(listBucketsRequest);
         List<Bucket> buckets = bucketList.getBucketList();
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return buckets;
     }
 
@@ -96,11 +94,10 @@ public class AliOssBucketApi {
     public boolean isBucket(String bucketName) {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
+        boolean exists = aliOssClientSupport.getInstanceClient().doesBucketExist(bucketName);
 
-        boolean exists = ossClient.doesBucketExist(bucketName);
-
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return exists;
     }
 
@@ -113,10 +110,10 @@ public class AliOssBucketApi {
     public String getBucketRegion(String bucketName) {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
-        String location = ossClient.getBucketLocation(bucketName);
+        String location = aliOssClientSupport.getInstanceClient().getBucketLocation(bucketName);
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return location;
     }
 
@@ -130,7 +127,7 @@ public class AliOssBucketApi {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 存储空间的信息包括地域（Region或Location）、创建日期（CreationDate）、拥有者（Owner）、权限（Grants）等。
-        BucketInfo info = ossClient.getBucketInfo(bucketName);
+        BucketInfo info = aliOssClientSupport.getInstanceClient().getBucketInfo(bucketName);
         // 获取地域。
         String location = info.getBucket().getLocation();
         // 获取创建日期。
@@ -140,8 +137,8 @@ public class AliOssBucketApi {
         // 获取容灾类型。
         DataRedundancyType dataRedundancyType = info.getDataRedundancyType();
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return info;
     }
 
@@ -158,10 +155,10 @@ public class AliOssBucketApi {
         Assert.notNull(access, "权限名称不能为空");
 
         // 设置存储空间的访问权限为私有。
-        ossClient.setBucketAcl(bucketName, CannedAccessControlList.parse(access));
+        aliOssClientSupport.getInstanceClient().setBucketAcl(bucketName, CannedAccessControlList.parse(access));
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
     }
 
     /**
@@ -174,10 +171,10 @@ public class AliOssBucketApi {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 获取存储空间的访问权限。
-        AccessControlList acl = ossClient.getBucketAcl(bucketName);
+        AccessControlList acl = aliOssClientSupport.getInstanceClient().getBucketAcl(bucketName);
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return acl.toString();
     }
 
@@ -190,10 +187,10 @@ public class AliOssBucketApi {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 删除存储空间。
-        ossClient.deleteBucket(bucketName);
+        aliOssClientSupport.getInstanceClient().deleteBucket(bucketName);
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
     }
 
     /**
@@ -213,10 +210,10 @@ public class AliOssBucketApi {
             Map.Entry<String, String> entry = entries.next();
             request.setTag(entry.getKey(), entry.getValue());
         }
-        ossClient.setBucketTagging(request);
+        aliOssClientSupport.getInstanceClient().setBucketTagging(request);
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
     }
 
     /**
@@ -229,11 +226,11 @@ public class AliOssBucketApi {
         Assert.notNull(bucketName, "存储空间名称不能为空");
 
         // 获取Bucket标签信息。
-        TagSet tagSet = ossClient.getBucketTagging(new GenericRequest(bucketName));
+        TagSet tagSet = aliOssClientSupport.getInstanceClient().getBucketTagging(new GenericRequest(bucketName));
         Map<String, String> tags = tagSet.getAllTags();
 
-        // 关闭OSSClient。
-        ossClient.shutdown();
+        // 关闭aliOssClientSupport.getInstanceClient()。
+        aliOssClientSupport.getInstanceClient().shutdown();
         return tags;
     }
 }

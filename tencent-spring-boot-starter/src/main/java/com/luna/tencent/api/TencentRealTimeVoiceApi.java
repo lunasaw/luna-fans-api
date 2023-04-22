@@ -11,7 +11,7 @@ import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.ByteUtils;
 import com.luna.common.text.RandomStrUtil;
 import com.luna.tencent.response.voice.SpeechRecognitionResponse;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
