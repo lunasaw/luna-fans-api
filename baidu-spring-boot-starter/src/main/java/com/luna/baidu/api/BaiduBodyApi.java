@@ -10,7 +10,7 @@ import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.CharsetUtil;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;

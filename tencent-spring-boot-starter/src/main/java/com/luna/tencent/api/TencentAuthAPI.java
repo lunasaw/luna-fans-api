@@ -9,7 +9,7 @@ import com.luna.common.encrypt.Base64Util;
 import com.luna.tencent.response.card.IdCardPictureCheckInfoResponse;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -11,7 +11,7 @@ import com.luna.tencent.response.group.AddFaceResultResponse;
 import com.luna.tencent.response.group.CheckPersonInGroupResponse;
 import com.luna.tencent.response.group.PersonBaseInfoResponse;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -2,7 +2,7 @@ package com.luna.baidu.hander;
 
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.hander.ValidatingResponseHandler;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.ClassicHttpResponse;
 
 /**
  * @author luna
@@ -11,7 +11,7 @@ import org.apache.http.HttpResponse;
  */
 public class ByteResponseHandler extends ValidatingResponseHandler<byte[]> {
     @Override
-    public byte[] handleResponse(HttpResponse httpResponse) {
+    public byte[] handleResponse(ClassicHttpResponse httpResponse) {
         this.validateResponse(httpResponse);
         return HttpUtils.checkResponseStreamAndGetResult(httpResponse);
     }
