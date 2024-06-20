@@ -1,6 +1,6 @@
 package io.github.lunasaw.ali;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.aliyun.facebody20191230.models.DetectFaceResponse;
 import com.aliyun.facebody20191230.models.RecognizeExpressionResponse;
 import com.aliyun.facebody20191230.models.RecognizeFaceResponse;

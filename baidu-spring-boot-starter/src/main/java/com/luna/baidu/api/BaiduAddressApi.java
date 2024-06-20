@@ -11,7 +11,7 @@ import com.luna.common.net.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hc.core5.http.HttpResponse;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.luna.baidu.dto.map.ip2address.AddressResultDTO;

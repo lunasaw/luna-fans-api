@@ -4,8 +4,8 @@ import com.luna.api.smms.dto.UserProfileDTO;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.UserAgentConstant;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.api.smms.constant.SmMsConstant;
 import org.apache.hc.core5.http.HttpResponse;
