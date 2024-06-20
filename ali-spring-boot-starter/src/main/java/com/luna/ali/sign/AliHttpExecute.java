@@ -1,6 +1,7 @@
 package com.luna.ali.sign;
 
 import com.google.common.collect.ImmutableMap;
+import com.luna.common.encrypt.Base64Util;
 import com.luna.common.net.base.HttpBaseUtils;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
@@ -89,7 +90,7 @@ public class AliHttpExecute {
         javax.crypto.Mac mac = javax.crypto.Mac.getInstance("HmacSHA1");
         mac.init(new javax.crypto.spec.SecretKeySpec(accessSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA1"));
         byte[] signData = mac.doFinal(stringToSign.getBytes(StandardCharsets.UTF_8));
-        return new sun.misc.BASE64Encoder().encode(signData);
+        return Base64Util.encodeBase64(signData);
     }
 
 }

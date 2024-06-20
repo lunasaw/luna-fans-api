@@ -27,8 +27,8 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.10</spring-boot.version>
-        <luna-common.veriosn>2.6.0</luna-common.veriosn>
+        <spring-boot.version>2.7.18</spring-boot.version>
+        <luna-common.veriosn>2.6.1</luna-common.veriosn>
         <luna-fans-api.version>3.1.9</luna-fans-api.version>
         <github.username>lunasaw</github.username>
         <httpclient-5.version>5.3.1</httpclient-5.version>
@@ -58,18 +58,9 @@
                 <groupId>io.github.lunasaw</groupId>
                 <artifactId>luna-common</artifactId>
                 <version>${luna-common.veriosn}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.httpcomponents</groupId>
-                        <artifactId>httpcomponents-client</artifactId>
-                    </exclusion>
-                </exclusions>
+
             </dependency>
-            <dependency>
-                <groupId>org.apache.httpcomponents.client5</groupId>
-                <artifactId>httpclient5</artifactId>
-                <version>${httpclient-5.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
