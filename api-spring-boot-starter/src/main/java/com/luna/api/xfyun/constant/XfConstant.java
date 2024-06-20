@@ -6,10 +6,10 @@ package com.luna.api.xfyun.constant;
  */
 public interface XfConstant {
 
-    String REQUEST_URL = "https://api.xf-yun.com/v1//sf8e6aca1";
 
     String HOST        = "https://api.xf-yun.com";
-    String PATH        = "/v1//sf8e6aca1";
+    String PATH        = "/v1/private/sf8e6aca1";
+    String REQUEST_URL = HOST + PATH;
 
     // 控制台获取以下信息
     String APPID       = "5eae601b";

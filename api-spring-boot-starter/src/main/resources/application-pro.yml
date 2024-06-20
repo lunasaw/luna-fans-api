@@ -6,6 +6,12 @@ spring:
     password: qyEF63QVT4!NwT9
     username: luna_nov
 
+  xunfei:
+    enable: true
+    app-id: "5eae601b"
+    api-secret: "f8457806d8ae791dcfd250c1b4ca2ba8"
+    apikey: "d0b88051dff7906c15ab700316a2a412"
+
   mail:
     default-encoding: UTF-8
     host: smtp.qq.com

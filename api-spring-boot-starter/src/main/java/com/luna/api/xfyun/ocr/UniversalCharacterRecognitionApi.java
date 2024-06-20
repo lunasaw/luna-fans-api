@@ -12,6 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.hc.core5.http.ClassicHttpResponse;
 
 import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.ImmutableMap;
@@ -20,6 +21,7 @@ import com.luna.api.xfyun.constant.XfConstant;
 import com.luna.api.xfyun.ocr.dto.OcrRequest;
 import com.luna.api.xfyun.ocr.dto.OcrResponse;
 import com.luna.api.xfyun.ocr.dto.OcrTextDTO;
+import com.luna.common.check.Assert;
 import com.luna.common.constant.StrPoolConstant;
 import com.luna.common.encrypt.Base64Util;
 import com.luna.common.file.FileTools;
@@ -40,12 +42,23 @@ public class UniversalCharacterRecognitionApi {
 
     @SneakyThrows
     public static void main(String[] args) {
-        String s = getOcrText(IMAGE_PATH);
-
+        String s = getOcrText(XfConstant.REQUEST_URL, XfConstant.API_SECRET, XfConstant.API_KEY, IMAGE_PATH);
         System.out.println(s);
-
         OcrTextDTO parse = parse(s);
         System.out.println(JSON.toJSONString(getContent(parse)));
+    }
+
+    public static List<String> getContent(String filePath) {
+        return getContent(XfConstant.API_SECRET, XfConstant.API_KEY, filePath);
+    }
+
+    public static List<String> getContent(String apiSecret, String apiKey, String filePath) {
+        Assert.notNull(filePath, "文件路径不能为空");
+        String ocrText = getOcrText(XfConstant.API_SECRET, XfConstant.API_KEY, filePath);
+        if (StringUtils.isBlank(ocrText)) {
+            return Collections.emptyList();
+        }
+        return getContent(parse(ocrText));
     }
 
     public static List<String> getContent(OcrTextDTO ocrTextDTO) {
@@ -98,21 +111,31 @@ public class UniversalCharacterRecognitionApi {
         return JSON.parseObject(result, OcrTextDTO.class);
     }
 
-    private static String getOcrText(String filePath) {
+    private static String getOcrText(String apiSecret, String apiKey, String filePath) {
+        return getOcrText(XfConstant.REQUEST_URL, apiSecret, apiKey, filePath);
+    }
+
+    private static String getOcrText(String requestUrl, String apiSecret, String apiKey, String filePath) {
         OcrRequest ocrRequest = new OcrRequest();
         ocrRequest.setHeader(new OcrRequest.Header(XfConstant.APPID, 3));
         ocrRequest.setParameter(new OcrRequest.Parameter(OcrRequest.Sf8e6aca1.getInstance()));
         ocrRequest.setPayload(
             new OcrRequest.Payload(OcrRequest.Sf8e6aca1DataOne.getInstance(Base64.getEncoder().encodeToString(FileTools.read(filePath)))));
-        Map<String, String> param = getUrlAuthPath(XfConstant.REQUEST_URL, XfConstant.API_SECRET, XfConstant.API_KEY);
+        Map<String, String> param = getUrlAuthPath(requestUrl, apiSecret, apiKey);
 
-
-        return HttpUtils.doPostHander(XfConstant.HOST, XfConstant.PATH, ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), param,
-            JSON.toJSONString(ocrRequest));
+        ClassicHttpResponse classicHttpResponse =
+            HttpUtils.doPost(XfConstant.HOST, XfConstant.PATH, ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), param,
+                JSON.toJSONString(ocrRequest));
+        String s = HttpUtils.checkResponseAndGetResult(classicHttpResponse, false);
+        System.out.println(s);
+        return s;
     }
 
     @SneakyThrows
     private static Map<String, String> getUrlAuthPath(String requestUrl, String apiSecret, String apiKey) {
+        Assert.notNull(apiSecret, "apiSecret不能为空");
+        Assert.notNull(apiKey, "apiKey不能为空");
+
         // 替换调schema前缀 ，原因是URL库不支持解析包含ws,wss schema的url
         String httpRequestUrl = requestUrl.replace("ws://", "http://").replace("wss://", "https://");
         URL url = new URL(httpRequestUrl);
@@ -121,14 +144,14 @@ public class UniversalCharacterRecognitionApi {
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
         String date = format.format(new Date());
         String host = url.getHost();
-        StringBuilder builder = new StringBuilder("host: ").append(host).append("\n").//
-            append("date: ").append(date).append("\n").//
-            append("POST ").append(url.getPath()).append(" HTTP/1.1");
+        String builder = "host: " + host + "\n" +
+            "date: " + date + "\n" +
+            "POST " + url.getPath() + " HTTP/1.1";
         Charset charset = StandardCharsets.UTF_8;
         Mac mac = Mac.getInstance("hmacsha256");
         SecretKeySpec spec = new SecretKeySpec(apiSecret.getBytes(charset), "hmacsha256");
         mac.init(spec);
-        byte[] hexDigits = mac.doFinal(builder.toString().getBytes(charset));
+        byte[] hexDigits = mac.doFinal(builder.getBytes(charset));
         String sha = Base64.getEncoder().encodeToString(hexDigits);
         String authorization =
             String.format("api_key=\"%s\", algorithm=\"%s\", headers=\"%s\", signature=\"%s\"", apiKey, "hmac-sha256", "host date request-line", sha);
