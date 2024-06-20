@@ -58,9 +58,7 @@
                 <groupId>io.github.lunasaw</groupId>
                 <artifactId>luna-common</artifactId>
                 <version>${luna-common.veriosn}</version>
-
             </dependency>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
