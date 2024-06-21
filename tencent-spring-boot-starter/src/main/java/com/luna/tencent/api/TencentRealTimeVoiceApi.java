@@ -1,6 +1,6 @@
 package com.luna.tencent.api;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.luna.common.file.FileTools;
@@ -11,7 +11,7 @@ import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.ByteUtils;
 import com.luna.common.text.RandomStrUtil;
 import com.luna.tencent.response.voice.SpeechRecognitionResponse;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

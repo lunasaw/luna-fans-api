@@ -12,3 +12,7 @@ com.luna.api.smms.api
 com.luna.api.smms.config
 com.luna.api.smms.constant
 com.luna.api.smms.dto
+com.luna.api.xfyun.config
+com.luna.api.xfyun.constant
+com.luna.api.xfyun.ocr
+com.luna.api.xfyun.ocr.dto

@@ -1,6 +1,6 @@
 package com.luna.api.smms.api;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.luna.api.smms.config.SmMsProperties;
 import com.luna.api.smms.dto.UploadResultDTO;
 import com.luna.api.smms.dto.UserProfileDTO;

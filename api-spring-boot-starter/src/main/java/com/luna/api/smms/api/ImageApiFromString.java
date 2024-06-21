@@ -1,14 +1,15 @@
 package com.luna.api.smms.api;
 
 import java.util.List;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.api.smms.dto.UploadResultDTO;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.UserAgentConstant;
-import org.apache.http.HttpResponse;
+
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

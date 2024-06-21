@@ -19,21 +19,20 @@ import com.luna.baidu.req.voice.VoiceCheckReq;
 import com.luna.baidu.req.voice.VoiceSynthesisReq;
 import com.luna.baidu.req.voice.VoiceSynthesisResponse;
 import com.luna.baidu.req.voice.VoiceSynthesisV2Req;
+import com.luna.common.check.Assert;
 import com.luna.common.file.FileNameUtil;
 import com.luna.common.file.FileTools;
-import com.luna.common.net.HttpConnectionPoolUtil;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import com.luna.common.os.SystemInfoUtil;
 import com.luna.common.encrypt.Base64Util;
 import com.luna.common.text.CharsetUtil;
-import com.luna.common.utils.Assert;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
@@ -59,7 +58,7 @@ public class BaiduVoiceApi {
      * @return
      */
     public static VoiceDetailResult voiceDetailApi(VoiceCheckReq voiceCheckReq) {
-        String response = HttpConnectionPoolUtil.doPost(BaiduApiConstant.VOICE_HOST, BaiduApiConstant.VOICE_SPEECH,
+        String response = HttpUtils.doPost(BaiduApiConstant.VOICE_HOST, BaiduApiConstant.VOICE_SPEECH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, JSON.toJSONString(voiceCheckReq),
             new StringResponseHandler());
 
@@ -189,7 +188,7 @@ public class BaiduVoiceApi {
         map.put("aue", voiceSynthesisReq.getAue());
         map.put("lan", voiceSynthesisReq.getLan());
         map.put("ctp", voiceSynthesisReq.getCtp());
-        return HttpConnectionPoolUtil.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
+        return HttpUtils.doPost(BaiduApiConstant.VOICE_SYNTHESIS, BaiduApiConstant.VOICE_SYNTHESIS_PATH,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), null, HttpUtils.urlEncode(map), new ByteResponseHandler());
     }
 
@@ -231,7 +230,7 @@ public class BaiduVoiceApi {
     public static VoiceSynthesisResponse voiceSynthesis(List<String> text, String format, int voice, String lang, int speed, int pitch, int volume,
         int enableSubtitle, String token) {
         VoiceSynthesisV2Req voiceSynthesisV2Req = new VoiceSynthesisV2Req(text, format, voice, lang, speed, pitch, volume, enableSubtitle);
-        String s = HttpConnectionPoolUtil.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_PATH_V2,
+        String s = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_PATH_V2,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", token), JSON.toJSONString(voiceSynthesisV2Req),
             new StringResponseHandler());
         return JSON.parseObject(s, VoiceSynthesisResponse.class);
@@ -245,7 +244,7 @@ public class BaiduVoiceApi {
      * @return
      */
     public static VoiceSynthesisDetailResponse voiceSynthesisQuery(List<String> taskIds, String token){
-        String s = HttpConnectionPoolUtil.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_V2_QUERY,
+        String s = HttpUtils.doPost(BaiduApiConstant.HOST, BaiduApiConstant.VOICE_SYNTHESIS_V2_QUERY,
             ImmutableMap.of("Content-Type", HttpUtilsConstant.JSON), ImmutableMap.of("access_token", token), JSON.toJSONString(ImmutableMap.of("task_ids", taskIds)),
             new StringResponseHandler());
         return JSON.parseObject(s, VoiceSynthesisDetailResponse.class);

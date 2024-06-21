@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.luna.api.config.ApiAutoConfiguration,org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration
+com.luna.api.config.ApiAutoConfiguration,org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration,com.luna.api.config.XunfeiAutoConfiguration

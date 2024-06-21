@@ -7,10 +7,10 @@ import com.luna.baidu.config.BaiduApiConstant;
 import com.luna.common.net.HttpUtils;
 import com.luna.common.net.HttpUtilsConstant;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.HttpResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.google.common.collect.ImmutableMap;
 import com.luna.baidu.dto.write.EventContextDTO;
 import com.luna.baidu.dto.write.HotEventDTO;

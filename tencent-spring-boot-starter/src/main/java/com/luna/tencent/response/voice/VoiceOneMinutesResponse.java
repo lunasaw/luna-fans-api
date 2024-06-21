@@ -1,6 +1,6 @@
 package com.luna.tencent.response.voice;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.tencentcloudapi.asr.v20190614.models.SentenceWord;
 
 import java.util.List;
