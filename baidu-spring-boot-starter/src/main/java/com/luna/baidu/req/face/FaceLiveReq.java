@@ -1,6 +1,6 @@
 package com.luna.baidu.req.face;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;
 
 /**

@@ -1,6 +1,6 @@
 package io.github.lunasaw;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.luna.api.email.service.MessageService;
 import com.luna.api.email.service.TemplateService;
 import io.github.lunasaw.listener.ApiMethodListener;

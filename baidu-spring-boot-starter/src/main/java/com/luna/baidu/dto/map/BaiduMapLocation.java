@@ -1,7 +1,7 @@
 package com.luna.baidu.dto.map;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.luna.common.file.FileTools;
 import com.luna.common.io.IoUtil;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package io.github.lunasaw.baidu.map;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.luna.baidu.api.BaiduAddressApi;
 import com.luna.baidu.config.BaiduProperties;
 import com.luna.baidu.dto.map.BaiduMapLocation;
