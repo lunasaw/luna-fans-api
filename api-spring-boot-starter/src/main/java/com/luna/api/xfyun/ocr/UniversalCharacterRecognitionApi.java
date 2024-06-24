@@ -42,19 +42,23 @@ public class UniversalCharacterRecognitionApi {
 
     @SneakyThrows
     public static void main(String[] args) {
-        String s = getOcrText(XfConstant.REQUEST_URL, XfConstant.API_SECRET, XfConstant.API_KEY, IMAGE_PATH);
+        // java -jar  /Users/weidian/compose/git/bfg-1.13.0.jar --delete-files e76d7d8f .git
+        // APPId = "e76d7d8f" # 控制台获取
+        // APISecret = "Y2Y2ODc2OGQyOWFjMWZhY2JkOTllMDVl" # 控制台获取
+        // APIKey = "990e2770b030441fbcc126c691daf5cd" # 控制台获取
+        String s = getOcrText("e76d7d8f", "Y2Y2ODc2OGQyOWFjMWZhY2JkOTllMDVl", "990e2770b030441fbcc126c691daf5cd", IMAGE_PATH);
         System.out.println(s);
         OcrTextDTO parse = parse(s);
         System.out.println(JSON.toJSONString(getContent(parse)));
     }
 
     public static List<String> getContent(String filePath) {
-        return getContent(XfConstant.API_SECRET, XfConstant.API_KEY, filePath);
+        return getContent(XfConstant.APPID, XfConstant.API_SECRET, XfConstant.API_KEY, filePath);
     }
 
-    public static List<String> getContent(String apiSecret, String apiKey, String filePath) {
+    public static List<String> getContent(String appId, String apiSecret, String apiKey, String filePath) {
         Assert.notNull(filePath, "文件路径不能为空");
-        String ocrText = getOcrText(XfConstant.API_SECRET, XfConstant.API_KEY, filePath);
+        String ocrText = getOcrText(appId, apiSecret, apiKey, filePath);
         if (StringUtils.isBlank(ocrText)) {
             return Collections.emptyList();
         }
@@ -111,13 +115,13 @@ public class UniversalCharacterRecognitionApi {
         return JSON.parseObject(result, OcrTextDTO.class);
     }
 
-    private static String getOcrText(String apiSecret, String apiKey, String filePath) {
-        return getOcrText(XfConstant.REQUEST_URL, apiSecret, apiKey, filePath);
+    private static String getOcrText(String appId, String apiSecret, String apiKey, String filePath) {
+        return getOcrText(XfConstant.REQUEST_URL, appId, apiSecret, apiKey, filePath);
     }
 
-    private static String getOcrText(String requestUrl, String apiSecret, String apiKey, String filePath) {
+    private static String getOcrText(String requestUrl, String appId, String apiSecret, String apiKey, String filePath) {
         OcrRequest ocrRequest = new OcrRequest();
-        ocrRequest.setHeader(new OcrRequest.Header(XfConstant.APPID, 3));
+        ocrRequest.setHeader(new OcrRequest.Header(appId, 3));
         ocrRequest.setParameter(new OcrRequest.Parameter(OcrRequest.Sf8e6aca1.getInstance()));
         ocrRequest.setPayload(
             new OcrRequest.Payload(OcrRequest.Sf8e6aca1DataOne.getInstance(Base64.getEncoder().encodeToString(FileTools.read(filePath)))));
