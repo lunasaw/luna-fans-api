@@ -8,9 +8,10 @@ spring:
 
   xunfei:
     enable: true
-    app-id: "5eae601b"
-    api-secret: "f8457806d8ae791dcfd250c1b4ca2ba8"
-    apikey: "d0b88051dff7906c15ab700316a2a412"
+    app-id: "e76d7d8f"
+    api-secret: "990e2770b030441fbcc126c691daf5cd"
+    apikey: "Y2Y2ODc2OGQyOWFjMWZhY2JkOTllMDVl"
+
 
   mail:
     default-encoding: UTF-8
